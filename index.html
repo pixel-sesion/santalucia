@@ -19,53 +19,41 @@
 html{scroll-behavior:smooth;overflow-x:hidden;}
 body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:var(--dark);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
 
-/* ══ PAGE LOADER — solo conexión lenta ══ */
-.page-loader{
-  position:fixed;inset:0;z-index:9999;
-  background:#f0f4fb;
-  display:none;flex-direction:column;align-items:center;justify-content:center;gap:20px;
-  transition:opacity .5s ease, visibility .5s ease;
-  opacity:0;
-}
+/* ══ PAGE LOADER ══ */
+.page-loader{position:fixed;inset:0;z-index:9999;background:#f0f4fb;display:none;flex-direction:column;align-items:center;justify-content:center;gap:20px;transition:opacity .5s ease,visibility .5s ease;opacity:0;}
 .page-loader.visible{display:flex;opacity:1;}
 .page-loader.hidden{opacity:0;pointer-events:none;}
-.loader-logo{height:42px;margin-bottom:8px;}
+.loader-logo{height:36px;margin-bottom:8px;}
 .loader-dots{display:flex;gap:10px;}
-.loader-dot{
-  width:14px;height:14px;border-radius:50%;
-  background:var(--blue);
-  animation:dotBounce 1.2s ease-in-out infinite;
-}
+.loader-dot{width:14px;height:14px;border-radius:50%;background:var(--blue);animation:dotBounce 1.2s ease-in-out infinite;}
 .loader-dot:nth-child(1){background:var(--blue);animation-delay:0s;}
 .loader-dot:nth-child(2){background:#3a7bd5;animation-delay:0.2s;}
 .loader-dot:nth-child(3){background:#c0d4f5;animation-delay:0.4s;}
 .loader-text{font-size:14px;color:var(--gray);font-weight:600;letter-spacing:.5px;}
-@keyframes dotBounce{
-  0%,80%,100%{transform:scale(0.7);opacity:.5;}
-  40%{transform:scale(1.2);opacity:1;}
-}
+@keyframes dotBounce{0%,80%,100%{transform:scale(0.7);opacity:.5;}40%{transform:scale(1.2);opacity:1;}}
 
 /* ══ HEADER ══ */
 .header{background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:300;box-shadow:0 2px 12px rgba(0,37,122,0.07);}
-.header-inner{max-width:1280px;margin:0 auto;padding:0 1.5rem;height:72px;display:flex;align-items:center;gap:1rem;}
-.menu-btn{background:var(--blue3);border:none;border-radius:8px;height:40px;padding:0 16px;display:inline-flex;align-items:center;gap:10px;cursor:pointer;flex-shrink:0;color:white;font-size:15px;font-weight:600;font-family:inherit;}
+.header-inner{max-width:1280px;margin:0 auto;padding:0 1.5rem;height:64px;display:flex;align-items:center;gap:1rem;}
+.menu-btn{background:var(--blue3);border:none;border-radius:8px;height:38px;padding:0 14px;display:inline-flex;align-items:center;gap:8px;cursor:pointer;flex-shrink:0;color:white;font-size:14px;font-weight:600;font-family:inherit;}
 .menu-btn:hover{background:var(--blue2);}
 .header-logo{flex-shrink:0;}
-.header-logo img{height:42px;width:auto;display:block;}
+/* PC: logo más pequeño */
+.header-logo img{height:32px;width:auto;display:block;}
 .header-nav{display:flex;align-items:center;gap:4px;margin-left:auto;}
 .header-nav a{color:var(--blue);text-decoration:none;font-weight:700;font-size:0.88rem;padding:6px 14px;border-radius:6px;transition:background .2s,color .2s;white-space:nowrap;}
 .header-nav a:hover{background:#eef3fb;color:var(--blue3);}
 .header-right{display:flex;align-items:center;gap:8px;margin-left:16px;flex-shrink:0;}
-.icon-btn{background:none;border:none;cursor:pointer;width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--blue);transition:background .2s;}
+.icon-btn{background:none;border:none;cursor:pointer;width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--blue);transition:background .2s;}
 .icon-btn:hover{background:#eef3fb;}
-.icon-btn svg{width:28px;height:28px;}
+.icon-btn svg{width:26px;height:26px;}
 
 /* ══ LOGIN FULLSCREEN ══ */
 .login-overlay{position:fixed;inset:0;z-index:500;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;display:flex;flex-direction:column;overflow:hidden;}
 .login-overlay.open{opacity:1;visibility:visible;}
 .login-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80') center/cover no-repeat;z-index:0;}
 .login-topbar{position:relative;z-index:3;background:var(--blue);display:flex;align-items:center;justify-content:center;padding:14px 20px;min-height:60px;flex-shrink:0;}
-.login-topbar img{height:34px;filter:brightness(0) invert(1);}
+.login-topbar img{height:30px;filter:brightness(0) invert(1);}
 .login-close{position:absolute;right:16px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.18);border:1.5px solid rgba(255,255,255,0.3);border-radius:8px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;}
 .login-close:hover{background:rgba(255,255,255,0.28);}
 .login-close svg{width:15px;height:15px;stroke:white;fill:none;stroke-width:2.5;stroke-linecap:round;}
@@ -99,7 +87,7 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
 .side-nav{position:fixed;top:0;left:-300px;width:280px;height:100dvh;background:var(--white);z-index:700;transition:left .3s cubic-bezier(.25,.9,.35,1.05);display:flex;flex-direction:column;overflow-y:auto;box-shadow:4px 0 24px rgba(0,0,0,.12);}
 .side-nav.open{left:0;}
 .side-nav-head{background:var(--blue);padding:20px;display:flex;align-items:center;justify-content:space-between;}
-.side-nav-head img{height:32px;filter:brightness(0) invert(1);}
+.side-nav-head img{height:28px;filter:brightness(0) invert(1);}
 .side-close{background:none;border:none;cursor:pointer;color:white;display:flex;}
 .side-close svg{width:22px;height:22px;}
 .side-nav ul{list-style:none;padding:12px 8px;}
@@ -123,60 +111,169 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
 .hero-tab svg{width:28px;height:28px;stroke:var(--blue2);fill:none;stroke-width:1.7;}
 .hero-tab span{font-size:10px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--blue);}
 
-/* Payment card in hero */
-.hero-payment{flex-shrink:0;width:320px;background:white;border-radius:16px;overflow:hidden;box-shadow:0 12px 40px rgba(0,37,122,0.15);}
-.hero-payment-head{background:linear-gradient(120deg,var(--blue) 0%,#003dab 100%);color:white;padding:18px 20px;text-align:center;}
-.hero-payment-head h3{font-size:17px;font-weight:800;}
-.hero-payment-head p{font-size:12px;opacity:.75;margin-top:3px;}
-.hero-payment-body{padding:20px;}
-.pay-btns{display:flex;flex-direction:column;gap:10px;}
-.pay-btn{width:100%;padding:12px 16px;border-radius:50px;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s;background:white;border:2px solid var(--blue2);color:var(--blue2);font-family:inherit;text-decoration:none;}
-.pay-btn:hover{transform:translateY(-2px);background:#eef3fb;box-shadow:0 6px 16px rgba(6,104,245,.12);}
-.pay-btn svg{width:22px;height:22px;flex-shrink:0;}
-.bank-wrap{max-height:0;overflow:hidden;opacity:0;transition:max-height .4s,opacity .3s;margin-top:10px;}
-.bank-wrap.open{max-height:500px;opacity:1;}
-.bank-card{background:var(--bg);border-radius:10px;padding:16px;border:1px solid var(--border);}
-.bank-title{font-weight:800;color:var(--blue);margin-bottom:10px;font-size:13px;}
-.bank-row{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);gap:10px;}
-.bank-row:last-child{border-bottom:none;}
-.bank-label{font-weight:700;color:var(--dark);font-size:12px;white-space:nowrap;min-width:80px;}
-.bank-value{font-weight:800;color:#003dbb;font-size:12px;text-align:right;word-break:break-word;}
+/* ══ PAYMENT CARD — PC horizontal ══ */
+.hero-payment{
+  flex-shrink:0;
+  width:480px;
+  background:white;
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 12px 40px rgba(0,37,122,0.15);
+}
+.hero-payment-head{
+  background:linear-gradient(120deg,var(--blue) 0%,#003dab 100%);
+  color:white;
+  padding:16px 22px;
+  text-align:center;
+}
+.hero-payment-head h3{font-size:16px;font-weight:800;}
+.hero-payment-head p{font-size:12px;opacity:.75;margin-top:2px;}
+.hero-payment-body{padding:16px 20px;}
 
-/* ══ PROMO ══ */
+/* Botones en fila PC */
+.pay-btns{display:flex;flex-direction:row;gap:8px;}
+.pay-btn{
+  flex:1;
+  padding:10px 8px;
+  border-radius:10px;
+  font-weight:700;
+  font-size:12px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  cursor:pointer;
+  transition:transform .2s,box-shadow .2s,background .2s;
+  background:white;
+  border:2px solid var(--blue2);
+  color:var(--blue2);
+  font-family:inherit;
+  text-decoration:none;
+  text-align:center;
+  white-space:nowrap;
+}
+.pay-btn:hover{transform:translateY(-2px);background:#eef3fb;box-shadow:0 6px 16px rgba(6,104,245,.12);}
+.pay-btn svg{width:20px;height:20px;flex-shrink:0;}
+
+/* Bank data expandible */
+.bank-wrap{max-height:0;overflow:hidden;opacity:0;transition:max-height .4s,opacity .3s;margin-top:12px;}
+.bank-wrap.open{max-height:600px;opacity:1;}
+.bank-card{
+  background:#fff;
+  border-radius:12px;
+  padding:18px 20px;
+  border:1.5px solid #d0dcf0;
+  box-shadow:0 2px 12px rgba(0,37,122,0.07);
+}
+.bank-title{
+  font-weight:800;
+  color:var(--dark);
+  margin-bottom:14px;
+  font-size:15px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.bank-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:10px 0;
+  border-bottom:1px solid #e8edf5;
+  gap:16px;
+}
+.bank-row:last-child{border-bottom:none;}
+.bank-label{
+  font-weight:700;
+  color:var(--dark);
+  font-size:13px;
+  white-space:nowrap;
+  flex-shrink:0;
+}
+.bank-value{
+  font-weight:800;
+  color:#003dbb;
+  font-size:13px;
+  text-align:right;
+}
+
+/* ══ PROMO — imagen con fondo azul visible ══ */
 .promo-section{background:var(--white);padding:60px 1.5rem;}
-.promo-inner{max-width:1100px;margin:0 auto;background:linear-gradient(120deg,#f8faff 0%,#eef3fc 100%);border:1.5px solid #d0dcf0;border-radius:20px;display:flex;align-items:center;overflow:hidden;position:relative;}
-.promo-text{padding:40px 48px;flex:1;}
+.promo-inner{
+  max-width:1100px;
+  margin:0 auto;
+  background:linear-gradient(120deg,#f8faff 0%,#eef3fc 100%);
+  border:1.5px solid #d0dcf0;
+  border-radius:20px;
+  display:flex;
+  align-items:stretch;
+  overflow:hidden;
+  position:relative;
+  min-height:200px;
+}
+.promo-text{padding:40px 48px;flex:1;display:flex;flex-direction:column;justify-content:center;}
 .promo-eyebrow{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin-bottom:10px;}
 .promo-title{font-size:26px;font-weight:800;color:var(--dark);margin-bottom:8px;line-height:1.3;}
 .promo-title span{color:var(--blue3);}
 .promo-desc{font-size:15px;color:var(--gray);line-height:1.6;}
 .promo-badge{position:absolute;top:20px;left:20px;background:var(--blue3);color:white;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;}
 
-/* Imagen más pequeña + estrellas encima */
+/* Imagen promo: fondo azul redondeado visible */
 .promo-img-wrap{
-  width:240px;flex-shrink:0;
-  display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
-  padding:20px 20px 20px 0;gap:0;
+  width:280px;
+  flex-shrink:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:0;
   position:relative;
+  overflow:hidden;
+  background:linear-gradient(135deg,#1a56c4 0%,#0d3fa0 50%,#0a2d80 100%);
+  border-radius:0 18px 18px 0;
 }
+
+/* Decoración circular azul dentro del wrap */
+.promo-img-wrap::before{
+  content:'';
+  position:absolute;
+  width:300px;height:300px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.08);
+  top:-60px;right:-60px;
+}
+.promo-img-wrap::after{
+  content:'';
+  position:absolute;
+  width:200px;height:200px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.06);
+  bottom:-40px;left:-40px;
+}
+
 .promo-stars{
-  width:100%;display:flex;justify-content:flex-start;
-  margin-bottom:2px;z-index:1;position:relative;
-  padding-left:4px;
+  position:absolute;
+  top:16px;right:16px;
+  z-index:2;
 }
 .promo-stars img{
-  width:80px;height:auto;display:block;
-  filter:drop-shadow(0 2px 4px rgba(0,0,0,.15));
+  width:70px;height:auto;display:block;
+  filter:brightness(0) invert(1) drop-shadow(0 2px 4px rgba(0,0,0,.2));
 }
+
 .promo-img{
-  width:190px;height:auto;
+  width:200px;
+  height:auto;
   object-fit:contain;
   display:block;
-  transition:transform .6s cubic-bezier(.25,.9,.35,1);
-  transform-origin:center;
-  border-radius:10px;
+  position:relative;
+  z-index:1;
+  border-radius:14px;
+  box-shadow:0 8px 32px rgba(0,0,0,0.35);
+  transform:rotate(-3deg);
+  transition:transform .4s cubic-bezier(.25,.9,.35,1);
 }
-.promo-img-wrap:hover .promo-img{transform:rotate(4deg) scale(1.05);}
+.promo-img-wrap:hover .promo-img{transform:rotate(0deg) scale(1.04);}
 
 /* ══ HELP ══ */
 .help-section{background:var(--bg);padding:60px 1.5rem;}
@@ -245,7 +342,7 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
 /* ══ FOOTER ══ */
 footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
 .footer-main{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,.12);}
-.footer-brand img{height:36px;filter:brightness(0) invert(1);margin-bottom:16px;}
+.footer-brand img{height:30px;filter:brightness(0) invert(1);margin-bottom:16px;}
 .footer-brand p{font-size:13px;line-height:1.7;max-width:240px;margin-bottom:14px;}
 .footer-brand small{font-size:12px;opacity:.55;}
 .footer-social{display:flex;gap:10px;margin-top:16px;}
@@ -268,29 +365,15 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
 .footer-bottom-links a{color:rgba(255,255,255,.4);text-decoration:none;font-size:12px;}
 .footer-bottom-links a:hover{color:rgba(255,255,255,.7);}
 
-/* ══ FLOATING CONTACT — pill / círculo ══ */
+/* ══ FLOATING CONTACT ══ */
 .float-wrap{position:fixed;bottom:28px;right:28px;z-index:200;}
-.float-pill{
-  display:flex;align-items:center;justify-content:space-between;
-  background:#F5C400;border:none;border-radius:50px;
-  padding:14px 18px 14px 22px;width:240px;
-  cursor:pointer;box-shadow:0 8px 28px rgba(0,0,0,.18);
-  font-family:inherit;
-  transition:opacity .4s ease,transform .4s ease;
-}
+.float-pill{display:flex;align-items:center;justify-content:space-between;background:#F5C400;border:none;border-radius:50px;padding:14px 18px 14px 22px;width:240px;cursor:pointer;box-shadow:0 8px 28px rgba(0,0,0,.18);font-family:inherit;transition:opacity .4s ease,transform .4s ease;}
 .float-pill:hover{opacity:.9;}
 .float-pill-text{display:flex;flex-direction:column;gap:2px;}
 .float-pill-text p:first-child{margin:0;font-weight:700;font-size:14px;color:#1a1a1a;}
 .float-pill-text p:last-child{margin:0;font-size:12px;color:#3a3a3a;}
 .float-pill-icon{background:#fff;border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.float-circle{
-  background:#fff;border:3px solid #F5C400;border-radius:50%;
-  width:58px;height:58px;
-  display:flex;align-items:center;justify-content:center;
-  cursor:pointer;box-shadow:0 8px 28px rgba(0,0,0,.15);
-  transition:opacity .4s ease,transform .4s ease;
-  display:none;
-}
+.float-circle{background:#fff;border:3px solid #F5C400;border-radius:50%;width:58px;height:58px;display:none;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 8px 28px rgba(0,0,0,.15);transition:opacity .4s ease,transform .4s ease;}
 .float-circle:hover{opacity:.85;}
 .float-pill.hide{opacity:0;pointer-events:none;transform:translateY(8px);}
 .float-circle.hide{opacity:0;pointer-events:none;transform:translateY(8px);}
@@ -318,7 +401,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
 .modal-success h3{font-size:20px;font-weight:800;color:var(--blue);margin-bottom:8px;}
 .modal-success p{font-size:14px;color:var(--gray);line-height:1.6;}
 
-/* ══ RESPONSIVE ══ */
+/* ══ RESPONSIVE TABLET ══ */
 @media(max-width:960px){
   .products-grid{grid-template-columns:repeat(2,1fr);}
   .reviews-grid{grid-template-columns:repeat(2,1fr);}
@@ -329,19 +412,75 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   .login-main{justify-content:center;padding:24px 16px;}
   .login-panel{width:100%;max-width:460px;}
   .hero-inner{flex-direction:column;}
-  .hero-payment{width:100%;max-width:400px;}
+  .hero-payment{width:100%;max-width:100%;}
+  /* En tablet los botones de pago vuelven a columna */
+  .pay-btns{flex-direction:column;}
+  .pay-btn{flex-direction:row;padding:12px 16px;}
 }
+
+/* ══ RESPONSIVE MÓVIL ══ */
 @media(max-width:640px){
+  /* Header móvil */
+  .header-inner{height:56px;padding:0 10px;gap:6px;}
+  .menu-btn{border-radius:8px;height:36px;width:44px;padding:0;justify-content:center;}
+  .menu-btn span{display:none;}/* ocultar texto "Menú" en móvil */
+  .header-logo img{height:26px;}
   .header-nav{display:none;}
+  /* Mostrar solo iconos edificio y perfil, ocultar cualquier extra */
+  .header-right{margin-left:auto;gap:4px;}
+  .icon-btn{width:36px;height:36px;}
+  .icon-btn svg{width:22px;height:22px;}
+
+  /* Hero tabs en una sola línea */
+  .hero-tabs{
+    display:flex;
+    flex-wrap:nowrap;
+    gap:4px;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    padding-bottom:4px;
+  }
+  .hero-tabs::-webkit-scrollbar{display:none;}
+  .hero-tab{
+    min-width:52px;
+    max-width:52px;
+    padding:8px 4px;
+    gap:4px;
+    flex-shrink:0;
+    border-radius:10px;
+  }
+  .hero-tab svg{width:20px;height:20px;}
+  .hero-tab span{font-size:8px;letter-spacing:.3px;}
+
+  /* Payment card móvil — columna */
+  .hero-payment{width:100%;max-width:100%;}
+  .pay-btns{flex-direction:column;}
+  .pay-btn{flex-direction:row;padding:11px 14px;font-size:13px;gap:10px;}
+
+  /* Promo móvil */
+  .promo-inner{flex-direction:column;}
+  .promo-img-wrap{
+    width:100%;
+    border-radius:0 0 18px 18px;
+    padding:24px 16px;
+    min-height:180px;
+  }
+  .promo-img{width:160px;}
+  .promo-text{padding:40px 20px 20px;}
+
+  /* Products */
   .products-grid{grid-template-columns:1fr;}
   .reviews-grid{grid-template-columns:1fr;}
   .stats-row{grid-template-columns:1fr 1fr;}
   .footer-main{grid-template-columns:1fr;}
-  .hero-tabs{gap:6px;}
-  .hero-tab{min-width:72px;padding:10px 12px;}
-  .hero-tab span{font-size:9px;}
   .login-body{padding:22px 18px 20px;}
   .login-body h3{font-size:20px;}
+
+  /* Bank data móvil */
+  .bank-row{flex-direction:row;align-items:center;}
+  .bank-label{font-size:12px;min-width:90px;}
+  .bank-value{font-size:12px;}
 }
 </style>
 </head>
@@ -385,12 +524,12 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
 <header class="header">
   <div class="header-inner">
     <button class="menu-btn" id="menuBtn">
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+      <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
         <rect y="3" width="20" height="2.5" rx="1.25" fill="white"/>
         <rect y="9" width="20" height="2.5" rx="1.25" fill="white"/>
         <rect y="15" width="13" height="2.5" rx="1.25" fill="white"/>
       </svg>
-      Menú
+      <span>Menú</span>
     </button>
     <a href="#" class="header-logo">
       <img src="https://www.santalucia.es/imagenes_slw4/1574967615331/santalucia-seguros.svg" alt="Santalucía Seguros">
@@ -405,7 +544,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
     </nav>
     <div class="header-right">
       <button class="icon-btn" title="Buscar oficina">
-        <svg width="28" height="28" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="26" height="26" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M29 6 Q29 4 27 4 L9 4 Q7 4 7 6 L7 38 Q7 40 9 40 L25 40" stroke="#00257a" stroke-width="2" stroke-linecap="round" fill="none"/>
           <path d="M29 24 L29 6" stroke="#00257a" stroke-width="2" stroke-linecap="round" fill="none"/>
           <circle cx="13" cy="13" r="1.8" fill="#00257a"/>
@@ -419,7 +558,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
         </svg>
       </button>
       <button class="icon-btn" id="profileBtn" title="Acceder a mi espacio">
-        <svg width="28" height="28" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="26" height="26" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs><clipPath id="profileClip"><circle cx="22" cy="22" r="16"/></clipPath></defs>
           <circle cx="22" cy="22" r="17" stroke="#00257a" stroke-width="2" fill="none"/>
           <g clip-path="url(#profileClip)">
@@ -487,21 +626,26 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
         <a href="#" class="hero-tab" data-prod="ahorro"><svg viewBox="0 0 24 24"><path d="M12 2C9 2 6 4 6 7c0 2 .5 3 1 4.5C7.5 13 8 14 8 16c0 2 .5 4 2 4 1 0 1.5-1 2-2 .5 1 1 2 2 2 1.5 0 2-2 2-4 0-2 .5-3 1-4.5.5-1.5 1-2.5 1-4.5 0-3-3-5-6-5z"/></svg><span>AHORRO</span></a>
       </div>
     </div>
+
+    <!-- PAYMENT CARD -->
     <div class="hero-payment">
-      <div class="hero-payment-head"><h3>Pago de recibos</h3><p>Elige tu método de pago favorito</p></div>
+      <div class="hero-payment-head">
+        <h3>Pago de recibos en línea</h3>
+        <p>Elige tu método de pago favorito</p>
+      </div>
       <div class="hero-payment-body">
         <div class="pay-btns">
           <a class="pay-btn" href="https://www.paypal.com/ncp/payment/AB6HLHKWJCM4C" target="_blank" rel="noopener">
             <svg viewBox="0 0 48 44" fill="none"><rect x="2" y="4" width="44" height="36" rx="4" fill="#003087"/><text x="24" y="27" font-family="Arial" font-size="13" font-weight="bold" fill="white" text-anchor="middle">PayPal</text></svg>
-            Pagar con PayPal
+            PayPal
           </a>
           <a class="pay-btn" href="https://www.paypal.com/ncp/payment/AB6HLHKWJCM4C" target="_blank" rel="noopener">
             <svg viewBox="0 0 48 44" fill="none"><rect x="2" y="6" width="44" height="32" rx="4" fill="#1e293b"/><rect x="2" y="14" width="44" height="6" fill="rgba(255,255,255,0.25)"/><rect x="6" y="24" width="9" height="6" rx="1" fill="#fbbf24"/></svg>
-            Pagar con Tarjeta
+            Tarjeta
           </a>
           <button class="pay-btn" id="transferBtn">
             <svg viewBox="0 0 48 44" fill="none"><rect x="4" y="28" width="40" height="12" rx="2" fill="#0668f5"/><rect x="8" y="16" width="32" height="14" rx="2" fill="#00257a"/><polygon points="24,4 42,16 6,16" fill="#003dab"/><circle cx="24" cy="10" r="4" fill="#ffdd43"/></svg>
-            Transferencia bancaria
+            Transferencia
           </button>
         </div>
         <div class="bank-wrap" id="bankWrap">
@@ -532,7 +676,6 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
       </div>
     </div>
     <div class="promo-img-wrap">
-      <!-- Estrellas encima de la imagen -->
       <div class="promo-stars">
         <img src="https://www.santalucia.es/estaticos_slw4/images/destacado-secundario-stars.svg" alt="Valoración estrellas">
       </div>
@@ -541,7 +684,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   </div>
 </section>
 
-<!-- HELP — sin botón "Descubre la historia" -->
+<!-- HELP -->
 <section class="help-section">
   <div class="help-inner">
     <div class="help-img-wrap">
@@ -573,84 +716,84 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
     <!-- HOGAR -->
     <div class="prod-detail" id="detail-hogar">
       <h2>🏠 Tu hogar, siempre protegido</h2>
-      <p>Un seguro de hogar protege tu vivienda y todos tus bienes materiales frente a cualquier daño inesperado, robo, accidente o catástrofe natural. Con Santalucía tienes la tranquilidad de saber que tu casa está cubierta las 24 horas del día, los 365 días del año.</p>
+      <p>Un seguro de hogar protege tu vivienda y todos tus bienes frente a cualquier daño inesperado. Con Santalucía, cubierto 24h los 365 días del año.</p>
       <div class="detail-grid">
-        <div class="detail-block"><h3>🏚️ Daños materiales</h3><p>Cubrimos todos los daños que puedan afectar a la estructura y contenido de tu hogar: incendios, explosiones, fenómenos atmosféricos como granizo, viento o inundaciones, escapes de agua, roturas de cristales y actos vandálicos. La reparación o sustitución corre a cargo del seguro.</p></div>
-        <div class="detail-block"><h3>🧾 Gastos cubiertos</h3><p>Nos hacemos cargo de los gastos de extinción de incendios, trabajos de limpieza y retirada de escombros, demolición de partes dañadas, desinfección, y también del alojamiento temporal en un hotel mientras se realizan las reparaciones necesarias en tu vivienda.</p></div>
-        <div class="detail-block"><h3>⚖️ Responsabilidad civil</h3><p>Si un accidente en tu hogar —como una fuga de agua— provoca daños en la vivienda de un vecino o a cualquier tercero, el seguro cubre los gastos de indemnización y reparación. Quedas protegido legalmente frente a reclamaciones externas sin tener que afrontar esos costes de tu bolsillo.</p></div>
-        <div class="detail-block"><h3>🔒 Robo y vandalismo</h3><p>Cobertura completa ante robos con fuerza en tu vivienda, incluyendo la reparación de cerraduras, puertas o ventanas dañadas durante el acceso. También cubre el robo de objetos de valor, electrodomésticos y efectos personales dentro del hogar o en trasteros y garajes vinculados.</p></div>
-        <div class="detail-block"><h3>🔧 Asistencia en el hogar 24h</h3><p>Servicio de asistencia inmediata las 24 horas: fontanero, electricista, cerrajero y cristalero. Si tienes una avería urgente, un técnico acude a tu domicilio sin coste adicional. También incluye asesoramiento telefónico para resolver pequeños problemas del día a día en casa.</p></div>
-        <div class="detail-block"><h3>🌊 Daños por agua</h3><p>Uno de los siniestros más frecuentes en el hogar. Cubrimos roturas de tuberías, atascos, desbordamientos de electrodomésticos y filtraciones. Incluimos la búsqueda y localización de la fuga, así como la reparación de los daños causados tanto en el suelo como en paredes y techos.</p></div>
+        <div class="detail-block"><h3>🏚️ Daños materiales</h3><p>Incendios, explosiones, fenómenos atmosféricos, escapes de agua, roturas de cristales y vandalismo. Reparación o sustitución a cargo del seguro.</p></div>
+        <div class="detail-block"><h3>🧾 Gastos cubiertos</h3><p>Extinción de incendios, limpieza, demolición de partes dañadas y alojamiento temporal mientras se realizan las reparaciones.</p></div>
+        <div class="detail-block"><h3>⚖️ Responsabilidad civil</h3><p>Si un accidente en tu hogar provoca daños a vecinos o terceros, el seguro cubre indemnizaciones y reparaciones sin coste para ti.</p></div>
+        <div class="detail-block"><h3>🔒 Robo y vandalismo</h3><p>Cobertura ante robos con fuerza: reparación de cerraduras, puertas dañadas y objetos robados dentro del hogar, trastero o garaje.</p></div>
+        <div class="detail-block"><h3>🔧 Asistencia 24h</h3><p>Fontanero, electricista, cerrajero y cristalero a domicilio sin coste adicional. Disponible cualquier día del año.</p></div>
+        <div class="detail-block"><h3>🌊 Daños por agua</h3><p>Roturas de tuberías, filtraciones y atascos. Incluye localización de la fuga y reparación de suelos, paredes y techos afectados.</p></div>
       </div>
     </div>
 
     <!-- DECESOS -->
     <div class="prod-detail" id="detail-decesos">
       <h2>🕊️ Protección integral para ti y los tuyos</h2>
-      <p>El seguro de decesos cubre todos los gastos del funeral y los trámites legales, liberando a la familia de una carga económica y burocrática en el momento más difícil. Santalucía es líder en España con más de 100 años de experiencia.</p>
+      <p>Cubre todos los gastos del funeral y los trámites legales. Santalucía es líder en España con más de 100 años de experiencia.</p>
       <div class="detail-grid" style="grid-template-columns:repeat(3,1fr);">
-        <div class="detail-block"><h3>⚰️ Gastos de sepelio</h3><p>Cubrimos íntegramente todos los gastos del funeral: ataúd o urna, servicio funerario completo, traslado del fallecido, esquelas, flores y decoración del velatorio. Sin ningún coste para la familia en ese momento tan delicado.</p></div>
-        <div class="detail-block"><h3>📋 Trámites y gestiones</h3><p>Nos encargamos de todos los trámites legales y administrativos: certificado de defunción, gestiones con el registro civil, bajas en la Seguridad Social y asesoramiento jurídico para los herederos. Toda la burocracia resuelta sin coste.</p></div>
-        <div class="detail-block"><h3>👨‍👩‍👧 Para toda la familia</h3><p>La póliza puede incluir a todo el núcleo familiar bajo una misma cobertura: pareja, hijos y otros dependientes. Planes adaptados para familias numerosas, parejas y solteros. Cuantos más miembros, mejor precio por persona asegurada.</p></div>
-        <div class="detail-block"><h3>🚑 Traslado nacional e internacional</h3><p>Si el fallecimiento ocurre fuera del lugar de residencia, ya sea en otra ciudad o en el extranjero, nos hacemos cargo del traslado del cuerpo o las cenizas. El servicio opera los 365 días del año desde cualquier parte del mundo.</p></div>
-        <div class="detail-block"><h3>💆 Apoyo psicológico</h3><p>Servicio de acompañamiento emocional para los familiares más directos durante el duelo. Un equipo de profesionales especializados está disponible para ayudar a superar el dolor de forma presencial, telefónica o por videollamada.</p></div>
-        <div class="detail-block"><h3>⏳ El mejor momento para contratarlo</h3><p>Cuanto antes se contrata, más ventajosa es la prima mensual. Al hacerlo con buena salud se garantiza cobertura total sin periodos de carencia, y se evita el riesgo de no poder asegurarse por problemas de salud en el futuro.</p></div>
+        <div class="detail-block"><h3>⚰️ Gastos de sepelio</h3><p>Ataúd, servicio funerario, traslado, esquelas, flores y velatorio. Sin ningún coste para la familia.</p></div>
+        <div class="detail-block"><h3>📋 Trámites y gestiones</h3><p>Certificado de defunción, registro civil, bajas en Seguridad Social y asesoramiento jurídico para herederos.</p></div>
+        <div class="detail-block"><h3>👨‍👩‍👧 Para toda la familia</h3><p>Una póliza para todo el núcleo familiar. Cuantos más miembros, mejor precio por persona asegurada.</p></div>
+        <div class="detail-block"><h3>🚑 Traslado internacional</h3><p>Si el fallecimiento ocurre fuera de la residencia habitual, gestionamos el traslado desde cualquier parte del mundo.</p></div>
+        <div class="detail-block"><h3>💆 Apoyo psicológico</h3><p>Acompañamiento emocional profesional para los familiares durante el duelo, presencial o por videollamada.</p></div>
+        <div class="detail-block"><h3>⏳ Contrátalo cuanto antes</h3><p>A menor edad, menor prima mensual y cobertura total sin periodos de carencia ni riesgo de exclusiones futuras.</p></div>
       </div>
     </div>
 
     <!-- VIDA -->
     <div class="prod-detail" id="detail-vida">
       <h2>❤️ Seguridad y tranquilidad para tu familia</h2>
-      <p>El seguro de vida garantiza el bienestar económico de tus seres queridos en caso de que ya no puedas estar a su lado. Es una de las decisiones más responsables que puedes tomar para proteger el futuro de tu familia y asegurarte de que podrán mantener su nivel de vida ante cualquier imprevisto.</p>
+      <p>Garantiza el bienestar económico de tus seres queridos ante cualquier imprevisto. Una decisión responsable para proteger el futuro de tu familia.</p>
       <div class="detail-grid">
-        <div class="detail-block"><h3>⚰️ Fallecimiento por cualquier causa</h3><p>En caso de fallecimiento, los beneficiarios que hayas designado —cónyuge, hijos u otros familiares— reciben una indemnización económica pactada. Este capital permite hacer frente a hipotecas pendientes, gastos corrientes, educación de los hijos y cualquier necesidad económica familiar sin tener que depender de terceros.</p></div>
-        <div class="detail-block"><h3>🚗 Fallecimiento por accidente</h3><p>Si el fallecimiento se produce como consecuencia directa de un accidente de tráfico, laboral o doméstico, la indemnización que reciben los beneficiarios se duplica o incluso triplica según la modalidad contratada. Esta cobertura adicional proporciona una protección reforzada ante situaciones imprevistas y repentinas.</p></div>
-        <div class="detail-block"><h3>🛠️ Invalidez absoluta permanente</h3><p>Si sufres una invalidez absoluta y permanente que te impide de forma definitiva realizar cualquier tipo de trabajo o actividad cotidiana, recibes en vida la indemnización del seguro. Así puedes adaptar tu vivienda, costear una asistencia personal y mantener tu independencia económica sin depender exclusivamente de una pensión.</p></div>
-        <div class="detail-block"><h3>🩺 Segunda opinión médica internacional</h3><p>Ante un diagnóstico grave o una enfermedad compleja, tienes acceso a un servicio de segunda opinión médica con especialistas de reconocido prestigio internacional. Este servicio te permite contrastar el diagnóstico recibido, explorar tratamientos alternativos y tomar decisiones médicas con toda la información posible.</p></div>
-        <div class="detail-block"><h3>💊 Rehabilitación cardíaca y médica</h3><p>Incluye cobertura de programas de rehabilitación cardíaca supervisados por médicos especialistas tras sufrir un infarto u otras patologías graves del corazón. También cubre tratamientos de recuperación funcional tras accidentes o intervenciones quirúrgicas, con seguimiento médico personalizado hasta la plena recuperación del asegurado.</p></div>
-        <div class="detail-block"><h3>📞 Asistencia y orientación 24h</h3><p>Servicio de atención telefónica disponible las 24 horas con orientación médica, psicológica y social. Ante cualquier duda sobre síntomas, tratamientos o situaciones de emergencia, un equipo multidisciplinar de profesionales está disponible para orientarte y derivarte al servicio más adecuado en cada momento.</p></div>
+        <div class="detail-block"><h3>⚰️ Fallecimiento por cualquier causa</h3><p>Los beneficiarios reciben un capital para hacer frente a hipotecas, gastos corrientes o educación de los hijos.</p></div>
+        <div class="detail-block"><h3>🚗 Fallecimiento por accidente</h3><p>La indemnización se duplica o triplica si el fallecimiento es consecuencia de un accidente de tráfico o laboral.</p></div>
+        <div class="detail-block"><h3>🛠️ Invalidez absoluta permanente</h3><p>Recibes la indemnización en vida si una invalidez te impide trabajar o realizar actividades cotidianas de forma definitiva.</p></div>
+        <div class="detail-block"><h3>🩺 Segunda opinión médica</h3><p>Ante un diagnóstico grave, acceso a especialistas internacionales de prestigio para contrastar y explorar tratamientos.</p></div>
+        <div class="detail-block"><h3>💊 Rehabilitación médica</h3><p>Programas de recuperación cardíaca y funcional tras infartos, accidentes o intervenciones, con seguimiento personalizado.</p></div>
+        <div class="detail-block"><h3>📞 Asistencia 24h</h3><p>Orientación médica, psicológica y social disponible las 24 horas con profesionales especializados.</p></div>
       </div>
     </div>
 
     <!-- SALUD -->
     <div class="prod-detail" id="detail-salud">
       <h2>🏥 Protege tu bienestar físico y emocional</h2>
-      <p>Con el seguro de salud de Santalucía accedes a una amplia red de médicos especialistas, hospitales y centros sanitarios en toda España sin necesidad de esperar en listas de la sanidad pública. Tu salud es nuestra prioridad, y por eso diseñamos coberturas completas para cada etapa de tu vida.</p>
+      <p>Accede a médicos especialistas y hospitales en toda España sin listas de espera. Tu salud, nuestra prioridad.</p>
       <div class="detail-grid">
-        <div class="detail-block"><h3>⏱️ Sin listas de espera</h3><p>Accede a cualquier consulta médica, prueba diagnóstica o intervención quirúrgica sin los tiempos de espera de la sanidad pública. En muchos casos, podrás ser atendido en menos de 48 horas. Ideal para situaciones que requieren diagnóstico o tratamiento rápido para evitar que el problema de salud se agrave.</p></div>
-        <div class="detail-block"><h3>🔬 Especialistas sin derivación</h3><p>Puedes acudir directamente a cualquier especialista —cardiólogo, traumatólogo, dermatólogo, ginecólogo, psiquiatra, etc.— sin necesidad de pasar primero por tu médico de cabecera ni obtener una autorización previa. Tú eliges el especialista que prefieras dentro de la amplia red médica concertada.</p></div>
-        <div class="detail-block"><h3>🏨 Hospitalización y cirugía</h3><p>Cubrimos todos los gastos de hospitalización en habitación individual, honorarios del cirujano y anestesista, material quirúrgico, medicación durante el ingreso y seguimiento postoperatorio. También incluye la rehabilitación necesaria tras la intervención para garantizar una recuperación completa y en el menor tiempo posible.</p></div>
-        <div class="detail-block"><h3>🌍 Cobertura en el extranjero</h3><p>Cuando viajes fuera de España, tu seguro de salud te cubre en caso de urgencia médica en cualquier parte del mundo. Incluye repatriación sanitaria en caso necesario, asistencia médica de urgencias, hospitalización en el extranjero y coordinación con las autoridades sanitarias locales para garantizar la mejor atención posible.</p></div>
-        <div class="detail-block"><h3>🧠 Salud mental</h3><p>Cobertura de consultas con psicólogos y psiquiatras sin necesidad de derivación médica. La salud mental es tan importante como la física, y por eso incluimos terapia individual, tratamiento de ansiedad, depresión, trastornos del sueño y otras patologías psicológicas con profesionales especializados y acreditados.</p></div>
-        <div class="detail-block"><h3>📞 Asistencia médica 24h</h3><p>Servicio de atención médica telefónica disponible las 24 horas del día, los 7 días de la semana. Un médico colegiado te orienta ante cualquier síntoma, duda o situación de urgencia, recomienda si debes acudir a urgencias o esperar consulta, y puede prescribir medicación en casos concretos sin salir de casa.</p></div>
+        <div class="detail-block"><h3>⏱️ Sin listas de espera</h3><p>Consultas, pruebas e intervenciones sin los tiempos de la sanidad pública. Atención en menos de 48 horas en muchos casos.</p></div>
+        <div class="detail-block"><h3>🔬 Especialistas sin derivación</h3><p>Accede directamente a cualquier especialista sin pasar por el médico de cabecera ni obtener autorización previa.</p></div>
+        <div class="detail-block"><h3>🏨 Hospitalización y cirugía</h3><p>Habitación individual, honorarios médicos, material quirúrgico, medicación y rehabilitación postoperatoria incluidos.</p></div>
+        <div class="detail-block"><h3>🌍 Cobertura en el extranjero</h3><p>Urgencias médicas en cualquier parte del mundo, repatriación sanitaria y coordinación con autoridades locales.</p></div>
+        <div class="detail-block"><h3>🧠 Salud mental</h3><p>Consultas con psicólogos y psiquiatras sin derivación. Tratamiento de ansiedad, depresión y trastornos del sueño.</p></div>
+        <div class="detail-block"><h3>📞 Médico 24h</h3><p>Un médico colegiado te orienta telefónicamente a cualquier hora, te indica si debes ir a urgencias y puede prescribir medicación.</p></div>
       </div>
     </div>
 
-    <!-- MASCOTAS -->
+    <!-- MASCOTAS — texto reducido -->
     <div class="prod-detail" id="detail-mascotas">
       <h2>🐾 Seguro de Mascotas</h2>
-      <p>Tu perro o gato es parte de la familia, y como tal merece la mejor protección. El seguro de mascotas de Santalucía te ofrece cobertura completa ante imprevistos veterinarios, accidentes y responsabilidad civil, para que puedas disfrutar de tu mascota con toda la tranquilidad del mundo.</p>
+      <p>Tu perro o gato merece la mejor protección. Cobertura completa ante imprevistos veterinarios, accidentes y responsabilidad civil.</p>
       <div class="detail-grid">
-        <div class="detail-block"><h3>🐕 Responsabilidad civil</h3><p>Si tu mascota causa daños a personas, otros animales o propiedades —un mordisco, un arañazo o un accidente— el seguro cubre los gastos de indemnización y reparación reclamados por los perjudicados. Esta cobertura es especialmente importante en espacios públicos, parques y zonas de convivencia con otras personas y animales.</p></div>
-        <div class="detail-block"><h3>📞 Consulta veterinaria 24h</h3><p>Asesoramiento veterinario telefónico disponible las 24 horas del día, los 7 días de la semana. Un veterinario colegiado te orienta ante cualquier síntoma de enfermedad, comportamiento extraño o urgencia de tu mascota. Podrás recibir orientación inmediata sin necesidad de esperar a que abra la clínica más cercana.</p></div>
-        <div class="detail-block"><h3>🏥 Gastos veterinarios por accidente</h3><p>Cubrimos los gastos de diagnóstico, tratamiento y hospitalización veterinaria derivados de un accidente: atropello, caída, ingestión accidental de tóxicos, lesiones por pelea con otros animales, etc. El seguro se hace cargo de las facturas veterinarias para que tu mascota reciba la mejor atención sin que el coste te preocupe.</p></div>
-        <div class="detail-block"><h3>🔍 Robo y pérdida</h3><p>En caso de robo o pérdida de tu mascota, el seguro cubre los gastos de búsqueda activa, publicidad en redes y medios locales, recompensa y, en determinadas modalidades, una indemnización económica. También incluimos la gestión y microchip de identificación para facilitar la localización del animal si se pierde.</p></div>
-        <div class="detail-block"><h3>🩺 Enfermedades cubiertas</h3><p>Algunas modalidades incluyen cobertura de enfermedades comunes y crónicas diagnosticadas tras la contratación: infecciones, problemas digestivos, enfermedades dermatológicas, problemas articulares y más. Consulta las condiciones específicas de cada plan para conocer el listado detallado de patologías incluidas en tu póliza.</p></div>
-        <div class="detail-block"><h3>✈️ Viajes con tu mascota</h3><p>Si viajas con tu perro o gato dentro de España o al extranjero, el seguro te cubre ante imprevistos de salud durante el desplazamiento. Incluye asistencia veterinaria de urgencia en destino, gestiones con autoridades sanitarias locales y, si fuera necesario, el traslado de la mascota de regreso a tu domicilio habitual.</p></div>
+        <div class="detail-block"><h3>🐕 Responsabilidad civil</h3><p>Si tu mascota causa daños a personas o propiedades, el seguro cubre las indemnizaciones y reparaciones reclamadas.</p></div>
+        <div class="detail-block"><h3>📞 Veterinario 24h</h3><p>Asesoramiento veterinario telefónico a cualquier hora. Orientación inmediata ante síntomas, urgencias o comportamientos extraños.</p></div>
+        <div class="detail-block"><h3>🏥 Accidentes veterinarios</h3><p>Cubrimos diagnóstico, tratamiento y hospitalización por atropello, caída o ingestión accidental de tóxicos.</p></div>
+        <div class="detail-block"><h3>🔍 Robo y pérdida</h3><p>Búsqueda activa, publicidad local, recompensa e indemnización económica. Gestión del microchip de identificación incluida.</p></div>
+        <div class="detail-block"><h3>🩺 Enfermedades</h3><p>Cobertura de enfermedades comunes y crónicas diagnosticadas tras la contratación según la modalidad elegida.</p></div>
+        <div class="detail-block"><h3>✈️ Viajes con tu mascota</h3><p>Asistencia veterinaria de urgencia en destino dentro y fuera de España, con traslado de regreso si fuera necesario.</p></div>
       </div>
     </div>
 
     <!-- AHORRO -->
     <div class="prod-detail" id="detail-ahorro">
       <h2>💰 Impulsa tu futuro financiero</h2>
-      <p>En Santalucía te ofrecemos soluciones de ahorro e inversión flexibles, seguras y adaptadas a tus objetivos personales. Ya sea para la jubilación, la educación de tus hijos o simplemente para hacer crecer tu dinero con tranquilidad, tenemos el producto que mejor se adapta a tu perfil y capacidad económica.</p>
+      <p>Soluciones de ahorro e inversión flexibles y seguras adaptadas a tus objetivos: jubilación, educación o simplemente hacer crecer tu dinero.</p>
       <div class="detail-grid">
-        <div class="detail-block"><h3>📈 Plan de ahorro garantizado</h3><p>Deposita un capital inicial y realiza aportaciones periódicas que se van acumulando con un tipo de interés garantizado. Al vencimiento del plan, recuperas tu capital más los intereses generados, con total seguridad y sin riesgo de pérdida. Ideal para personas que prefieren la certeza sobre la rentabilidad de sus ahorros.</p></div>
-        <div class="detail-block"><h3>🎯 Plan de pensiones</h3><p>Complementa tu pensión pública con un plan de pensiones privado que te permita mantener tu nivel de vida tras la jubilación. Realiza aportaciones mensuales o anuales y benefíciate de ventajas fiscales cada año en tu declaración de la renta. Cuanto antes empieces, mayor será el capital acumulado para tu retiro.</p></div>
-        <div class="detail-block"><h3>📊 Inversión con rentabilidad variable</h3><p>Si buscas mayor rentabilidad y estás dispuesto a asumir cierto nivel de riesgo, contamos con productos de inversión vinculados a mercados financieros. Nuestros asesores diseñarán una cartera adaptada a tu perfil inversor —conservador, moderado o dinámico— con revisiones periódicas para optimizar el rendimiento de tu dinero.</p></div>
-        <div class="detail-block"><h3>🏡 Ahorro para objetivos específicos</h3><p>¿Quieres comprar una vivienda, financiar los estudios de tus hijos o preparar un gran viaje? Diseñamos un plan de ahorro personalizado con un horizonte temporal y un objetivo concreto. Cada mes se hace una aportación automática y al final del plazo tienes el capital listo para cumplir tu meta sin esfuerzo extra.</p></div>
-        <div class="detail-block"><h3>🤝 Asesoramiento financiero experto</h3><p>Nuestro equipo de asesores financieros certificados te acompaña en todo momento: desde la elección del producto más adecuado hasta el seguimiento periódico de tu inversión. Analizamos tu situación económica, tus objetivos y tu tolerancia al riesgo para recomendarte siempre la estrategia más conveniente para ti.</p></div>
-        <div class="detail-block"><h3>💸 Rescate flexible</h3><p>A diferencia de otros productos financieros, nuestras soluciones de ahorro e inversión ofrecen condiciones de rescate flexibles. Puedes recuperar total o parcialmente tu capital en caso de necesidad —desempleo, enfermedad grave u otras situaciones excepcionales— sin penalizaciones desproporcionadas y con plena liquidez.</p></div>
+        <div class="detail-block"><h3>📈 Ahorro garantizado</h3><p>Capital inicial más aportaciones periódicas con interés garantizado. Al vencimiento recuperas tu dinero más los intereses, sin riesgo.</p></div>
+        <div class="detail-block"><h3>🎯 Plan de pensiones</h3><p>Complementa tu pensión pública con ventajas fiscales anuales. Cuanto antes empieces, mayor capital acumularás.</p></div>
+        <div class="detail-block"><h3>📊 Inversión con rentabilidad variable</h3><p>Cartera adaptada a tu perfil inversor —conservador, moderado o dinámico— con revisiones periódicas para optimizar el rendimiento.</p></div>
+        <div class="detail-block"><h3>🏡 Ahorro por objetivos</h3><p>Plan personalizado para comprar vivienda, financiar estudios o un gran viaje. Aportación automática mensual hasta alcanzar tu meta.</p></div>
+        <div class="detail-block"><h3>🤝 Asesoramiento experto</h3><p>Asesores financieros certificados que analizan tu situación y objetivos para recomendarte siempre la mejor estrategia.</p></div>
+        <div class="detail-block"><h3>💸 Rescate flexible</h3><p>Recupera tu capital parcial o totalmente en caso de necesidad sin penalizaciones desproporcionadas y con plena liquidez.</p></div>
       </div>
     </div>
 
@@ -720,9 +863,8 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   </div>
 </footer>
 
-<!-- FLOATING CONTACT — pill + círculo -->
+<!-- FLOATING CONTACT -->
 <div class="float-wrap" id="floatWrap">
-  <!-- Pill expandida -->
   <button class="float-pill" id="floatPill">
     <div class="float-pill-text">
       <p>¿Necesitas ayuda?</p>
@@ -736,7 +878,6 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
       </svg>
     </div>
   </button>
-  <!-- Círculo colapsado -->
   <button class="float-circle" id="floatCircle">
     <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2Z" fill="#1a1a1a" opacity="0.1"/>
@@ -762,57 +903,29 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
 </div>
 
 <script>
-/* ── PAGE LOADER — solo si hay conexión lenta ── */
+/* ── PAGE LOADER ── */
 const loader = document.getElementById('pageLoader');
 let loaderTimer = setTimeout(()=>{
-  loader.style.display = 'flex';
-  loader.style.opacity = '1';
-}, 2000); // aparece solo si la página tarda más de 2s en cargar
-
-window.addEventListener('load', function(){
+  loader.style.display='flex';loader.style.opacity='1';
+},2000);
+window.addEventListener('load',function(){
   clearTimeout(loaderTimer);
-  if(loader.style.display === 'flex'){
-    loader.style.opacity = '0';
-    setTimeout(()=>{ loader.style.display = 'none'; }, 500);
-  } else {
-    loader.style.display = 'none';
-  }
+  if(loader.style.display==='flex'){loader.style.opacity='0';setTimeout(()=>{loader.style.display='none';},500);}
+  else{loader.style.display='none';}
 });
 
-/* ── FLOATING BUTTON — pill / círculo, solo por tiempo 10→15→10→15 ── */
-const floatPill = document.getElementById('floatPill');
-const floatCircle = document.getElementById('floatCircle');
-
-function showPill(){
-  floatCircle.style.display = 'none';
-  floatPill.style.display = 'flex';
-  floatPill.classList.remove('hide');
-}
-function showCircle(){
-  floatPill.style.display = 'none';
-  floatCircle.style.display = 'flex';
-  floatCircle.classList.remove('hide');
-}
-
-// Arrancar: pill visible, colapsar a los 10s, ciclo 15→10→15→10...
+/* ── FLOATING BUTTON ── */
+const floatPill=document.getElementById('floatPill');
+const floatCircle=document.getElementById('floatCircle');
+function showPill(){floatCircle.style.display='none';floatPill.style.display='flex';floatPill.classList.remove('hide');}
+function showCircle(){floatPill.style.display='none';floatCircle.style.display='flex';floatCircle.classList.remove('hide');}
 showPill();
 function startFloatCycle(){
-  // Pill visible → tras 10s colapsa
-  setTimeout(()=>{
-    showCircle();
-    // Círculo visible → tras 15s expande
-    setTimeout(()=>{
-      showPill();
-      // Repetir indefinidamente
-      startFloatCycle();
-    }, 15000);
-  }, 10000);
+  setTimeout(()=>{showCircle();setTimeout(()=>{showPill();startFloatCycle();},15000);},10000);
 }
 startFloatCycle();
-
-// Ambos botones abren el modal
-floatPill.addEventListener('click', openModal);
-floatCircle.addEventListener('click', openModal);
+floatPill.addEventListener('click',openModal);
+floatCircle.addEventListener('click',openModal);
 
 /* ── SIDE NAV ── */
 const menuBtn=document.getElementById('menuBtn'),sideNav=document.getElementById('sideNav'),navOverlay=document.getElementById('navOverlay'),sideClose=document.getElementById('sideClose');
@@ -839,12 +952,22 @@ function showProduct(key){
   document.getElementById('productos').scrollIntoView({behavior:'smooth',block:'start'});
   closeSideNav();
 }
-document.querySelectorAll('[data-prod]').forEach(el=>{el.addEventListener('click',(e)=>{e.preventDefault();showProduct(el.getAttribute('data-prod'));});});
+document.querySelectorAll('[data-prod]').forEach(el=>{
+  el.addEventListener('click',(e)=>{e.preventDefault();showProduct(el.getAttribute('data-prod'));});
+});
 
-/* ── TRANSFER ── */
-document.getElementById('transferBtn').addEventListener('click',()=>{
-  const bw=document.getElementById('bankWrap');bw.classList.toggle('open');
-  if(bw.classList.contains('open'))setTimeout(()=>bw.scrollIntoView({behavior:'smooth',block:'nearest'}),100);
+/* ── TRANSFER — sin alterar layout ── */
+const transferBtn=document.getElementById('transferBtn');
+const bankWrap=document.getElementById('bankWrap');
+transferBtn.addEventListener('click',()=>{
+  const isOpen=bankWrap.classList.contains('open');
+  bankWrap.classList.toggle('open');
+  // Solo scroll suave dentro del contenedor, no altera layout superior
+  if(!isOpen){
+    setTimeout(()=>{
+      bankWrap.scrollIntoView({behavior:'smooth',block:'nearest'});
+    },100);
+  }
 });
 
 /* ── CONTACT MODAL ── */
@@ -857,19 +980,35 @@ if(sideContactBtn)sideContactBtn.addEventListener('click',(e)=>{e.preventDefault
 contactModal.addEventListener('click',(e)=>{if(e.target===contactModal)closeModal();});
 
 document.getElementById('sendBtn').addEventListener('click',()=>{
-  const n=document.getElementById('cf-name').value.trim(),em=document.getElementById('cf-email').value.trim(),s=document.getElementById('cf-subject').value.trim(),m=document.getElementById('cf-message').value.trim();
+  const n=document.getElementById('cf-name').value.trim();
+  const em=document.getElementById('cf-email').value.trim();
+  const s=document.getElementById('cf-subject').value.trim();
+  const m=document.getElementById('cf-message').value.trim();
   if(!n||!em||!s||!m){alert('Por favor, completa todos los campos.');return;}
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){alert('Por favor, introduce un correo válido.');return;}
   document.getElementById('modalForm').style.display='none';
   document.getElementById('modalSuccess').style.display='block';
-  setTimeout(()=>{closeModal();setTimeout(()=>{document.getElementById('modalForm').style.display='block';document.getElementById('modalSuccess').style.display='none';['cf-name','cf-email','cf-subject','cf-message'].forEach(id=>document.getElementById(id).value='');},400);},3000);
+  setTimeout(()=>{
+    closeModal();
+    setTimeout(()=>{
+      document.getElementById('modalForm').style.display='block';
+      document.getElementById('modalSuccess').style.display='none';
+      ['cf-name','cf-email','cf-subject','cf-message'].forEach(id=>document.getElementById(id).value='');
+    },400);
+  },3000);
 });
 
 document.addEventListener('keydown',(e)=>{if(e.key==='Escape'){closeModal();closeLogin();}});
 
 /* ── SCROLL ANIMATION ── */
-const io=new IntersectionObserver((entries)=>{entries.forEach(en=>{if(en.isIntersecting){en.target.style.opacity='1';en.target.style.transform='translateY(0)';}});},{threshold:.15});
-document.querySelectorAll('.prod-card,.review-card,.stat-box,.detail-block').forEach(el=>{el.style.opacity='0';el.style.transform='translateY(18px)';el.style.transition='opacity .5s ease, transform .5s ease';io.observe(el);});
+const io=new IntersectionObserver((entries)=>{
+  entries.forEach(en=>{
+    if(en.isIntersecting){en.target.style.opacity='1';en.target.style.transform='translateY(0)';}
+  });
+},{threshold:.15});
+document.querySelectorAll('.prod-card,.review-card,.stat-box,.detail-block').forEach(el=>{
+  el.style.opacity='0';el.style.transform='translateY(18px)';el.style.transition='opacity .5s ease, transform .5s ease';io.observe(el);
+});
 </script>
 </body>
 </html>
