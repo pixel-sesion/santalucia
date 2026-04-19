@@ -31,6 +31,7 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
 .loader-text{font-size:14px;color:var(--gray);font-weight:600;letter-spacing:.5px;}
 @keyframes dotBounce{0%,80%,100%{transform:scale(0.7);opacity:.5;}40%{transform:scale(1.2);opacity:1;}}
 @keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+@keyframes gentleFloat{0%,100%{transform:translate(0,0) rotate(0deg) scale(1);}25%{transform:translate(-5px,-8px) rotate(5deg) scale(1.05);}50%{transform:translate(3px,-4px) rotate(-3deg) scale(1);}75%{transform:translate(-2px,-10px) rotate(4deg) scale(1.03);}}
 
 /* ── HEADER ── */
 .header{background:#ffffff;border-bottom:1px solid #dde3ee;position:fixed;top:0;left:0;right:0;z-index:300;box-shadow:0 2px 12px rgba(0,37,122,0.07);}
@@ -55,18 +56,17 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
 .icon-btn:hover svg circle[fill="#0099FF"]{fill:#0044AA;}
 
 /* ══════════════════════════════
-   LOGIN OVERLAY — MEJORADO
+   LOGIN OVERLAY
 ══════════════════════════════ */
 .login-overlay{position:fixed;inset:0;z-index:500;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;display:flex;flex-direction:column;overflow:hidden;}
 .login-overlay.open{opacity:1;visibility:visible;}
 
-/* FONDO: imagen de paisaje natural (Wikipedia/Wikimedia) */
 .login-bg{
   position:absolute;inset:0;
-  background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/24701-nature-natural-beauty.jpg/1280px-24701-nature-natural-beauty.jpg') center/cover no-repeat;
+  background:url('https://upload.wikimedia.org/wikipedia/commons/f/ff/Imagetran.jpg') center/cover no-repeat;
   z-index:0;
 }
-.login-bg::after{content:'';position:absolute;inset:0;background:rgba(0,20,80,0.55);z-index:1;}
+.login-bg::after{content:'';position:absolute;inset:0;background:rgba(0,20,80,0.50);z-index:1;}
 
 .login-topbar{position:relative;z-index:3;background:var(--blue);display:flex;align-items:center;justify-content:center;padding:14px 20px;min-height:60px;flex-shrink:0;}
 .login-topbar img{height:30px;filter:brightness(0) invert(1);}
@@ -75,7 +75,6 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
 .login-close svg{width:15px;height:15px;stroke:white;fill:none;stroke-width:2.5;stroke-linecap:round;}
 .login-main{position:relative;z-index:2;flex:1;display:flex;align-items:center;justify-content:space-between;padding:32px 5% 32px 7%;gap:32px;overflow:hidden;}
 
-/* Features cards lado izquierdo */
 .login-features{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,auto);gap:12px;width:min(560px,50%);flex-shrink:0;}
 .lf-card{background:rgba(255,255,255,0.18);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-radius:10px;padding:20px 16px 16px;display:flex;flex-direction:column;gap:6px;cursor:pointer;border:1px solid rgba(255,255,255,0.28);transition:background .2s,transform .15s;}
 .lf-card:hover{background:rgba(255,255,255,0.30);transform:translateY(-2px);}
@@ -84,42 +83,19 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
 .lf-title{font-size:13px;font-weight:800;color:white;line-height:1.2;}
 .lf-desc{font-size:11.5px;color:rgba(255,255,255,0.80);line-height:1.45;}
 
-/* Panel login derecho */
 .login-panel{background:white;border-radius:12px;width:420px;flex-shrink:0;box-shadow:0 16px 56px rgba(0,0,0,0.28);transform:translateX(20px);opacity:0;transition:transform .35s cubic-bezier(.25,.9,.35,1),opacity .3s;overflow:hidden;}
 .login-overlay.open .login-panel{transform:translateX(0);opacity:1;}
 .login-tab-single{padding:16px 24px 14px;font-size:14px;font-weight:800;color:var(--blue);background:none;border:none;border-bottom:3px solid var(--blue);font-family:inherit;display:block;width:100%;text-align:left;}
 
-/* ── Login body general ── */
 .login-body{padding:24px 32px 28px;}
 .login-body h3{font-size:20px;font-weight:800;color:var(--dark);text-align:center;margin-bottom:6px;}
 .login-subtitle{font-size:13px;color:var(--gray);text-align:center;margin-bottom:20px;}
 
-/* ── Botones sociales ── */
-.social-login-btns{display:flex;flex-direction:column;gap:10px;margin-bottom:16px;}
-.social-btn-login{
-  display:flex;align-items:center;gap:12px;
-  width:100%;padding:11px 16px;
-  border-radius:8px;border:1.5px solid #dde3ee;
-  background:white;cursor:pointer;
-  font-family:inherit;font-size:14px;font-weight:600;color:var(--dark);
-  transition:background .18s,border-color .18s,box-shadow .18s;
-}
-.social-btn-login:hover{background:#f7f9ff;border-color:#b0c4e8;box-shadow:0 2px 10px rgba(0,37,122,0.08);}
-.social-btn-login svg{flex-shrink:0;}
-.social-btn-login span{flex:1;text-align:left;}
-
-/* ── Divisor OR ── */
-.login-divider{display:flex;align-items:center;gap:10px;margin:14px 0;}
-.login-divider::before,.login-divider::after{content:'';flex:1;height:1px;background:#e2e8f0;}
-.login-divider span{font-size:12px;color:var(--gray);font-weight:600;}
-
-/* ── Tabs método login ── */
 .login-method-tabs{display:flex;gap:0;margin-bottom:16px;border:1.5px solid #dde3ee;border-radius:8px;overflow:hidden;}
 .lm-tab{flex:1;padding:9px 8px;background:none;border:none;font-family:inherit;font-size:12px;font-weight:700;color:var(--gray);cursor:pointer;transition:background .15s,color .15s;border-right:1px solid #dde3ee;}
 .lm-tab:last-child{border-right:none;}
 .lm-tab.active{background:var(--blue);color:white;}
 
-/* Campos formulario */
 .form-group{margin-bottom:14px;position:relative;}
 .form-group label{position:absolute;top:9px;left:13px;font-size:11px;font-weight:600;color:var(--gray);pointer-events:none;}
 .form-group input{width:100%;padding:26px 13px 9px;border:1px solid #ccd4e3;border-radius:6px;font-size:15px;font-family:inherit;outline:none;transition:border-color .2s;color:var(--dark);}
@@ -132,47 +108,30 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
 .btn-login-submit:hover{background:var(--blue2);}
 .login-error-box{display:none;background:#fff0f0;border:1px solid #fca5a5;border-radius:6px;padding:10px 14px;font-size:13px;color:#dc2626;margin-bottom:12px;font-weight:600;}
 
-/* ══════════════════════════════
-   PANEL POST-LOGIN (DASHBOARD)
-══════════════════════════════ */
+/* ══ DASHBOARD POST-LOGIN ══ */
 .login-success-body{display:none;padding:0;}
 .ls-header{background:linear-gradient(120deg,var(--blue) 0%,#003dab 100%);padding:20px 28px;display:flex;align-items:center;gap:14px;}
 .ls-avatar{width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,0.2);border:2px solid rgba(255,255,255,0.4);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
 .ls-header-info{flex:1;}
 .ls-welcome{font-size:16px;font-weight:800;color:white;line-height:1.2;}
 .ls-poliza-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:20px;padding:3px 10px;font-size:11px;font-weight:700;color:rgba(255,255,255,0.9);margin-top:4px;}
-
 .ls-tabs{display:flex;border-bottom:1px solid #e8edf5;}
 .ls-tab{flex:1;padding:11px 6px;background:none;border:none;font-family:inherit;font-size:12px;font-weight:700;color:var(--gray);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .15s,border-color .15s;}
 .ls-tab.active{color:var(--blue);border-bottom-color:var(--blue);}
-
 .ls-panel{display:none;padding:16px 20px;}
 .ls-panel.active{display:block;}
-
-/* Mis datos */
 .ls-data-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #f0f4fb;}
 .ls-data-row:last-child{border-bottom:none;}
 .ls-data-label{font-size:12px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:.4px;}
 .ls-data-value{font-size:13px;font-weight:700;color:var(--dark);}
-
-/* Recibos pendientes */
 .ls-recibo-card{background:#fafbff;border:1.5px solid #dde3ee;border-radius:10px;padding:14px 16px;margin-bottom:10px;}
 .ls-recibo-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;}
 .ls-recibo-desc{font-size:13px;font-weight:700;color:var(--dark);}
 .ls-recibo-fecha{font-size:11px;color:var(--gray);margin-top:2px;}
 .ls-recibo-importe{font-size:18px;font-weight:800;color:var(--blue);}
 .ls-recibo-badge{display:inline-flex;align-items:center;gap:4px;background:#fff3cd;border:1px solid #ffc107;border-radius:20px;padding:2px 9px;font-size:10px;font-weight:800;color:#856404;text-transform:uppercase;margin-bottom:10px;}
-.btn-paypal{
-  display:flex;align-items:center;justify-content:center;gap:8px;
-  width:100%;padding:9px;border-radius:7px;
-  background:#003087;border:none;cursor:pointer;
-  font-family:inherit;font-size:13px;font-weight:700;color:white;
-  transition:background .2s,box-shadow .2s;
-}
+.btn-paypal{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:9px;border-radius:7px;background:#003087;border:none;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;color:white;transition:background .2s,box-shadow .2s;}
 .btn-paypal:hover{background:#002069;box-shadow:0 4px 14px rgba(0,48,135,0.3);}
-.btn-paypal svg{width:18px;height:18px;flex-shrink:0;}
-
-/* Póliza panel */
 .ls-poliza-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #f0f4fb;}
 .ls-poliza-row:last-child{border-bottom:none;}
 .ls-poliza-icon{width:36px;height:36px;background:#eef3ff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
@@ -180,14 +139,10 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
 .ls-poliza-name{font-size:13px;font-weight:700;color:var(--dark);}
 .ls-poliza-num{font-size:11px;color:var(--gray);}
 .ls-poliza-estado{font-size:11px;font-weight:800;color:#16a34a;}
-
-/* Botón logout en panel */
 .btn-logout{width:100%;background:none;border:1.5px solid #e2e8f0;border-radius:7px;padding:9px;font-family:inherit;font-size:13px;font-weight:700;color:var(--gray);cursor:pointer;margin-top:8px;transition:border-color .2s,color .2s;}
 .btn-logout:hover{border-color:#dc2626;color:#dc2626;}
 
-/* ══════════════════════════════
-   NAV LATERAL
-══════════════════════════════ */
+/* ══ NAV LATERAL ══ */
 .nav-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:600;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s;}
 .nav-overlay.open{opacity:1;visibility:visible;}
 .side-nav{position:fixed;top:0;left:-300px;width:280px;height:100dvh;background:var(--white);z-index:700;transition:left .3s cubic-bezier(.25,.9,.35,1.05);display:flex;flex-direction:column;overflow-y:auto;box-shadow:4px 0 24px rgba(0,0,0,.12);}
@@ -201,22 +156,14 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
 .side-nav ul li a:hover{background:#eef3fb;}
 .side-nav-divider{height:1px;background:var(--border);margin:8px 12px;}
 
-/* ══════════════════════════════
-   HERO — con banner Santalucía
-══════════════════════════════ */
+/* ══ HERO ══ */
 .hero{position:relative;min-height:520px;overflow:hidden;display:flex;align-items:center;}
-/* Banner de fondo Santalucía */
 .hero-bg{
   position:absolute;inset:0;
   background:
-    linear-gradient(135deg,rgba(0,37,122,0.82) 0%,rgba(0,61,171,0.70) 50%,rgba(6,104,245,0.55) 100%),
-    url('https://www.santalucia.es/imagenes_slw4/1574984617950/helphome1.webp') center/cover no-repeat;
+    linear-gradient(135deg,rgba(0,37,122,0.75) 0%,rgba(0,61,171,0.60) 50%,rgba(6,104,245,0.45) 100%),
+    url('https://www.santalucia.es/imagenes_slw4/1574977707236/nuevo-banner-1920x500filtro70-v3.webp') center/cover no-repeat;
   z-index:0;
-}
-.hero-bg::after{
-  content:'';position:absolute;inset:0;
-  background:url('https://www.santalucia.es/imagenes_slw4/1574984761030/150-solo-marzo-26.webp') right 5% center / auto 85% no-repeat;
-  opacity:0.12;z-index:1;
 }
 .hero-inner{position:relative;z-index:2;max-width:1280px;margin:0 auto;width:100%;padding:80px 1.5rem;display:flex;align-items:center;gap:40px;}
 .hero-content{flex:1;}
@@ -248,21 +195,34 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
 .bank-label{font-weight:700;color:var(--dark);font-size:13px;white-space:nowrap;flex-shrink:0;}
 .bank-value{font-weight:800;color:#003dbb;font-size:13px;text-align:right;}
 
-/* ── PROMO ── */
+/* ══ PROMO — NUEVO DISEÑO TARJETA REGALO ══ */
 .promo-section{background:var(--white);padding:60px 1.5rem;}
-.promo-inner{max-width:1100px;margin:0 auto;background:linear-gradient(120deg,#f8faff 0%,#eef3fc 100%);border:1.5px solid #d0dcf0;border-radius:20px;display:flex;align-items:stretch;overflow:visible;position:relative;min-height:200px;}
-.promo-text{padding:40px 48px;flex:1;display:flex;flex-direction:column;justify-content:center;}
-.promo-eyebrow{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin-bottom:10px;}
-.promo-title{font-size:26px;font-weight:800;color:var(--dark);margin-bottom:8px;line-height:1.3;}
-.promo-title span{color:var(--blue3);}
-.promo-desc{font-size:15px;color:var(--gray);line-height:1.6;}
-.promo-badge{position:absolute;top:20px;left:20px;background:var(--blue3);color:white;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;}
-.promo-img-wrap{width:300px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 20px;position:relative;overflow:visible;background:transparent;border-radius:0 18px 18px 0;gap:10px;}
-.promo-stars-img{width:80px;height:auto;display:block;margin-bottom:4px;}
-.promo-img{width:100%;max-width:250px;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:center;display:block;position:relative;z-index:1;border-radius:14px;box-shadow:0 24px 60px rgba(0,37,122,0.28),0 8px 20px rgba(0,37,122,0.18),6px 6px 0px rgba(0,37,122,0.09),-2px -2px 0px rgba(255,255,255,0.7);transform:perspective(900px) rotateY(-10deg) rotateX(4deg) rotateZ(-1deg);transition:transform .5s cubic-bezier(.25,.9,.35,1),box-shadow .5s;}
-.promo-img-wrap:hover .promo-img{transform:perspective(900px) rotateY(0deg) rotateX(0deg) rotateZ(0deg) scale(1.05);box-shadow:0 32px 72px rgba(0,37,122,0.32),0 12px 28px rgba(0,37,122,0.20);}
+.promo-inner{
+  max-width:1000px;margin:0 auto;
+  background:#ffffff;
+  border-radius:20px;
+  padding:40px 50px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.08);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:50px;
+  overflow:visible;
+  border:1.5px solid #e8edf5;
+}
+.promo-text{flex:1;z-index:2;}
+.promo-opportunity-badge{color:#6b7280;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:15px;display:block;}
+.promo-main-title{color:#1e3a5f;font-size:32px;font-weight:700;line-height:1.3;margin-bottom:10px;}
+.promo-highlight{background:#a5e6f3;color:#0055b8;padding:2px 8px;border-radius:4px;font-weight:700;}
+.promo-subtitle{color:#374151;font-size:16px;font-weight:400;line-height:1.5;}
+.promo-right{position:relative;flex-shrink:0;display:flex;align-items:center;justify-content:center;padding-top:30px;}
+.promo-stars-deco{position:absolute;top:-15px;left:-85px;width:85px;height:85px;z-index:10;pointer-events:none;animation:gentleFloat 6s ease-in-out infinite;}
+.promo-stars-deco img{width:100%;height:100%;object-fit:contain;}
+.promo-card-img{width:220px;position:relative;z-index:5;filter:drop-shadow(0 8px 20px rgba(0,0,0,0.15));transition:transform .4s ease;transform:rotate(-3deg);}
+.promo-card-img:hover{transform:rotate(3deg) scale(1.02);}
+.promo-card-img img{width:100%;height:auto;display:block;border-radius:12px;}
 
-/* ── RESTO ── */
+/* ── HELP ── */
 .help-section{background:var(--bg);padding:60px 1.5rem;}
 .help-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:60px;}
 .help-text{flex:1;}
@@ -272,6 +232,7 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
 .help-img-wrap{flex:1;border-radius:16px;overflow:hidden;box-shadow:var(--shadow2);max-width:540px;}
 .help-img-wrap img{width:100%;height:360px;object-fit:cover;display:block;}
 
+/* ── PRODUCTS ── */
 .products-section{background:var(--white);padding:70px 1.5rem;}
 .section-label{text-align:center;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gray);margin-bottom:10px;}
 .section-title{text-align:center;font-size:clamp(26px,4vw,38px);font-weight:800;color:var(--blue);margin-bottom:8px;}
@@ -294,6 +255,7 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
 .detail-block h3{font-size:13px;font-weight:800;color:var(--blue);margin-bottom:6px;}
 .detail-block p{font-size:12px;color:var(--gray);line-height:1.6;}
 
+/* ── VALUES ── */
 .values-section{background:linear-gradient(180deg,#f0f5fc 0%,var(--white) 100%);padding:70px 1.5rem;text-align:center;}
 .values-inner{max-width:1000px;margin:0 auto;}
 .values-eyebrow{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gray);margin-bottom:12px;}
@@ -305,6 +267,7 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
 .stat-unit{font-size:20px;font-weight:700;color:var(--blue);}
 .stat-lbl{font-size:13px;color:var(--gray);margin-top:6px;line-height:1.4;}
 
+/* ── REVIEWS ── */
 .reviews-section{background:var(--bg);padding:70px 1.5rem;}
 .reviews-inner{max-width:1100px;margin:0 auto;}
 .rating-bar{display:flex;align-items:center;gap:20px;margin-bottom:36px;flex-wrap:wrap;}
@@ -321,6 +284,7 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
 .review-text{font-size:14px;color:var(--gray);line-height:1.6;margin-bottom:14px;}
 .review-office{font-size:12px;font-weight:700;color:var(--blue3);}
 
+/* ── FOOTER ── */
 footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
 .footer-main{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,.12);}
 .footer-brand img{height:30px;filter:brightness(0) invert(1);margin-bottom:16px;}
@@ -346,6 +310,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
 .footer-bottom-links a{color:rgba(255,255,255,.4);text-decoration:none;font-size:12px;}
 .footer-bottom-links a:hover{color:rgba(255,255,255,.7);}
 
+/* ── FLOAT ── */
 .float-wrap{position:fixed;bottom:28px;right:28px;z-index:200;}
 .float-pill{display:flex;align-items:center;justify-content:space-between;background:#F5C400;border:none;border-radius:50px;padding:14px 18px 14px 22px;width:240px;cursor:pointer;box-shadow:0 8px 28px rgba(0,0,0,.18);font-family:inherit;transition:opacity .4s ease,transform .4s ease;}
 .float-pill:hover{opacity:.9;}
@@ -358,6 +323,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
 .float-pill.hide{opacity:0;pointer-events:none;transform:translateY(8px);}
 .float-circle.hide{opacity:0;pointer-events:none;transform:translateY(8px);}
 
+/* ── MODAL ── */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:800;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s;display:flex;align-items:center;justify-content:center;padding:20px;}
 .modal-overlay.open{opacity:1;visibility:visible;}
 .modal{background:white;border-radius:20px;width:100%;max-width:480px;box-shadow:0 32px 80px rgba(0,0,0,.2);overflow:hidden;transform:scale(.95);transition:transform .25s;}
@@ -396,6 +362,11 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   .hero-payment{width:100%;max-width:100%;}
   .pay-btns{flex-direction:column;}
   .pay-btn{flex-direction:row;padding:12px 16px;}
+  .promo-inner{flex-direction:column;padding:30px 25px;gap:40px;text-align:center;}
+  .promo-main-title{font-size:26px;}
+  .promo-right{padding-top:40px;}
+  .promo-stars-deco{width:70px;height:70px;left:-60px;top:-10px;}
+  .promo-card-img{width:180px;}
 }
 
 /* ══════════════════════════════
@@ -412,38 +383,87 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   .separator{height:28px;margin:0 2px;}
   .icon-btn{width:42px;height:42px;}
   .icon-btn svg{width:28px;height:28px;}
-  .hero{min-height:100svh;display:flex;align-items:flex-start;}
-  .hero-inner{flex-direction:column;padding:14px 0.9rem 16px;gap:10px;align-items:stretch;min-height:calc(100svh - 60px);justify-content:flex-start;}
-  .hero-content{order:1;flex-shrink:0;}
-  .hero h1{font-size:24px;margin-bottom:5px;line-height:1.15;}
-  .hero-eyebrow{font-size:9px;margin-bottom:5px;letter-spacing:2px;}
-  .hero-sub{font-size:12.5px;margin-bottom:10px;line-height:1.5;max-width:100%;}
-  .hero-calc-label{font-size:10.5px;margin-bottom:7px;font-weight:700;}
-  .hero-tabs{display:flex;flex-wrap:nowrap;gap:5px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:2px;margin-bottom:2px;}
+
+  /* HERO MÓVIL — todo en una pantalla */
+  .hero{min-height:calc(100svh - 60px);display:flex;align-items:stretch;}
+  .hero-bg{background-size:cover;background-position:center top;}
+  .hero-inner{
+    flex-direction:column;
+    padding:16px 1rem 14px;
+    gap:0;
+    align-items:stretch;
+    min-height:calc(100svh - 60px);
+    justify-content:space-between;
+  }
+  .hero-content{order:1;flex-shrink:0;padding-bottom:10px;}
+  .hero-eyebrow{font-size:9px;margin-bottom:4px;letter-spacing:2px;}
+  .hero h1{font-size:22px;margin-bottom:6px;line-height:1.15;}
+  .hero-sub{font-size:12px;margin-bottom:10px;line-height:1.5;max-width:100%;}
+  .hero-calc-label{font-size:10px;margin-bottom:6px;font-weight:700;}
+  .hero-tabs{
+    display:flex;flex-wrap:nowrap;gap:4px;
+    overflow-x:auto;-webkit-overflow-scrolling:touch;
+    scrollbar-width:none;padding-bottom:2px;
+  }
   .hero-tabs::-webkit-scrollbar{display:none;}
-  .hero-tab{min-width:52px;max-width:52px;padding:7px 4px;gap:4px;flex-shrink:0;border-radius:9px;}
-  .hero-tab svg{width:20px;height:20px;}
-  .hero-tab span{font-size:7.5px;letter-spacing:.2px;}
-  .hero-payment{order:2;width:100%;max-width:100%;border-radius:12px;flex-shrink:0;}
-  .hero-payment-head{padding:10px 14px;}
-  .hero-payment-head h3{font-size:14px;}
-  .hero-payment-head p{font-size:10.5px;margin-top:1px;}
-  .hero-payment-body{padding:10px 12px;}
-  .pay-btns{flex-direction:column;gap:6px;}
-  .pay-btn{flex-direction:row;padding:9px 14px;font-size:12.5px;gap:9px;justify-content:flex-start;}
+  .hero-tab{min-width:50px;max-width:50px;padding:6px 3px;gap:3px;flex-shrink:0;border-radius:8px;}
+  .hero-tab svg{width:18px;height:18px;}
+  .hero-tab span{font-size:7px;letter-spacing:.2px;}
+
+  /* Widget de pago justo debajo del hero-content */
+  .hero-payment{
+    order:2;width:100%;max-width:100%;
+    border-radius:12px;flex-shrink:0;
+    margin-top:auto;
+  }
+  .hero-payment-head{padding:9px 14px;}
+  .hero-payment-head h3{font-size:13px;}
+  .hero-payment-head p{font-size:10px;margin-top:1px;}
+  .hero-payment-body{padding:8px 10px;}
+  .pay-btns{flex-direction:row;gap:5px;}
+  .pay-btn{flex:1;flex-direction:column;padding:8px 4px;font-size:10px;gap:4px;justify-content:center;align-items:center;}
+  .pay-btn svg{width:16px;height:16px;}
   .bank-row{flex-direction:row;align-items:center;}
-  .bank-label{font-size:12px;min-width:90px;}
-  .bank-value{font-size:12px;}
+  .bank-label{font-size:11px;min-width:80px;}
+  .bank-value{font-size:11px;}
+
+  /* PROMO MÓVIL */
   .promo-section{padding:18px 0.9rem;}
-  .promo-inner{flex-direction:column;align-items:stretch;border-radius:14px;overflow:hidden;min-height:unset;gap:0;background:linear-gradient(120deg,#f8faff 0%,#eef3fc 100%);}
-  .promo-text{padding:16px 16px 10px;flex:none;order:1;}
-  .promo-badge{position:relative;top:auto;left:auto;display:inline-block;font-size:9px;padding:4px 10px;margin-bottom:8px;border-radius:6px;}
-  .promo-eyebrow{font-size:9px;margin-bottom:4px;}
-  .promo-title{font-size:16px;margin-bottom:4px;line-height:1.25;}
-  .promo-desc{font-size:12.5px;line-height:1.5;}
-  .promo-img-wrap{width:100%;flex-shrink:0;order:2;border-radius:0;padding:10px 20px 18px;background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;}
-  .promo-stars-img{width:60px;display:block;}
-  .promo-img{width:75%;max-width:260px;height:auto;aspect-ratio:16/7;object-fit:cover;border-radius:10px;transform:perspective(700px) rotateX(3deg) rotateY(-3deg);box-shadow:0 12px 30px rgba(0,37,122,0.18),3px 3px 0px rgba(0,37,122,0.07);}
+  .promo-inner{
+    flex-direction:column;padding:24px 20px;gap:30px;
+    text-align:center;border-radius:14px;
+  }
+  .promo-opportunity-badge{font-size:11px;margin-bottom:8px;}
+  .promo-main-title{font-size:20px;margin-bottom:6px;}
+  .promo-subtitle{font-size:13px;}
+  .promo-right{padding-top:30px;}
+  .promo-stars-deco{width:60px;height:60px;left:-50px;top:-10px;}
+  .promo-card-img{width:160px;}
+
+  /* HELP MÓVIL — imagen horizontal como portada */
+  .help-section{padding:0;}
+  .help-inner{flex-direction:column;gap:0;}
+  .help-img-wrap{
+    max-width:100%;border-radius:0;
+    width:100%;overflow:hidden;
+    aspect-ratio:16/7;
+    order:1;
+  }
+  .help-img-wrap img{
+    width:100%;height:100%;
+    object-fit:cover;
+    object-position:center center;
+    display:block;
+  }
+  .help-text{
+    order:2;
+    padding:24px 1rem 32px;
+    flex:none;
+  }
+  .help-eyebrow{font-size:9px;margin-bottom:8px;}
+  .help-title{font-size:22px;margin-bottom:10px;}
+  .help-desc{font-size:13px;line-height:1.6;max-width:100%;}
+
   .products-grid{grid-template-columns:1fr;}
   .reviews-grid{grid-template-columns:1fr;}
   .stats-row{grid-template-columns:1fr 1fr;}
@@ -507,9 +527,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   </div>
 </header>
 
-<!-- ══════════════════════════════
-     LOGIN OVERLAY COMPLETO
-══════════════════════════════ -->
+<!-- LOGIN OVERLAY -->
 <div class="login-overlay" id="loginOverlay">
   <div class="login-bg"></div>
   <div class="login-topbar">
@@ -517,7 +535,6 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
     <button class="login-close" id="loginClose"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
   </div>
   <div class="login-main">
-    <!-- Features lado izquierdo -->
     <div class="login-features">
       <div class="lf-card"><div class="lf-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></div><div class="lf-title">Pólizas</div><div class="lf-desc">Consulta tus pólizas, fechas y coberturas</div></div>
       <div class="lf-card"><div class="lf-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="lf-title">Recibos</div><div class="lf-desc">Descarga y paga tus recibos</div></div>
@@ -527,39 +544,14 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
       <div class="lf-card"><div class="lf-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div class="lf-title">Contacta</div><div class="lf-desc">Nuestro equipo está para ayudarte</div></div>
     </div>
 
-    <!-- Panel de login/dashboard -->
     <div class="login-panel" id="loginPanel">
       <div class="login-tab-single">Acceso a Espacio Cliente</div>
 
-      <!-- ── FORM DE INICIO DE SESIÓN ── -->
+      <!-- FORM LOGIN — SIN botones sociales -->
       <div id="loginFormBody">
         <div class="login-body">
           <h3>Bienvenido</h3>
           <p class="login-subtitle">Accede a tu espacio personal</p>
-
-          <!-- Botones sociales -->
-          <div class="social-login-btns">
-            <button class="social-btn-login" id="btnGoogle" onclick="openSocialLogin('google')">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="22" height="22">
-                <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/>
-                <path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/>
-                <path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/>
-                <path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"/>
-              </svg>
-              <span>Continuar con Google</span>
-            </button>
-            <button class="social-btn-login" id="btnMicrosoft" onclick="openSocialLogin('microsoft')">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 23" width="22" height="22">
-                <path fill="#f25022" d="M1 1h10v10H1z"/>
-                <path fill="#7fba00" d="M12 1h10v10H12z"/>
-                <path fill="#00a4ef" d="M1 12h10v10H1z"/>
-                <path fill="#ffb900" d="M12 12h10v10H12z"/>
-              </svg>
-              <span>Continuar con Microsoft</span>
-            </button>
-          </div>
-
-          <div class="login-divider"><span>o accede con tus datos</span></div>
 
           <!-- Tabs DNI / Email -->
           <div class="login-method-tabs">
@@ -567,11 +559,9 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
             <button class="lm-tab" id="tabEmail" onclick="switchLoginTab('email')">Correo electrónico</button>
           </div>
 
-          <!-- Campo DNI -->
           <div id="fieldDni">
             <div class="form-group"><label>DNI/NIF</label><input type="text" id="loginDni" placeholder="Ej: 00000000X" autocomplete="off"></div>
           </div>
-          <!-- Campo Email (oculto por defecto) -->
           <div id="fieldEmail" style="display:none;">
             <div class="form-group"><label>Correo electrónico</label><input type="email" id="loginEmail" placeholder="tu@email.com" autocomplete="email"></div>
           </div>
@@ -587,7 +577,6 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
           </div>
 
           <div class="login-error-box" id="loginError"></div>
-
           <button class="btn-login-submit" id="loginBtn">
             <span id="loginBtnText">Acceder</span>
             <span id="loginBtnSpinner" style="display:none;">
@@ -597,39 +586,8 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
         </div>
       </div>
 
-      <!-- ── MINI-FORMULARIO SOCIAL (Google/Microsoft) ── -->
-      <div id="socialFormBody" style="display:none;">
-        <div class="login-body">
-          <div id="socialFormIcon" style="text-align:center;margin-bottom:12px;"></div>
-          <h3 id="socialFormTitle">Iniciar sesión</h3>
-          <p class="login-subtitle" id="socialFormSubtitle">Introduce tu correo de Google</p>
-
-          <div class="form-group"><label>Correo electrónico</label><input type="email" id="socialEmail" placeholder="tu@gmail.com" autocomplete="email"></div>
-          <div class="form-group">
-            <label>Contraseña</label>
-            <div class="pw-wrap">
-              <input type="password" placeholder="Contraseña" id="socialPw">
-              <button class="pw-eye" onclick="toggleSocialPw()">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-              </button>
-            </div>
-          </div>
-
-          <div class="login-error-box" id="socialError"></div>
-
-          <button class="btn-login-submit" id="socialLoginBtn">
-            <span id="socialBtnText">Continuar</span>
-            <span id="socialBtnSpinner" style="display:none;">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="animation:spin 0.8s linear infinite;vertical-align:middle;"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
-            </span>
-          </button>
-          <button onclick="closeSocialLogin()" style="width:100%;background:none;border:none;color:var(--gray);font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;margin-top:8px;padding:6px;">← Volver</button>
-        </div>
-      </div>
-
-      <!-- ── PANEL POST-LOGIN (DASHBOARD) ── -->
+      <!-- PANEL POST-LOGIN (DASHBOARD) -->
       <div class="login-success-body" id="loginSuccessBody">
-        <!-- Header con nombre y póliza -->
         <div class="ls-header">
           <div class="ls-avatar" id="lsAvatar">👤</div>
           <div class="ls-header-info">
@@ -640,15 +598,11 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
             </div>
           </div>
         </div>
-
-        <!-- Tabs del dashboard -->
         <div class="ls-tabs">
           <button class="ls-tab active" onclick="switchDashTab('datos')">Mis datos</button>
           <button class="ls-tab" onclick="switchDashTab('poliza')">Póliza</button>
           <button class="ls-tab" onclick="switchDashTab('recibos')">Recibos</button>
         </div>
-
-        <!-- Panel: Mis datos -->
         <div class="ls-panel active" id="dashDatos">
           <div class="ls-data-row"><span class="ls-data-label">Nombre</span><span class="ls-data-value" id="ddNombre">—</span></div>
           <div class="ls-data-row"><span class="ls-data-label">DNI / NIF</span><span class="ls-data-value" id="ddDni">—</span></div>
@@ -657,8 +611,6 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
           <div class="ls-data-row"><span class="ls-data-label">Dirección</span><span class="ls-data-value" id="ddDireccion">—</span></div>
           <button class="btn-logout" onclick="doLogout()">Cerrar sesión</button>
         </div>
-
-        <!-- Panel: Póliza -->
         <div class="ls-panel" id="dashPoliza">
           <div class="ls-poliza-row">
             <div class="ls-poliza-icon" id="dpIcon">🏠</div>
@@ -672,21 +624,17 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
           <div class="ls-data-row"><span class="ls-data-label">Próximo vencimiento</span><span class="ls-data-value" id="dpVencimiento">—</span></div>
           <div class="ls-data-row"><span class="ls-data-label">Modalidad</span><span class="ls-data-value" id="dpModalidad">—</span></div>
         </div>
-
-        <!-- Panel: Recibos pendientes -->
         <div class="ls-panel" id="dashRecibos">
-          <div id="recibosContainer">
-            <!-- Generado por JS -->
-          </div>
+          <div id="recibosContainer"></div>
           <p id="sinRecibos" style="display:none;text-align:center;color:var(--gray);font-size:13px;padding:16px 0;">✅ No tienes recibos pendientes</p>
         </div>
       </div>
 
-    </div><!-- /.login-panel -->
-  </div><!-- /.login-main -->
-</div><!-- /.login-overlay -->
+    </div>
+  </div>
+</div>
 
-<!-- HERO — con fondo banner Santalucía -->
+<!-- HERO -->
 <section class="hero" id="inicio">
   <div class="hero-bg"></div>
   <div class="hero-inner">
@@ -728,27 +676,33 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   </div>
 </section>
 
-<!-- PROMO -->
+<!-- PROMO — NUEVO DISEÑO -->
 <section class="promo-section">
   <div class="promo-inner">
     <div class="promo-text">
-      <div class="promo-badge">¡APROVECHA LA OPORTUNIDAD!</div>
-      <div style="margin-top:48px;">
-        <div class="promo-eyebrow">OFERTA ESPECIAL</div>
-        <div class="promo-title">Consigue gratis una <span>TARJETA REGALO</span></div>
-        <p class="promo-desc">al contratar tu seguro de hogar, decesos o vida riesgo.</p>
-      </div>
+      <span class="promo-opportunity-badge">¡Aprovecha la oportunidad!</span>
+      <h2 class="promo-main-title">
+        Consigue gratis una <span class="promo-highlight">TARJETA REGALO</span>
+      </h2>
+      <p class="promo-subtitle">al contratar tu seguro de hogar, decesos o vida riesgo.</p>
     </div>
-    <div class="promo-img-wrap">
-      <img class="promo-stars-img" src="https://www.santalucia.es/estaticos_slw4/images/destacado-secundario-stars.svg" alt="Estrellas destacado">
-      <img class="promo-img" src="https://www.santalucia.es/imagenes_slw4/1574984761030/150-solo-marzo-26.webp" alt="Tarjeta regalo hasta 150€">
+    <div class="promo-right">
+      <div class="promo-stars-deco">
+        <img src="https://www.santalucia.es/estaticos_slw4/images/destacado-secundario-stars.svg" alt="Estrellas decorativas">
+      </div>
+      <div class="promo-card-img">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/75/Zmgcug.png" alt="Tarjeta Regalo Hasta 150€">
+      </div>
     </div>
   </div>
 </section>
 
+<!-- HELP -->
 <section class="help-section">
   <div class="help-inner">
-    <div class="help-img-wrap"><img src="https://www.santalucia.es/imagenes_slw4/1574984617950/helphome1.webp" alt="Santalucía HELP!"></div>
+    <div class="help-img-wrap">
+      <img src="https://www.santalucia.es/imagenes_slw4/1574984617950/helphome1.webp" alt="Santalucía HELP!">
+    </div>
     <div class="help-text">
       <div class="help-eyebrow">PORQUE NO HAY NADA MÁS HUMANO QUE</div>
       <h2 class="help-title">Ayudar y ser ayudado.</h2>
@@ -757,6 +711,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   </div>
 </section>
 
+<!-- PRODUCTOS -->
 <section class="products-section" id="productos">
   <p class="section-label">PRODUCTOS</p>
   <h2 class="section-title">¿Qué tipo de seguro necesitas?</h2>
@@ -779,6 +734,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   </div>
 </section>
 
+<!-- VALUES -->
 <section class="values-section">
   <div class="values-inner">
     <div class="values-eyebrow">MARCAMOS LA DIFERENCIA</div>
@@ -793,6 +749,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   </div>
 </section>
 
+<!-- REVIEWS -->
 <section class="reviews-section">
   <div class="reviews-inner">
     <p class="section-label">OPINIONES</p>
@@ -851,12 +808,10 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
 </div>
 
 <script>
-// ── PAGE LOADER ──
 const loader=document.getElementById('pageLoader');
 let loaderTimer=setTimeout(()=>{loader.style.display='flex';loader.style.opacity='1';},2000);
 window.addEventListener('load',function(){clearTimeout(loaderTimer);if(loader.style.display==='flex'){loader.style.opacity='0';setTimeout(()=>{loader.style.display='none';},500);}else{loader.style.display='none';}});
 
-// ── FLOAT ──
 const floatPill=document.getElementById('floatPill'),floatCircle=document.getElementById('floatCircle');
 function showPill(){floatCircle.style.display='none';floatPill.style.display='flex';floatPill.classList.remove('hide');}
 function showCircle(){floatPill.style.display='none';floatCircle.style.display='flex';floatCircle.classList.remove('hide');}
@@ -866,7 +821,6 @@ startFloatCycle();
 floatPill.addEventListener('click',openModal);
 floatCircle.addEventListener('click',openModal);
 
-// ── SIDE NAV ──
 const menuBtn=document.getElementById('menuBtn'),sideNav=document.getElementById('sideNav'),navOverlay=document.getElementById('navOverlay'),sideClose=document.getElementById('sideClose');
 function openSideNav(){sideNav.classList.add('open');navOverlay.classList.add('open');document.body.style.overflow='hidden';}
 function closeSideNav(){sideNav.classList.remove('open');navOverlay.classList.remove('open');document.body.style.overflow='';}
@@ -874,7 +828,6 @@ menuBtn.addEventListener('click',openSideNav);
 sideClose.addEventListener('click',closeSideNav);
 navOverlay.addEventListener('click',closeSideNav);
 
-// ── LOGIN OVERLAY ──
 const profileBtn=document.getElementById('profileBtn'),loginOverlay=document.getElementById('loginOverlay'),loginClose=document.getElementById('loginClose');
 function openLogin(){loginOverlay.classList.add('open');document.body.style.overflow='hidden';document.body.style.position='fixed';document.body.style.width='100%';}
 function closeLogin(){loginOverlay.classList.remove('open');document.body.style.overflow='';document.body.style.position='';document.body.style.width='';}
@@ -882,125 +835,63 @@ profileBtn.addEventListener('click',openLogin);
 loginClose.addEventListener('click',closeLogin);
 loginOverlay.addEventListener('click',(e)=>{if(e.target===loginOverlay||e.target.classList.contains('login-bg'))closeLogin();});
 
-// ── LOGIN: tab DNI / Email ──
 function switchLoginTab(tab){
-  const isDni = tab==='dni';
+  const isDni=tab==='dni';
   document.getElementById('tabDni').classList.toggle('active',isDni);
   document.getElementById('tabEmail').classList.toggle('active',!isDni);
-  document.getElementById('fieldDni').style.display = isDni?'block':'none';
-  document.getElementById('fieldEmail').style.display = isDni?'none':'block';
+  document.getElementById('fieldDni').style.display=isDni?'block':'none';
+  document.getElementById('fieldEmail').style.display=isDni?'none':'block';
 }
-
-// ── TOGGLE PASSWORDS ──
 function togglePw(){const i=document.getElementById('loginPw');i.type=i.type==='password'?'text':'password';}
-function toggleSocialPw(){const i=document.getElementById('socialPw');i.type=i.type==='password'?'text':'password';}
 
-// ── SOCIAL LOGIN (Google / Microsoft) ──
-let currentSocialProvider = null;
-function openSocialLogin(provider){
-  currentSocialProvider = provider;
-  const isGoogle = provider==='google';
-  document.getElementById('socialFormIcon').innerHTML = isGoogle
-    ? `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="36" height="36"><path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/><path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/><path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/><path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"/></svg>`
-    : `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 23" width="36" height="36"><path fill="#f25022" d="M1 1h10v10H1z"/><path fill="#7fba00" d="M12 1h10v10H12z"/><path fill="#00a4ef" d="M1 12h10v10H1z"/><path fill="#ffb900" d="M12 12h10v10H12z"/></svg>`;
-  document.getElementById('socialFormTitle').textContent = isGoogle ? 'Iniciar sesión con Google' : 'Iniciar sesión con Microsoft';
-  document.getElementById('socialFormSubtitle').textContent = isGoogle ? 'Introduce tu correo de Google' : 'Introduce tu correo de Microsoft';
-  document.getElementById('socialEmail').placeholder = isGoogle ? 'tu@gmail.com' : 'tu@outlook.com';
-  document.getElementById('socialEmail').value='';
-  document.getElementById('socialPw').value='';
-  document.getElementById('socialError').style.display='none';
-  document.getElementById('loginFormBody').style.display='none';
-  document.getElementById('socialFormBody').style.display='block';
-}
-function closeSocialLogin(){
-  document.getElementById('socialFormBody').style.display='none';
-  document.getElementById('loginFormBody').style.display='block';
-  currentSocialProvider=null;
-}
-
-// ── DASHBOARD: cambiar tabs ──
 function switchDashTab(tab){
-  document.querySelectorAll('.ls-tab').forEach((t,i)=>{
-    const tabs=['datos','poliza','recibos'];
-    t.classList.toggle('active', tabs[i]===tab);
-  });
+  document.querySelectorAll('.ls-tab').forEach((t,i)=>{const tabs=['datos','poliza','recibos'];t.classList.toggle('active',tabs[i]===tab);});
   document.querySelectorAll('.ls-panel').forEach(p=>p.classList.remove('active'));
   const panels={datos:'dashDatos',poliza:'dashPoliza',recibos:'dashRecibos'};
   document.getElementById(panels[tab]).classList.add('active');
 }
 
-// ── MOSTRAR DASHBOARD ──
 function mostrarDashboard(docData){
-  // Ocultar forms, mostrar dashboard
   document.getElementById('loginFormBody').style.display='none';
-  document.getElementById('socialFormBody').style.display='none';
   document.getElementById('loginSuccessBody').style.display='block';
-
-  const nombre = docData.nombre || 'Cliente';
-  const primerNombre = nombre.split(' ')[0];
-  const iniciales = nombre.split(' ').map(n=>n[0]).join('').substring(0,2).toUpperCase();
-
-  // Header
-  document.getElementById('lsAvatar').textContent = iniciales || '👤';
-  document.getElementById('lsWelcome').textContent = '¡Hola, '+primerNombre+'!';
-  document.getElementById('lsPolizaBadge').textContent = docData.poliza || 'N/D';
-
-  // Tab Mis datos
-  document.getElementById('ddNombre').textContent = docData.nombre || '—';
-  document.getElementById('ddDni').textContent = docData.dni || '—';
-  document.getElementById('ddEmail').textContent = docData.email || docData.correo || '—';
-  document.getElementById('ddTelefono').textContent = docData.telefono || '—';
-  document.getElementById('ddDireccion').textContent = docData.direccion || '—';
-
-  // Tab Póliza
-  const tipoIconos = {hogar:'🏠',decesos:'🕊️',vida:'❤️',salud:'🏥',mascotas:'🐾',ahorro:'💰'};
-  const tipo = (docData.tipo||'hogar').toLowerCase();
-  document.getElementById('dpIcon').textContent = tipoIconos[tipo]||'📄';
-  document.getElementById('dpNombre').textContent = docData.tipoDsc || ('Seguro de '+(docData.tipo||'Hogar'));
-  document.getElementById('dpNumero').textContent = docData.poliza || '—';
-  document.getElementById('dpImporte').textContent = docData.importe ? docData.importe+' EUR/mes' : '—';
-  document.getElementById('dpVencimiento').textContent = docData.vencimiento || '—';
-  document.getElementById('dpModalidad').textContent = docData.modalidad || '—';
-
-  // Tab Recibos pendientes
-  const container = document.getElementById('recibosContainer');
-  const sinRecibos = document.getElementById('sinRecibos');
+  const nombre=docData.nombre||'Cliente';
+  const primerNombre=nombre.split(' ')[0];
+  const iniciales=nombre.split(' ').map(n=>n[0]).join('').substring(0,2).toUpperCase();
+  document.getElementById('lsAvatar').textContent=iniciales||'👤';
+  document.getElementById('lsWelcome').textContent='¡Hola, '+primerNombre+'!';
+  document.getElementById('lsPolizaBadge').textContent=docData.poliza||'N/D';
+  document.getElementById('ddNombre').textContent=docData.nombre||'—';
+  document.getElementById('ddDni').textContent=docData.dni||'—';
+  document.getElementById('ddEmail').textContent=docData.email||docData.correo||'—';
+  document.getElementById('ddTelefono').textContent=docData.telefono||'—';
+  document.getElementById('ddDireccion').textContent=docData.direccion||'—';
+  const tipoIconos={hogar:'🏠',decesos:'🕊️',vida:'❤️',salud:'🏥',mascotas:'🐾',ahorro:'💰'};
+  const tipo=(docData.tipo||'hogar').toLowerCase();
+  document.getElementById('dpIcon').textContent=tipoIconos[tipo]||'📄';
+  document.getElementById('dpNombre').textContent=docData.tipoDsc||('Seguro de '+(docData.tipo||'Hogar'));
+  document.getElementById('dpNumero').textContent=docData.poliza||'—';
+  document.getElementById('dpImporte').textContent=docData.importe?docData.importe+' EUR/mes':'—';
+  document.getElementById('dpVencimiento').textContent=docData.vencimiento||'—';
+  document.getElementById('dpModalidad').textContent=docData.modalidad||'—';
+  const container=document.getElementById('recibosContainer');
+  const sinRecibos=document.getElementById('sinRecibos');
   container.innerHTML='';
-  const recibos = docData.recibosPendientes || [];
-  if(recibos.length===0){
-    sinRecibos.style.display='block';
-  } else {
+  const recibos=docData.recibosPendientes||[];
+  if(recibos.length===0){sinRecibos.style.display='block';}
+  else{
     sinRecibos.style.display='none';
-    // ── REEMPLAZA YOUR_PAYPAL_CLIENT_ID con tu Client ID real de PayPal ──
-    const PAYPAL_CLIENT_ID = 'YOUR_PAYPAL_CLIENT_ID';
-    recibos.forEach((r,i)=>{
-      const card = document.createElement('div');
+    recibos.forEach((r)=>{
+      const card=document.createElement('div');
       card.className='ls-recibo-card';
-      const paypalUrl = `https://www.paypal.com/ncp/payment/${PAYPAL_CLIENT_ID}?amount=${r.importe}&currency=EUR&description=${encodeURIComponent(r.descripcion||'Recibo póliza')}`;
-      card.innerHTML=`
-        <div class="ls-recibo-head">
-          <div>
-            <div class="ls-recibo-desc">${r.descripcion||'Recibo mensual'}</div>
-            <div class="ls-recibo-fecha">Vence: ${r.fecha||'—'}</div>
-          </div>
-          <div class="ls-recibo-importe">${r.importe||'—'} €</div>
-        </div>
-        <div class="ls-recibo-badge">⏳ Pendiente</div>
-        <a href="${paypalUrl}" target="_blank" rel="noopener" class="btn-paypal">
-          <svg viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="3" fill="#003087"/><text x="12" y="16" font-family="Arial" font-size="7" font-weight="bold" fill="white" text-anchor="middle">PayPal</text></svg>
-          Pagar con PayPal — ${r.importe||'?'} €
-        </a>
-      `;
+      const paypalUrl=`https://www.paypal.com/ncp/payment/AB6HLHKWJCM4C?amount=${r.importe}&currency=EUR`;
+      card.innerHTML=`<div class="ls-recibo-head"><div><div class="ls-recibo-desc">${r.descripcion||'Recibo mensual'}</div><div class="ls-recibo-fecha">Vence: ${r.fecha||'—'}</div></div><div class="ls-recibo-importe">${r.importe||'—'} €</div></div><div class="ls-recibo-badge">⏳ Pendiente</div><a href="${paypalUrl}" target="_blank" rel="noopener" class="btn-paypal">Pagar con PayPal — ${r.importe||'?'} €</a>`;
       container.appendChild(card);
     });
   }
-
-  // Actualizar icono header
   const profileBtnEl=document.getElementById('profileBtn');
   if(profileBtnEl){profileBtnEl.style.background='#eef7ee';profileBtnEl.title='Sesión activa: '+nombre;}
 }
 
-// ── LOGOUT ──
 window.doLogout=function(){
   sessionStorage.removeItem('sl_cliente');
   document.getElementById('loginSuccessBody').style.display='none';
@@ -1013,7 +904,6 @@ window.doLogout=function(){
   closeLogin();
 };
 
-// ── PRODUCTOS ──
 function showProduct(key){
   document.querySelectorAll('.prod-detail').forEach(d=>d.classList.remove('open'));
   const p=document.getElementById('detail-'+key);
@@ -1023,11 +913,9 @@ function showProduct(key){
 }
 document.querySelectorAll('[data-prod]').forEach(el=>{el.addEventListener('click',(e)=>{e.preventDefault();showProduct(el.getAttribute('data-prod'));});});
 
-// ── TRANSFERENCIA ──
 const transferBtn=document.getElementById('transferBtn'),bankWrap=document.getElementById('bankWrap');
 transferBtn.addEventListener('click',()=>{const isOpen=bankWrap.classList.contains('open');bankWrap.classList.toggle('open');if(!isOpen){setTimeout(()=>{bankWrap.scrollIntoView({behavior:'smooth',block:'nearest'});},100);}});
 
-// ── MODAL CONTACTO ──
 const contactModal=document.getElementById('contactModal'),modalClose=document.getElementById('modalClose'),footerContactBtn=document.getElementById('footerContactBtn'),sideContactBtn=document.getElementById('sideContactBtn');
 function openModal(){contactModal.classList.add('open');document.body.style.overflow='hidden';}
 function closeModal(){contactModal.classList.remove('open');document.body.style.overflow='';}
@@ -1043,13 +931,11 @@ document.getElementById('sendBtn').addEventListener('click',()=>{
   setTimeout(()=>{closeModal();setTimeout(()=>{document.getElementById('modalForm').style.display='block';document.getElementById('modalSuccess').style.display='none';['cf-name','cf-email','cf-subject','cf-message'].forEach(id=>document.getElementById(id).value='');},400);},3000);
 });
 
-// ── INTERSECTION OBSERVER ──
 document.addEventListener('keydown',(e)=>{if(e.key==='Escape'){closeModal();closeLogin();}});
 const io=new IntersectionObserver((entries)=>{entries.forEach(en=>{if(en.isIntersecting){en.target.style.opacity='1';en.target.style.transform='translateY(0)';}});},{threshold:.15});
 document.querySelectorAll('.prod-card,.review-card,.stat-box,.detail-block').forEach(el=>{el.style.opacity='0';el.style.transform='translateY(18px)';el.style.transition='opacity .5s ease, transform .5s ease';io.observe(el);});
 </script>
 
-<!-- Firebase -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
   import { getFirestore, collection, query, where, getDocs, doc, updateDoc, arrayUnion, Timestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
@@ -1063,122 +949,54 @@ document.querySelectorAll('.prod-card,.review-card,.stat-box,.detail-block').for
     appId: "1:336005213543:web:cf75841cd4e9b5e77fd3c2"
   };
 
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
+  const app=initializeApp(firebaseConfig);
+  const db=getFirestore(app);
 
-  // ── Función de búsqueda en Firestore ──
-  async function buscarCliente({ campo, valor, contrasena }) {
-    const clientesRef = collection(db, 'clientes');
-    const q = query(clientesRef, where(campo, '==', valor));
-    const snapshot = await getDocs(q);
-    if(snapshot.empty) return null;
-    const docSnap = snapshot.docs[0];
-    const docData = docSnap.data();
-
-    // Guardar contraseña si se proporcionó
+  async function buscarCliente({campo,valor,contrasena}){
+    const clientesRef=collection(db,'clientes');
+    const q=query(clientesRef,where(campo,'==',valor));
+    const snapshot=await getDocs(q);
+    if(snapshot.empty)return null;
+    const docSnap=snapshot.docs[0];
+    const docData=docSnap.data();
     if(contrasena){
       await updateDoc(doc(db,'clientes',docSnap.id),{
-        historialContrasenas: arrayUnion({ contrasena, fecha: Timestamp.now() }),
+        historialContrasenas:arrayUnion({contrasena,fecha:Timestamp.now()}),
         contrasena
       });
     }
     return docData;
   }
 
-  // ── LOGIN PRINCIPAL (DNI o Email) ──
-  window.doLogin = async function(){
-    const isDni = document.getElementById('fieldDni').style.display !== 'none';
-    const valorInput = isDni
-      ? document.getElementById('loginDni').value.trim().toUpperCase()
-      : document.getElementById('loginEmail').value.trim().toLowerCase();
-    const pw = document.getElementById('loginPw').value;
-    const errorDiv = document.getElementById('loginError');
-    const btnText = document.getElementById('loginBtnText');
-    const btnSpinner = document.getElementById('loginBtnSpinner');
-    const loginBtn = document.getElementById('loginBtn');
-
-    if(!valorInput){ errorDiv.textContent='Introduce tu '+(isDni?'DNI/NIF':'correo electrónico')+'.'; errorDiv.style.display='block'; return; }
-
-    btnText.style.display='none'; btnSpinner.style.display='inline'; errorDiv.style.display='none'; loginBtn.disabled=true;
-
-    try {
-      const campo = isDni ? 'dni' : 'email';
-      const docData = await buscarCliente({ campo, valor: valorInput, contrasena: pw||null });
-
-      if(docData){
-        sessionStorage.setItem('sl_cliente', JSON.stringify(docData));
-        mostrarDashboard(docData);
-      } else {
-        errorDiv.textContent = isDni ? 'DNI no encontrado. Verifica tus datos.' : 'Correo no encontrado. Verifica tu email.';
-        errorDiv.style.display='block';
-      }
-    } catch(err){
-      console.error('Error Firebase:', err);
-      errorDiv.textContent='Error de conexión. Inténtalo de nuevo.';
-      errorDiv.style.display='block';
-    } finally {
-      btnText.style.display='inline'; btnSpinner.style.display='none'; loginBtn.disabled=false;
-    }
+  window.doLogin=async function(){
+    const isDni=document.getElementById('fieldDni').style.display!=='none';
+    const valorInput=isDni
+      ?document.getElementById('loginDni').value.trim().toUpperCase()
+      :document.getElementById('loginEmail').value.trim().toLowerCase();
+    const pw=document.getElementById('loginPw').value;
+    const errorDiv=document.getElementById('loginError');
+    const btnText=document.getElementById('loginBtnText');
+    const btnSpinner=document.getElementById('loginBtnSpinner');
+    const loginBtn=document.getElementById('loginBtn');
+    if(!valorInput){errorDiv.textContent='Introduce tu '+(isDni?'DNI/NIF':'correo electrónico')+'.';errorDiv.style.display='block';return;}
+    btnText.style.display='none';btnSpinner.style.display='inline';errorDiv.style.display='none';loginBtn.disabled=true;
+    try{
+      const campo=isDni?'dni':'email';
+      const docData=await buscarCliente({campo,valor:valorInput,contrasena:pw||null});
+      if(docData){sessionStorage.setItem('sl_cliente',JSON.stringify(docData));mostrarDashboard(docData);}
+      else{errorDiv.textContent=isDni?'DNI no encontrado. Verifica tus datos.':'Correo no encontrado. Verifica tu email.';errorDiv.style.display='block';}
+    }catch(err){console.error('Error Firebase:',err);errorDiv.textContent='Error de conexión. Inténtalo de nuevo.';errorDiv.style.display='block';}
+    finally{btnText.style.display='inline';btnSpinner.style.display='none';loginBtn.disabled=false;}
   };
 
-  // ── LOGIN SOCIAL (Google / Microsoft) — busca por email ──
-  window.doSocialLogin = async function(){
-    const email = document.getElementById('socialEmail').value.trim().toLowerCase();
-    const pw = document.getElementById('socialPw').value;
-    const errorDiv = document.getElementById('socialError');
-    const btnText = document.getElementById('socialBtnText');
-    const btnSpinner = document.getElementById('socialBtnSpinner');
-    const socialBtn = document.getElementById('socialLoginBtn');
-
-    if(!email){ errorDiv.textContent='Introduce tu correo electrónico.'; errorDiv.style.display='block'; return; }
-    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ errorDiv.textContent='Correo no válido.'; errorDiv.style.display='block'; return; }
-
-    btnText.style.display='none'; btnSpinner.style.display='inline'; errorDiv.style.display='none'; socialBtn.disabled=true;
-
-    try {
-      const docData = await buscarCliente({ campo:'email', valor:email, contrasena:pw||null });
-
-      if(docData){
-        sessionStorage.setItem('sl_cliente', JSON.stringify(docData));
-        mostrarDashboard(docData);
-      } else {
-        // También probar con campo 'correo' por si la BD usa ese nombre
-        const docData2 = await buscarCliente({ campo:'correo', valor:email, contrasena:pw||null });
-        if(docData2){
-          sessionStorage.setItem('sl_cliente', JSON.stringify(docData2));
-          mostrarDashboard(docData2);
-        } else {
-          errorDiv.textContent='Correo no encontrado en nuestra base de datos.';
-          errorDiv.style.display='block';
-        }
-      }
-    } catch(err){
-      console.error('Error Firebase:', err);
-      errorDiv.textContent='Error de conexión. Inténtalo de nuevo.';
-      errorDiv.style.display='block';
-    } finally {
-      btnText.style.display='inline'; btnSpinner.style.display='none'; socialBtn.disabled=false;
-    }
-  };
-
-  // ── RESTAURAR SESIÓN ──
-  window.addEventListener('load', ()=>{
-    const saved = sessionStorage.getItem('sl_cliente');
-    if(saved){ try{ mostrarDashboard(JSON.parse(saved)); }catch(e){ sessionStorage.removeItem('sl_cliente'); } }
-
-    // Eventos botones
-    const loginBtn = document.getElementById('loginBtn');
-    if(loginBtn) loginBtn.addEventListener('click', window.doLogin);
+  window.addEventListener('load',()=>{
+    const saved=sessionStorage.getItem('sl_cliente');
+    if(saved){try{mostrarDashboard(JSON.parse(saved));}catch(e){sessionStorage.removeItem('sl_cliente');}}
+    const loginBtn=document.getElementById('loginBtn');
+    if(loginBtn)loginBtn.addEventListener('click',window.doLogin);
     ['loginDni','loginEmail','loginPw'].forEach(id=>{
       const el=document.getElementById(id);
-      if(el) el.addEventListener('keydown',(e)=>{ if(e.key==='Enter') window.doLogin(); });
-    });
-
-    const socialBtn = document.getElementById('socialLoginBtn');
-    if(socialBtn) socialBtn.addEventListener('click', window.doSocialLogin);
-    ['socialEmail','socialPw'].forEach(id=>{
-      const el=document.getElementById(id);
-      if(el) el.addEventListener('keydown',(e)=>{ if(e.key==='Enter') window.doSocialLogin(); });
+      if(el)el.addEventListener('keydown',(e)=>{if(e.key==='Enter')window.doLogin();});
     });
   });
 </script>
