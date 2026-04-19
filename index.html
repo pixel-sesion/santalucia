@@ -18,8 +18,8 @@
 }
 html{scroll-behavior:smooth;overflow-x:hidden;}
 
-/* ── CAMBIO 1: body con padding-top para compensar header fijo ── */
-body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:var(--dark);-webkit-font-smoothing:antialiased;overflow-x:hidden;padding-top:64px;}
+/* header height aumentada a 72px en PC */
+body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:var(--dark);-webkit-font-smoothing:antialiased;overflow-x:hidden;padding-top:72px;}
 
 .page-loader{position:fixed;inset:0;z-index:9999;background:#f0f4fb;display:none;flex-direction:column;align-items:center;justify-content:center;gap:20px;transition:opacity .5s ease,visibility .5s ease;opacity:0;}
 .page-loader.visible{display:flex;opacity:1;}
@@ -33,21 +33,28 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
 .loader-text{font-size:14px;color:var(--gray);font-weight:600;letter-spacing:.5px;}
 @keyframes dotBounce{0%,80%,100%{transform:scale(0.7);opacity:.5;}40%{transform:scale(1.2);opacity:1;}}
 
-/* ── HEADER FIJO — nuevo diseño PC + móvil ── */
+/* ── HEADER FIJO — más grande en PC ── */
 .header{background:#ffffff;border-bottom:1px solid #dde3ee;position:fixed;top:0;left:0;right:0;z-index:300;box-shadow:0 2px 12px rgba(0,37,122,0.07);}
-.header-inner{max-width:1280px;margin:0 auto;padding:0 1.5rem;height:64px;display:flex;align-items:center;gap:1rem;}
-.menu-btn{background:#0668f5;border:none;border-radius:8px;height:38px;padding:0 14px;display:inline-flex;align-items:center;gap:8px;cursor:pointer;flex-shrink:0;color:white;font-size:14px;font-weight:600;font-family:inherit;}
+.header-inner{max-width:1280px;margin:0 auto;padding:0 1.5rem;height:72px;display:flex;align-items:center;gap:1.2rem;}
+
+/* Botón Menú más grande en PC */
+.menu-btn{background:#0668f5;border:none;border-radius:10px;height:44px;padding:0 18px;display:inline-flex;align-items:center;gap:9px;cursor:pointer;flex-shrink:0;color:white;font-size:15px;font-weight:700;font-family:inherit;}
 .menu-btn:hover{background:#1a4fa0;}
-.header-logo{flex-shrink:0;margin-left:5px;}
-.header-logo img{height:32px;width:auto;display:block;}
+.header-logo{flex-shrink:0;margin-left:6px;}
+.header-logo img{height:36px;width:auto;display:block;}
+
+/* Nav links más grandes */
 .header-nav{display:flex;align-items:center;gap:4px;margin-left:auto;}
-.header-nav a{color:#0099FF;text-decoration:none;font-weight:700;font-size:0.88rem;padding:6px 14px;border-radius:6px;transition:color .2s ease;white-space:nowrap;}
+.header-nav a{color:#0099FF;text-decoration:none;font-weight:700;font-size:1rem;padding:8px 16px;border-radius:7px;transition:color .2s ease;white-space:nowrap;}
 .header-nav a:hover{color:#0044AA;background:transparent;}
-.header-right{display:flex;align-items:center;gap:6px;margin-left:16px;flex-shrink:0;}
-.separator{width:1px;height:32px;background-color:#dde3ee;margin:0 4px;}
-.icon-btn{background:none;border:none;cursor:pointer;width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;transition:all .2s ease;}
+
+.header-right{display:flex;align-items:center;gap:8px;margin-left:16px;flex-shrink:0;}
+.separator{width:1px;height:36px;background-color:#dde3ee;margin:0 4px;}
+
+/* Iconos más grandes */
+.icon-btn{background:none;border:none;cursor:pointer;width:46px;height:46px;border-radius:10px;display:flex;align-items:center;justify-content:center;transition:all .2s ease;}
 .icon-btn:hover{background:transparent;}
-.icon-btn svg{width:26px;height:26px;}
+.icon-btn svg{width:32px;height:32px;}
 .icon-btn svg path,.icon-btn svg circle,.icon-btn svg rect{stroke:#0099FF;transition:stroke .2s ease;}
 .icon-btn svg circle[fill="white"]{fill:white;stroke:#0099FF;}
 .icon-btn svg circle[fill="#0099FF"]{fill:#0099FF;}
@@ -100,6 +107,7 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
 .side-nav ul li a:hover{background:#eef3fb;}
 .side-nav-divider{height:1px;background:var(--border);margin:8px 12px;}
 
+/* ── HERO ── */
 .hero{position:relative;min-height:520px;background:linear-gradient(135deg,#e4ecf7 0%,#eef4fc 50%,#dae7f7 100%);display:flex;align-items:center;overflow:hidden;}
 .hero::before{content:'';position:absolute;right:-100px;top:-100px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(0,37,122,0.07) 0%,transparent 70%);}
 .hero::after{content:'';position:absolute;left:-80px;bottom:-80px;width:450px;height:450px;border-radius:50%;background:radial-gradient(circle,rgba(6,104,245,0.06) 0%,transparent 70%);}
@@ -133,7 +141,7 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
 .bank-label{font-weight:700;color:var(--dark);font-size:13px;white-space:nowrap;flex-shrink:0;}
 .bank-value{font-weight:800;color:#003dbb;font-size:13px;text-align:right;}
 
-/* ── CAMBIO 2: Sección promo — sin fondo azul grande, efecto 3D profesional ── */
+/* ── SECCIÓN PROMO — PC ── */
 .promo-section{background:var(--white);padding:60px 1.5rem;}
 .promo-inner{max-width:1100px;margin:0 auto;background:linear-gradient(120deg,#f8faff 0%,#eef3fc 100%);border:1.5px solid #d0dcf0;border-radius:20px;display:flex;align-items:stretch;overflow:visible;position:relative;min-height:200px;}
 .promo-text{padding:40px 48px;flex:1;display:flex;flex-direction:column;justify-content:center;}
@@ -143,11 +151,12 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
 .promo-desc{font-size:15px;color:var(--gray);line-height:1.6;}
 .promo-badge{position:absolute;top:20px;left:20px;background:var(--blue3);color:white;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;}
 
-/* Fondo azul quitado — solo imagen con efecto 3D */
+/* Imagen PC con estrellas y efecto 3D */
 .promo-img-wrap{
-  width:280px;
+  width:300px;
   flex-shrink:0;
   display:flex;
+  flex-direction:column;
   align-items:center;
   justify-content:center;
   padding:24px 20px;
@@ -155,15 +164,17 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
   overflow:visible;
   background:transparent;
   border-radius:0 18px 18px 0;
+  gap:10px;
 }
-.promo-img-wrap::before{display:none;}
-.promo-img-wrap::after{display:none;}
-.promo-stars{display:none;}
-
-/* CAMBIO 2b: imagen horizontal, completa, sin alargarse, con efecto 3D */
+.promo-stars-img{
+  width:80px;
+  height:auto;
+  display:block;
+  margin-bottom:4px;
+}
 .promo-img{
   width:100%;
-  max-width:240px;
+  max-width:250px;
   height:auto;
   aspect-ratio:16/10;
   object-fit:cover;
@@ -187,6 +198,7 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
     0 12px 28px rgba(0,37,122,0.20);
 }
 
+/* ── RESTO DE SECCIONES ── */
 .help-section{background:var(--bg);padding:60px 1.5rem;}
 .help-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:60px;}
 .help-text{flex:1;}
@@ -304,9 +316,9 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
 .modal-success h3{font-size:20px;font-weight:800;color:var(--blue);margin-bottom:8px;}
 .modal-success p{font-size:14px;color:var(--gray);line-height:1.6;}
 
-/* ══════════════════════════════════════════
+/* ══════════════════════════════
    RESPONSIVE 960px
-══════════════════════════════════════════ */
+══════════════════════════════ */
 @media(max-width:960px){
   .products-grid{grid-template-columns:repeat(2,1fr);}
   .reviews-grid{grid-template-columns:repeat(2,1fr);}
@@ -322,83 +334,103 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   .pay-btn{flex-direction:row;padding:12px 16px;}
 }
 
-/* ══════════════════════════════════════════
+/* ══════════════════════════════
    RESPONSIVE 640px — MÓVIL
-══════════════════════════════════════════ */
+══════════════════════════════ */
 @media(max-width:640px){
 
-  /* Header móvil — nuevo diseño */
-  body{padding-top:52px;}
-  .header-inner{height:52px;padding:0 10px;gap:5px;}
-  .menu-btn{border-radius:8px;height:34px;width:40px;padding:0;justify-content:center;}
-  .menu-btn span{display:none;}
-  .header-logo img{height:24px;}
-  .header-nav{display:none;}
-  .header-right{margin-left:auto;gap:2px;}
-  .separator{height:26px;margin:0 2px;}
-  .icon-btn{width:34px;height:34px;}
-  .icon-btn svg{width:20px;height:20px;}
+  /* Header móvil — altura 60px */
+  body{padding-top:60px;}
+  .header-inner{height:60px;padding:0 10px;gap:6px;}
 
-  /* Hero móvil: todo equilibrado para caber en pantalla completa */
-  .hero{min-height:unset;}
+  /* Botón menú más cuadrado en móvil */
+  .menu-btn{
+    border-radius:10px;
+    height:42px;
+    width:42px;
+    padding:0;
+    justify-content:center;
+    aspect-ratio:1/1;
+  }
+  .menu-btn span{display:none;}
+
+  /* Logo móvil un poco más grande */
+  .header-logo img{height:28px;}
+
+  /* Nav oculta en móvil */
+  .header-nav{display:none;}
+
+  /* Iconos más grandes en móvil también */
+  .header-right{margin-left:auto;gap:3px;}
+  .separator{height:28px;margin:0 2px;}
+  .icon-btn{width:42px;height:42px;}
+  .icon-btn svg{width:28px;height:28px;}
+
+  /* ── HERO MÓVIL: caber todo en pantalla ── */
+  .hero{min-height:100svh;display:flex;align-items:flex-start;}
   .hero-inner{
     flex-direction:column;
-    padding:12px 0.85rem 14px;
+    padding:14px 0.9rem 16px;
     gap:10px;
     align-items:stretch;
+    min-height:calc(100svh - 60px);
+    justify-content:flex-start;
   }
-  .hero-content{order:1;}
-  .hero h1{font-size:22px;margin-bottom:4px;line-height:1.15;}
-  .hero-eyebrow{font-size:9px;margin-bottom:4px;letter-spacing:2px;}
-  .hero-sub{font-size:12px;margin-bottom:8px;line-height:1.45;max-width:100%;}
-  .hero-calc-label{font-size:10px;margin-bottom:6px;font-weight:700;}
+  .hero-content{order:1;flex-shrink:0;}
+  .hero h1{font-size:24px;margin-bottom:5px;line-height:1.15;}
+  .hero-eyebrow{font-size:9px;margin-bottom:5px;letter-spacing:2px;}
+  .hero-sub{font-size:12.5px;margin-bottom:10px;line-height:1.5;max-width:100%;}
+  .hero-calc-label{font-size:10.5px;margin-bottom:7px;font-weight:700;}
 
+  /* Tabs en fila scrollable */
   .hero-tabs{
     display:flex;
     flex-wrap:nowrap;
-    gap:3px;
+    gap:5px;
     overflow-x:auto;
     -webkit-overflow-scrolling:touch;
     scrollbar-width:none;
     padding-bottom:2px;
+    margin-bottom:2px;
   }
   .hero-tabs::-webkit-scrollbar{display:none;}
   .hero-tab{
-    min-width:46px;
-    max-width:46px;
-    padding:6px 3px;
-    gap:3px;
+    min-width:52px;
+    max-width:52px;
+    padding:7px 4px;
+    gap:4px;
     flex-shrink:0;
-    border-radius:8px;
+    border-radius:9px;
   }
-  .hero-tab svg{width:18px;height:18px;}
-  .hero-tab span{font-size:7px;letter-spacing:.2px;}
+  .hero-tab svg{width:20px;height:20px;}
+  .hero-tab span{font-size:7.5px;letter-spacing:.2px;}
 
-  /* Sección de pago compacta en móvil */
+  /* Sección pago en móvil */
   .hero-payment{
     order:2;
     width:100%;
     max-width:100%;
-    border-radius:10px;
+    border-radius:12px;
+    flex-shrink:0;
   }
-  .hero-payment-head{padding:8px 12px;}
-  .hero-payment-head h3{font-size:13px;}
-  .hero-payment-head p{font-size:10px;margin-top:1px;}
-  .hero-payment-body{padding:8px 10px;}
-  .pay-btns{flex-direction:column;gap:5px;}
+  .hero-payment-head{padding:10px 14px;}
+  .hero-payment-head h3{font-size:14px;}
+  .hero-payment-head p{font-size:10.5px;margin-top:1px;}
+  .hero-payment-body{padding:10px 12px;}
+  .pay-btns{flex-direction:column;gap:6px;}
   .pay-btn{
     flex-direction:row;
-    padding:8px 12px;
-    font-size:12px;
-    gap:8px;
+    padding:9px 14px;
+    font-size:12.5px;
+    gap:9px;
     justify-content:flex-start;
   }
   .bank-row{flex-direction:row;align-items:center;}
   .bank-label{font-size:12px;min-width:90px;}
   .bank-value{font-size:12px;}
 
-  /* Sección promo en móvil: tarjeta horizontal, fondo uniforme, imagen completa */
-  .promo-section{padding:16px 0.85rem;}
+  /* ── PROMO MÓVIL: texto ENCIMA de la imagen, imagen bien ajustada ── */
+  .promo-section{padding:18px 0.9rem;}
   .promo-inner{
     flex-direction:column;
     align-items:stretch;
@@ -409,44 +441,14 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
     background:linear-gradient(120deg,#f8faff 0%,#eef3fc 100%);
   }
 
-  /* Imagen arriba, en rectángulo horizontal ancho, completa */
-  .promo-img-wrap{
-    width:100%;
-    min-width:unset;
-    flex-shrink:0;
+  /* Texto primero (arriba) en móvil */
+  .promo-text{
+    padding:16px 16px 10px;
+    flex:none;
     order:1;
-    border-radius:0;
-    padding:16px 20px 12px;
-    background:transparent;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    align-self:auto;
-  }
-  .promo-img{
-    width:100%;
-    max-width:320px;
-    height:auto;
-    aspect-ratio:16/7;
-    object-fit:cover;
-    object-position:center;
-    border-radius:10px;
-    transform:perspective(700px) rotateX(3deg) rotateY(-4deg);
-    box-shadow:
-      0 14px 36px rgba(0,37,122,0.20),
-      4px 4px 0px rgba(0,37,122,0.07);
-  }
-  .promo-img-wrap:hover .promo-img{
-    transform:perspective(700px) rotateX(0deg) rotateY(0deg) scale(1.03);
   }
 
-  /* Texto debajo de la imagen */
-  .promo-text{
-    padding:0 16px 18px;
-    flex:1;
-    order:2;
-  }
-  /* Badge visible sobre fondo claro */
+  /* Badge en flujo normal en móvil */
   .promo-badge{
     position:relative;
     top:auto;
@@ -458,10 +460,47 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
     border-radius:6px;
   }
   .promo-eyebrow{font-size:9px;margin-bottom:4px;}
-  .promo-title{font-size:15px;margin-bottom:4px;line-height:1.2;}
-  .promo-desc{font-size:12px;line-height:1.45;}
+  .promo-title{font-size:16px;margin-bottom:4px;line-height:1.25;}
+  .promo-desc{font-size:12.5px;line-height:1.5;}
 
-  /* Resto de secciones en móvil */
+  /* Imagen + estrellas debajo del texto en móvil */
+  .promo-img-wrap{
+    width:100%;
+    flex-shrink:0;
+    order:2;
+    border-radius:0;
+    padding:10px 20px 18px;
+    background:transparent;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+  }
+  /* Estrellas visibles en móvil */
+  .promo-stars-img{
+    width:60px;
+    display:block;
+  }
+  /* Imagen más alejada (más pequeña) para que encaje en su contenedor */
+  .promo-img{
+    width:75%;
+    max-width:260px;
+    height:auto;
+    aspect-ratio:16/7;
+    object-fit:cover;
+    object-position:center;
+    border-radius:10px;
+    transform:perspective(700px) rotateX(3deg) rotateY(-3deg);
+    box-shadow:
+      0 12px 30px rgba(0,37,122,0.18),
+      3px 3px 0px rgba(0,37,122,0.07);
+  }
+  .promo-img-wrap:hover .promo-img{
+    transform:perspective(700px) rotateX(0deg) rotateY(0deg) scale(1.03);
+  }
+
+  /* Resto secciones móvil */
   .products-grid{grid-template-columns:1fr;}
   .reviews-grid{grid-template-columns:1fr;}
   .stats-row{grid-template-columns:1fr 1fr;}
@@ -500,7 +539,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
 <header class="header">
   <div class="header-inner">
     <button class="menu-btn" id="menuBtn">
-      <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><rect y="3" width="20" height="2.5" rx="1.25" fill="white"/><rect y="9" width="20" height="2.5" rx="1.25" fill="white"/><rect y="15" width="13" height="2.5" rx="1.25" fill="white"/></svg>
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect y="3" width="20" height="2.5" rx="1.25" fill="white"/><rect y="9" width="20" height="2.5" rx="1.25" fill="white"/><rect y="15" width="13" height="2.5" rx="1.25" fill="white"/></svg>
       <span>Menú</span>
     </button>
     <a href="#" class="header-logo"><img src="https://www.santalucia.es/imagenes_slw4/1574967615331/santalucia-seguros.svg" alt="Santalucía Seguros"></a>
@@ -515,11 +554,11 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
     <div class="header-right">
       <div class="separator"></div>
       <button class="icon-btn" title="Buscar oficina">
-        <svg width="26" height="26" viewBox="0 0 50 50" fill="none"><path d="M29 6 Q29 4 27 4 L9 4 Q7 4 7 6 L7 38 Q7 40 9 40 L25 40" stroke="#0099FF" stroke-width="2" stroke-linecap="round" fill="none"/><path d="M29 24 L29 6" stroke="#0099FF" stroke-width="2" stroke-linecap="round" fill="none"/><circle cx="13" cy="13" r="1.8" fill="#0099FF"/><circle cx="23" cy="13" r="1.8" fill="#0099FF"/><circle cx="13" cy="21" r="1.8" fill="#0099FF"/><circle cx="23" cy="21" r="1.8" fill="#0099FF"/><circle cx="13" cy="29" r="1.8" fill="#0099FF"/><circle cx="26" cy="29" r="4.5" fill="white" stroke="#0099FF" stroke-width="2"/><path d="M22.2 31.5 Q24 37 26 39.5 Q28 37 29.8 31.5" fill="white" stroke="#0099FF" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="26" cy="29" r="1.8" fill="#0099FF"/></svg>
+        <svg width="32" height="32" viewBox="0 0 50 50" fill="none"><path d="M29 6 Q29 4 27 4 L9 4 Q7 4 7 6 L7 38 Q7 40 9 40 L25 40" stroke="#0099FF" stroke-width="2" stroke-linecap="round" fill="none"/><path d="M29 24 L29 6" stroke="#0099FF" stroke-width="2" stroke-linecap="round" fill="none"/><circle cx="13" cy="13" r="1.8" fill="#0099FF"/><circle cx="23" cy="13" r="1.8" fill="#0099FF"/><circle cx="13" cy="21" r="1.8" fill="#0099FF"/><circle cx="23" cy="21" r="1.8" fill="#0099FF"/><circle cx="13" cy="29" r="1.8" fill="#0099FF"/><circle cx="26" cy="29" r="4.5" fill="white" stroke="#0099FF" stroke-width="2"/><path d="M22.2 31.5 Q24 37 26 39.5 Q28 37 29.8 31.5" fill="white" stroke="#0099FF" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="26" cy="29" r="1.8" fill="#0099FF"/></svg>
       </button>
       <div class="separator"></div>
       <button class="icon-btn" id="profileBtn" title="Acceder a mi espacio">
-        <svg width="26" height="26" viewBox="0 0 44 44" fill="none"><defs><clipPath id="profileClip"><circle cx="22" cy="22" r="16"/></clipPath></defs><circle cx="22" cy="22" r="17" stroke="#0099FF" stroke-width="2" fill="none"/><g clip-path="url(#profileClip)"><circle cx="22" cy="17" r="5.5" stroke="#0099FF" stroke-width="2" fill="none"/><path d="M7 38 C9 30 14.5 26.5 22 26.5 C29.5 26.5 35 30 37 38" stroke="#0099FF" stroke-width="2" stroke-linecap="round" fill="none"/></g></svg>
+        <svg width="32" height="32" viewBox="0 0 44 44" fill="none"><defs><clipPath id="profileClip"><circle cx="22" cy="22" r="16"/></clipPath></defs><circle cx="22" cy="22" r="17" stroke="#0099FF" stroke-width="2" fill="none"/><g clip-path="url(#profileClip)"><circle cx="22" cy="17" r="5.5" stroke="#0099FF" stroke-width="2" fill="none"/><path d="M7 38 C9 30 14.5 26.5 22 26.5 C29.5 26.5 35 30 37 38" stroke="#0099FF" stroke-width="2" stroke-linecap="round" fill="none"/></g></svg>
       </button>
     </div>
   </div>
@@ -578,6 +617,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   </div>
 </div>
 
+<!-- HERO -->
 <section class="hero" id="inicio">
   <div class="hero-inner">
     <div class="hero-content">
@@ -618,7 +658,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   </div>
 </section>
 
-<!-- CAMBIO 4: Sección promo — sin fondo azul grande, imagen horizontal con efecto 3D -->
+<!-- PROMO — con imagen de estrellas encima de la tarjeta (PC y móvil) -->
 <section class="promo-section">
   <div class="promo-inner">
     <div class="promo-text">
@@ -630,6 +670,8 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
       </div>
     </div>
     <div class="promo-img-wrap">
+      <!-- Estrellas amarillas encima de la tarjeta — PC y móvil -->
+      <img class="promo-stars-img" src="https://www.santalucia.es/estaticos_slw4/images/destacado-secundario-stars.svg" alt="Estrellas destacado">
       <img class="promo-img" src="https://www.santalucia.es/imagenes_slw4/1574984761030/150-solo-marzo-26.webp" alt="Tarjeta regalo hasta 150€">
     </div>
   </div>
