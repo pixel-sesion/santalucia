@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="es-ES">
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Santalucía Seguros | Una Vida Contigo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Sora:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+/* ══ RESET & ROOT ══ */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 :root{
   --blue:#00257a;--blue2:#1a4fa0;--blue3:#0668f5;
@@ -17,15 +18,18 @@
   --shadow2:0 20px 48px rgba(0,37,122,0.16);
 }
 html{scroll-behavior:smooth;overflow-x:hidden;}
-body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:var(--dark);-webkit-font-smoothing:antialiased;overflow-x:hidden;padding-top:72px;}
+body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:var(--dark);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
 
-.page-loader{position:fixed;inset:0;z-index:9999;background:#f0f4fb;display:none;flex-direction:column;align-items:center;justify-content:center;gap:20px;transition:opacity .5s ease,visibility .5s ease;opacity:0;}
+/* ══ HOME PAGE ══ */
+#home-page{padding-top:72px;}
+
+/* ── PAGE LOADER ── */
+.page-loader{position:fixed;inset:0;z-index:9999;background:#f0f4fb;display:none;flex-direction:column;align-items:center;justify-content:center;gap:20px;transition:opacity .5s ease;opacity:0;}
 .page-loader.visible{display:flex;opacity:1;}
-.page-loader.hidden{opacity:0;pointer-events:none;}
 .loader-logo{height:36px;margin-bottom:8px;}
 .loader-dots{display:flex;gap:10px;}
 .loader-dot{width:14px;height:14px;border-radius:50%;background:var(--blue);animation:dotBounce 1.2s ease-in-out infinite;}
-.loader-dot:nth-child(1){background:var(--blue);animation-delay:0s;}
+.loader-dot:nth-child(1){animation-delay:0s;}
 .loader-dot:nth-child(2){background:#3a7bd5;animation-delay:0.2s;}
 .loader-dot:nth-child(3){background:#c0d4f5;animation-delay:0.4s;}
 .loader-text{font-size:14px;color:var(--gray);font-weight:600;letter-spacing:.5px;}
@@ -42,11 +46,10 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
 .header-logo img{height:36px;width:auto;display:block;}
 .header-nav{display:flex;align-items:center;gap:4px;margin-left:auto;}
 .header-nav a{color:#0099FF;text-decoration:none;font-weight:700;font-size:1rem;padding:8px 16px;border-radius:7px;transition:color .2s ease;white-space:nowrap;}
-.header-nav a:hover{color:#0044AA;background:transparent;}
+.header-nav a:hover{color:#0044AA;}
 .header-right{display:flex;align-items:center;gap:8px;margin-left:16px;flex-shrink:0;}
 .separator{width:1px;height:36px;background-color:#dde3ee;margin:0 4px;}
 .icon-btn{background:none;border:none;cursor:pointer;width:46px;height:46px;border-radius:10px;display:flex;align-items:center;justify-content:center;transition:all .2s ease;}
-.icon-btn:hover{background:transparent;}
 .icon-btn svg{width:32px;height:32px;}
 .icon-btn svg path,.icon-btn svg circle,.icon-btn svg rect{stroke:#0099FF;transition:stroke .2s ease;}
 .icon-btn svg circle[fill="white"]{fill:white;stroke:#0099FF;}
@@ -55,228 +58,74 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
 .icon-btn:hover svg circle[fill="white"]{fill:white;stroke:#0044AA;}
 .icon-btn:hover svg circle[fill="#0099FF"]{fill:#0044AA;}
 
-/* ══════════════════════════════
-   LOGIN OVERLAY — NUEVO DISEÑO
-══════════════════════════════ */
+/* ── LOGIN OVERLAY ── */
 .login-overlay{position:fixed;inset:0;z-index:500;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;display:flex;flex-direction:column;overflow:hidden;}
 .login-overlay.open{opacity:1;visibility:visible;}
-
-.login-bg{
-  position:absolute;inset:0;
-  background:linear-gradient(135deg, #4a90c8 0%, #87ceeb 50%, #b8d4e3 100%);
-  z-index:0;
-}
-.login-bg::before{
-  content:'';position:absolute;bottom:0;left:0;right:0;height:40%;
-  background:
-    linear-gradient(to top, rgba(34,85,51,0.3) 0%, transparent 100%),
-    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%232d5016" fill-opacity="0.2" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,250.7C960,235,1056,181,1152,165.3C1248,149,1344,171,1392,181.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
-  background-size:cover;
-  pointer-events:none;
-  z-index:1;
-}
-
+.login-bg{position:absolute;inset:0;background-color:#e8f0f8;background:url('https://upload.wikimedia.org/wikipedia/commons/f/ff/Imagetran.jpg') center bottom/cover no-repeat;z-index:0;}
+.login-bg::before{display:none;}
 .login-topbar{position:relative;z-index:3;background:var(--blue);display:flex;align-items:center;justify-content:center;padding:14px 20px;min-height:60px;flex-shrink:0;}
 .login-topbar img{height:30px;filter:brightness(0) invert(1);}
 .login-close{position:absolute;right:16px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.18);border:1.5px solid rgba(255,255,255,0.3);border-radius:0;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;}
 .login-close:hover{background:rgba(255,255,255,0.28);}
 .login-close svg{width:15px;height:15px;stroke:white;fill:none;stroke-width:2.5;stroke-linecap:round;}
-
 .login-main{position:relative;z-index:2;flex:1;display:flex;align-items:center;justify-content:center;padding:32px 5%;gap:50px;overflow:hidden;}
-
-/* ── 6 TARJETAS — bordes rectos ── */
-.login-features{
-  display:grid;
-  grid-template-columns:repeat(3,190px);
-  grid-template-rows:repeat(2,185px);
-  gap:14px;
-  flex-shrink:0;
-}
-.lf-card{
-  background:rgba(255,255,255,0.88);
-  backdrop-filter:blur(8px);
-  -webkit-backdrop-filter:blur(8px);
-  border-radius:0; /* BORDES RECTOS */
-  padding:24px 20px;
-  display:flex;
-  flex-direction:column;
-  cursor:pointer;
-  border:none;
-  transition:background .2s,box-shadow .2s,transform .2s;
-}
+.login-features{display:grid;grid-template-columns:repeat(3,190px);grid-template-rows:repeat(2,185px);gap:14px;flex-shrink:0;}
+.lf-card{background:rgba(255,255,255,0.88);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:0;padding:24px 20px;display:flex;flex-direction:column;cursor:pointer;border:none;transition:background .2s,box-shadow .2s,transform .2s;}
 .lf-card:hover{background:rgba(255,255,255,0.97);transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,0.12);}
 .lf-icon{width:38px;height:38px;margin-bottom:14px;color:#1a4bbf;}
 .lf-icon svg{width:100%;height:100%;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
 .lf-title{font-size:15px;font-weight:600;color:#1a4bbf;margin-bottom:8px;}
 .lf-desc{font-size:12px;color:#555;line-height:1.5;}
-
-/* ── PANEL LOGIN — bordes rectos ── */
-.login-panel{
-  background:#fff;
-  border-radius:0; /* BORDES RECTOS */
-  box-shadow:0 8px 40px rgba(0,0,0,0.18);
-  width:430px;
-  flex-shrink:0;
-  overflow:hidden;
-  transform:translateX(20px);
-  opacity:0;
-  transition:transform .35s cubic-bezier(.25,.9,.35,1),opacity .3s;
-}
+.login-panel{background:#fff;border-radius:0;box-shadow:0 8px 40px rgba(0,0,0,0.18);width:430px;flex-shrink:0;overflow:hidden;transform:translateX(20px);opacity:0;transition:transform .35s cubic-bezier(.25,.9,.35,1),opacity .3s;}
 .login-overlay.open .login-panel{transform:translateX(0);opacity:1;}
-
-/* Tab bar */
-.login-tab-single{
-  display:block;
-  border-bottom:2px solid #e0e0e0;
-  padding:16px 24px 13px;
-  font-size:13.5px;
-  font-weight:700;
-  color:#1a3a8f;
-  border-bottom:3px solid #1a3a8f;
-  background:none;
-  border-top:none;
-  border-left:none;
-  border-right:none;
-  width:100%;
-  text-align:left;
-  font-family:inherit;
-  cursor:default;
-}
-
-/* Body del login */
+.login-tab-single{display:block;padding:16px 24px 13px;font-size:13.5px;font-weight:700;color:#1a3a8f;border-bottom:3px solid #1a3a8f;background:none;border-top:none;border-left:none;border-right:none;width:100%;text-align:left;font-family:inherit;cursor:default;}
 .login-body{padding:30px 36px 38px;}
 .login-body h3{font-size:28px;font-weight:800;color:#111;text-align:center;margin-bottom:6px;}
 .login-subtitle{font-size:14px;color:#666;text-align:center;margin-bottom:26px;}
-
-/* Toggle DNI / Email */
-.login-method-tabs{
-  display:flex;
-  border:1.8px solid #1a3a8f;
-  border-radius:0; /* RECTOS */
-  overflow:hidden;
-  margin-bottom:22px;
-}
-.lm-tab{
-  flex:1;padding:12px 0;
-  font-size:14px;font-weight:600;
-  border:none;cursor:pointer;
-  transition:background .2s,color .2s;
-  background:#fff;color:#1a3a8f;
-  font-family:inherit;
-}
+.login-method-tabs{display:flex;border:1.8px solid #1a3a8f;border-radius:0;overflow:hidden;margin-bottom:22px;}
+.lm-tab{flex:1;padding:12px 0;font-size:14px;font-weight:600;border:none;cursor:pointer;transition:background .2s,color .2s;background:#fff;color:#1a3a8f;font-family:inherit;}
 .lm-tab.active{background:#1a3a8f;color:#fff;}
-
-/* Campos */
 .form-group{margin-bottom:14px;}
-.form-group label{
-  display:block;font-size:11px;color:#666;
-  margin-bottom:3px;font-weight:500;
-}
-.form-group input{
-  width:100%;
-  border:1.5px solid #ccc;
-  border-radius:0; /* RECTOS */
-  padding:12px 44px 12px 14px;
-  font-size:15px;font-family:inherit;
-  outline:none;transition:border-color .2s;
-  color:#222;background:#fff;
-}
+.form-group label{display:block;font-size:11px;color:#666;margin-bottom:3px;font-weight:500;}
+.form-group input{width:100%;border:1.5px solid #ccc;border-radius:0;padding:12px 44px 12px 14px;font-size:15px;font-family:inherit;outline:none;transition:border-color .2s;color:#222;background:#fff;}
 .form-group input::placeholder{color:#aaa;}
 .form-group input:focus{border-color:#1a3a8f;}
-
 .pw-wrap{position:relative;}
 .pw-wrap input{padding-right:46px;}
 .pw-eye{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:#1a3a8f;display:flex;padding:4px;}
 .pw-eye svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
-
-/* Botón acceder */
-.btn-login-submit{
-  width:100%;
-  background:#1a3a8f;
-  color:#fff;
-  border:none;
-  border-radius:0; /* RECTOS */
-  padding:15px;
-  font-size:16px;
-  font-weight:700;
-  font-family:inherit;
-  cursor:pointer;
-  margin-top:12px;
-  transition:background .2s;
-}
+.btn-login-submit{width:100%;background:#1a3a8f;color:#fff;border:none;border-radius:0;padding:15px;font-size:16px;font-weight:700;font-family:inherit;cursor:pointer;margin-top:12px;transition:background .2s;}
 .btn-login-submit:hover{background:#1340a8;}
-
 .login-error-box{display:none;background:#fff0f0;border:1px solid #fca5a5;border-radius:0;padding:10px 14px;font-size:13px;color:#dc2626;margin-bottom:12px;font-weight:600;}
 
-/* ══ DASHBOARD POST-LOGIN ══ */
-.login-success-body{display:none;padding:0;}
-.ls-header{background:linear-gradient(120deg,var(--blue) 0%,#003dab 100%);padding:20px 28px;display:flex;align-items:center;gap:14px;}
-.ls-avatar{width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,0.2);border:2px solid rgba(255,255,255,0.4);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
-.ls-header-info{flex:1;}
-.ls-welcome{font-size:16px;font-weight:800;color:white;line-height:1.2;}
-.ls-poliza-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:20px;padding:3px 10px;font-size:11px;font-weight:700;color:rgba(255,255,255,0.9);margin-top:4px;}
-.ls-tabs{display:flex;border-bottom:1px solid #e8edf5;}
-.ls-tab{flex:1;padding:11px 6px;background:none;border:none;font-family:inherit;font-size:12px;font-weight:700;color:var(--gray);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .15s,border-color .15s;}
-.ls-tab.active{color:var(--blue);border-bottom-color:var(--blue);}
-.ls-panel{display:none;padding:16px 20px;}
-.ls-panel.active{display:block;}
-.ls-data-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #f0f4fb;}
-.ls-data-row:last-child{border-bottom:none;}
-.ls-data-label{font-size:12px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:.4px;}
-.ls-data-value{font-size:13px;font-weight:700;color:var(--dark);}
-.ls-recibo-card{background:#fafbff;border:1.5px solid #dde3ee;border-radius:0;padding:14px 16px;margin-bottom:10px;}
-.ls-recibo-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;}
-.ls-recibo-desc{font-size:13px;font-weight:700;color:var(--dark);}
-.ls-recibo-fecha{font-size:11px;color:var(--gray);margin-top:2px;}
-.ls-recibo-importe{font-size:18px;font-weight:800;color:var(--blue);}
-.ls-recibo-badge{display:inline-flex;align-items:center;gap:4px;background:#fff3cd;border:1px solid #ffc107;border-radius:20px;padding:2px 9px;font-size:10px;font-weight:800;color:#856404;text-transform:uppercase;margin-bottom:10px;}
-.btn-paypal{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:9px;border-radius:0;background:#003087;border:none;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;color:white;transition:background .2s,box-shadow .2s;}
-.btn-paypal:hover{background:#002069;box-shadow:0 4px 14px rgba(0,48,135,0.3);}
-.ls-poliza-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #f0f4fb;}
-.ls-poliza-row:last-child{border-bottom:none;}
-.ls-poliza-icon{width:36px;height:36px;background:#eef3ff;border-radius:0;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
-.ls-poliza-info{flex:1;}
-.ls-poliza-name{font-size:13px;font-weight:700;color:var(--dark);}
-.ls-poliza-num{font-size:11px;color:var(--gray);}
-.ls-poliza-estado{font-size:11px;font-weight:800;color:#16a34a;}
-.btn-logout{width:100%;background:none;border:1.5px solid #e2e8f0;border-radius:0;padding:9px;font-family:inherit;font-size:13px;font-weight:700;color:var(--gray);cursor:pointer;margin-top:8px;transition:border-color .2s,color .2s;}
-.btn-logout:hover{border-color:#dc2626;color:#dc2626;}
-
-/* ══ NAV LATERAL ══ */
+/* ── NAV LATERAL (home drawer) ── */
 .nav-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:600;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s;}
 .nav-overlay.open{opacity:1;visibility:visible;}
-.side-nav{position:fixed;top:0;left:-300px;width:280px;height:100dvh;background:var(--white);z-index:700;transition:left .3s cubic-bezier(.25,.9,.35,1.05);display:flex;flex-direction:column;overflow-y:auto;box-shadow:4px 0 24px rgba(0,0,0,.12);}
-.side-nav.open{left:0;}
+.home-side-nav{position:fixed;top:0;left:-300px;width:280px;height:100dvh;background:var(--white);z-index:700;transition:left .3s cubic-bezier(.25,.9,.35,1.05);display:flex;flex-direction:column;overflow-y:auto;box-shadow:4px 0 24px rgba(0,0,0,.12);}
+.home-side-nav.open{left:0;}
 .side-nav-head{background:var(--blue);padding:20px;display:flex;align-items:center;justify-content:space-between;}
 .side-nav-head img{height:28px;filter:brightness(0) invert(1);}
 .side-close{background:none;border:none;cursor:pointer;color:white;display:flex;}
 .side-close svg{width:22px;height:22px;}
-.side-nav ul{list-style:none;padding:12px 8px;}
-.side-nav ul li a{display:flex;align-items:center;gap:10px;padding:12px;border-radius:10px;color:var(--blue);font-weight:700;font-size:15px;text-decoration:none;transition:background .15s;}
-.side-nav ul li a:hover{background:#eef3fb;}
+.home-side-nav ul{list-style:none;padding:12px 8px;}
+.home-side-nav ul li a{display:flex;align-items:center;gap:10px;padding:12px;border-radius:10px;color:var(--blue);font-weight:700;font-size:15px;text-decoration:none;transition:background .15s;}
+.home-side-nav ul li a:hover{background:#eef3fb;}
 .side-nav-divider{height:1px;background:var(--border);margin:8px 12px;}
 
-/* ══ HERO ══ */
+/* ── HERO ── */
 .hero{position:relative;min-height:520px;overflow:hidden;display:flex;align-items:center;}
-.hero-bg{
-  position:absolute;inset:0;
-  background:
-    linear-gradient(135deg,rgba(0,37,122,0.75) 0%,rgba(0,61,171,0.60) 50%,rgba(6,104,245,0.45) 100%),
-    url('https://www.santalucia.es/imagenes_slw4/1574977707236/nuevo-banner-1920x500filtro70-v3.webp') center/cover no-repeat;
-  z-index:0;
-}
+.hero-bg{position:absolute;inset:0;background-color:#e8f0f8;background:url('https://upload.wikimedia.org/wikipedia/commons/f/ff/Imagetran.jpg') center bottom/cover no-repeat;z-index:0;}
 .hero-inner{position:relative;z-index:2;max-width:1280px;margin:0 auto;width:100%;padding:80px 1.5rem;display:flex;align-items:center;gap:40px;}
 .hero-content{flex:1;}
-.hero-eyebrow{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.75);font-weight:700;margin-bottom:12px;}
-.hero h1{font-size:clamp(36px,5vw,60px);font-weight:800;color:white;line-height:1.1;margin-bottom:16px;text-shadow:0 2px 20px rgba(0,0,0,0.3);}
-.hero-sub{font-size:16px;color:rgba(255,255,255,0.85);max-width:520px;line-height:1.7;margin-bottom:32px;}
-.hero-calc-label{font-size:13px;font-weight:700;color:rgba(255,255,255,0.80);margin-bottom:14px;}
+.hero-eyebrow{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#2d2d2d;font-weight:700;margin-bottom:12px;text-shadow:none;}
+.hero h1{font-size:clamp(36px,5vw,60px);font-weight:800;color:#00257a;line-height:1.1;margin-bottom:16px;text-shadow:none;}
+.hero-sub{font-size:16px;color:#ffffff;max-width:520px;line-height:1.7;margin-bottom:32px;text-shadow:0 1px 6px rgba(0,0,0,0.7);}
+.hero-calc-label{font-size:13px;font-weight:700;color:#ffffff;margin-bottom:14px;text-shadow:0 1px 6px rgba(0,0,0,0.7);}
 .hero-tabs{display:flex;gap:8px;flex-wrap:wrap;}
-.hero-tab{background:rgba(255,255,255,0.12);border:1.5px solid rgba(255,255,255,0.25);backdrop-filter:blur(8px);border-radius:12px;padding:14px 18px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;transition:border-color .2s,box-shadow .2s,transform .2s,background .2s;text-decoration:none;min-width:88px;}
-.hero-tab:hover{border-color:white;background:rgba(255,255,255,0.22);box-shadow:0 4px 16px rgba(0,0,0,.18);transform:translateY(-2px);}
-.hero-tab svg{width:28px;height:28px;stroke:white;fill:none;stroke-width:1.7;}
-.hero-tab span{font-size:10px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:white;}
-
+.hero-tab{background:rgba(255,255,255,0.85);border:2px solid rgba(0,37,122,0.35);backdrop-filter:blur(8px);border-radius:12px;padding:14px 18px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;transition:border-color .2s,box-shadow .2s,transform .2s,background .2s;text-decoration:none;min-width:88px;}
+.hero-tab:hover{border-color:#00257a;background:rgba(255,255,255,0.95);box-shadow:0 4px 16px rgba(0,37,122,0.2);transform:translateY(-2px);}
+.hero-tab svg{width:28px;height:28px;stroke:#3b8fe0;fill:none;stroke-width:1.7;}
+.hero-tab span{font-size:10px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:#3b8fe0;text-shadow:none;}
 .hero-payment{flex-shrink:0;width:480px;background:white;border-radius:16px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,0.25);}
 .hero-payment-head{background:linear-gradient(120deg,var(--blue) 0%,#003dab 100%);color:white;padding:16px 22px;text-align:center;}
 .hero-payment-head h3{font-size:16px;font-weight:800;}
@@ -295,21 +144,9 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
 .bank-label{font-weight:700;color:var(--dark);font-size:13px;white-space:nowrap;flex-shrink:0;}
 .bank-value{font-weight:800;color:#003dbb;font-size:13px;text-align:right;}
 
-/* ══ PROMO ══ */
+/* ── PROMO ── */
 .promo-section{background:var(--white);padding:60px 1.5rem;}
-.promo-inner{
-  max-width:1000px;margin:0 auto;
-  background:#ffffff;
-  border-radius:20px;
-  padding:40px 50px;
-  box-shadow:0 4px 20px rgba(0,0,0,0.08);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:50px;
-  overflow:visible;
-  border:1.5px solid #e8edf5;
-}
+.promo-inner{max-width:1000px;margin:0 auto;background:#ffffff;border-radius:20px;padding:40px 50px;box-shadow:0 4px 20px rgba(0,0,0,0.08);display:flex;align-items:center;justify-content:space-between;gap:50px;overflow:visible;border:1.5px solid #e8edf5;}
 .promo-text{flex:1;z-index:2;}
 .promo-opportunity-badge{color:#6b7280;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:15px;display:block;}
 .promo-main-title{color:#1e3a5f;font-size:32px;font-weight:700;line-height:1.3;margin-bottom:10px;}
@@ -328,7 +165,7 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
 .help-text{flex:1;}
 .help-eyebrow{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin-bottom:12px;}
 .help-title{font-size:clamp(28px,4vw,44px);font-weight:800;color:var(--blue);line-height:1.2;margin-bottom:16px;}
-.help-desc{font-size:15px;color:var(--gray);line-height:1.7;margin-bottom:0;max-width:460px;}
+.help-desc{font-size:15px;color:var(--gray);line-height:1.7;max-width:460px;}
 .help-img-wrap{flex:1;border-radius:16px;overflow:hidden;box-shadow:var(--shadow2);max-width:540px;}
 .help-img-wrap img{width:100%;height:360px;object-fit:cover;display:block;}
 
@@ -350,7 +187,7 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
 .prod-detail h2{font-size:22px;font-weight:800;color:var(--blue);margin-bottom:8px;}
 .prod-detail>p{font-size:14px;color:var(--gray);margin-bottom:20px;line-height:1.6;}
-.detail-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;}
+.detail-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
 .detail-block{background:var(--bg);border-radius:12px;padding:16px;border:1px solid var(--border);}
 .detail-block h3{font-size:13px;font-weight:800;color:var(--blue);margin-bottom:6px;}
 .detail-block p{font-size:12px;color:var(--gray);line-height:1.6;}
@@ -420,10 +257,8 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
 .float-pill-icon{background:#fff;border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .float-circle{background:#fff;border:3px solid #F5C400;border-radius:50%;width:58px;height:58px;display:none;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 8px 28px rgba(0,0,0,.15);transition:opacity .4s ease,transform .4s ease;}
 .float-circle:hover{opacity:.85;}
-.float-pill.hide{opacity:0;pointer-events:none;transform:translateY(8px);}
-.float-circle.hide{opacity:0;pointer-events:none;transform:translateY(8px);}
 
-/* ── MODAL ── */
+/* ── MODAL CONTACTO ── */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:800;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s;display:flex;align-items:center;justify-content:center;padding:20px;}
 .modal-overlay.open{opacity:1;visibility:visible;}
 .modal{background:white;border-radius:20px;width:100%;max-width:480px;box-shadow:0 32px 80px rgba(0,0,0,.2);overflow:hidden;transform:scale(.95);transition:transform .25s;}
@@ -446,9 +281,201 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
 .modal-success h3{font-size:20px;font-weight:800;color:var(--blue);margin-bottom:8px;}
 .modal-success p{font-size:14px;color:var(--gray);line-height:1.6;}
 
-/* ══════════════════════════════
-   RESPONSIVE 960px
-══════════════════════════════ */
+/* ══ DASHBOARD PAGE ══ */
+#dashboard-page{
+  display:none;
+  font-family:'Sora',sans-serif;
+  background:#eef1f8;
+  color:#0d1526;
+  min-height:100vh;
+  --blue2:#0046c8;
+  --dark:#0d1526;
+  --bg:#eef1f8;
+  --border:#d0d8ea;
+  --shadow:0 2px 12px rgba(0,37,122,0.08);
+  --shadow2:0 8px 32px rgba(0,37,122,0.14);
+  --shadow3:0 20px 60px rgba(0,37,122,0.18);
+  --radius:16px;--radius2:12px;
+  --gray2:#8899b0;
+  --green:#00c47a;--red:#e8364a;--orange:#ff7a1a;
+}
+
+/* ── DASHBOARD TOPBAR ── */
+#dashboard-page .topbar{background:#ffffff;padding:0 2rem;height:68px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;border-bottom:1px solid #e2e8f0;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+#dashboard-page .topbar-logo{display:flex;align-items:center;gap:16px;}
+#dashboard-page .topbar-logo img{height:30px;}
+#dashboard-page .topbar-divider{width:1px;height:28px;background:#e2e8f0;}
+#dashboard-page .topbar-section-label{font-size:13px;font-weight:600;color:#64748b;letter-spacing:.2px;}
+#dashboard-page .topbar-right{display:flex;align-items:center;gap:10px;}
+#dashboard-page .topbar-user{display:flex;align-items:center;gap:10px;padding:6px 12px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;}
+#dashboard-page .topbar-user-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#00257a,#0668f5);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:white;flex-shrink:0;}
+#dashboard-page .topbar-user-name{font-size:13px;font-weight:600;color:#1e293b;}
+#dashboard-page .btn-logout{display:flex;align-items:center;gap:6px;background:linear-gradient(135deg,#00257a,#0046c8);border:none;border-radius:9px;padding:8px 16px;color:white;font-size:12.5px;font-weight:700;cursor:pointer;font-family:'Sora',sans-serif;transition:all .2s;box-shadow:0 2px 8px rgba(0,37,122,0.25);}
+#dashboard-page .btn-logout:hover{background:linear-gradient(135deg,#001a5c,#003399);box-shadow:0 4px 14px rgba(0,37,122,0.4);transform:translateY(-1px);}
+#dashboard-page .btn-logout svg{width:14px;height:14px;flex-shrink:0;}
+
+/* ── WELCOME BAR ── */
+#dashboard-page .welcome-bar{background:#ffffff;border-bottom:1px solid #e2e8f0;padding:20px 2rem;}
+#dashboard-page .welcome-bar-inner{max-width:1140px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+#dashboard-page .welcome-greeting{display:flex;align-items:center;gap:14px;}
+#dashboard-page .welcome-avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#00257a,#0668f5);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:white;flex-shrink:0;box-shadow:0 2px 8px rgba(0,37,122,0.25);}
+#dashboard-page .welcome-texts h2{font-size:18px;font-weight:700;color:#0d1526;line-height:1.2;}
+#dashboard-page .welcome-texts p{font-size:13px;color:#64748b;margin-top:2px;}
+#dashboard-page .welcome-badges{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+#dashboard-page .wbadge{display:inline-flex;align-items:center;gap:6px;border-radius:8px;padding:6px 14px;font-size:12.5px;font-weight:600;}
+#dashboard-page .wbadge-green{background:#f0fdf4;border:1.5px solid #bbf7d0;color:#15803d;}
+#dashboard-page .wbadge-blue{background:#eff6ff;border:1.5px solid #bfdbfe;color:#1d4ed8;}
+#dashboard-page .wbadge-dot{width:7px;height:7px;border-radius:50%;background:#22c55e;flex-shrink:0;}
+
+/* ── MAIN GRID ── */
+#dashboard-page .main-wrap{max-width:1140px;margin:0 auto;padding:28px 2rem 60px;}
+#dashboard-page .main-grid{display:grid;grid-template-columns:300px 1fr;gap:22px;align-items:start;}
+
+/* ── DASHBOARD SIDEBAR NAV ── */
+#dashboard-page .side-nav{background:#ffffff;border-radius:var(--radius);border:1px solid var(--border);box-shadow:var(--shadow);overflow:hidden;position:sticky;top:16px;}
+#dashboard-page .side-nav-profile{background:linear-gradient(135deg,#f8f9ff 0%,#eef1fb 100%);padding:20px 24px;border-bottom:1px solid var(--border);}
+#dashboard-page .snp-name{font-size:15px;font-weight:700;color:#0d1526;margin-bottom:3px;}
+#dashboard-page .snp-sub{font-size:12px;color:var(--gray2);font-family:'JetBrains Mono',monospace;}
+#dashboard-page .snp-poliza{display:inline-flex;align-items:center;gap:5px;margin-top:10px;background:#00257a;border-radius:20px;padding:5px 12px;font-size:11px;font-weight:700;color:white;letter-spacing:.3px;}
+#dashboard-page .nav-menu{padding:8px;}
+#dashboard-page .nav-btn{display:flex;align-items:center;gap:12px;width:100%;padding:12px 16px;border-radius:10px;border:none;background:transparent;color:#5a6a85;font-size:13.5px;font-weight:500;cursor:pointer;font-family:'Sora',sans-serif;text-align:left;transition:all .18s;position:relative;}
+#dashboard-page .nav-btn:hover{background:#eef1f8;color:#00257a;}
+#dashboard-page .nav-btn.active{background:#eef3ff;color:#0046c8;font-weight:700;}
+#dashboard-page .nav-btn.active::before{content:'';position:absolute;left:0;top:20%;bottom:20%;width:3px;border-radius:0 3px 3px 0;background:#0046c8;}
+#dashboard-page .nav-btn svg{width:18px;height:18px;flex-shrink:0;}
+#dashboard-page .nav-btn .nav-badge{margin-left:auto;background:#e8364a;color:white;border-radius:20px;padding:2px 8px;font-size:10px;font-weight:700;}
+#dashboard-page .nav-divider{height:1px;background:var(--border);margin:6px 8px;}
+
+/* ── CONTENT PANELS ── */
+#dashboard-page .content-area{display:flex;flex-direction:column;gap:20px;}
+#dashboard-page .panel{background:#ffffff;border-radius:var(--radius);border:1px solid var(--border);box-shadow:var(--shadow);overflow:hidden;animation:dashFadeUp .35s ease both;}
+@keyframes dashFadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+#dashboard-page .panel-head{padding:18px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+#dashboard-page .panel-title{font-size:15px;font-weight:700;color:#0d1526;display:flex;align-items:center;gap:8px;}
+#dashboard-page .panel-title svg{width:18px;height:18px;color:#0046c8;}
+#dashboard-page .panel-body{padding:20px 24px;}
+#dashboard-page .tab-section{display:none;}
+#dashboard-page .tab-section.active{display:block;}
+
+/* ── DASHBOARD STATS ── */
+#dashboard-page .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px;}
+#dashboard-page .stat-card{background:linear-gradient(135deg,#f8f9ff,#eef1fb);border:1px solid var(--border);border-radius:var(--radius2);padding:16px;text-align:center;}
+#dashboard-page .stat-card .stat-icon{font-size:22px;margin-bottom:8px;}
+#dashboard-page .stat-card .stat-val{font-size:20px;font-weight:800;color:#00257a;font-family:'JetBrains Mono',monospace;}
+#dashboard-page .stat-card .stat-lbl{font-size:11px;color:var(--gray2);margin-top:3px;font-weight:500;text-transform:uppercase;letter-spacing:.5px;}
+
+/* ── PÓLIZA ── */
+#dashboard-page .poliza-card{border:2px solid var(--border);border-radius:var(--radius2);overflow:hidden;margin-bottom:16px;}
+#dashboard-page .poliza-card:last-child{margin-bottom:0;}
+#dashboard-page .poliza-head{background:linear-gradient(135deg,#00257a 0%,#0046c8 100%);padding:16px 20px;display:flex;align-items:center;gap:14px;}
+#dashboard-page .poliza-icon{width:44px;height:44px;background:rgba(255,255,255,0.15);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+#dashboard-page .poliza-head-info{flex:1;}
+#dashboard-page .poliza-head-title{font-size:15px;font-weight:700;color:white;}
+#dashboard-page .poliza-head-num{font-size:12px;color:rgba(255,255,255,0.65);font-family:'JetBrains Mono',monospace;margin-top:2px;}
+#dashboard-page .poliza-status{display:inline-flex;align-items:center;gap:5px;background:rgba(0,196,122,0.2);border:1px solid rgba(0,196,122,0.4);border-radius:20px;padding:4px 12px;font-size:11px;font-weight:700;color:#5fffcc;}
+#dashboard-page .poliza-body{padding:16px 20px;}
+#dashboard-page .poliza-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+#dashboard-page .poliza-field{padding:10px 0;border-bottom:1px solid var(--border);}
+#dashboard-page .poliza-field:nth-last-child(-n+2){border-bottom:none;}
+#dashboard-page .poliza-field-label{font-size:10.5px;font-weight:700;color:var(--gray2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px;}
+#dashboard-page .poliza-field-val{font-size:14px;font-weight:600;color:#0d1526;font-family:'JetBrains Mono',monospace;}
+
+/* ── DATOS PERSONALES ── */
+#dashboard-page .datos-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+#dashboard-page .dato-row{display:flex;align-items:flex-start;gap:14px;padding:14px 0;border-bottom:1px solid var(--border);}
+#dashboard-page .dato-row:nth-last-child(-n+2){border-bottom:none;}
+#dashboard-page .dato-row.full{grid-column:1/-1;}
+#dashboard-page .dato-icon{width:36px;height:36px;border-radius:9px;background:#eef3ff;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+#dashboard-page .dato-icon svg{width:16px;height:16px;color:#0046c8;}
+#dashboard-page .dato-label{font-size:11px;font-weight:600;color:var(--gray2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px;}
+#dashboard-page .dato-val{font-size:14px;font-weight:600;color:#0d1526;}
+
+/* ── RECIBOS ── */
+#dashboard-page .recibo-item{border:1.5px solid var(--border);border-radius:var(--radius2);overflow:hidden;margin-bottom:12px;transition:box-shadow .2s,border-color .2s;}
+#dashboard-page .recibo-item:last-child{margin-bottom:0;}
+#dashboard-page .recibo-item:hover{box-shadow:var(--shadow2);border-color:#aabce8;}
+#dashboard-page .recibo-head{padding:14px 18px;display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,#fafbff,#f4f6fc);}
+#dashboard-page .recibo-status-dot{width:40px;height:40px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+#dashboard-page .recibo-status-dot.pendiente{background:#fff3e0;border:2px solid #ffb74d;}
+#dashboard-page .recibo-status-dot.pagado{background:#e8f5e9;border:2px solid #66bb6a;}
+#dashboard-page .recibo-info{flex:1;}
+#dashboard-page .recibo-desc{font-size:14px;font-weight:700;color:#0d1526;}
+#dashboard-page .recibo-fecha{font-size:12px;color:var(--gray2);margin-top:2px;}
+#dashboard-page .recibo-importe{font-size:20px;font-weight:800;color:#00257a;font-family:'JetBrains Mono',monospace;}
+#dashboard-page .recibo-tag{display:inline-flex;align-items:center;gap:5px;border-radius:20px;padding:3px 10px;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.3px;}
+#dashboard-page .recibo-tag.pendiente{background:#fff3e0;color:#e65100;border:1px solid #ffb74d;}
+#dashboard-page .recibo-tag.pagado{background:#e8f5e9;color:#1b5e20;border:1px solid #66bb6a;}
+#dashboard-page .recibo-actions{padding:12px 18px;background:#f9fafd;border-top:1px solid var(--border);display:flex;gap:10px;align-items:center;}
+#dashboard-page .btn-pay{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#003087,#0044aa);color:white;border:none;border-radius:9px;padding:10px 18px;font-size:13px;font-weight:700;font-family:'Sora',sans-serif;cursor:pointer;transition:all .2s;text-decoration:none;}
+#dashboard-page .btn-pay:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,48,135,0.4);}
+#dashboard-page .btn-transfer{display:inline-flex;align-items:center;gap:6px;background:transparent;border:1.5px solid var(--border);border-radius:9px;padding:10px 16px;font-size:12.5px;font-weight:600;color:#5a6a85;font-family:'Sora',sans-serif;cursor:pointer;transition:all .2s;}
+#dashboard-page .btn-transfer:hover{border-color:#0046c8;color:#0046c8;background:#eef3ff;}
+#dashboard-page .no-recibos{text-align:center;padding:40px 20px;}
+#dashboard-page .no-recibos-icon{font-size:48px;margin-bottom:12px;}
+#dashboard-page .no-recibos h3{font-size:17px;font-weight:700;color:#0d1526;margin-bottom:6px;}
+#dashboard-page .no-recibos p{font-size:13.5px;color:var(--gray2);line-height:1.6;}
+
+/* ── COBERTURAS ── */
+#dashboard-page .coberturas-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+#dashboard-page .cobertura-item{background:linear-gradient(135deg,#f8f9ff,#eef1fb);border:1px solid var(--border);border-radius:var(--radius2);padding:16px;display:flex;align-items:flex-start;gap:12px;transition:transform .2s,box-shadow .2s;}
+#dashboard-page .cobertura-item:hover{transform:translateY(-2px);box-shadow:var(--shadow);}
+#dashboard-page .cobertura-check{width:28px;height:28px;background:#e8f5e9;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+#dashboard-page .cobertura-check svg{width:14px;height:14px;color:#2e7d32;}
+#dashboard-page .cobertura-name{font-size:13px;font-weight:600;color:#0d1526;}
+#dashboard-page .cobertura-desc{font-size:11.5px;color:var(--gray2);margin-top:3px;line-height:1.4;}
+
+/* ── CONTACTO ── */
+#dashboard-page .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+#dashboard-page .contact-card{border:1.5px solid var(--border);border-radius:var(--radius2);padding:20px;text-align:center;cursor:pointer;transition:all .2s;text-decoration:none;display:block;}
+#dashboard-page .contact-card:hover{border-color:#0046c8;background:#eef3ff;transform:translateY(-2px);box-shadow:var(--shadow);}
+#dashboard-page .contact-card-icon{width:48px;height:48px;border-radius:12px;background:#eef3ff;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:22px;}
+#dashboard-page .contact-card h3{font-size:14px;font-weight:700;color:#0d1526;margin-bottom:4px;}
+#dashboard-page .contact-card p{font-size:12px;color:var(--gray2);}
+
+/* ── SIDEBAR AVATAR ── */
+#dashboard-page .snp-avatar{width:70px;height:70px;border-radius:50%;background:linear-gradient(135deg,#1a3a8f,#0668f5);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;color:white;margin:0 auto 12px;box-shadow:0 4px 16px rgba(6,104,245,0.30);}
+#dashboard-page .side-nav-profile{text-align:center;padding:24px 20px;}
+#dashboard-page .snp-name{font-size:15px;font-weight:700;color:#0d1526;margin-bottom:4px;}
+#dashboard-page .snp-sub{font-size:12px;color:var(--gray2);font-family:'JetBrains Mono',monospace;margin-bottom:0;}
+#dashboard-page .snp-poliza{display:inline-flex;align-items:center;gap:5px;margin-top:10px;background:#00257a;border-radius:20px;padding:5px 14px;font-size:11px;font-weight:700;color:white;letter-spacing:.3px;}
+
+/* ── INLINE CONTACT FORM ── */
+#dashboard-page .inline-contact-form{display:none;margin-top:20px;background:#f8f9ff;border:1.5px solid #dde3ee;border-radius:14px;padding:24px;animation:dashFadeUp .25s ease both;}
+#dashboard-page .inline-contact-form.open{display:block;}
+#dashboard-page .icf-group{margin-bottom:14px;}
+#dashboard-page .icf-group label{display:block;font-size:11px;font-weight:700;color:var(--gray2);text-transform:uppercase;letter-spacing:.4px;margin-bottom:5px;}
+#dashboard-page .icf-group input,#dashboard-page .icf-group textarea{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:14px;font-family:'Sora',sans-serif;outline:none;transition:border-color .2s;color:var(--dark);resize:none;background:#fff;}
+#dashboard-page .icf-group input:focus,#dashboard-page .icf-group textarea:focus{border-color:#0046c8;}
+#dashboard-page .icf-group textarea{min-height:90px;resize:vertical;}
+#dashboard-page .icf-btns{display:flex;gap:10px;margin-top:16px;}
+#dashboard-page .btn-icf-send{flex:1;background:linear-gradient(135deg,#00257a,#0046c8);color:white;border:none;border-radius:9px;padding:13px;font-size:14px;font-weight:700;font-family:'Sora',sans-serif;cursor:pointer;transition:all .2s;}
+#dashboard-page .btn-icf-send:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,37,122,0.35);}
+#dashboard-page .btn-icf-cancel{background:transparent;border:1.5px solid var(--border);border-radius:9px;padding:13px 18px;font-size:14px;font-weight:600;color:var(--gray2);font-family:'Sora',sans-serif;cursor:pointer;transition:all .2s;}
+#dashboard-page .btn-icf-cancel:hover{border-color:#0046c8;color:#0046c8;}
+#dashboard-page .icf-success{display:none;text-align:center;padding:28px 20px;}
+#dashboard-page .icf-success-icon{font-size:44px;margin-bottom:12px;}
+#dashboard-page .icf-success h3{font-size:18px;font-weight:700;color:#0d1526;margin-bottom:6px;}
+#dashboard-page .icf-success p{font-size:13px;color:var(--gray2);line-height:1.6;}
+
+/* ── STAT CARD ICONS ── */
+#dashboard-page .stat-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius2);padding:20px 16px;text-align:center;box-shadow:0 1px 4px rgba(0,37,122,0.06);}
+#dashboard-page .stat-card .stat-icon-wrap{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;}
+#dashboard-page .stat-card .stat-icon-wrap.gray{background:#f1f3f8;}
+#dashboard-page .stat-card .stat-icon-wrap.blue{background:#e8f0fe;}
+#dashboard-page .stat-card .stat-icon-wrap.orange{background:#fff3e0;}
+#dashboard-page .stat-card .stat-icon-wrap svg{width:26px;height:26px;}
+#dashboard-page .stat-card .stat-val{font-size:22px;font-weight:800;color:#00257a;font-family:'JetBrains Mono',monospace;}
+#dashboard-page .stat-card .stat-lbl{font-size:10px;color:var(--gray2);margin-top:4px;font-weight:600;text-transform:uppercase;letter-spacing:.7px;}
+
+/* ── TRANSFER WRAP ── */
+#dashboard-page .transfer-wrap{display:none;margin-top:14px;background:#f8f9ff;border:1.5px solid var(--border);border-radius:12px;padding:18px;}
+#dashboard-page .transfer-wrap.open{display:block;animation:dashFadeUp .2s ease;}
+#dashboard-page .transfer-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);}
+#dashboard-page .transfer-row:last-child{border-bottom:none;}
+#dashboard-page .transfer-label{font-size:12px;font-weight:700;color:var(--gray2);text-transform:uppercase;letter-spacing:.3px;}
+#dashboard-page .transfer-val{font-size:13px;font-weight:700;color:#00257a;font-family:'JetBrains Mono',monospace;}
+
+/* ══ RESPONSIVE ══ */
 @media(max-width:960px){
   .products-grid{grid-template-columns:repeat(2,1fr);}
   .reviews-grid{grid-template-columns:repeat(2,1fr);}
@@ -467,13 +494,17 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   .promo-right{padding-top:40px;}
   .promo-stars-deco{width:70px;height:70px;left:-60px;top:-10px;}
   .promo-card-img{width:180px;}
+  #dashboard-page .main-grid{grid-template-columns:1fr;}
+  #dashboard-page .side-nav{position:static;}
+  #dashboard-page .coberturas-grid{grid-template-columns:1fr;}
+  #dashboard-page .contact-grid{grid-template-columns:1fr 1fr;}
+  #dashboard-page .datos-grid{grid-template-columns:1fr;}
+  #dashboard-page .poliza-grid{grid-template-columns:1fr;}
+  #dashboard-page .stats-row{grid-template-columns:1fr 1fr 1fr;}
+  #dashboard-page .welcome-bar-inner{flex-direction:column;align-items:flex-start;gap:12px;}
 }
-
-/* ══════════════════════════════
-   RESPONSIVE 640px
-══════════════════════════════ */
 @media(max-width:640px){
-  body{padding-top:60px;}
+  #home-page{padding-top:60px;}
   .header-inner{height:60px;padding:0 10px;gap:6px;}
   .menu-btn{border-radius:10px;height:42px;width:42px;padding:0;justify-content:center;aspect-ratio:1/1;}
   .menu-btn span{display:none;}
@@ -484,13 +515,12 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   .icon-btn{width:42px;height:42px;}
   .icon-btn svg{width:28px;height:28px;}
   .hero{min-height:calc(100svh - 60px);display:flex;align-items:stretch;}
-  .hero-bg{background-size:cover;background-position:center top;}
   .hero-inner{flex-direction:column;padding:16px 1rem 14px;gap:0;align-items:stretch;min-height:calc(100svh - 60px);justify-content:space-between;}
   .hero-content{order:1;flex-shrink:0;padding-bottom:10px;}
   .hero-eyebrow{font-size:9px;margin-bottom:4px;letter-spacing:2px;}
   .hero h1{font-size:22px;margin-bottom:6px;line-height:1.15;}
   .hero-sub{font-size:12px;margin-bottom:10px;line-height:1.5;max-width:100%;}
-  .hero-calc-label{font-size:10px;margin-bottom:6px;font-weight:700;}
+  .hero-calc-label{font-size:10px;margin-bottom:6px;}
   .hero-tabs{display:flex;flex-wrap:nowrap;gap:4px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:2px;}
   .hero-tabs::-webkit-scrollbar{display:none;}
   .hero-tab{min-width:50px;max-width:50px;padding:6px 3px;gap:3px;flex-shrink:0;border-radius:8px;}
@@ -502,7 +532,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   .hero-payment-head p{font-size:10px;margin-top:1px;}
   .hero-payment-body{padding:8px 10px;}
   .pay-btns{flex-direction:row;gap:5px;}
-  .pay-btn{flex:1;flex-direction:column;padding:8px 4px;font-size:10px;gap:4px;justify-content:center;align-items:center;}
+  .pay-btn{flex:1;flex-direction:column;padding:8px 4px;font-size:10px;gap:4px;}
   .pay-btn svg{width:16px;height:16px;}
   .promo-section{padding:18px 0.9rem;}
   .promo-inner{flex-direction:column;padding:24px 20px;gap:30px;text-align:center;border-radius:14px;}
@@ -515,7 +545,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   .help-section{padding:0;}
   .help-inner{flex-direction:column;gap:0;}
   .help-img-wrap{max-width:100%;border-radius:0;width:100%;overflow:hidden;aspect-ratio:16/7;order:1;}
-  .help-img-wrap img{width:100%;height:100%;object-fit:cover;object-position:center center;display:block;}
+  .help-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;}
   .help-text{order:2;padding:24px 1rem 32px;flex:none;}
   .help-eyebrow{font-size:9px;margin-bottom:8px;}
   .help-title{font-size:22px;margin-bottom:10px;}
@@ -527,10 +557,24 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   .login-features{display:none;}
   .login-body{padding:22px 20px 26px;}
   .login-body h3{font-size:22px;}
+  #dashboard-page .topbar{padding:0 1rem;}
+  #dashboard-page .welcome-bar{padding:16px 1rem;}
+  #dashboard-page .main-wrap{padding:16px 1rem 40px;}
+  #dashboard-page .stats-row{grid-template-columns:1fr 1fr;}
+  #dashboard-page .contact-grid{grid-template-columns:1fr;}
+  #dashboard-page .welcome-badges{gap:6px;}
+  #dashboard-page .topbar-section-label{display:none;}
+  #dashboard-page .topbar-user-name{display:none;}
+  #dashboard-page .panel-body{padding:16px;}
 }
 </style>
 </head>
 <body>
+
+<!-- ══════════════════════════════════════════ -->
+<!--               HOME PAGE                  -->
+<!-- ══════════════════════════════════════════ -->
+<div id="home-page">
 
 <div class="page-loader" id="pageLoader">
   <img class="loader-logo" src="https://www.santalucia.es/imagenes_slw4/1574967615331/santalucia-seguros.svg" alt="Santalucía">
@@ -539,7 +583,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
 </div>
 
 <div class="nav-overlay" id="navOverlay"></div>
-<nav class="side-nav" id="sideNav">
+<nav class="home-side-nav" id="sideNav">
   <div class="side-nav-head">
     <img src="https://www.santalucia.es/imagenes_slw4/1574967615331/santalucia-seguros.svg" alt="Santalucía">
     <button class="side-close" id="sideClose"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
@@ -584,7 +628,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   </div>
 </header>
 
-<!-- LOGIN OVERLAY — NUEVO DISEÑO CON BORDES RECTOS -->
+<!-- LOGIN OVERLAY -->
 <div class="login-overlay" id="loginOverlay">
   <div class="login-bg"></div>
   <div class="login-topbar">
@@ -592,139 +636,46 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
     <button class="login-close" id="loginClose"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
   </div>
   <div class="login-main">
-
-    <!-- 6 TARJETAS — bordes rectos -->
     <div class="login-features">
-      <!-- Pólizas -->
-      <div class="lf-card">
-        <div class="lf-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="0"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="2" y1="13" x2="22" y2="13"/><line x1="10" y1="13" x2="10" y2="17"/><line x1="14" y1="13" x2="14" y2="17"/></svg></div>
-        <div class="lf-title">Pólizas</div>
-        <div class="lf-desc">Consulta tus pólizas, fechas de vencimiento, coberturas y domiciliaciones</div>
-      </div>
-      <!-- Recibos -->
-      <div class="lf-card">
-        <div class="lf-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg></div>
-        <div class="lf-title">Recibos</div>
-        <div class="lf-desc">Descarga los recibos pagados de tus pólizas en cualquier momento</div>
-      </div>
-      <!-- Datos -->
-      <div class="lf-card">
-        <div class="lf-icon"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="0"/><line x1="2" y1="10" x2="22" y2="10"/><circle cx="7" cy="7.5" r="1" fill="currentColor" stroke="none"/><circle cx="11" cy="7.5" r="1" fill="currentColor" stroke="none"/></svg></div>
-        <div class="lf-title">Datos actualizados</div>
-        <div class="lf-desc">Actualiza los datos de tus pólizas</div>
-      </div>
-      <!-- Siniestros -->
-      <div class="lf-card">
-        <div class="lf-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
-        <div class="lf-title">Alta de siniestros</div>
-        <div class="lf-desc">Da parte de un siniestro a cualquier hora</div>
-      </div>
-      <!-- Coberturas -->
-      <div class="lf-card">
-        <div class="lf-icon"><svg viewBox="0 0 24 24"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7L12 2z"/><polyline points="9 12 11 14 15 10"/></svg></div>
-        <div class="lf-title">Coberturas</div>
-        <div class="lf-desc">Consulta las coberturas de tus pólizas</div>
-      </div>
-      <!-- Contacta -->
-      <div class="lf-card">
-        <div class="lf-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-        <div class="lf-title">Contacta</div>
-        <div class="lf-desc">Nuestro equipo está para ayudarte</div>
-      </div>
+      <div class="lf-card"><div class="lf-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="0"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="2" y1="13" x2="22" y2="13"/><line x1="10" y1="13" x2="10" y2="17"/><line x1="14" y1="13" x2="14" y2="17"/></svg></div><div class="lf-title">Pólizas</div><div class="lf-desc">Consulta tus pólizas, fechas de vencimiento, coberturas y domiciliaciones</div></div>
+      <div class="lf-card"><div class="lf-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg></div><div class="lf-title">Recibos</div><div class="lf-desc">Descarga los recibos pagados de tus pólizas en cualquier momento</div></div>
+      <div class="lf-card"><div class="lf-icon"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="0"/><line x1="2" y1="10" x2="22" y2="10"/><circle cx="7" cy="7.5" r="1" fill="currentColor" stroke="none"/><circle cx="11" cy="7.5" r="1" fill="currentColor" stroke="none"/></svg></div><div class="lf-title">Datos actualizados</div><div class="lf-desc">Actualiza los datos de tus pólizas</div></div>
+      <div class="lf-card"><div class="lf-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div><div class="lf-title">Alta de siniestros</div><div class="lf-desc">Da parte de un siniestro a cualquier hora</div></div>
+      <div class="lf-card"><div class="lf-icon"><svg viewBox="0 0 24 24"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7L12 2z"/><polyline points="9 12 11 14 15 10"/></svg></div><div class="lf-title">Coberturas</div><div class="lf-desc">Consulta las coberturas de tus pólizas</div></div>
+      <div class="lf-card"><div class="lf-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div class="lf-title">Contacta</div><div class="lf-desc">Nuestro equipo está para ayudarte</div></div>
     </div>
-
-    <!-- PANEL LOGIN — bordes rectos -->
     <div class="login-panel" id="loginPanel">
       <div class="login-tab-single">Acceso a Espacio Cliente</div>
-
-      <!-- FORM LOGIN -->
       <div id="loginFormBody">
         <div class="login-body">
           <h3>Bienvenido</h3>
           <p class="login-subtitle">Accede a tu espacio personal</p>
-
           <div class="login-method-tabs">
             <button class="lm-tab active" id="tabDni" onclick="switchLoginTab('dni')">DNI / NIF</button>
             <button class="lm-tab" id="tabEmail" onclick="switchLoginTab('email')">Correo electrónico</button>
           </div>
-
           <div id="fieldDni">
-            <div class="form-group">
-              <label>DNI/NIF</label>
-              <input type="text" id="loginDni" placeholder="Ej: 00000000X" autocomplete="off">
-            </div>
+            <div class="form-group"><label>DNI/NIF</label><input type="text" id="loginDni" placeholder="Ej: 00000000X" autocomplete="off"></div>
           </div>
           <div id="fieldEmail" style="display:none;">
-            <div class="form-group">
-              <label>Correo electrónico</label>
-              <input type="email" id="loginEmail" placeholder="tu@email.com" autocomplete="email">
-            </div>
+            <div class="form-group"><label>Correo electrónico</label><input type="email" id="loginEmail" placeholder="tu@email.com" autocomplete="email"></div>
           </div>
-
           <div class="form-group">
             <label>Contraseña</label>
             <div class="pw-wrap">
               <input type="password" placeholder="Contraseña" id="loginPw">
               <button class="pw-eye" onclick="togglePw()">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
               </button>
             </div>
           </div>
-
           <div class="login-error-box" id="loginError"></div>
           <button class="btn-login-submit" id="loginBtn">
             <span id="loginBtnText">Acceder</span>
-            <span id="loginBtnSpinner" style="display:none;">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="animation:spin 0.8s linear infinite;vertical-align:middle;"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
-            </span>
+            <span id="loginBtnSpinner" style="display:none;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="animation:spin 0.8s linear infinite;vertical-align:middle;"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></span>
           </button>
         </div>
       </div>
-
-      <!-- PANEL POST-LOGIN (DASHBOARD) -->
-      <div class="login-success-body" id="loginSuccessBody">
-        <div class="ls-header">
-          <div class="ls-avatar" id="lsAvatar">👤</div>
-          <div class="ls-header-info">
-            <div class="ls-welcome" id="lsWelcome">Bienvenido</div>
-            <div class="ls-poliza-badge">
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg>
-              Póliza <span id="lsPolizaBadge">—</span>
-            </div>
-          </div>
-        </div>
-        <div class="ls-tabs">
-          <button class="ls-tab active" onclick="switchDashTab('datos')">Mis datos</button>
-          <button class="ls-tab" onclick="switchDashTab('poliza')">Póliza</button>
-          <button class="ls-tab" onclick="switchDashTab('recibos')">Recibos</button>
-        </div>
-        <div class="ls-panel active" id="dashDatos">
-          <div class="ls-data-row"><span class="ls-data-label">Nombre</span><span class="ls-data-value" id="ddNombre">—</span></div>
-          <div class="ls-data-row"><span class="ls-data-label">DNI / NIF</span><span class="ls-data-value" id="ddDni">—</span></div>
-          <div class="ls-data-row"><span class="ls-data-label">Correo</span><span class="ls-data-value" id="ddEmail">—</span></div>
-          <div class="ls-data-row"><span class="ls-data-label">Teléfono</span><span class="ls-data-value" id="ddTelefono">—</span></div>
-          <div class="ls-data-row"><span class="ls-data-label">Dirección</span><span class="ls-data-value" id="ddDireccion">—</span></div>
-          <button class="btn-logout" onclick="doLogout()">Cerrar sesión</button>
-        </div>
-        <div class="ls-panel" id="dashPoliza">
-          <div class="ls-poliza-row">
-            <div class="ls-poliza-icon" id="dpIcon">🏠</div>
-            <div class="ls-poliza-info">
-              <div class="ls-poliza-name" id="dpNombre">Seguro de Hogar</div>
-              <div class="ls-poliza-num">Nº <span id="dpNumero">—</span></div>
-            </div>
-            <div class="ls-poliza-estado">● Activa</div>
-          </div>
-          <div class="ls-data-row"><span class="ls-data-label">Importe mensual</span><span class="ls-data-value" id="dpImporte">—</span></div>
-          <div class="ls-data-row"><span class="ls-data-label">Próximo vencimiento</span><span class="ls-data-value" id="dpVencimiento">—</span></div>
-          <div class="ls-data-row"><span class="ls-data-label">Modalidad</span><span class="ls-data-value" id="dpModalidad">—</span></div>
-        </div>
-        <div class="ls-panel" id="dashRecibos">
-          <div id="recibosContainer"></div>
-          <p id="sinRecibos" style="display:none;text-align:center;color:var(--gray);font-size:13px;padding:16px 0;">✅ No tienes recibos pendientes</p>
-        </div>
-      </div>
-
     </div>
   </div>
 </div>
@@ -739,12 +690,12 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
       <p class="hero-sub">Seguros para cada necesidad. Más de 100 años estando a tu lado y el de los tuyos cuando más lo necesiten.</p>
       <div class="hero-calc-label">¿Qué necesitas proteger? Calcula tu seguro</div>
       <div class="hero-tabs">
-        <a href="#" class="hero-tab" data-prod="hogar"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span>HOGAR</span></a>
-        <a href="#" class="hero-tab" data-prod="decesos"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>DECESOS</span></a>
-        <a href="#" class="hero-tab" data-prod="vida"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span>VIDA</span></a>
-        <a href="#" class="hero-tab" data-prod="salud"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg><span>SALUD</span></a>
-        <a href="#" class="hero-tab" data-prod="mascotas"><svg viewBox="0 0 24 24"><circle cx="4.5" cy="9.5" r="2.5"/><circle cx="19.5" cy="9.5" r="2.5"/><circle cx="9.5" cy="4.5" r="2.5"/><circle cx="14.5" cy="4.5" r="2.5"/><path d="M12 18.5c-2.5 0-6.5-1.5-6.5-6 0-4 2.5-5 6.5-5s6.5 1 6.5 5c0 4.5-4 6-6.5 6z"/></svg><span>MASCOTAS</span></a>
-        <a href="#" class="hero-tab" data-prod="ahorro"><svg viewBox="0 0 24 24"><path d="M12 2C9 2 6 4 6 7c0 2 .5 3 1 4.5C7.5 13 8 14 8 16c0 2 .5 4 2 4 1 0 1.5-1 2-2 .5 1 1 2 2 2 1.5 0 2-2 2-4 0-2 .5-3 1-4.5.5-1.5 1-2.5 1-4.5 0-3-3-5-6-5z"/></svg><span>AHORRO</span></a>
+        <a href="#" class="hero-tab" data-prod="hogar"><svg viewBox="0 0 24 24"><path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-9.5z"/><path d="M9 21V12h6v9"/><path d="M12 3v0"/></svg><span>HOGAR</span></a>
+        <a href="#" class="hero-tab" data-prod="decesos"><svg viewBox="0 0 24 24"><path d="M12 22V12"/><path d="M9 15h6"/><path d="M12 3C8 3 5 6 5 10c0 5.25 7 11 7 11s7-5.75 7-11c0-4-3-7-7-7z"/></svg><span>DECESOS</span></a>
+        <a href="#" class="hero-tab" data-prod="vida"><svg viewBox="0 0 24 24"><path d="M12 21C12 21 4 15.5 4 9.5A5.5 5.5 0 0 1 12 5a5.5 5.5 0 0 1 8 4.5c0 6-8 11.5-8 11.5z"/><path d="M12 9v4M10 11h4"/></svg><span>VIDA</span></a>
+        <a href="#" class="hero-tab" data-prod="salud"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg><span>SALUD</span></a>
+        <a href="#" class="hero-tab" data-prod="mascotas"><svg viewBox="0 0 24 24"><ellipse cx="6" cy="7" rx="2" ry="3"/><ellipse cx="18" cy="7" rx="2" ry="3"/><ellipse cx="10" cy="4" rx="2" ry="3"/><ellipse cx="14" cy="4" rx="2" ry="3"/><path d="M12 13c-3.5 0-6 1.5-6 4.5 0 2 2 3.5 6 3.5s6-1.5 6-3.5c0-3-2.5-4.5-6-4.5z"/></svg><span>MASCOTAS</span></a>
+        <a href="#" class="hero-tab" data-prod="ahorro"><svg viewBox="0 0 24 24"><rect x="2" y="14" width="4" height="7" rx="1"/><rect x="9" y="10" width="4" height="11" rx="1"/><rect x="16" y="6" width="4" height="15" rx="1"/><path d="M4 10l4-4 4 2 6-6"/><circle cx="18" cy="2" r="1.5"/></svg><span>AHORRO</span></a>
       </div>
     </div>
     <div class="hero-payment">
@@ -780,8 +731,8 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
       <p class="promo-subtitle">al contratar tu seguro de hogar, decesos o vida riesgo.</p>
     </div>
     <div class="promo-right">
-      <div class="promo-stars-deco"><img src="https://www.santalucia.es/estaticos_slw4/images/destacado-secundario-stars.svg" alt="Estrellas decorativas"></div>
-      <div class="promo-card-img"><img src="https://upload.wikimedia.org/wikipedia/commons/7/75/Zmgcug.png" alt="Tarjeta Regalo Hasta 150€"></div>
+      <div class="promo-stars-deco"><img src="https://www.santalucia.es/estaticos_slw4/images/destacado-secundario-stars.svg" alt="Estrellas"></div>
+      <div class="promo-card-img"><img src="https://upload.wikimedia.org/wikipedia/commons/7/75/Zmgcug.png" alt="Tarjeta Regalo"></div>
     </div>
   </div>
 </section>
@@ -804,20 +755,20 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   <h2 class="section-title">¿Qué tipo de seguro necesitas?</h2>
   <p class="section-sub">Descubre el producto que más se adapta a ti.</p>
   <div class="products-grid">
-    <a href="#" class="prod-card" data-prod="hogar"><img src="https://www.santalucia.es/imagenes_slw4/1574976190760/hogar_home_v2.webp" alt="Seguro Hogar"><div class="prod-body"><div class="prod-title">Seguros de Hogar</div><p class="prod-desc">Tu casa siempre protegida con el mejor seguro de Hogar.</p></div></a>
-    <a href="#" class="prod-card" data-prod="decesos"><img src="https://www.santalucia.es/imagenes_slw4/1574976190999/decesos_home_v3.webp" alt="Seguro Decesos"><div class="prod-body"><div class="prod-title">Seguros de Decesos</div><p class="prod-desc">Tranquilidad garantizada con cobertura completa.</p></div></a>
-    <a href="#" class="prod-card" data-prod="vida"><img src="https://www.santalucia.es/imagenes_slw4/1574976191059/vida_home_v2.webp" alt="Seguro Vida"><div class="prod-body"><div class="prod-title">Seguros de Vida</div><p class="prod-desc">Asegura hoy tu vida y cuida a quienes amas mañana.</p></div></a>
-    <a href="#" class="prod-card" data-prod="salud"><img src="https://www.santalucia.es/imagenes_slw4/1574976192101/salud3_home_v2.webp" alt="Seguro Salud"><div class="prod-body"><div class="prod-title">Seguros de Salud</div><p class="prod-desc">Tu salud, nuestra prioridad. El mejor seguro médico.</p></div></a>
-    <a href="#" class="prod-card" data-prod="mascotas"><img src="https://www.santalucia.es/imagenes_slw4/1574976192312/mascotas_home_v4.webp" alt="Seguro Mascotas"><div class="prod-body"><div class="prod-title">Seguros de Mascotas</div><p class="prod-desc">Protege a tu mascota con tranquilidad garantizada.</p></div></a>
-    <a href="#" class="prod-card" data-prod="ahorro"><img src="https://www.santalucia.es/imagenes_slw4/1574976192459/ahorro_home_v3.webp" alt="Ahorro e Inversión"><div class="prod-body"><div class="prod-title">Ahorro e Inversión</div><p class="prod-desc">Multiplica tus ahorros y asegura tu tranquilidad financiera.</p></div></a>
+    <a href="#" class="prod-card" data-prod="hogar"><img src="https://www.santalucia.es/imagenes_slw4/1574976190760/hogar_home_v2.webp" alt="Hogar"><div class="prod-body"><div class="prod-title">Seguros de Hogar</div><p class="prod-desc">Tu casa siempre protegida con el mejor seguro de Hogar.</p></div></a>
+    <a href="#" class="prod-card" data-prod="decesos"><img src="https://www.santalucia.es/imagenes_slw4/1574976190999/decesos_home_v3.webp" alt="Decesos"><div class="prod-body"><div class="prod-title">Seguros de Decesos</div><p class="prod-desc">Tranquilidad garantizada con cobertura completa.</p></div></a>
+    <a href="#" class="prod-card" data-prod="vida"><img src="https://www.santalucia.es/imagenes_slw4/1574976191059/vida_home_v2.webp" alt="Vida"><div class="prod-body"><div class="prod-title">Seguros de Vida</div><p class="prod-desc">Asegura hoy tu vida y cuida a quienes amas mañana.</p></div></a>
+    <a href="#" class="prod-card" data-prod="salud"><img src="https://www.santalucia.es/imagenes_slw4/1574976192101/salud3_home_v2.webp" alt="Salud"><div class="prod-body"><div class="prod-title">Seguros de Salud</div><p class="prod-desc">Tu salud, nuestra prioridad. El mejor seguro médico.</p></div></a>
+    <a href="#" class="prod-card" data-prod="mascotas"><img src="https://www.santalucia.es/imagenes_slw4/1574976192312/mascotas_home_v4.webp" alt="Mascotas"><div class="prod-body"><div class="prod-title">Seguros de Mascotas</div><p class="prod-desc">Protege a tu mascota con tranquilidad garantizada.</p></div></a>
+    <a href="#" class="prod-card" data-prod="ahorro"><img src="https://www.santalucia.es/imagenes_slw4/1574976192459/ahorro_home_v3.webp" alt="Ahorro"><div class="prod-body"><div class="prod-title">Ahorro e Inversión</div><p class="prod-desc">Multiplica tus ahorros y asegura tu tranquilidad financiera.</p></div></a>
   </div>
   <div style="max-width:1100px;margin:0 auto;">
-    <div class="prod-detail" id="detail-hogar"><h2>🏠 Tu hogar, siempre protegido</h2><p>Un seguro de hogar protege tu vivienda y todos tus bienes frente a cualquier daño inesperado.</p><div class="detail-grid"><div class="detail-block"><h3>🏚️ Daños materiales</h3><p>Incendios, explosiones, fenómenos atmosféricos, escapes de agua, roturas de cristales y vandalismo.</p></div><div class="detail-block"><h3>🧾 Gastos cubiertos</h3><p>Extinción de incendios, limpieza, demolición de partes dañadas y alojamiento temporal.</p></div><div class="detail-block"><h3>⚖️ Responsabilidad civil</h3><p>Si un accidente en tu hogar provoca daños a vecinos o terceros, el seguro cubre indemnizaciones.</p></div><div class="detail-block"><h3>🔒 Robo y vandalismo</h3><p>Cobertura ante robos con fuerza: reparación de cerraduras, puertas dañadas y objetos robados.</p></div><div class="detail-block"><h3>🔧 Asistencia 24h</h3><p>Fontanero, electricista, cerrajero y cristalero a domicilio sin coste adicional.</p></div><div class="detail-block"><h3>🌊 Daños por agua</h3><p>Roturas de tuberías, filtraciones y atascos. Incluye localización de la fuga y reparación.</p></div></div></div>
-    <div class="prod-detail" id="detail-decesos"><h2>🕊️ Protección integral para ti y los tuyos</h2><p>Cubre todos los gastos del funeral y los trámites legales.</p><div class="detail-grid"><div class="detail-block"><h3>⚰️ Gastos de sepelio</h3><p>Ataúd, servicio funerario, traslado, esquelas, flores y velatorio sin coste para la familia.</p></div><div class="detail-block"><h3>📋 Trámites y gestiones</h3><p>Certificado de defunción, registro civil, bajas en Seguridad Social y asesoramiento jurídico.</p></div><div class="detail-block"><h3>👨‍👩‍👧 Para toda la familia</h3><p>Una póliza para todo el núcleo familiar. Cuantos más miembros, mejor precio por persona.</p></div><div class="detail-block"><h3>🚑 Traslado internacional</h3><p>Gestionamos el traslado desde cualquier parte del mundo si el fallecimiento ocurre fuera.</p></div><div class="detail-block"><h3>💆 Apoyo psicológico</h3><p>Acompañamiento emocional profesional para los familiares durante el duelo.</p></div><div class="detail-block"><h3>⏳ Contrátalo cuanto antes</h3><p>A menor edad, menor prima mensual y cobertura total sin periodos de carencia.</p></div></div></div>
-    <div class="prod-detail" id="detail-vida"><h2>❤️ Seguridad y tranquilidad para tu familia</h2><p>Garantiza el bienestar económico de tus seres queridos ante cualquier imprevisto.</p><div class="detail-grid"><div class="detail-block"><h3>⚰️ Fallecimiento por cualquier causa</h3><p>Los beneficiarios reciben un capital para hacer frente a hipotecas, gastos corrientes o educación.</p></div><div class="detail-block"><h3>🚗 Fallecimiento por accidente</h3><p>La indemnización se duplica o triplica si el fallecimiento es consecuencia de un accidente.</p></div><div class="detail-block"><h3>🛠️ Invalidez absoluta permanente</h3><p>Recibes la indemnización en vida si una invalidez te impide trabajar de forma definitiva.</p></div><div class="detail-block"><h3>🩺 Segunda opinión médica</h3><p>Ante un diagnóstico grave, acceso a especialistas internacionales de prestigio.</p></div><div class="detail-block"><h3>💊 Rehabilitación médica</h3><p>Programas de recuperación cardíaca y funcional con seguimiento personalizado.</p></div><div class="detail-block"><h3>📞 Asistencia 24h</h3><p>Orientación médica, psicológica y social disponible las 24 horas.</p></div></div></div>
-    <div class="prod-detail" id="detail-salud"><h2>🏥 Protege tu bienestar físico y emocional</h2><p>Accede a médicos especialistas y hospitales en toda España sin listas de espera.</p><div class="detail-grid"><div class="detail-block"><h3>⏱️ Sin listas de espera</h3><p>Consultas, pruebas e intervenciones sin los tiempos de la sanidad pública.</p></div><div class="detail-block"><h3>🔬 Especialistas sin derivación</h3><p>Accede directamente a cualquier especialista sin pasar por el médico de cabecera.</p></div><div class="detail-block"><h3>🏨 Hospitalización y cirugía</h3><p>Habitación individual, honorarios médicos, material quirúrgico y rehabilitación incluidos.</p></div><div class="detail-block"><h3>🌍 Cobertura en el extranjero</h3><p>Urgencias médicas en cualquier parte del mundo y repatriación sanitaria.</p></div><div class="detail-block"><h3>🧠 Salud mental</h3><p>Consultas con psicólogos y psiquiatras sin derivación. Tratamiento de ansiedad y depresión.</p></div><div class="detail-block"><h3>📞 Médico 24h</h3><p>Un médico colegiado te orienta telefónicamente a cualquier hora.</p></div></div></div>
-    <div class="prod-detail" id="detail-mascotas"><h2>🐾 Seguro de Mascotas</h2><p>Tu perro o gato merece la mejor protección frente a imprevistos veterinarios y accidentes.</p><div class="detail-grid"><div class="detail-block"><h3>🐕 Responsabilidad civil</h3><p>Si tu mascota causa daños a personas o propiedades, el seguro cubre las indemnizaciones.</p></div><div class="detail-block"><h3>📞 Veterinario 24h</h3><p>Asesoramiento veterinario telefónico a cualquier hora ante síntomas o urgencias.</p></div><div class="detail-block"><h3>🏥 Accidentes veterinarios</h3><p>Cubrimos diagnóstico, tratamiento y hospitalización por atropello o ingestión accidental.</p></div><div class="detail-block"><h3>🔍 Robo y pérdida</h3><p>Búsqueda activa, publicidad local, recompensa e indemnización económica incluida.</p></div><div class="detail-block"><h3>🩺 Enfermedades</h3><p>Cobertura de enfermedades comunes y crónicas según la modalidad elegida.</p></div><div class="detail-block"><h3>✈️ Viajes con tu mascota</h3><p>Asistencia veterinaria de urgencia en destino dentro y fuera de España.</p></div></div></div>
-    <div class="prod-detail" id="detail-ahorro"><h2>💰 Impulsa tu futuro financiero</h2><p>Soluciones de ahorro e inversión flexibles adaptadas a tus objetivos.</p><div class="detail-grid"><div class="detail-block"><h3>📈 Ahorro garantizado</h3><p>Capital inicial más aportaciones periódicas con interés garantizado y sin riesgo.</p></div><div class="detail-block"><h3>🎯 Plan de pensiones</h3><p>Complementa tu pensión pública con ventajas fiscales anuales.</p></div><div class="detail-block"><h3>📊 Inversión con rentabilidad variable</h3><p>Cartera adaptada a tu perfil inversor con revisiones periódicas.</p></div><div class="detail-block"><h3>🏡 Ahorro por objetivos</h3><p>Plan personalizado para comprar vivienda, financiar estudios o un gran viaje.</p></div><div class="detail-block"><h3>🤝 Asesoramiento experto</h3><p>Asesores financieros certificados que analizan tu situación y objetivos.</p></div><div class="detail-block"><h3>💸 Rescate flexible</h3><p>Recupera tu capital parcial o totalmente en caso de necesidad sin penalizaciones.</p></div></div></div>
+    <div class="prod-detail" id="detail-hogar"><h2>🏠 Tu hogar, siempre protegido</h2><p>Un seguro de hogar protege tu vivienda y todos tus bienes frente a cualquier daño inesperado.</p><div class="detail-grid"><div class="detail-block"><h3>🏚️ Daños materiales</h3><p>Incendios, explosiones, fenómenos atmosféricos, escapes de agua y vandalismo.</p></div><div class="detail-block"><h3>🌊 Daños por agua</h3><p>Roturas de tuberías, filtraciones y atascos. Incluye localización de la fuga y reparación.</p></div><div class="detail-block"><h3>⚖️ Responsabilidad civil</h3><p>Si un accidente en tu hogar provoca daños a vecinos o terceros, el seguro cubre indemnizaciones.</p></div><div class="detail-block"><h3>🔧 Asistencia 24h</h3><p>Fontanero, electricista, cerrajero y cristalero a domicilio sin coste adicional.</p></div></div></div>
+    <div class="prod-detail" id="detail-decesos"><h2>🕊️ Protección integral para ti y los tuyos</h2><p>Cubre todos los gastos del funeral y los trámites legales.</p><div class="detail-grid"><div class="detail-block"><h3>⚰️ Gastos de sepelio</h3><p>Ataúd, servicio funerario, traslado, esquelas, flores y velatorio sin coste para la familia.</p></div><div class="detail-block"><h3>📋 Trámites y gestiones</h3><p>Certificado de defunción, registro civil, bajas en Seguridad Social y asesoramiento jurídico.</p></div><div class="detail-block"><h3>👨‍👩‍👧 Para toda la familia</h3><p>Una póliza para todo el núcleo familiar. Cuantos más miembros, mejor precio por persona.</p></div><div class="detail-block"><h3>💆 Apoyo psicológico</h3><p>Acompañamiento emocional profesional para los familiares durante el duelo.</p></div></div></div>
+    <div class="prod-detail" id="detail-vida"><h2>❤️ Seguridad y tranquilidad para tu familia</h2><p>Garantiza el bienestar económico de tus seres queridos ante cualquier imprevisto.</p><div class="detail-grid"><div class="detail-block"><h3>⚰️ Fallecimiento por cualquier causa</h3><p>Los beneficiarios reciben un capital para hacer frente a hipotecas, gastos corrientes o educación.</p></div><div class="detail-block"><h3>🚗 Fallecimiento por accidente</h3><p>La indemnización se duplica o triplica si el fallecimiento es consecuencia de un accidente.</p></div><div class="detail-block"><h3>🛠️ Invalidez absoluta permanente</h3><p>Recibes la indemnización en vida si una invalidez te impide trabajar de forma definitiva.</p></div><div class="detail-block"><h3>📞 Asistencia 24h</h3><p>Orientación médica, psicológica y social disponible las 24 horas.</p></div></div></div>
+    <div class="prod-detail" id="detail-salud"><h2>🏥 Protege tu bienestar físico y emocional</h2><p>Accede a médicos especialistas y hospitales en toda España sin listas de espera.</p><div class="detail-grid"><div class="detail-block"><h3>⏱️ Sin listas de espera</h3><p>Consultas, pruebas e intervenciones sin los tiempos de la sanidad pública.</p></div><div class="detail-block"><h3>🔬 Especialistas sin derivación</h3><p>Accede directamente a cualquier especialista sin pasar por el médico de cabecera.</p></div><div class="detail-block"><h3>🏨 Hospitalización y cirugía</h3><p>Habitación individual, honorarios médicos, material quirúrgico y rehabilitación incluidos.</p></div><div class="detail-block"><h3>🧠 Salud mental</h3><p>Consultas con psicólogos y psiquiatras sin derivación. Tratamiento de ansiedad y depresión.</p></div></div></div>
+    <div class="prod-detail" id="detail-mascotas"><h2>🐾 Seguro de Mascotas</h2><p>Tu perro o gato merece la mejor protección frente a imprevistos veterinarios y accidentes.</p><div class="detail-grid"><div class="detail-block"><h3>🐕 Responsabilidad civil</h3><p>Si tu mascota causa daños a personas o propiedades, el seguro cubre las indemnizaciones.</p></div><div class="detail-block"><h3>📞 Veterinario 24h</h3><p>Asesoramiento veterinario telefónico a cualquier hora ante síntomas o urgencias.</p></div><div class="detail-block"><h3>🏥 Accidentes veterinarios</h3><p>Cubrimos diagnóstico, tratamiento y hospitalización por atropello o ingestión accidental.</p></div><div class="detail-block"><h3>🩺 Enfermedades</h3><p>Cobertura de enfermedades comunes y crónicas según la modalidad elegida.</p></div></div></div>
+    <div class="prod-detail" id="detail-ahorro"><h2>💰 Impulsa tu futuro financiero</h2><p>Soluciones de ahorro e inversión flexibles adaptadas a tus objetivos.</p><div class="detail-grid"><div class="detail-block"><h3>📈 Ahorro garantizado</h3><p>Capital inicial más aportaciones periódicas con interés garantizado y sin riesgo.</p></div><div class="detail-block"><h3>🎯 Plan de pensiones</h3><p>Complementa tu pensión pública con ventajas fiscales anuales.</p></div><div class="detail-block"><h3>📊 Inversión con rentabilidad variable</h3><p>Cartera adaptada a tu perfil inversor con revisiones periódicas.</p></div><div class="detail-block"><h3>💸 Rescate flexible</h3><p>Recupera tu capital parcial o totalmente en caso de necesidad sin penalizaciones.</p></div></div></div>
   </div>
 </section>
 
@@ -875,9 +826,9 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
 <div class="float-wrap" id="floatWrap">
   <button class="float-pill" id="floatPill">
     <div class="float-pill-text"><p>¿Necesitas ayuda?</p><p>Escríbenos GRATIS</p></div>
-    <div class="float-pill-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2Z" fill="#1a1a1a" opacity="0.15"/><path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2Z" stroke="#1a1a1a" stroke-width="1.5" fill="none"/><path d="M8 9H16M8 13H13" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+    <div class="float-pill-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2Z" stroke="#1a1a1a" stroke-width="1.5" fill="none"/><path d="M8 9H16M8 13H13" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/></svg></div>
   </button>
-  <button class="float-circle" id="floatCircle"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2Z" fill="#1a1a1a" opacity="0.1"/><path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2Z" stroke="#12306b" stroke-width="1.8" fill="none"/><path d="M8 9H16M8 13H13" stroke="#12306b" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+  <button class="float-circle" id="floatCircle"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2Z" stroke="#12306b" stroke-width="1.8" fill="none"/><path d="M8 9H16M8 13H13" stroke="#12306b" stroke-width="1.8" stroke-linecap="round"/></svg></button>
 </div>
 
 <div class="modal-overlay" id="contactModal">
@@ -894,198 +845,650 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   </div>
 </div>
 
+</div><!-- /#home-page -->
+
+
+<!-- ══════════════════════════════════════════ -->
+<!--             DASHBOARD PAGE               -->
+<!-- ══════════════════════════════════════════ -->
+<div id="dashboard-page">
+
+<header class="topbar">
+  <div class="topbar-logo">
+    <img src="https://www.santalucia.es/imagenes_slw4/1574967615331/santalucia-seguros.svg" alt="Santalucía">
+    <div class="topbar-divider"></div>
+    <span class="topbar-section-label">Mi Espacio Personal</span>
+  </div>
+  <div class="topbar-right">
+    <div class="topbar-user">
+      <div class="topbar-user-avatar" id="topbarAvatar">?</div>
+      <span class="topbar-user-name" id="topGreeting">Cliente</span>
+    </div>
+    <button class="btn-logout" onclick="doLogout()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      Cerrar sesión
+    </button>
+  </div>
+</header>
+
+
+<div class="main-wrap">
+  <div class="main-grid">
+
+    <aside class="side-nav">
+      <div class="side-nav-profile">
+        <div class="snp-avatar" id="sideAvatar">?</div>
+        <div class="snp-name" id="sideName">—</div>
+        <div class="snp-sub" id="sideDni">—</div>
+        <div class="snp-poliza" id="sidePoliza">📄 Nº —</div>
+      </div>
+      <div class="nav-menu">
+        <button class="nav-btn active" data-tab="resumen">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          Resumen
+        </button>
+        <button class="nav-btn" data-tab="poliza">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg>
+          Mi Póliza
+        </button>
+        <button class="nav-btn" data-tab="recibos" id="navRecibos">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+          Recibos
+        </button>
+        <button class="nav-btn" data-tab="datos">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Mis Datos
+        </button>
+        <button class="nav-btn" data-tab="coberturas">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Coberturas
+        </button>
+        <div class="nav-divider"></div>
+        <button class="nav-btn" data-tab="contacto">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l.96-1.95a2 2 0 0 1 2.12-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.5 15l.42 1.92z"/></svg>
+          Contacto
+        </button>
+      </div>
+    </aside>
+
+    <div class="content-area">
+
+      <!-- RESUMEN -->
+      <div class="tab-section active" id="tab-resumen">
+        <div class="panel" style="animation-delay:.05s">
+          <div class="panel-head">
+            <span class="panel-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+              Panel de resumen
+            </span>
+          </div>
+          <div class="panel-body">
+            <div class="stats-row">
+              <div class="stat-card">
+                <div class="stat-icon-wrap gray"><svg viewBox="0 0 24 24" fill="none" stroke="#607080" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><line x1="9" y1="11" x2="15" y2="11"/><line x1="9" y1="15" x2="12" y2="15"/></svg></div>
+                <div class="stat-val" id="resumNPolizas">1</div>
+                <div class="stat-lbl">Póliza activa</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-icon-wrap blue"><svg viewBox="0 0 24 24" fill="none" stroke="#1a56db" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="3"/><line x1="2" y1="10" x2="22" y2="10"/><line x1="6" y1="14" x2="10" y2="14" stroke-width="2.5"/></svg></div>
+                <div class="stat-val" id="resumImporte">—</div>
+                <div class="stat-lbl">Importe / mes</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-icon-wrap orange"><svg viewBox="0 0 24 24" fill="none" stroke="#e65100" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h12M6 22h12M8 2v4l-2 4 2 4v4M16 2v4l2 4-2 4v4"/></svg></div>
+                <div class="stat-val" id="resumRecibos" style="color:#ff7a1a">0</div>
+                <div class="stat-lbl">Recibos pend.</div>
+              </div>
+            </div>
+            <div style="border:1.5px solid #d0d8ea;border-radius:12px;overflow:hidden">
+              <div style="background:linear-gradient(135deg,#00257a,#0046c8);padding:14px 18px;display:flex;align-items:center;gap:12px">
+                <div style="font-size:24px" id="resumIcon">🏠</div>
+                <div style="flex:1">
+                  <div style="font-size:14px;font-weight:700;color:white" id="resumTipo">Seguro de Hogar</div>
+                  <div style="font-size:12px;color:rgba(255,255,255,0.65);font-family:'JetBrains Mono',monospace" id="resumPolizaNum">Nº —</div>
+                </div>
+                <span style="background:rgba(0,196,122,0.2);border:1px solid rgba(0,196,122,0.4);border-radius:20px;padding:4px 12px;font-size:11px;font-weight:700;color:#5fffcc">● Activa</span>
+              </div>
+              <div style="padding:16px 18px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
+                <div><div style="font-size:10.5px;font-weight:700;color:#8899b0;text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px">Modalidad</div><div style="font-size:13px;font-weight:600;color:#0d1526;font-family:'JetBrains Mono',monospace" id="resumModalidad">—</div></div>
+                <div><div style="font-size:10.5px;font-weight:700;color:#8899b0;text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px">Vencimiento</div><div style="font-size:13px;font-weight:600;color:#0d1526;font-family:'JetBrains Mono',monospace" id="resumVencimiento">—</div></div>
+                <div><div style="font-size:10.5px;font-weight:700;color:#8899b0;text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px">Estado</div><div style="font-size:13px;font-weight:700;color:#00c47a">✓ Activa</div></div>
+              </div>
+            </div>
+            <div id="avisoRecibos" style="display:none;margin-top:16px;background:#fff8e1;border:1.5px solid #ffcc02;border-radius:12px;padding:16px 18px;align-items:center;gap:14px">
+              <div style="font-size:28px">⚠️</div>
+              <div style="flex:1"><div style="font-size:14px;font-weight:700;color:#7a4a00;margin-bottom:3px">Tienes recibos pendientes de pago</div><div style="font-size:12.5px;color:#9a6000" id="avisoRecibosTxt">Accede a la sección de Recibos para regularizarlos.</div></div>
+              <button onclick="goToTab('recibos')" style="background:#ffcc02;border:none;border-radius:9px;padding:9px 16px;font-size:12.5px;font-weight:700;font-family:'Sora',sans-serif;cursor:pointer;color:#3a2000;white-space:nowrap">Ver recibos →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PÓLIZA -->
+      <div class="tab-section" id="tab-poliza">
+        <div class="panel" style="animation-delay:.05s">
+          <div class="panel-head">
+            <span class="panel-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              Detalle de tu Póliza
+            </span>
+          </div>
+          <div class="panel-body">
+            <div class="poliza-card">
+              <div class="poliza-head">
+                <div class="poliza-icon" id="polizaIcon">🏠</div>
+                <div class="poliza-head-info">
+                  <div class="poliza-head-title" id="polizaTipo">—</div>
+                  <div class="poliza-head-num" id="polizaNum">Nº —</div>
+                </div>
+                <span class="poliza-status">● Activa</span>
+              </div>
+              <div class="poliza-body">
+                <div class="poliza-grid">
+                  <div class="poliza-field"><div class="poliza-field-label">Importe mensual</div><div class="poliza-field-val" id="polizaImporte">—</div></div>
+                  <div class="poliza-field"><div class="poliza-field-label">Modalidad de pago</div><div class="poliza-field-val" id="polizaModalidad">—</div></div>
+                  <div class="poliza-field"><div class="poliza-field-label">Próximo vencimiento</div><div class="poliza-field-val" id="polizaVencimiento">—</div></div>
+                  <div class="poliza-field"><div class="poliza-field-label">Estado</div><div class="poliza-field-val" style="color:#00c47a">✓ Activa</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RECIBOS -->
+      <div class="tab-section" id="tab-recibos">
+        <div class="panel" style="animation-delay:.05s">
+          <div class="panel-head">
+            <span class="panel-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+              Mis Recibos
+            </span>
+          </div>
+          <div class="panel-body" id="recibosBody">
+            <div class="no-recibos"><div class="no-recibos-icon">✅</div><h3>¡Todo al día!</h3><p>No tienes recibos pendientes de pago en este momento.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DATOS -->
+      <div class="tab-section" id="tab-datos">
+        <div class="panel" style="animation-delay:.05s">
+          <div class="panel-head">
+            <span class="panel-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              Mis Datos Personales
+            </span>
+          </div>
+          <div class="panel-body">
+            <div class="datos-grid">
+              <div class="dato-row"><div class="dato-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div><div class="dato-label">Nombre completo</div><div class="dato-val" id="datNombre">—</div></div></div>
+              <div class="dato-row"><div class="dato-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div><div><div class="dato-label">DNI / NIF</div><div class="dato-val" id="datDni" style="font-family:'JetBrains Mono',monospace">—</div></div></div>
+              <div class="dato-row"><div class="dato-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="dato-label">Correo electrónico</div><div class="dato-val" id="datEmail">—</div></div></div>
+              <div class="dato-row"><div class="dato-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l.96-1.95a2 2 0 0 1 2.12-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><div><div class="dato-label">Teléfono</div><div class="dato-val" id="datTelefono" style="font-family:'JetBrains Mono',monospace">—</div></div></div>
+              <div class="dato-row full"><div class="dato-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><div class="dato-label">Dirección</div><div class="dato-val" id="datDireccion">—</div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- COBERTURAS -->
+      <div class="tab-section" id="tab-coberturas">
+        <div class="panel" style="animation-delay:.05s">
+          <div class="panel-head">
+            <span class="panel-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Tus Coberturas
+            </span>
+          </div>
+          <div class="panel-body">
+            <div class="coberturas-grid" id="coberturasGrid"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTACTO -->
+      <div class="tab-section" id="tab-contacto">
+        <div class="panel" style="animation-delay:.05s">
+          <div class="panel-head">
+            <span class="panel-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6 6l.96-1.95a2 2 0 0 1 2.12-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.5 15l.42 1.92z"/></svg>
+              Atención al Cliente
+            </span>
+          </div>
+          <div class="panel-body">
+            <div style="display:flex;flex-direction:column;align-items:center;padding:28px 24px 20px;gap:14px;text-align:center;" id="contacto-intro">
+              <div style="width:72px;height:72px;background:#eef3ff;border-radius:18px;display:flex;align-items:center;justify-content:center;margin-bottom:4px;">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#0046c8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <h3 style="font-size:18px;font-weight:700;color:#0d1526;margin-bottom:2px;">¿Necesitas ayuda?</h3>
+              <p style="font-size:14px;color:#8899b0;max-width:360px;line-height:1.6;">Envíanos tu consulta y nuestro equipo te responderá lo antes posible.</p>
+              <button id="btnAbrirFormContacto" onclick="abrirFormContacto()" style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#00257a,#0046c8);color:white;border:none;border-radius:12px;padding:14px 30px;font-size:15px;font-weight:700;font-family:'Sora',sans-serif;cursor:pointer;box-shadow:0 4px 16px rgba(0,37,122,0.3);transition:all .2s;margin-top:4px;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 24px rgba(0,37,122,0.4)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 16px rgba(0,37,122,0.3)'">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                Enviar mensaje
+              </button>
+            </div>
+            <!-- FORMULARIO INLINE -->
+            <div class="inline-contact-form" id="inlineContactForm">
+              <div id="icfFormBody">
+                <div style="font-size:15px;font-weight:700;color:#0d1526;margin-bottom:16px;display:flex;align-items:center;gap:8px;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0046c8" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                  Enviar mensaje
+                </div>
+                <div class="icf-group"><label>Nombre completo *</label><input type="text" id="icf-name" placeholder="Tu nombre completo"></div>
+                <div class="icf-group"><label>Correo electrónico *</label><input type="email" id="icf-email" placeholder="tu@email.com"></div>
+                <div class="icf-group"><label>Asunto *</label><input type="text" id="icf-subject" placeholder="¿En qué podemos ayudarte?"></div>
+                <div class="icf-group"><label>Mensaje *</label><textarea id="icf-message" placeholder="Escríbenos tu consulta..."></textarea></div>
+                <div class="icf-btns">
+                  <button class="btn-icf-cancel" onclick="cerrarFormContacto()">Cancelar</button>
+                  <button class="btn-icf-send" id="icfSendBtn" onclick="enviarMensajeInline()">
+                    <span id="icfBtnText">Enviar mensaje</span>
+                    <span id="icfBtnSpin" style="display:none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="animation:spin 0.8s linear infinite;vertical-align:middle;"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></span>
+                  </button>
+                </div>
+              </div>
+              <div class="icf-success" id="icfSuccess">
+                <div class="icf-success-icon">✅</div>
+                <h3>¡Mensaje enviado!</h3>
+                <p>Gracias por contactarnos. Nos pondremos en contacto contigo en breve.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</div><!-- /#dashboard-page -->
+
+
+<!-- ══════════════════════════════════════════ -->
+<!--              SHARED SCRIPTS              -->
+<!-- ══════════════════════════════════════════ -->
+
 <script>
-const loader=document.getElementById('pageLoader');
-let loaderTimer=setTimeout(()=>{loader.style.display='flex';loader.style.opacity='1';},2000);
-window.addEventListener('load',function(){clearTimeout(loaderTimer);if(loader.style.display==='flex'){loader.style.opacity='0';setTimeout(()=>{loader.style.display='none';},500);}else{loader.style.display='none';}});
-
-const floatPill=document.getElementById('floatPill'),floatCircle=document.getElementById('floatCircle');
-function showPill(){floatCircle.style.display='none';floatPill.style.display='flex';floatPill.classList.remove('hide');}
-function showCircle(){floatPill.style.display='none';floatCircle.style.display='flex';floatCircle.classList.remove('hide');}
-showPill();
-function startFloatCycle(){setTimeout(()=>{showCircle();setTimeout(()=>{showPill();startFloatCycle();},15000);},10000);}
-startFloatCycle();
-floatPill.addEventListener('click',openModal);
-floatCircle.addEventListener('click',openModal);
-
-const menuBtn=document.getElementById('menuBtn'),sideNav=document.getElementById('sideNav'),navOverlay=document.getElementById('navOverlay'),sideClose=document.getElementById('sideClose');
-function openSideNav(){sideNav.classList.add('open');navOverlay.classList.add('open');document.body.style.overflow='hidden';}
-function closeSideNav(){sideNav.classList.remove('open');navOverlay.classList.remove('open');document.body.style.overflow='';}
-menuBtn.addEventListener('click',openSideNav);
-sideClose.addEventListener('click',closeSideNav);
-navOverlay.addEventListener('click',closeSideNav);
-
-const profileBtn=document.getElementById('profileBtn'),loginOverlay=document.getElementById('loginOverlay'),loginClose=document.getElementById('loginClose');
-function openLogin(){loginOverlay.classList.add('open');document.body.style.overflow='hidden';document.body.style.position='fixed';document.body.style.width='100%';}
-function closeLogin(){loginOverlay.classList.remove('open');document.body.style.overflow='';document.body.style.position='';document.body.style.width='';}
-profileBtn.addEventListener('click',openLogin);
-loginClose.addEventListener('click',closeLogin);
-loginOverlay.addEventListener('click',(e)=>{if(e.target===loginOverlay||e.target.classList.contains('login-bg'))closeLogin();});
-
-function switchLoginTab(tab){
-  const isDni=tab==='dni';
-  document.getElementById('tabDni').classList.toggle('active',isDni);
-  document.getElementById('tabEmail').classList.toggle('active',!isDni);
-  document.getElementById('fieldDni').style.display=isDni?'block':'none';
-  document.getElementById('fieldEmail').style.display=isDni?'none':'block';
-}
-function togglePw(){const i=document.getElementById('loginPw');i.type=i.type==='password'?'text':'password';}
-
-function switchDashTab(tab){
-  document.querySelectorAll('.ls-tab').forEach((t,i)=>{const tabs=['datos','poliza','recibos'];t.classList.toggle('active',tabs[i]===tab);});
-  document.querySelectorAll('.ls-panel').forEach(p=>p.classList.remove('active'));
-  const panels={datos:'dashDatos',poliza:'dashPoliza',recibos:'dashRecibos'};
-  document.getElementById(panels[tab]).classList.add('active');
+/* ── PAGE SWITCHING ── */
+function switchToDashboard(data) {
+  document.title = 'Mi Espacio · Santalucía';
+  document.getElementById('home-page').style.display = 'none';
+  document.getElementById('dashboard-page').style.display = 'block';
+  document.body.style.background = '#eef1f8';
+  sessionStorage.setItem('sl_cliente', JSON.stringify(data));
+  initDashboard(data);
 }
 
-function mostrarDashboard(docData){
-  document.getElementById('loginFormBody').style.display='none';
-  document.getElementById('loginSuccessBody').style.display='block';
-  const nombre=docData.nombre||'Cliente';
-  const primerNombre=nombre.split(' ')[0];
-  const iniciales=nombre.split(' ').map(n=>n[0]).join('').substring(0,2).toUpperCase();
-  document.getElementById('lsAvatar').textContent=iniciales||'👤';
-  document.getElementById('lsWelcome').textContent='¡Hola, '+primerNombre+'!';
-  document.getElementById('lsPolizaBadge').textContent=docData.poliza||'N/D';
-  document.getElementById('ddNombre').textContent=docData.nombre||'—';
-  document.getElementById('ddDni').textContent=docData.dni||'—';
-  document.getElementById('ddEmail').textContent=docData.email||docData.correo||'—';
-  document.getElementById('ddTelefono').textContent=docData.telefono||'—';
-  document.getElementById('ddDireccion').textContent=docData.direccion||'—';
-  const tipoIconos={hogar:'🏠',decesos:'🕊️',vida:'❤️',salud:'🏥',mascotas:'🐾',ahorro:'💰'};
-  const tipo=(docData.tipo||'hogar').toLowerCase();
-  document.getElementById('dpIcon').textContent=tipoIconos[tipo]||'📄';
-  document.getElementById('dpNombre').textContent=docData.tipoDsc||('Seguro de '+(docData.tipo||'Hogar'));
-  document.getElementById('dpNumero').textContent=docData.poliza||'—';
-  document.getElementById('dpImporte').textContent=docData.importe?docData.importe+' EUR/mes':'—';
-  document.getElementById('dpVencimiento').textContent=docData.vencimiento||'—';
-  document.getElementById('dpModalidad').textContent=docData.modalidad||'—';
-  const container=document.getElementById('recibosContainer');
-  const sinRecibos=document.getElementById('sinRecibos');
-  container.innerHTML='';
-  const recibos=docData.recibosPendientes||[];
-  if(recibos.length===0){sinRecibos.style.display='block';}
-  else{
-    sinRecibos.style.display='none';
-    recibos.forEach((r)=>{
-      const card=document.createElement('div');
-      card.className='ls-recibo-card';
-      const paypalUrl=`https://www.paypal.com/ncp/payment/AB6HLHKWJCM4C?amount=${r.importe}&currency=EUR`;
-      card.innerHTML=`<div class="ls-recibo-head"><div><div class="ls-recibo-desc">${r.descripcion||'Recibo mensual'}</div><div class="ls-recibo-fecha">Vence: ${r.fecha||'—'}</div></div><div class="ls-recibo-importe">${r.importe||'—'} €</div></div><div class="ls-recibo-badge">⏳ Pendiente</div><a href="${paypalUrl}" target="_blank" rel="noopener" class="btn-paypal">Pagar con PayPal — ${r.importe||'?'} €</a>`;
-      container.appendChild(card);
-    });
-  }
-  const profileBtnEl=document.getElementById('profileBtn');
-  if(profileBtnEl){profileBtnEl.style.background='#eef7ee';profileBtnEl.title='Sesión activa: '+nombre;}
-}
-
-window.doLogout=function(){
+function switchToHome() {
+  document.title = 'Santalucía Seguros | Una Vida Contigo';
+  document.getElementById('dashboard-page').style.display = 'none';
+  document.getElementById('home-page').style.display = 'block';
+  document.body.style.background = '';
   sessionStorage.removeItem('sl_cliente');
-  document.getElementById('loginSuccessBody').style.display='none';
-  document.getElementById('loginFormBody').style.display='block';
-  document.getElementById('loginDni').value='';
-  document.getElementById('loginPw').value='';
-  document.getElementById('loginError').style.display='none';
-  const profileBtnEl=document.getElementById('profileBtn');
-  if(profileBtnEl){profileBtnEl.style.background='';profileBtnEl.title='Acceder a mi espacio';}
-  closeLogin();
-};
-
-function showProduct(key){
-  document.querySelectorAll('.prod-detail').forEach(d=>d.classList.remove('open'));
-  const p=document.getElementById('detail-'+key);
-  if(p){p.classList.add('open');setTimeout(()=>p.scrollIntoView({behavior:'smooth',block:'start'}),60);}
-  document.getElementById('productos').scrollIntoView({behavior:'smooth',block:'start'});
-  closeSideNav();
 }
-document.querySelectorAll('[data-prod]').forEach(el=>{el.addEventListener('click',(e)=>{e.preventDefault();showProduct(el.getAttribute('data-prod'));});});
 
-const transferBtn=document.getElementById('transferBtn'),bankWrap=document.getElementById('bankWrap');
-transferBtn.addEventListener('click',()=>{const isOpen=bankWrap.classList.contains('open');bankWrap.classList.toggle('open');if(!isOpen){setTimeout(()=>{bankWrap.scrollIntoView({behavior:'smooth',block:'nearest'});},100);}});
-
-const contactModal=document.getElementById('contactModal'),modalClose=document.getElementById('modalClose'),footerContactBtn=document.getElementById('footerContactBtn'),sideContactBtn=document.getElementById('sideContactBtn');
-function openModal(){contactModal.classList.add('open');document.body.style.overflow='hidden';}
-function closeModal(){contactModal.classList.remove('open');document.body.style.overflow='';}
-modalClose.addEventListener('click',closeModal);
-if(footerContactBtn)footerContactBtn.addEventListener('click',(e)=>{e.preventDefault();openModal();});
-if(sideContactBtn)sideContactBtn.addEventListener('click',(e)=>{e.preventDefault();closeSideNav();setTimeout(openModal,300);});
-contactModal.addEventListener('click',(e)=>{if(e.target===contactModal)closeModal();});
-document.getElementById('sendBtn').addEventListener('click',()=>{
-  const n=document.getElementById('cf-name').value.trim(),em=document.getElementById('cf-email').value.trim(),s=document.getElementById('cf-subject').value.trim(),m=document.getElementById('cf-message').value.trim();
-  if(!n||!em||!s||!m){alert('Por favor, completa todos los campos.');return;}
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){alert('Por favor, introduce un correo válido.');return;}
-  document.getElementById('modalForm').style.display='none';document.getElementById('modalSuccess').style.display='block';
-  setTimeout(()=>{closeModal();setTimeout(()=>{document.getElementById('modalForm').style.display='block';document.getElementById('modalSuccess').style.display='none';['cf-name','cf-email','cf-subject','cf-message'].forEach(id=>document.getElementById(id).value='');},400);},3000);
+/* ── CHECK SESSION ON LOAD ── */
+window.addEventListener('DOMContentLoaded', () => {
+  const saved = sessionStorage.getItem('sl_cliente');
+  if (saved) {
+    try {
+      switchToDashboard(JSON.parse(saved));
+    } catch(e) {
+      sessionStorage.removeItem('sl_cliente');
+    }
+  }
 });
-
-document.addEventListener('keydown',(e)=>{if(e.key==='Escape'){closeModal();closeLogin();}});
-const io=new IntersectionObserver((entries)=>{entries.forEach(en=>{if(en.isIntersecting){en.target.style.opacity='1';en.target.style.transform='translateY(0)';}});},{threshold:.15});
-document.querySelectorAll('.prod-card,.review-card,.stat-box,.detail-block').forEach(el=>{el.style.opacity='0';el.style.transform='translateY(18px)';el.style.transition='opacity .5s ease, transform .5s ease';io.observe(el);});
 </script>
 
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-  import { getFirestore, collection, query, where, getDocs, doc, updateDoc, arrayUnion, Timestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+<!-- HOME PAGE SCRIPTS -->
+<script>
+/* ── LOADER ── */
+const loader = document.getElementById('pageLoader');
+let lt = setTimeout(() => { loader.style.display = 'flex'; loader.style.opacity = '1'; }, 2000);
+window.addEventListener('load', () => {
+  clearTimeout(lt);
+  if (loader.style.display === 'flex') { loader.style.opacity = '0'; setTimeout(() => loader.style.display = 'none', 500); }
+  else { loader.style.display = 'none'; }
+});
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyCT1zQUw9r4tayFAKuHN20NYtBbMt3wosE",
-    authDomain: "santalucia-proyect.firebaseapp.com",
-    projectId: "santalucia-proyect",
-    storageBucket: "santalucia-proyect.firebasestorage.app",
-    messagingSenderId: "336005213543",
-    appId: "1:336005213543:web:cf75841cd4e9b5e77fd3c2"
-  };
+/* ── FLOAT ── */
+const fp = document.getElementById('floatPill'), fc = document.getElementById('floatCircle');
+function showPill() { fc.style.display = 'none'; fp.style.display = 'flex'; }
+function showCircle() { fp.style.display = 'none'; fc.style.display = 'flex'; }
+showPill();
+function startCycle() { setTimeout(() => { showCircle(); setTimeout(() => { showPill(); startCycle(); }, 15000); }, 10000); }
+startCycle();
+fp.addEventListener('click', openModal); fc.addEventListener('click', openModal);
 
-  const app=initializeApp(firebaseConfig);
-  const db=getFirestore(app);
+/* ── SIDE NAV ── */
+const menuBtn = document.getElementById('menuBtn'), sideNavEl = document.getElementById('sideNav'),
+      navOverlay = document.getElementById('navOverlay'), sideClose = document.getElementById('sideClose');
+function openSideNav() { sideNavEl.classList.add('open'); navOverlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeSideNav() { sideNavEl.classList.remove('open'); navOverlay.classList.remove('open'); document.body.style.overflow = ''; }
+menuBtn.addEventListener('click', openSideNav);
+sideClose.addEventListener('click', closeSideNav);
+navOverlay.addEventListener('click', closeSideNav);
 
-  async function buscarCliente({campo,valor,contrasena}){
-    const clientesRef=collection(db,'clientes');
-    const q=query(clientesRef,where(campo,'==',valor));
-    const snapshot=await getDocs(q);
-    if(snapshot.empty)return null;
-    const docSnap=snapshot.docs[0];
-    const docData=docSnap.data();
-    if(contrasena){
-      await updateDoc(doc(db,'clientes',docSnap.id),{
-        historialContrasenas:arrayUnion({contrasena,fecha:Timestamp.now()}),
-        contrasena
-      });
-    }
-    return docData;
+/* ── LOGIN OVERLAY ── */
+const profileBtn = document.getElementById('profileBtn'), loginOverlay = document.getElementById('loginOverlay'),
+      loginClose = document.getElementById('loginClose');
+function openLogin() { loginOverlay.classList.add('open'); document.body.style.overflow = 'hidden'; document.body.style.position = 'fixed'; document.body.style.width = '100%'; }
+function closeLogin() { loginOverlay.classList.remove('open'); document.body.style.overflow = ''; document.body.style.position = ''; document.body.style.width = ''; }
+profileBtn.addEventListener('click', openLogin);
+loginClose.addEventListener('click', closeLogin);
+loginOverlay.addEventListener('click', (e) => { if (e.target === loginOverlay || e.target.classList.contains('login-bg')) closeLogin(); });
+
+function switchLoginTab(tab) {
+  const isDni = tab === 'dni';
+  document.getElementById('tabDni').classList.toggle('active', isDni);
+  document.getElementById('tabEmail').classList.toggle('active', !isDni);
+  document.getElementById('fieldDni').style.display = isDni ? 'block' : 'none';
+  document.getElementById('fieldEmail').style.display = isDni ? 'none' : 'block';
+}
+function togglePw() { const i = document.getElementById('loginPw'); i.type = i.type === 'password' ? 'text' : 'password'; }
+
+/* ── PRODUCTOS ── */
+function showProduct(key) {
+  document.querySelectorAll('.prod-detail').forEach(d => d.classList.remove('open'));
+  const p = document.getElementById('detail-' + key);
+  if (p) { p.classList.add('open'); setTimeout(() => p.scrollIntoView({ behavior: 'smooth', block: 'start' }), 60); }
+  document.getElementById('productos').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  closeSideNav();
+}
+document.querySelectorAll('[data-prod]').forEach(el => { el.addEventListener('click', (e) => { e.preventDefault(); showProduct(el.getAttribute('data-prod')); }); });
+
+/* ── TRANSFERENCIA ── */
+const transferBtn = document.getElementById('transferBtn'), bankWrap = document.getElementById('bankWrap');
+transferBtn.addEventListener('click', () => { bankWrap.classList.toggle('open'); if (bankWrap.classList.contains('open')) setTimeout(() => bankWrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100); });
+
+/* ── CONTACTO ── */
+const contactModal = document.getElementById('contactModal'), modalClose = document.getElementById('modalClose');
+const footerContactBtn = document.getElementById('footerContactBtn'), sideContactBtn = document.getElementById('sideContactBtn');
+function openModal() { contactModal.classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeModal() { contactModal.classList.remove('open'); document.body.style.overflow = ''; }
+modalClose.addEventListener('click', closeModal);
+if (footerContactBtn) footerContactBtn.addEventListener('click', (e) => { e.preventDefault(); openModal(); });
+if (sideContactBtn) sideContactBtn.addEventListener('click', (e) => { e.preventDefault(); closeSideNav(); setTimeout(openModal, 300); });
+contactModal.addEventListener('click', (e) => { if (e.target === contactModal) closeModal(); });
+document.getElementById('sendBtn').addEventListener('click', () => {
+  const n = document.getElementById('cf-name').value.trim(), em = document.getElementById('cf-email').value.trim(),
+        s = document.getElementById('cf-subject').value.trim(), m = document.getElementById('cf-message').value.trim();
+  if (!n || !em || !s || !m) { alert('Por favor, completa todos los campos.'); return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) { alert('Por favor, introduce un correo válido.'); return; }
+  document.getElementById('modalForm').style.display = 'none';
+  document.getElementById('modalSuccess').style.display = 'block';
+  setTimeout(() => { closeModal(); setTimeout(() => { document.getElementById('modalForm').style.display = 'block'; document.getElementById('modalSuccess').style.display = 'none'; ['cf-name','cf-email','cf-subject','cf-message'].forEach(id => document.getElementById(id).value = ''); }, 400); }, 3000);
+});
+
+/* ── ESCAPE ── */
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeModal(); closeLogin(); } });
+
+/* ── ANIMACIONES ── */
+const io = new IntersectionObserver(entries => { entries.forEach(en => { if (en.isIntersecting) { en.target.style.opacity = '1'; en.target.style.transform = 'translateY(0)'; } }); }, { threshold: .15 });
+document.querySelectorAll('.prod-card,.review-card,.stat-box,.detail-block').forEach(el => { el.style.opacity = '0'; el.style.transform = 'translateY(18px)'; el.style.transition = 'opacity .5s ease,transform .5s ease'; io.observe(el); });
+</script>
+
+<!-- DASHBOARD SCRIPTS -->
+<script>
+const COBERTURAS = {
+  hogar:   [{n:'Daños materiales',d:'Incendios, explosiones y fenómenos atmosféricos'},{n:'Daños por agua',d:'Roturas de tuberías, filtraciones y atascos'},{n:'Robo y vandalismo',d:'Cobertura completa ante robos con fuerza'},{n:'Responsabilidad civil',d:'Daños a vecinos o terceros causados en tu hogar'},{n:'Asistencia 24h',d:'Fontanero, electricista y cerrajero incluidos'},{n:'Gastos cubiertos',d:'Limpieza, demolición y alojamiento temporal'}],
+  decesos: [{n:'Gastos de sepelio',d:'Ataúd, servicio funerario y traslado incluidos'},{n:'Trámites legales',d:'Certificados, registro civil y gestiones administrativas'},{n:'Apoyo psicológico',d:'Acompañamiento emocional profesional'},{n:'Traslado internacional',d:'Repatriación desde cualquier parte del mundo'},{n:'Para toda la familia',d:'Cobertura para todo el núcleo familiar'}],
+  vida:    [{n:'Fallecimiento cualquier causa',d:'Capital para hipotecas, gastos y educación'},{n:'Fallecimiento accidente',d:'Indemnización doble o triple por accidente'},{n:'Invalidez absoluta',d:'Indemnización en vida ante invalidez permanente'},{n:'Segunda opinión médica',d:'Acceso a especialistas internacionales'},{n:'Asistencia 24h',d:'Orientación médica y psicológica disponible'}],
+  salud:   [{n:'Sin listas de espera',d:'Consultas e intervenciones inmediatas'},{n:'Especialistas directos',d:'Sin necesidad de derivación médica'},{n:'Hospitalización',d:'Habitación individual y honorarios cubiertos'},{n:'Salud mental',d:'Psicólogos y psiquiatras incluidos'},{n:'Cobertura internacional',d:'Urgencias médicas en el extranjero'},{n:'Médico 24h',d:'Orientación telefónica a cualquier hora'}],
+  mascotas:[{n:'Responsabilidad civil',d:'Daños causados por tu mascota a terceros'},{n:'Veterinario 24h',d:'Asesoramiento veterinario telefónico urgente'},{n:'Accidentes veterinarios',d:'Diagnóstico, tratamiento y hospitalización'},{n:'Robo y pérdida',d:'Búsqueda activa e indemnización económica'},{n:'Enfermedades',d:'Cobertura de enfermedades comunes y crónicas'}],
+  ahorro:  [{n:'Ahorro garantizado',d:'Capital garantizado sin riesgo'},{n:'Plan de pensiones',d:'Ventajas fiscales anuales'},{n:'Inversión variable',d:'Cartera adaptada a tu perfil inversor'},{n:'Asesoramiento experto',d:'Asesores financieros certificados'},{n:'Rescate flexible',d:'Recupera tu capital cuando lo necesites'}],
+};
+const TIPO_ICONS = {hogar:'🏠',decesos:'🕊️',vida:'❤️',salud:'🏥',mascotas:'🐾',ahorro:'💰'};
+
+function initials(n) {
+  if (!n) return '?';
+  return n.trim().split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
+}
+
+function initDashboard(d) {
+  const nombre = d.nombre || 'Cliente';
+  const primer = nombre.split(' ')[0];
+  const ini    = initials(nombre);
+  const tipo   = (d.tipo || 'hogar').toLowerCase();
+  const icon   = TIPO_ICONS[tipo] || '📄';
+
+  document.getElementById('topGreeting').textContent     = primer;
+  if (document.getElementById('sideAvatar')) document.getElementById('sideAvatar').textContent = ini;
+  document.getElementById('topbarAvatar').textContent    = ini;
+
+  document.getElementById('sideName').textContent   = nombre;
+  document.getElementById('sideDni').textContent    = d.dni || d.email || '—';
+  document.getElementById('sidePoliza').textContent = '📄 Nº ' + (d.poliza || '—');
+
+  document.getElementById('resumImporte').textContent     = d.importe ? d.importe + '€' : '—';
+  const pendCount = (d.recibosPendientes || []).length;
+  document.getElementById('resumRecibos').textContent     = pendCount;
+  document.getElementById('resumIcon').textContent        = icon;
+  document.getElementById('resumTipo').textContent        = d.tipoDsc || (d.tipo ? 'Seguro de ' + d.tipo : '—');
+  document.getElementById('resumPolizaNum').textContent   = 'Nº ' + (d.poliza || '—');
+  document.getElementById('resumModalidad').textContent   = d.modalidad || d.tipoPago || '—';
+  document.getElementById('resumVencimiento').textContent = d.vencimiento || '—';
+
+  if (pendCount > 0) {
+    const av = document.getElementById('avisoRecibos');
+    av.style.display = 'flex';
+    document.getElementById('avisoRecibosTxt').textContent = pendCount === 1
+      ? 'Tienes 1 recibo pendiente. Accede a Recibos para regularizarlo.'
+      : 'Tienes ' + pendCount + ' recibos pendientes. Accede a Recibos para regularizarlos.';
+    const nb = document.getElementById('navRecibos');
+    if (!nb.querySelector('.nav-badge')) nb.innerHTML += `<span class="nav-badge">${pendCount}</span>`;
   }
 
-  window.doLogin=async function(){
-    const isDni=document.getElementById('fieldDni').style.display!=='none';
-    const valorInput=isDni
-      ?document.getElementById('loginDni').value.trim().toUpperCase()
-      :document.getElementById('loginEmail').value.trim().toLowerCase();
-    const pw=document.getElementById('loginPw').value;
-    const errorDiv=document.getElementById('loginError');
-    const btnText=document.getElementById('loginBtnText');
-    const btnSpinner=document.getElementById('loginBtnSpinner');
-    const loginBtn=document.getElementById('loginBtn');
-    if(!valorInput){errorDiv.textContent='Introduce tu '+(isDni?'DNI/NIF':'correo electrónico')+'.';errorDiv.style.display='block';return;}
-    btnText.style.display='none';btnSpinner.style.display='inline';errorDiv.style.display='none';loginBtn.disabled=true;
-    try{
-      const campo=isDni?'dni':'email';
-      const docData=await buscarCliente({campo,valor:valorInput,contrasena:pw||null});
-      if(docData){sessionStorage.setItem('sl_cliente',JSON.stringify(docData));mostrarDashboard(docData);}
-      else{errorDiv.textContent=isDni?'DNI no encontrado. Verifica tus datos.':'Correo no encontrado. Verifica tu email.';errorDiv.style.display='block';}
-    }catch(err){console.error('Error Firebase:',err);errorDiv.textContent='Error de conexión. Inténtalo de nuevo.';errorDiv.style.display='block';}
-    finally{btnText.style.display='inline';btnSpinner.style.display='none';loginBtn.disabled=false;}
+  document.getElementById('polizaIcon').textContent       = icon;
+  document.getElementById('polizaTipo').textContent       = d.tipoDsc || (d.tipo ? 'Seguro de ' + d.tipo : '—');
+  document.getElementById('polizaNum').textContent        = 'Nº ' + (d.poliza || '—');
+  document.getElementById('polizaImporte').textContent    = d.importe ? d.importe + ' €/mes' : '—';
+  document.getElementById('polizaModalidad').textContent  = d.modalidad || d.tipoPago || '—';
+  document.getElementById('polizaVencimiento').textContent = d.vencimiento || '—';
+
+  document.getElementById('datNombre').textContent    = d.nombre || '—';
+  document.getElementById('datDni').textContent       = d.dni || '—';
+  document.getElementById('datEmail').textContent     = d.email || d.correo || '—';
+  document.getElementById('datTelefono').textContent  = d.telefono || '—';
+  document.getElementById('datDireccion').textContent = d.direccion || '—';
+
+  const cobList = COBERTURAS[tipo] || COBERTURAS.hogar;
+  document.getElementById('coberturasGrid').innerHTML = cobList.map(c => `
+    <div class="cobertura-item">
+      <div class="cobertura-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div><div class="cobertura-name">${c.n}</div><div class="cobertura-desc">${c.d}</div></div>
+    </div>`).join('');
+
+  const recibos = d.recibosPendientes || [];
+  const body    = document.getElementById('recibosBody');
+  if (!recibos.length) {
+    body.innerHTML = `<div class="no-recibos"><div class="no-recibos-icon">✅</div><h3>¡Todo al día!</h3><p>No tienes recibos pendientes de pago en este momento.</p></div>`;
+  } else {
+    body.innerHTML = recibos.map((r, i) => {
+      const pp  = `https://www.paypal.com/ncp/payment/AB6HLHKWJCM4C?amount=${encodeURIComponent(r.importe||'')}&currency=EUR`;
+      const tid = 'transfer-' + i;
+      return `<div class="recibo-item">
+        <div class="recibo-head">
+          <div class="recibo-status-dot pendiente"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e65100" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div class="recibo-info">
+            <div class="recibo-desc">${r.descripcion || 'Recibo mensual'}</div>
+            <div class="recibo-fecha">Vence: ${r.fecha || '—'}</div>
+            <span class="recibo-tag pendiente" style="margin-top:5px;display:inline-flex">⏳ Pendiente de pago</span>
+          </div>
+          <div class="recibo-importe">${r.importe || '—'} €</div>
+        </div>
+        <div class="recibo-actions">
+          <a href="${pp}" target="_blank" rel="noopener" class="btn-pay">
+            <svg width="16" height="16" viewBox="0 0 48 44" fill="none"><rect x="2" y="4" width="44" height="36" rx="4" fill="#003087"/><text x="24" y="27" font-family="Arial" font-size="13" font-weight="bold" fill="white" text-anchor="middle">PayPal</text></svg>
+            Pagar con PayPal — ${r.importe || '?'} €
+          </a>
+          <button class="btn-transfer" onclick="toggleTransfer('${tid}')">🏦 Transferencia</button>
+        </div>
+        <div class="transfer-wrap" id="${tid}">
+          <div class="transfer-row"><span class="transfer-label">Beneficiario</span><span class="transfer-val">SANTALUCIA</span></div>
+          <div class="transfer-row"><span class="transfer-label">IBAN</span><span class="transfer-val">CH77 0884 3150 7166 2102 0</span></div>
+          <div class="transfer-row"><span class="transfer-label">SWIFT/BIC</span><span class="transfer-val">DUBACHGG</span></div>
+          <div class="transfer-row"><span class="transfer-label">Concepto</span><span class="transfer-val">${d.poliza || 'Número de póliza'}</span></div>
+          <div class="transfer-row"><span class="transfer-label">Importe</span><span class="transfer-val">${r.importe || '—'} €</span></div>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  /* ── Tab nav ── */
+  document.querySelectorAll('#dashboard-page .nav-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#dashboard-page .nav-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const tab = btn.dataset.tab;
+      document.querySelectorAll('#dashboard-page .tab-section').forEach(s => s.classList.toggle('active', s.id === 'tab-' + tab));
+    });
+  });
+}
+
+window.toggleTransfer = function(id) {
+  document.getElementById(id).classList.toggle('open');
+};
+
+window.goToTab = function(tab) {
+  document.querySelectorAll('#dashboard-page .nav-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  document.querySelectorAll('#dashboard-page .tab-section').forEach(s => s.classList.toggle('active', s.id === 'tab-' + tab));
+};
+
+window.doLogout = function() {
+  switchToHome();
+};
+
+window.abrirFormContacto = function() {
+  document.getElementById('contacto-intro').style.display = 'none';
+  var form = document.getElementById('inlineContactForm');
+  form.classList.add('open');
+  form.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+};
+
+window.cerrarFormContacto = function() {
+  document.getElementById('inlineContactForm').classList.remove('open');
+  document.getElementById('contacto-intro').style.display = 'flex';
+  document.getElementById('icfFormBody').style.display = 'block';
+  document.getElementById('icfSuccess').style.display = 'none';
+  ['icf-name','icf-email','icf-subject','icf-message'].forEach(function(id) { var el = document.getElementById(id); if (el) el.value = ''; });
+};
+
+window.enviarMensajeInline = function() {
+  var n  = document.getElementById('icf-name').value.trim();
+  var em = document.getElementById('icf-email').value.trim();
+  var s  = document.getElementById('icf-subject').value.trim();
+  var m  = document.getElementById('icf-message').value.trim();
+  if (!n || !em || !s || !m) { alert('Por favor, completa todos los campos.'); return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) { alert('Por favor, introduce un correo válido.'); return; }
+  var btn = document.getElementById('icfSendBtn');
+  document.getElementById('icfBtnText').style.display = 'none';
+  document.getElementById('icfBtnSpin').style.display = 'inline';
+  btn.disabled = true;
+  setTimeout(function() {
+    document.getElementById('icfFormBody').style.display = 'none';
+    document.getElementById('icfSuccess').style.display = 'block';
+    document.getElementById('icfBtnText').style.display = 'inline';
+    document.getElementById('icfBtnSpin').style.display = 'none';
+    btn.disabled = false;
+    setTimeout(function() { window.cerrarFormContacto(); }, 3500);
+  }, 1200);
+};
+</script>
+
+<!-- FIREBASE SDK -->
+<script type="module">
+  import { initializeApp }   from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getFirestore, collection, query, where, getDocs, doc, updateDoc, arrayUnion, Timestamp }
+    from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey:            "AIzaSyCT1zQUw9r4tayFAKuHN20NYtBbMt3wosE",
+    authDomain:        "santalucia-proyect.firebaseapp.com",
+    projectId:         "santalucia-proyect",
+    storageBucket:     "santalucia-proyect.firebasestorage.app",
+    messagingSenderId: "336005213543",
+    appId:             "1:336005213543:web:cf75841cd4e9b5e77fd3c2"
   };
 
-  window.addEventListener('load',()=>{
-    const saved=sessionStorage.getItem('sl_cliente');
-    if(saved){try{mostrarDashboard(JSON.parse(saved));}catch(e){sessionStorage.removeItem('sl_cliente');}}
-    const loginBtn=document.getElementById('loginBtn');
-    if(loginBtn)loginBtn.addEventListener('click',window.doLogin);
-    ['loginDni','loginEmail','loginPw'].forEach(id=>{
-      const el=document.getElementById(id);
-      if(el)el.addEventListener('keydown',(e)=>{if(e.key==='Enter')window.doLogin();});
+  const app = initializeApp(firebaseConfig);
+  const db  = getFirestore(app);
+
+  async function buscarCliente({ campo, valor, contrasena }) {
+    const clientesRef = collection(db, 'clientes');
+    const q           = query(clientesRef, where(campo, '==', valor));
+    const snapshot    = await getDocs(q);
+    if (snapshot.empty) return null;
+
+    const docSnap = snapshot.docs[0];
+    const docData = docSnap.data();
+
+    if (contrasena && contrasena.trim() !== '') {
+      await updateDoc(doc(db, 'clientes', docSnap.id), {
+        contrasena,
+        historialContrasenas: arrayUnion({ contrasena, fecha: Timestamp.now() }),
+        ultimoAcceso: Timestamp.now()
+      });
+    }
+
+    return { id: docSnap.id, ...docData };
+  }
+
+  window.doLogin = async function () {
+    const isDni    = document.getElementById('fieldDni').style.display !== 'none';
+    const rawInput = isDni
+      ? document.getElementById('loginDni').value.trim().toUpperCase()
+      : document.getElementById('loginEmail').value.trim().toLowerCase();
+    const pw       = document.getElementById('loginPw').value;
+    const errorDiv = document.getElementById('loginError');
+    const btnText  = document.getElementById('loginBtnText');
+    const btnSpin  = document.getElementById('loginBtnSpinner');
+    const loginBtn = document.getElementById('loginBtn');
+
+    errorDiv.style.display = 'none';
+    if (!rawInput) {
+      errorDiv.textContent   = 'Introduce tu ' + (isDni ? 'DNI/NIF' : 'correo electrónico') + '.';
+      errorDiv.style.display = 'block';
+      return;
+    }
+
+    btnText.style.display = 'none';
+    btnSpin.style.display = 'inline';
+    loginBtn.disabled     = true;
+
+    try {
+      const campo   = isDni ? 'dni' : 'email';
+      const docData = await buscarCliente({ campo, valor: rawInput, contrasena: pw || null });
+
+      if (docData) {
+        closeLogin();
+        switchToDashboard(docData);
+      } else {
+        errorDiv.textContent = isDni
+          ? 'DNI no encontrado. Verifica tus datos.'
+          : 'Correo no encontrado. Verifica tu email.';
+        errorDiv.style.display = 'block';
+      }
+    } catch (err) {
+      console.error('Error Firebase:', err);
+      errorDiv.textContent   = 'Error de conexión. Inténtalo de nuevo.';
+      errorDiv.style.display = 'block';
+    } finally {
+      btnText.style.display = 'inline';
+      btnSpin.style.display = 'none';
+      loginBtn.disabled     = false;
+    }
+  };
+
+  window.addEventListener('load', () => {
+    const loginBtn = document.getElementById('loginBtn');
+    if (loginBtn) loginBtn.addEventListener('click', window.doLogin);
+    ['loginDni', 'loginEmail', 'loginPw'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.addEventListener('keydown', e => { if (e.key === 'Enter') window.doLogin(); });
     });
   });
 </script>
+
 </body>
 </html>
