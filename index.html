@@ -332,117 +332,127 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   .icon-btn{width:36px;height:36px;}
   .icon-btn svg{width:22px;height:22px;}
 
-  /* CAMBIO 3: Hero en móvil — más compacto para ver todo sin scroll */
+  /* Hero móvil: todo equilibrado para caber en pantalla completa */
   .hero{min-height:unset;}
   .hero-inner{
     flex-direction:column;
-    padding:16px 1rem 20px;
-    gap:16px;
+    padding:12px 0.85rem 14px;
+    gap:10px;
     align-items:stretch;
   }
   .hero-content{order:1;}
-  .hero h1{font-size:26px;margin-bottom:6px;line-height:1.15;}
-  .hero-eyebrow{font-size:10px;margin-bottom:6px;}
-  .hero-sub{font-size:13px;margin-bottom:12px;line-height:1.5;}
-  .hero-calc-label{font-size:11px;margin-bottom:8px;}
+  .hero h1{font-size:22px;margin-bottom:4px;line-height:1.15;}
+  .hero-eyebrow{font-size:9px;margin-bottom:4px;letter-spacing:2px;}
+  .hero-sub{font-size:12px;margin-bottom:8px;line-height:1.45;max-width:100%;}
+  .hero-calc-label{font-size:10px;margin-bottom:6px;font-weight:700;}
 
   .hero-tabs{
     display:flex;
     flex-wrap:nowrap;
-    gap:4px;
+    gap:3px;
     overflow-x:auto;
     -webkit-overflow-scrolling:touch;
     scrollbar-width:none;
-    padding-bottom:4px;
+    padding-bottom:2px;
   }
   .hero-tabs::-webkit-scrollbar{display:none;}
   .hero-tab{
-    min-width:52px;
-    max-width:52px;
-    padding:8px 4px;
-    gap:4px;
+    min-width:46px;
+    max-width:46px;
+    padding:6px 3px;
+    gap:3px;
     flex-shrink:0;
-    border-radius:10px;
+    border-radius:8px;
   }
-  .hero-tab svg{width:20px;height:20px;}
-  .hero-tab span{font-size:8px;letter-spacing:.3px;}
+  .hero-tab svg{width:18px;height:18px;}
+  .hero-tab span{font-size:7px;letter-spacing:.2px;}
 
   /* Sección de pago compacta en móvil */
   .hero-payment{
     order:2;
     width:100%;
     max-width:100%;
-    border-radius:12px;
+    border-radius:10px;
   }
-  .hero-payment-head{padding:10px 14px;}
-  .hero-payment-head h3{font-size:14px;}
-  .hero-payment-head p{font-size:11px;}
-  .hero-payment-body{padding:10px 12px;}
-  .pay-btns{flex-direction:column;gap:6px;}
+  .hero-payment-head{padding:8px 12px;}
+  .hero-payment-head h3{font-size:13px;}
+  .hero-payment-head p{font-size:10px;margin-top:1px;}
+  .hero-payment-body{padding:8px 10px;}
+  .pay-btns{flex-direction:column;gap:5px;}
   .pay-btn{
     flex-direction:row;
-    padding:10px 14px;
-    font-size:13px;
-    gap:10px;
+    padding:8px 12px;
+    font-size:12px;
+    gap:8px;
     justify-content:flex-start;
   }
   .bank-row{flex-direction:row;align-items:center;}
   .bank-label{font-size:12px;min-width:90px;}
   .bank-value{font-size:12px;}
 
-  /* CAMBIO 4: Sección promo en móvil — tarjeta horizontal con imagen + texto juntos */
-  .promo-section{padding:24px 1rem;}
+  /* Sección promo en móvil: tarjeta horizontal, fondo uniforme, imagen completa */
+  .promo-section{padding:16px 0.85rem;}
   .promo-inner{
-    flex-direction:row;
-    align-items:center;
-    border-radius:16px;
+    flex-direction:column;
+    align-items:stretch;
+    border-radius:14px;
     overflow:hidden;
     min-height:unset;
     gap:0;
+    background:linear-gradient(120deg,#f8faff 0%,#eef3fc 100%);
   }
-  .promo-text{
-    padding:16px 14px 16px 44px;
-    flex:1;
-    order:2;
-  }
-  .promo-badge{
-    font-size:9px;
-    padding:4px 8px;
-    top:10px;
-    left:10px;
-  }
-  .promo-eyebrow{font-size:9px;margin-bottom:4px;}
-  .promo-title{font-size:14px;margin-bottom:4px;line-height:1.2;}
-  .promo-desc{font-size:11px;line-height:1.4;}
 
-  /* Imagen tarjeta en móvil: cuadro izquierdo de la tarjeta horizontal */
+  /* Imagen arriba, en rectángulo horizontal ancho, completa */
   .promo-img-wrap{
-    width:130px;
-    min-width:130px;
+    width:100%;
+    min-width:unset;
     flex-shrink:0;
     order:1;
     border-radius:0;
-    padding:16px 10px;
-    background:linear-gradient(160deg,#e8f0fd,#d4e4f7);
+    padding:16px 20px 12px;
+    background:transparent;
     display:flex;
     align-items:center;
     justify-content:center;
-    align-self:stretch;
+    align-self:auto;
   }
   .promo-img{
-    width:110px;
-    max-width:110px;
-    aspect-ratio:16/10;
+    width:100%;
+    max-width:320px;
+    height:auto;
+    aspect-ratio:16/7;
     object-fit:cover;
-    border-radius:8px;
-    transform:perspective(600px) rotateY(-6deg) rotateX(2deg);
+    object-position:center;
+    border-radius:10px;
+    transform:perspective(700px) rotateX(3deg) rotateY(-4deg);
     box-shadow:
-      0 12px 28px rgba(0,37,122,0.22),
-      4px 4px 0px rgba(0,37,122,0.08);
+      0 14px 36px rgba(0,37,122,0.20),
+      4px 4px 0px rgba(0,37,122,0.07);
   }
   .promo-img-wrap:hover .promo-img{
-    transform:perspective(600px) rotateY(0deg) rotateX(0deg) scale(1.04);
+    transform:perspective(700px) rotateX(0deg) rotateY(0deg) scale(1.03);
   }
+
+  /* Texto debajo de la imagen */
+  .promo-text{
+    padding:0 16px 18px;
+    flex:1;
+    order:2;
+  }
+  /* Badge visible sobre fondo claro */
+  .promo-badge{
+    position:relative;
+    top:auto;
+    left:auto;
+    display:inline-block;
+    font-size:9px;
+    padding:4px 10px;
+    margin-bottom:8px;
+    border-radius:6px;
+  }
+  .promo-eyebrow{font-size:9px;margin-bottom:4px;}
+  .promo-title{font-size:15px;margin-bottom:4px;line-height:1.2;}
+  .promo-desc{font-size:12px;line-height:1.45;}
 
   /* Resto de secciones en móvil */
   .products-grid{grid-template-columns:1fr;}
