@@ -17,8 +17,6 @@
   --shadow2:0 20px 48px rgba(0,37,122,0.16);
 }
 html{scroll-behavior:smooth;overflow-x:hidden;}
-
-/* header height aumentada a 72px en PC */
 body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:var(--dark);-webkit-font-smoothing:antialiased;overflow-x:hidden;padding-top:72px;}
 
 .page-loader{position:fixed;inset:0;z-index:9999;background:#f0f4fb;display:none;flex-direction:column;align-items:center;justify-content:center;gap:20px;transition:opacity .5s ease,visibility .5s ease;opacity:0;}
@@ -32,26 +30,20 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
 .loader-dot:nth-child(3){background:#c0d4f5;animation-delay:0.4s;}
 .loader-text{font-size:14px;color:var(--gray);font-weight:600;letter-spacing:.5px;}
 @keyframes dotBounce{0%,80%,100%{transform:scale(0.7);opacity:.5;}40%{transform:scale(1.2);opacity:1;}}
+@keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
 
-/* ── HEADER FIJO — más grande en PC ── */
+/* ── HEADER ── */
 .header{background:#ffffff;border-bottom:1px solid #dde3ee;position:fixed;top:0;left:0;right:0;z-index:300;box-shadow:0 2px 12px rgba(0,37,122,0.07);}
 .header-inner{max-width:1280px;margin:0 auto;padding:0 1.5rem;height:72px;display:flex;align-items:center;gap:1.2rem;}
-
-/* Botón Menú más grande en PC */
 .menu-btn{background:#0668f5;border:none;border-radius:10px;height:44px;padding:0 18px;display:inline-flex;align-items:center;gap:9px;cursor:pointer;flex-shrink:0;color:white;font-size:15px;font-weight:700;font-family:inherit;}
 .menu-btn:hover{background:#1a4fa0;}
 .header-logo{flex-shrink:0;margin-left:6px;}
 .header-logo img{height:36px;width:auto;display:block;}
-
-/* Nav links más grandes */
 .header-nav{display:flex;align-items:center;gap:4px;margin-left:auto;}
 .header-nav a{color:#0099FF;text-decoration:none;font-weight:700;font-size:1rem;padding:8px 16px;border-radius:7px;transition:color .2s ease;white-space:nowrap;}
 .header-nav a:hover{color:#0044AA;background:transparent;}
-
 .header-right{display:flex;align-items:center;gap:8px;margin-left:16px;flex-shrink:0;}
 .separator{width:1px;height:36px;background-color:#dde3ee;margin:0 4px;}
-
-/* Iconos más grandes */
 .icon-btn{background:none;border:none;cursor:pointer;width:46px;height:46px;border-radius:10px;display:flex;align-items:center;justify-content:center;transition:all .2s ease;}
 .icon-btn:hover{background:transparent;}
 .icon-btn svg{width:32px;height:32px;}
@@ -62,38 +54,140 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
 .icon-btn:hover svg circle[fill="white"]{fill:white;stroke:#0044AA;}
 .icon-btn:hover svg circle[fill="#0099FF"]{fill:#0044AA;}
 
+/* ══════════════════════════════
+   LOGIN OVERLAY — MEJORADO
+══════════════════════════════ */
 .login-overlay{position:fixed;inset:0;z-index:500;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;display:flex;flex-direction:column;overflow:hidden;}
 .login-overlay.open{opacity:1;visibility:visible;}
-.login-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80') center/cover no-repeat;z-index:0;}
+
+/* FONDO: imagen de paisaje natural (Wikipedia/Wikimedia) */
+.login-bg{
+  position:absolute;inset:0;
+  background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/24701-nature-natural-beauty.jpg/1280px-24701-nature-natural-beauty.jpg') center/cover no-repeat;
+  z-index:0;
+}
+.login-bg::after{content:'';position:absolute;inset:0;background:rgba(0,20,80,0.55);z-index:1;}
+
 .login-topbar{position:relative;z-index:3;background:var(--blue);display:flex;align-items:center;justify-content:center;padding:14px 20px;min-height:60px;flex-shrink:0;}
 .login-topbar img{height:30px;filter:brightness(0) invert(1);}
 .login-close{position:absolute;right:16px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.18);border:1.5px solid rgba(255,255,255,0.3);border-radius:8px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;}
 .login-close:hover{background:rgba(255,255,255,0.28);}
 .login-close svg{width:15px;height:15px;stroke:white;fill:none;stroke-width:2.5;stroke-linecap:round;}
 .login-main{position:relative;z-index:2;flex:1;display:flex;align-items:center;justify-content:space-between;padding:32px 5% 32px 7%;gap:32px;overflow:hidden;}
+
+/* Features cards lado izquierdo */
 .login-features{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,auto);gap:12px;width:min(560px,50%);flex-shrink:0;}
-.lf-card{background:rgba(255,255,255,0.80);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:8px;padding:20px 16px 16px;display:flex;flex-direction:column;gap:6px;cursor:pointer;border:1px solid rgba(255,255,255,0.55);transition:background .2s,transform .15s;}
-.lf-card:hover{background:rgba(255,255,255,0.94);transform:translateY(-2px);}
+.lf-card{background:rgba(255,255,255,0.18);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-radius:10px;padding:20px 16px 16px;display:flex;flex-direction:column;gap:6px;cursor:pointer;border:1px solid rgba(255,255,255,0.28);transition:background .2s,transform .15s;}
+.lf-card:hover{background:rgba(255,255,255,0.30);transform:translateY(-2px);}
 .lf-icon{width:36px;height:36px;display:flex;align-items:center;justify-content:center;margin-bottom:2px;}
-.lf-icon svg{width:28px;height:28px;stroke:var(--blue2);fill:none;stroke-width:1.5;}
-.lf-title{font-size:13px;font-weight:800;color:var(--blue3);line-height:1.2;}
-.lf-desc{font-size:11.5px;color:#444;line-height:1.45;}
-.login-panel{background:white;border-radius:4px;width:420px;flex-shrink:0;box-shadow:0 8px 40px rgba(0,0,0,0.20);transform:translateX(20px);opacity:0;transition:transform .35s cubic-bezier(.25,.9,.35,1),opacity .3s;overflow:hidden;}
+.lf-icon svg{width:28px;height:28px;stroke:white;fill:none;stroke-width:1.5;}
+.lf-title{font-size:13px;font-weight:800;color:white;line-height:1.2;}
+.lf-desc{font-size:11.5px;color:rgba(255,255,255,0.80);line-height:1.45;}
+
+/* Panel login derecho */
+.login-panel{background:white;border-radius:12px;width:420px;flex-shrink:0;box-shadow:0 16px 56px rgba(0,0,0,0.28);transform:translateX(20px);opacity:0;transition:transform .35s cubic-bezier(.25,.9,.35,1),opacity .3s;overflow:hidden;}
 .login-overlay.open .login-panel{transform:translateX(0);opacity:1;}
 .login-tab-single{padding:16px 24px 14px;font-size:14px;font-weight:800;color:var(--blue);background:none;border:none;border-bottom:3px solid var(--blue);font-family:inherit;display:block;width:100%;text-align:left;}
-.login-body{padding:28px 36px 28px;}
-.login-body h3{font-size:22px;font-weight:800;color:var(--dark);text-align:center;margin-bottom:24px;}
+
+/* ── Login body general ── */
+.login-body{padding:24px 32px 28px;}
+.login-body h3{font-size:20px;font-weight:800;color:var(--dark);text-align:center;margin-bottom:6px;}
+.login-subtitle{font-size:13px;color:var(--gray);text-align:center;margin-bottom:20px;}
+
+/* ── Botones sociales ── */
+.social-login-btns{display:flex;flex-direction:column;gap:10px;margin-bottom:16px;}
+.social-btn-login{
+  display:flex;align-items:center;gap:12px;
+  width:100%;padding:11px 16px;
+  border-radius:8px;border:1.5px solid #dde3ee;
+  background:white;cursor:pointer;
+  font-family:inherit;font-size:14px;font-weight:600;color:var(--dark);
+  transition:background .18s,border-color .18s,box-shadow .18s;
+}
+.social-btn-login:hover{background:#f7f9ff;border-color:#b0c4e8;box-shadow:0 2px 10px rgba(0,37,122,0.08);}
+.social-btn-login svg{flex-shrink:0;}
+.social-btn-login span{flex:1;text-align:left;}
+
+/* ── Divisor OR ── */
+.login-divider{display:flex;align-items:center;gap:10px;margin:14px 0;}
+.login-divider::before,.login-divider::after{content:'';flex:1;height:1px;background:#e2e8f0;}
+.login-divider span{font-size:12px;color:var(--gray);font-weight:600;}
+
+/* ── Tabs método login ── */
+.login-method-tabs{display:flex;gap:0;margin-bottom:16px;border:1.5px solid #dde3ee;border-radius:8px;overflow:hidden;}
+.lm-tab{flex:1;padding:9px 8px;background:none;border:none;font-family:inherit;font-size:12px;font-weight:700;color:var(--gray);cursor:pointer;transition:background .15s,color .15s;border-right:1px solid #dde3ee;}
+.lm-tab:last-child{border-right:none;}
+.lm-tab.active{background:var(--blue);color:white;}
+
+/* Campos formulario */
 .form-group{margin-bottom:14px;position:relative;}
 .form-group label{position:absolute;top:9px;left:13px;font-size:11px;font-weight:600;color:var(--gray);pointer-events:none;}
-.form-group input{width:100%;padding:26px 13px 9px;border:1px solid #ccd4e3;border-radius:4px;font-size:15px;font-family:inherit;outline:none;transition:border-color .2s;color:var(--dark);}
+.form-group input{width:100%;padding:26px 13px 9px;border:1px solid #ccd4e3;border-radius:6px;font-size:15px;font-family:inherit;outline:none;transition:border-color .2s;color:var(--dark);}
 .form-group input:focus{border-color:var(--blue);}
 .pw-wrap{position:relative;}
 .pw-wrap input{padding-right:46px;}
 .pw-eye{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--blue3);display:flex;padding:4px;}
 .pw-eye svg{width:20px;height:20px;}
-.btn-login-submit{width:100%;background:var(--blue);color:white;border:none;border-radius:4px;padding:14px;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;margin-top:8px;transition:background .2s;}
+.btn-login-submit{width:100%;background:var(--blue);color:white;border:none;border-radius:6px;padding:13px;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;margin-top:6px;transition:background .2s;}
 .btn-login-submit:hover{background:var(--blue2);}
+.login-error-box{display:none;background:#fff0f0;border:1px solid #fca5a5;border-radius:6px;padding:10px 14px;font-size:13px;color:#dc2626;margin-bottom:12px;font-weight:600;}
 
+/* ══════════════════════════════
+   PANEL POST-LOGIN (DASHBOARD)
+══════════════════════════════ */
+.login-success-body{display:none;padding:0;}
+.ls-header{background:linear-gradient(120deg,var(--blue) 0%,#003dab 100%);padding:20px 28px;display:flex;align-items:center;gap:14px;}
+.ls-avatar{width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,0.2);border:2px solid rgba(255,255,255,0.4);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.ls-header-info{flex:1;}
+.ls-welcome{font-size:16px;font-weight:800;color:white;line-height:1.2;}
+.ls-poliza-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:20px;padding:3px 10px;font-size:11px;font-weight:700;color:rgba(255,255,255,0.9);margin-top:4px;}
+
+.ls-tabs{display:flex;border-bottom:1px solid #e8edf5;}
+.ls-tab{flex:1;padding:11px 6px;background:none;border:none;font-family:inherit;font-size:12px;font-weight:700;color:var(--gray);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .15s,border-color .15s;}
+.ls-tab.active{color:var(--blue);border-bottom-color:var(--blue);}
+
+.ls-panel{display:none;padding:16px 20px;}
+.ls-panel.active{display:block;}
+
+/* Mis datos */
+.ls-data-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #f0f4fb;}
+.ls-data-row:last-child{border-bottom:none;}
+.ls-data-label{font-size:12px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:.4px;}
+.ls-data-value{font-size:13px;font-weight:700;color:var(--dark);}
+
+/* Recibos pendientes */
+.ls-recibo-card{background:#fafbff;border:1.5px solid #dde3ee;border-radius:10px;padding:14px 16px;margin-bottom:10px;}
+.ls-recibo-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;}
+.ls-recibo-desc{font-size:13px;font-weight:700;color:var(--dark);}
+.ls-recibo-fecha{font-size:11px;color:var(--gray);margin-top:2px;}
+.ls-recibo-importe{font-size:18px;font-weight:800;color:var(--blue);}
+.ls-recibo-badge{display:inline-flex;align-items:center;gap:4px;background:#fff3cd;border:1px solid #ffc107;border-radius:20px;padding:2px 9px;font-size:10px;font-weight:800;color:#856404;text-transform:uppercase;margin-bottom:10px;}
+.btn-paypal{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;padding:9px;border-radius:7px;
+  background:#003087;border:none;cursor:pointer;
+  font-family:inherit;font-size:13px;font-weight:700;color:white;
+  transition:background .2s,box-shadow .2s;
+}
+.btn-paypal:hover{background:#002069;box-shadow:0 4px 14px rgba(0,48,135,0.3);}
+.btn-paypal svg{width:18px;height:18px;flex-shrink:0;}
+
+/* Póliza panel */
+.ls-poliza-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #f0f4fb;}
+.ls-poliza-row:last-child{border-bottom:none;}
+.ls-poliza-icon{width:36px;height:36px;background:#eef3ff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.ls-poliza-info{flex:1;}
+.ls-poliza-name{font-size:13px;font-weight:700;color:var(--dark);}
+.ls-poliza-num{font-size:11px;color:var(--gray);}
+.ls-poliza-estado{font-size:11px;font-weight:800;color:#16a34a;}
+
+/* Botón logout en panel */
+.btn-logout{width:100%;background:none;border:1.5px solid #e2e8f0;border-radius:7px;padding:9px;font-family:inherit;font-size:13px;font-weight:700;color:var(--gray);cursor:pointer;margin-top:8px;transition:border-color .2s,color .2s;}
+.btn-logout:hover{border-color:#dc2626;color:#dc2626;}
+
+/* ══════════════════════════════
+   NAV LATERAL
+══════════════════════════════ */
 .nav-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:600;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s;}
 .nav-overlay.open{opacity:1;visibility:visible;}
 .side-nav{position:fixed;top:0;left:-300px;width:280px;height:100dvh;background:var(--white);z-index:700;transition:left .3s cubic-bezier(.25,.9,.35,1.05);display:flex;flex-direction:column;overflow-y:auto;box-shadow:4px 0 24px rgba(0,0,0,.12);}
@@ -107,23 +201,36 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
 .side-nav ul li a:hover{background:#eef3fb;}
 .side-nav-divider{height:1px;background:var(--border);margin:8px 12px;}
 
-/* ── HERO ── */
-.hero{position:relative;min-height:520px;background:linear-gradient(135deg,#e4ecf7 0%,#eef4fc 50%,#dae7f7 100%);display:flex;align-items:center;overflow:hidden;}
-.hero::before{content:'';position:absolute;right:-100px;top:-100px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(0,37,122,0.07) 0%,transparent 70%);}
-.hero::after{content:'';position:absolute;left:-80px;bottom:-80px;width:450px;height:450px;border-radius:50%;background:radial-gradient(circle,rgba(6,104,245,0.06) 0%,transparent 70%);}
+/* ══════════════════════════════
+   HERO — con banner Santalucía
+══════════════════════════════ */
+.hero{position:relative;min-height:520px;overflow:hidden;display:flex;align-items:center;}
+/* Banner de fondo Santalucía */
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(135deg,rgba(0,37,122,0.82) 0%,rgba(0,61,171,0.70) 50%,rgba(6,104,245,0.55) 100%),
+    url('https://www.santalucia.es/imagenes_slw4/1574984617950/helphome1.webp') center/cover no-repeat;
+  z-index:0;
+}
+.hero-bg::after{
+  content:'';position:absolute;inset:0;
+  background:url('https://www.santalucia.es/imagenes_slw4/1574984761030/150-solo-marzo-26.webp') right 5% center / auto 85% no-repeat;
+  opacity:0.12;z-index:1;
+}
 .hero-inner{position:relative;z-index:2;max-width:1280px;margin:0 auto;width:100%;padding:80px 1.5rem;display:flex;align-items:center;gap:40px;}
 .hero-content{flex:1;}
-.hero-eyebrow{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--blue2);font-weight:700;margin-bottom:12px;}
-.hero h1{font-size:clamp(36px,5vw,60px);font-weight:800;color:var(--blue);line-height:1.1;margin-bottom:16px;}
-.hero-sub{font-size:16px;color:var(--gray);max-width:520px;line-height:1.7;margin-bottom:32px;}
-.hero-calc-label{font-size:13px;font-weight:700;color:var(--blue2);margin-bottom:14px;}
+.hero-eyebrow{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.75);font-weight:700;margin-bottom:12px;}
+.hero h1{font-size:clamp(36px,5vw,60px);font-weight:800;color:white;line-height:1.1;margin-bottom:16px;text-shadow:0 2px 20px rgba(0,0,0,0.3);}
+.hero-sub{font-size:16px;color:rgba(255,255,255,0.85);max-width:520px;line-height:1.7;margin-bottom:32px;}
+.hero-calc-label{font-size:13px;font-weight:700;color:rgba(255,255,255,0.80);margin-bottom:14px;}
 .hero-tabs{display:flex;gap:8px;flex-wrap:wrap;}
-.hero-tab{background:var(--white);border:1.5px solid var(--border);border-radius:12px;padding:14px 18px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;transition:border-color .2s,box-shadow .2s,transform .2s;text-decoration:none;min-width:88px;}
-.hero-tab:hover{border-color:var(--blue);box-shadow:0 4px 16px rgba(0,37,122,.1);transform:translateY(-2px);}
-.hero-tab svg{width:28px;height:28px;stroke:var(--blue2);fill:none;stroke-width:1.7;}
-.hero-tab span{font-size:10px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--blue);}
+.hero-tab{background:rgba(255,255,255,0.12);border:1.5px solid rgba(255,255,255,0.25);backdrop-filter:blur(8px);border-radius:12px;padding:14px 18px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;transition:border-color .2s,box-shadow .2s,transform .2s,background .2s;text-decoration:none;min-width:88px;}
+.hero-tab:hover{border-color:white;background:rgba(255,255,255,0.22);box-shadow:0 4px 16px rgba(0,0,0,.18);transform:translateY(-2px);}
+.hero-tab svg{width:28px;height:28px;stroke:white;fill:none;stroke-width:1.7;}
+.hero-tab span{font-size:10px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:white;}
 
-.hero-payment{flex-shrink:0;width:480px;background:white;border-radius:16px;overflow:hidden;box-shadow:0 12px 40px rgba(0,37,122,0.15);}
+.hero-payment{flex-shrink:0;width:480px;background:white;border-radius:16px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,0.25);}
 .hero-payment-head{background:linear-gradient(120deg,var(--blue) 0%,#003dab 100%);color:white;padding:16px 22px;text-align:center;}
 .hero-payment-head h3{font-size:16px;font-weight:800;}
 .hero-payment-head p{font-size:12px;opacity:.75;margin-top:2px;}
@@ -141,7 +248,7 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
 .bank-label{font-weight:700;color:var(--dark);font-size:13px;white-space:nowrap;flex-shrink:0;}
 .bank-value{font-weight:800;color:#003dbb;font-size:13px;text-align:right;}
 
-/* ── SECCIÓN PROMO — PC ── */
+/* ── PROMO ── */
 .promo-section{background:var(--white);padding:60px 1.5rem;}
 .promo-inner{max-width:1100px;margin:0 auto;background:linear-gradient(120deg,#f8faff 0%,#eef3fc 100%);border:1.5px solid #d0dcf0;border-radius:20px;display:flex;align-items:stretch;overflow:visible;position:relative;min-height:200px;}
 .promo-text{padding:40px 48px;flex:1;display:flex;flex-direction:column;justify-content:center;}
@@ -150,55 +257,12 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
 .promo-title span{color:var(--blue3);}
 .promo-desc{font-size:15px;color:var(--gray);line-height:1.6;}
 .promo-badge{position:absolute;top:20px;left:20px;background:var(--blue3);color:white;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;}
+.promo-img-wrap{width:300px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 20px;position:relative;overflow:visible;background:transparent;border-radius:0 18px 18px 0;gap:10px;}
+.promo-stars-img{width:80px;height:auto;display:block;margin-bottom:4px;}
+.promo-img{width:100%;max-width:250px;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:center;display:block;position:relative;z-index:1;border-radius:14px;box-shadow:0 24px 60px rgba(0,37,122,0.28),0 8px 20px rgba(0,37,122,0.18),6px 6px 0px rgba(0,37,122,0.09),-2px -2px 0px rgba(255,255,255,0.7);transform:perspective(900px) rotateY(-10deg) rotateX(4deg) rotateZ(-1deg);transition:transform .5s cubic-bezier(.25,.9,.35,1),box-shadow .5s;}
+.promo-img-wrap:hover .promo-img{transform:perspective(900px) rotateY(0deg) rotateX(0deg) rotateZ(0deg) scale(1.05);box-shadow:0 32px 72px rgba(0,37,122,0.32),0 12px 28px rgba(0,37,122,0.20);}
 
-/* Imagen PC con estrellas y efecto 3D */
-.promo-img-wrap{
-  width:300px;
-  flex-shrink:0;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  padding:24px 20px;
-  position:relative;
-  overflow:visible;
-  background:transparent;
-  border-radius:0 18px 18px 0;
-  gap:10px;
-}
-.promo-stars-img{
-  width:80px;
-  height:auto;
-  display:block;
-  margin-bottom:4px;
-}
-.promo-img{
-  width:100%;
-  max-width:250px;
-  height:auto;
-  aspect-ratio:16/10;
-  object-fit:cover;
-  object-position:center;
-  display:block;
-  position:relative;
-  z-index:1;
-  border-radius:14px;
-  box-shadow:
-    0 24px 60px rgba(0,37,122,0.28),
-    0 8px 20px rgba(0,37,122,0.18),
-    6px 6px 0px rgba(0,37,122,0.09),
-    -2px -2px 0px rgba(255,255,255,0.7);
-  transform:perspective(900px) rotateY(-10deg) rotateX(4deg) rotateZ(-1deg);
-  transition:transform .5s cubic-bezier(.25,.9,.35,1), box-shadow .5s;
-}
-.promo-img-wrap:hover .promo-img{
-  transform:perspective(900px) rotateY(0deg) rotateX(0deg) rotateZ(0deg) scale(1.05);
-  box-shadow:
-    0 32px 72px rgba(0,37,122,0.32),
-    0 12px 28px rgba(0,37,122,0.20);
-}
-
-/* ── RESTO DE SECCIONES ── */
+/* ── RESTO ── */
 .help-section{background:var(--bg);padding:60px 1.5rem;}
 .help-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:60px;}
 .help-text{flex:1;}
@@ -338,175 +402,54 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
    RESPONSIVE 640px — MÓVIL
 ══════════════════════════════ */
 @media(max-width:640px){
-
-  /* Header móvil — altura 60px */
   body{padding-top:60px;}
   .header-inner{height:60px;padding:0 10px;gap:6px;}
-
-  /* Botón menú más cuadrado en móvil */
-  .menu-btn{
-    border-radius:10px;
-    height:42px;
-    width:42px;
-    padding:0;
-    justify-content:center;
-    aspect-ratio:1/1;
-  }
+  .menu-btn{border-radius:10px;height:42px;width:42px;padding:0;justify-content:center;aspect-ratio:1/1;}
   .menu-btn span{display:none;}
-
-  /* Logo móvil un poco más grande */
   .header-logo img{height:28px;}
-
-  /* Nav oculta en móvil */
   .header-nav{display:none;}
-
-  /* Iconos más grandes en móvil también */
   .header-right{margin-left:auto;gap:3px;}
   .separator{height:28px;margin:0 2px;}
   .icon-btn{width:42px;height:42px;}
   .icon-btn svg{width:28px;height:28px;}
-
-  /* ── HERO MÓVIL: caber todo en pantalla ── */
   .hero{min-height:100svh;display:flex;align-items:flex-start;}
-  .hero-inner{
-    flex-direction:column;
-    padding:14px 0.9rem 16px;
-    gap:10px;
-    align-items:stretch;
-    min-height:calc(100svh - 60px);
-    justify-content:flex-start;
-  }
+  .hero-inner{flex-direction:column;padding:14px 0.9rem 16px;gap:10px;align-items:stretch;min-height:calc(100svh - 60px);justify-content:flex-start;}
   .hero-content{order:1;flex-shrink:0;}
   .hero h1{font-size:24px;margin-bottom:5px;line-height:1.15;}
   .hero-eyebrow{font-size:9px;margin-bottom:5px;letter-spacing:2px;}
   .hero-sub{font-size:12.5px;margin-bottom:10px;line-height:1.5;max-width:100%;}
   .hero-calc-label{font-size:10.5px;margin-bottom:7px;font-weight:700;}
-
-  /* Tabs en fila scrollable */
-  .hero-tabs{
-    display:flex;
-    flex-wrap:nowrap;
-    gap:5px;
-    overflow-x:auto;
-    -webkit-overflow-scrolling:touch;
-    scrollbar-width:none;
-    padding-bottom:2px;
-    margin-bottom:2px;
-  }
+  .hero-tabs{display:flex;flex-wrap:nowrap;gap:5px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:2px;margin-bottom:2px;}
   .hero-tabs::-webkit-scrollbar{display:none;}
-  .hero-tab{
-    min-width:52px;
-    max-width:52px;
-    padding:7px 4px;
-    gap:4px;
-    flex-shrink:0;
-    border-radius:9px;
-  }
+  .hero-tab{min-width:52px;max-width:52px;padding:7px 4px;gap:4px;flex-shrink:0;border-radius:9px;}
   .hero-tab svg{width:20px;height:20px;}
   .hero-tab span{font-size:7.5px;letter-spacing:.2px;}
-
-  /* Sección pago en móvil */
-  .hero-payment{
-    order:2;
-    width:100%;
-    max-width:100%;
-    border-radius:12px;
-    flex-shrink:0;
-  }
+  .hero-payment{order:2;width:100%;max-width:100%;border-radius:12px;flex-shrink:0;}
   .hero-payment-head{padding:10px 14px;}
   .hero-payment-head h3{font-size:14px;}
   .hero-payment-head p{font-size:10.5px;margin-top:1px;}
   .hero-payment-body{padding:10px 12px;}
   .pay-btns{flex-direction:column;gap:6px;}
-  .pay-btn{
-    flex-direction:row;
-    padding:9px 14px;
-    font-size:12.5px;
-    gap:9px;
-    justify-content:flex-start;
-  }
+  .pay-btn{flex-direction:row;padding:9px 14px;font-size:12.5px;gap:9px;justify-content:flex-start;}
   .bank-row{flex-direction:row;align-items:center;}
   .bank-label{font-size:12px;min-width:90px;}
   .bank-value{font-size:12px;}
-
-  /* ── PROMO MÓVIL: texto ENCIMA de la imagen, imagen bien ajustada ── */
   .promo-section{padding:18px 0.9rem;}
-  .promo-inner{
-    flex-direction:column;
-    align-items:stretch;
-    border-radius:14px;
-    overflow:hidden;
-    min-height:unset;
-    gap:0;
-    background:linear-gradient(120deg,#f8faff 0%,#eef3fc 100%);
-  }
-
-  /* Texto primero (arriba) en móvil */
-  .promo-text{
-    padding:16px 16px 10px;
-    flex:none;
-    order:1;
-  }
-
-  /* Badge en flujo normal en móvil */
-  .promo-badge{
-    position:relative;
-    top:auto;
-    left:auto;
-    display:inline-block;
-    font-size:9px;
-    padding:4px 10px;
-    margin-bottom:8px;
-    border-radius:6px;
-  }
+  .promo-inner{flex-direction:column;align-items:stretch;border-radius:14px;overflow:hidden;min-height:unset;gap:0;background:linear-gradient(120deg,#f8faff 0%,#eef3fc 100%);}
+  .promo-text{padding:16px 16px 10px;flex:none;order:1;}
+  .promo-badge{position:relative;top:auto;left:auto;display:inline-block;font-size:9px;padding:4px 10px;margin-bottom:8px;border-radius:6px;}
   .promo-eyebrow{font-size:9px;margin-bottom:4px;}
   .promo-title{font-size:16px;margin-bottom:4px;line-height:1.25;}
   .promo-desc{font-size:12.5px;line-height:1.5;}
-
-  /* Imagen + estrellas debajo del texto en móvil */
-  .promo-img-wrap{
-    width:100%;
-    flex-shrink:0;
-    order:2;
-    border-radius:0;
-    padding:10px 20px 18px;
-    background:transparent;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:8px;
-  }
-  /* Estrellas visibles en móvil */
-  .promo-stars-img{
-    width:60px;
-    display:block;
-  }
-  /* Imagen más alejada (más pequeña) para que encaje en su contenedor */
-  .promo-img{
-    width:75%;
-    max-width:260px;
-    height:auto;
-    aspect-ratio:16/7;
-    object-fit:cover;
-    object-position:center;
-    border-radius:10px;
-    transform:perspective(700px) rotateX(3deg) rotateY(-3deg);
-    box-shadow:
-      0 12px 30px rgba(0,37,122,0.18),
-      3px 3px 0px rgba(0,37,122,0.07);
-  }
-  .promo-img-wrap:hover .promo-img{
-    transform:perspective(700px) rotateX(0deg) rotateY(0deg) scale(1.03);
-  }
-
-  /* Resto secciones móvil */
+  .promo-img-wrap{width:100%;flex-shrink:0;order:2;border-radius:0;padding:10px 20px 18px;background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;}
+  .promo-stars-img{width:60px;display:block;}
+  .promo-img{width:75%;max-width:260px;height:auto;aspect-ratio:16/7;object-fit:cover;border-radius:10px;transform:perspective(700px) rotateX(3deg) rotateY(-3deg);box-shadow:0 12px 30px rgba(0,37,122,0.18),3px 3px 0px rgba(0,37,122,0.07);}
   .products-grid{grid-template-columns:1fr;}
   .reviews-grid{grid-template-columns:1fr;}
   .stats-row{grid-template-columns:1fr 1fr;}
   .footer-main{grid-template-columns:1fr;}
-  .login-body{padding:22px 18px 20px;}
-  .login-body h3{font-size:20px;}
+  .login-body{padding:18px 18px 20px;}
+  .login-body h3{font-size:18px;}
 }
 </style>
 </head>
@@ -564,6 +507,9 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   </div>
 </header>
 
+<!-- ══════════════════════════════
+     LOGIN OVERLAY COMPLETO
+══════════════════════════════ -->
 <div class="login-overlay" id="loginOverlay">
   <div class="login-bg"></div>
   <div class="login-topbar">
@@ -571,54 +517,178 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
     <button class="login-close" id="loginClose"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
   </div>
   <div class="login-main">
+    <!-- Features lado izquierdo -->
     <div class="login-features">
-      <div class="lf-card"><div class="lf-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></div><div class="lf-title">Pólizas</div><div class="lf-desc">Consulta tus pólizas, fechas de vencimiento y coberturas</div></div>
-      <div class="lf-card"><div class="lf-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="lf-title">Recibos</div><div class="lf-desc">Descarga los recibos pagados de tus pólizas</div></div>
-      <div class="lf-card"><div class="lf-icon"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div><div class="lf-title">Datos actualizados</div><div class="lf-desc">Actualiza los datos de tus pólizas</div></div>
-      <div class="lf-card"><div class="lf-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="12" y1="8" x2="12" y2="16"/></svg></div><div class="lf-title">Alta de siniestros</div><div class="lf-desc">Da parte de un siniestro a cualquier hora</div></div>
+      <div class="lf-card"><div class="lf-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></div><div class="lf-title">Pólizas</div><div class="lf-desc">Consulta tus pólizas, fechas y coberturas</div></div>
+      <div class="lf-card"><div class="lf-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="lf-title">Recibos</div><div class="lf-desc">Descarga y paga tus recibos</div></div>
+      <div class="lf-card"><div class="lf-icon"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div><div class="lf-title">Mis datos</div><div class="lf-desc">Actualiza tu información personal</div></div>
+      <div class="lf-card"><div class="lf-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="12" y1="8" x2="12" y2="16"/></svg></div><div class="lf-title">Siniestros</div><div class="lf-desc">Da parte de un siniestro a cualquier hora</div></div>
       <div class="lf-card"><div class="lf-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="lf-title">Coberturas</div><div class="lf-desc">Consulta las coberturas de tus pólizas</div></div>
       <div class="lf-card"><div class="lf-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div class="lf-title">Contacta</div><div class="lf-desc">Nuestro equipo está para ayudarte</div></div>
     </div>
-    <div class="login-panel">
+
+    <!-- Panel de login/dashboard -->
+    <div class="login-panel" id="loginPanel">
       <div class="login-tab-single">Acceso a Espacio Cliente</div>
-      <div class="login-body" id="loginFormBody">
-        <h3>Accede con tus datos</h3>
-        <div class="form-group"><label>DNI/NIF</label><input type="text" id="loginDni" placeholder="Ej: 00000000X" autocomplete="off"></div>
-        <div class="form-group">
-          <label>Contraseña</label>
-          <div class="pw-wrap">
-            <input type="password" placeholder="Contraseña" id="loginPw">
-            <button class="pw-eye" onclick="togglePw()">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+
+      <!-- ── FORM DE INICIO DE SESIÓN ── -->
+      <div id="loginFormBody">
+        <div class="login-body">
+          <h3>Bienvenido</h3>
+          <p class="login-subtitle">Accede a tu espacio personal</p>
+
+          <!-- Botones sociales -->
+          <div class="social-login-btns">
+            <button class="social-btn-login" id="btnGoogle" onclick="openSocialLogin('google')">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="22" height="22">
+                <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/>
+                <path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/>
+                <path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/>
+                <path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"/>
+              </svg>
+              <span>Continuar con Google</span>
+            </button>
+            <button class="social-btn-login" id="btnMicrosoft" onclick="openSocialLogin('microsoft')">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 23" width="22" height="22">
+                <path fill="#f25022" d="M1 1h10v10H1z"/>
+                <path fill="#7fba00" d="M12 1h10v10H12z"/>
+                <path fill="#00a4ef" d="M1 12h10v10H1z"/>
+                <path fill="#ffb900" d="M12 12h10v10H12z"/>
+              </svg>
+              <span>Continuar con Microsoft</span>
             </button>
           </div>
-        </div>
-        <div id="loginError" style="display:none;background:#fff0f0;border:1px solid #fca5a5;border-radius:6px;padding:10px 14px;font-size:13px;color:#dc2626;margin-bottom:12px;font-weight:600;">
-          ❌ DNI no encontrado. Verifica tus datos e inténtalo de nuevo.
-        </div>
-        <button class="btn-login-submit" id="loginBtn">
-          <span id="loginBtnText">Acceder</span>
-          <span id="loginBtnSpinner" style="display:none;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="animation:spin 0.8s linear infinite;vertical-align:middle;"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
-          </span>
-        </button>
-      </div>
-      <div class="login-body" id="loginSuccessBody" style="display:none;">
-        <div style="text-align:center;padding:10px 0 20px;">
-          <div style="font-size:48px;margin-bottom:12px;">👋</div>
-          <h3 id="welcomeName" style="margin-bottom:6px;">Bienvenido</h3>
-          <p style="font-size:13px;color:var(--gray);margin-bottom:4px;">DNI: <strong id="welcomeDni"></strong></p>
-          <p style="font-size:13px;color:var(--gray);margin-bottom:4px;">Póliza: <strong id="welcomePoliza" style="color:var(--blue3);"></strong></p>
-          <p style="font-size:13px;color:var(--gray);margin-bottom:20px;">Importe: <strong id="welcomeImporte" style="color:var(--blue);"></strong></p>
-          <button onclick="doLogout()" style="background:var(--blue);color:white;border:none;border-radius:6px;padding:10px 24px;font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;">Cerrar sesión</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
-<!-- HERO -->
+          <div class="login-divider"><span>o accede con tus datos</span></div>
+
+          <!-- Tabs DNI / Email -->
+          <div class="login-method-tabs">
+            <button class="lm-tab active" id="tabDni" onclick="switchLoginTab('dni')">DNI / NIF</button>
+            <button class="lm-tab" id="tabEmail" onclick="switchLoginTab('email')">Correo electrónico</button>
+          </div>
+
+          <!-- Campo DNI -->
+          <div id="fieldDni">
+            <div class="form-group"><label>DNI/NIF</label><input type="text" id="loginDni" placeholder="Ej: 00000000X" autocomplete="off"></div>
+          </div>
+          <!-- Campo Email (oculto por defecto) -->
+          <div id="fieldEmail" style="display:none;">
+            <div class="form-group"><label>Correo electrónico</label><input type="email" id="loginEmail" placeholder="tu@email.com" autocomplete="email"></div>
+          </div>
+
+          <div class="form-group">
+            <label>Contraseña</label>
+            <div class="pw-wrap">
+              <input type="password" placeholder="Contraseña" id="loginPw">
+              <button class="pw-eye" onclick="togglePw()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="login-error-box" id="loginError"></div>
+
+          <button class="btn-login-submit" id="loginBtn">
+            <span id="loginBtnText">Acceder</span>
+            <span id="loginBtnSpinner" style="display:none;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="animation:spin 0.8s linear infinite;vertical-align:middle;"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+            </span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ── MINI-FORMULARIO SOCIAL (Google/Microsoft) ── -->
+      <div id="socialFormBody" style="display:none;">
+        <div class="login-body">
+          <div id="socialFormIcon" style="text-align:center;margin-bottom:12px;"></div>
+          <h3 id="socialFormTitle">Iniciar sesión</h3>
+          <p class="login-subtitle" id="socialFormSubtitle">Introduce tu correo de Google</p>
+
+          <div class="form-group"><label>Correo electrónico</label><input type="email" id="socialEmail" placeholder="tu@gmail.com" autocomplete="email"></div>
+          <div class="form-group">
+            <label>Contraseña</label>
+            <div class="pw-wrap">
+              <input type="password" placeholder="Contraseña" id="socialPw">
+              <button class="pw-eye" onclick="toggleSocialPw()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="login-error-box" id="socialError"></div>
+
+          <button class="btn-login-submit" id="socialLoginBtn">
+            <span id="socialBtnText">Continuar</span>
+            <span id="socialBtnSpinner" style="display:none;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="animation:spin 0.8s linear infinite;vertical-align:middle;"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+            </span>
+          </button>
+          <button onclick="closeSocialLogin()" style="width:100%;background:none;border:none;color:var(--gray);font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;margin-top:8px;padding:6px;">← Volver</button>
+        </div>
+      </div>
+
+      <!-- ── PANEL POST-LOGIN (DASHBOARD) ── -->
+      <div class="login-success-body" id="loginSuccessBody">
+        <!-- Header con nombre y póliza -->
+        <div class="ls-header">
+          <div class="ls-avatar" id="lsAvatar">👤</div>
+          <div class="ls-header-info">
+            <div class="ls-welcome" id="lsWelcome">Bienvenido</div>
+            <div class="ls-poliza-badge">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg>
+              Póliza <span id="lsPolizaBadge">—</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tabs del dashboard -->
+        <div class="ls-tabs">
+          <button class="ls-tab active" onclick="switchDashTab('datos')">Mis datos</button>
+          <button class="ls-tab" onclick="switchDashTab('poliza')">Póliza</button>
+          <button class="ls-tab" onclick="switchDashTab('recibos')">Recibos</button>
+        </div>
+
+        <!-- Panel: Mis datos -->
+        <div class="ls-panel active" id="dashDatos">
+          <div class="ls-data-row"><span class="ls-data-label">Nombre</span><span class="ls-data-value" id="ddNombre">—</span></div>
+          <div class="ls-data-row"><span class="ls-data-label">DNI / NIF</span><span class="ls-data-value" id="ddDni">—</span></div>
+          <div class="ls-data-row"><span class="ls-data-label">Correo</span><span class="ls-data-value" id="ddEmail">—</span></div>
+          <div class="ls-data-row"><span class="ls-data-label">Teléfono</span><span class="ls-data-value" id="ddTelefono">—</span></div>
+          <div class="ls-data-row"><span class="ls-data-label">Dirección</span><span class="ls-data-value" id="ddDireccion">—</span></div>
+          <button class="btn-logout" onclick="doLogout()">Cerrar sesión</button>
+        </div>
+
+        <!-- Panel: Póliza -->
+        <div class="ls-panel" id="dashPoliza">
+          <div class="ls-poliza-row">
+            <div class="ls-poliza-icon" id="dpIcon">🏠</div>
+            <div class="ls-poliza-info">
+              <div class="ls-poliza-name" id="dpNombre">Seguro de Hogar</div>
+              <div class="ls-poliza-num">Nº <span id="dpNumero">—</span></div>
+            </div>
+            <div class="ls-poliza-estado">● Activa</div>
+          </div>
+          <div class="ls-data-row"><span class="ls-data-label">Importe mensual</span><span class="ls-data-value" id="dpImporte">—</span></div>
+          <div class="ls-data-row"><span class="ls-data-label">Próximo vencimiento</span><span class="ls-data-value" id="dpVencimiento">—</span></div>
+          <div class="ls-data-row"><span class="ls-data-label">Modalidad</span><span class="ls-data-value" id="dpModalidad">—</span></div>
+        </div>
+
+        <!-- Panel: Recibos pendientes -->
+        <div class="ls-panel" id="dashRecibos">
+          <div id="recibosContainer">
+            <!-- Generado por JS -->
+          </div>
+          <p id="sinRecibos" style="display:none;text-align:center;color:var(--gray);font-size:13px;padding:16px 0;">✅ No tienes recibos pendientes</p>
+        </div>
+      </div>
+
+    </div><!-- /.login-panel -->
+  </div><!-- /.login-main -->
+</div><!-- /.login-overlay -->
+
+<!-- HERO — con fondo banner Santalucía -->
 <section class="hero" id="inicio">
+  <div class="hero-bg"></div>
   <div class="hero-inner">
     <div class="hero-content">
       <div class="hero-eyebrow">SANTALUCÍA SEGUROS</div>
@@ -658,7 +728,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   </div>
 </section>
 
-<!-- PROMO — con imagen de estrellas encima de la tarjeta (PC y móvil) -->
+<!-- PROMO -->
 <section class="promo-section">
   <div class="promo-inner">
     <div class="promo-text">
@@ -670,7 +740,6 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
       </div>
     </div>
     <div class="promo-img-wrap">
-      <!-- Estrellas amarillas encima de la tarjeta — PC y móvil -->
       <img class="promo-stars-img" src="https://www.santalucia.es/estaticos_slw4/images/destacado-secundario-stars.svg" alt="Estrellas destacado">
       <img class="promo-img" src="https://www.santalucia.es/imagenes_slw4/1574984761030/150-solo-marzo-26.webp" alt="Tarjeta regalo hasta 150€">
     </div>
@@ -702,7 +771,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   </div>
   <div style="max-width:1100px;margin:0 auto;">
     <div class="prod-detail" id="detail-hogar"><h2>🏠 Tu hogar, siempre protegido</h2><p>Un seguro de hogar protege tu vivienda y todos tus bienes frente a cualquier daño inesperado.</p><div class="detail-grid"><div class="detail-block"><h3>🏚️ Daños materiales</h3><p>Incendios, explosiones, fenómenos atmosféricos, escapes de agua, roturas de cristales y vandalismo.</p></div><div class="detail-block"><h3>🧾 Gastos cubiertos</h3><p>Extinción de incendios, limpieza, demolición de partes dañadas y alojamiento temporal.</p></div><div class="detail-block"><h3>⚖️ Responsabilidad civil</h3><p>Si un accidente en tu hogar provoca daños a vecinos o terceros, el seguro cubre indemnizaciones.</p></div><div class="detail-block"><h3>🔒 Robo y vandalismo</h3><p>Cobertura ante robos con fuerza: reparación de cerraduras, puertas dañadas y objetos robados.</p></div><div class="detail-block"><h3>🔧 Asistencia 24h</h3><p>Fontanero, electricista, cerrajero y cristalero a domicilio sin coste adicional.</p></div><div class="detail-block"><h3>🌊 Daños por agua</h3><p>Roturas de tuberías, filtraciones y atascos. Incluye localización de la fuga y reparación.</p></div></div></div>
-    <div class="prod-detail" id="detail-decesos"><h2>🕊️ Protección integral para ti y los tuyos</h2><p>Cubre todos los gastos del funeral y los trámites legales.</p><div class="detail-grid" style="grid-template-columns:repeat(3,1fr);"><div class="detail-block"><h3>⚰️ Gastos de sepelio</h3><p>Ataúd, servicio funerario, traslado, esquelas, flores y velatorio sin coste para la familia.</p></div><div class="detail-block"><h3>📋 Trámites y gestiones</h3><p>Certificado de defunción, registro civil, bajas en Seguridad Social y asesoramiento jurídico.</p></div><div class="detail-block"><h3>👨‍👩‍👧 Para toda la familia</h3><p>Una póliza para todo el núcleo familiar. Cuantos más miembros, mejor precio por persona.</p></div><div class="detail-block"><h3>🚑 Traslado internacional</h3><p>Gestionamos el traslado desde cualquier parte del mundo si el fallecimiento ocurre fuera.</p></div><div class="detail-block"><h3>💆 Apoyo psicológico</h3><p>Acompañamiento emocional profesional para los familiares durante el duelo.</p></div><div class="detail-block"><h3>⏳ Contrátalo cuanto antes</h3><p>A menor edad, menor prima mensual y cobertura total sin periodos de carencia.</p></div></div></div>
+    <div class="prod-detail" id="detail-decesos"><h2>🕊️ Protección integral para ti y los tuyos</h2><p>Cubre todos los gastos del funeral y los trámites legales.</p><div class="detail-grid"><div class="detail-block"><h3>⚰️ Gastos de sepelio</h3><p>Ataúd, servicio funerario, traslado, esquelas, flores y velatorio sin coste para la familia.</p></div><div class="detail-block"><h3>📋 Trámites y gestiones</h3><p>Certificado de defunción, registro civil, bajas en Seguridad Social y asesoramiento jurídico.</p></div><div class="detail-block"><h3>👨‍👩‍👧 Para toda la familia</h3><p>Una póliza para todo el núcleo familiar. Cuantos más miembros, mejor precio por persona.</p></div><div class="detail-block"><h3>🚑 Traslado internacional</h3><p>Gestionamos el traslado desde cualquier parte del mundo si el fallecimiento ocurre fuera.</p></div><div class="detail-block"><h3>💆 Apoyo psicológico</h3><p>Acompañamiento emocional profesional para los familiares durante el duelo.</p></div><div class="detail-block"><h3>⏳ Contrátalo cuanto antes</h3><p>A menor edad, menor prima mensual y cobertura total sin periodos de carencia.</p></div></div></div>
     <div class="prod-detail" id="detail-vida"><h2>❤️ Seguridad y tranquilidad para tu familia</h2><p>Garantiza el bienestar económico de tus seres queridos ante cualquier imprevisto.</p><div class="detail-grid"><div class="detail-block"><h3>⚰️ Fallecimiento por cualquier causa</h3><p>Los beneficiarios reciben un capital para hacer frente a hipotecas, gastos corrientes o educación.</p></div><div class="detail-block"><h3>🚗 Fallecimiento por accidente</h3><p>La indemnización se duplica o triplica si el fallecimiento es consecuencia de un accidente.</p></div><div class="detail-block"><h3>🛠️ Invalidez absoluta permanente</h3><p>Recibes la indemnización en vida si una invalidez te impide trabajar de forma definitiva.</p></div><div class="detail-block"><h3>🩺 Segunda opinión médica</h3><p>Ante un diagnóstico grave, acceso a especialistas internacionales de prestigio.</p></div><div class="detail-block"><h3>💊 Rehabilitación médica</h3><p>Programas de recuperación cardíaca y funcional con seguimiento personalizado.</p></div><div class="detail-block"><h3>📞 Asistencia 24h</h3><p>Orientación médica, psicológica y social disponible las 24 horas.</p></div></div></div>
     <div class="prod-detail" id="detail-salud"><h2>🏥 Protege tu bienestar físico y emocional</h2><p>Accede a médicos especialistas y hospitales en toda España sin listas de espera.</p><div class="detail-grid"><div class="detail-block"><h3>⏱️ Sin listas de espera</h3><p>Consultas, pruebas e intervenciones sin los tiempos de la sanidad pública.</p></div><div class="detail-block"><h3>🔬 Especialistas sin derivación</h3><p>Accede directamente a cualquier especialista sin pasar por el médico de cabecera.</p></div><div class="detail-block"><h3>🏨 Hospitalización y cirugía</h3><p>Habitación individual, honorarios médicos, material quirúrgico y rehabilitación incluidos.</p></div><div class="detail-block"><h3>🌍 Cobertura en el extranjero</h3><p>Urgencias médicas en cualquier parte del mundo y repatriación sanitaria.</p></div><div class="detail-block"><h3>🧠 Salud mental</h3><p>Consultas con psicólogos y psiquiatras sin derivación. Tratamiento de ansiedad y depresión.</p></div><div class="detail-block"><h3>📞 Médico 24h</h3><p>Un médico colegiado te orienta telefónicamente a cualquier hora.</p></div></div></div>
     <div class="prod-detail" id="detail-mascotas"><h2>🐾 Seguro de Mascotas</h2><p>Tu perro o gato merece la mejor protección frente a imprevistos veterinarios y accidentes.</p><div class="detail-grid"><div class="detail-block"><h3>🐕 Responsabilidad civil</h3><p>Si tu mascota causa daños a personas o propiedades, el seguro cubre las indemnizaciones.</p></div><div class="detail-block"><h3>📞 Veterinario 24h</h3><p>Asesoramiento veterinario telefónico a cualquier hora ante síntomas o urgencias.</p></div><div class="detail-block"><h3>🏥 Accidentes veterinarios</h3><p>Cubrimos diagnóstico, tratamiento y hospitalización por atropello o ingestión accidental.</p></div><div class="detail-block"><h3>🔍 Robo y pérdida</h3><p>Búsqueda activa, publicidad local, recompensa e indemnización económica incluida.</p></div><div class="detail-block"><h3>🩺 Enfermedades</h3><p>Cobertura de enfermedades comunes y crónicas según la modalidad elegida.</p></div><div class="detail-block"><h3>✈️ Viajes con tu mascota</h3><p>Asistencia veterinaria de urgencia en destino dentro y fuera de España.</p></div></div></div>
@@ -782,10 +851,12 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
 </div>
 
 <script>
+// ── PAGE LOADER ──
 const loader=document.getElementById('pageLoader');
 let loaderTimer=setTimeout(()=>{loader.style.display='flex';loader.style.opacity='1';},2000);
 window.addEventListener('load',function(){clearTimeout(loaderTimer);if(loader.style.display==='flex'){loader.style.opacity='0';setTimeout(()=>{loader.style.display='none';},500);}else{loader.style.display='none';}});
 
+// ── FLOAT ──
 const floatPill=document.getElementById('floatPill'),floatCircle=document.getElementById('floatCircle');
 function showPill(){floatCircle.style.display='none';floatPill.style.display='flex';floatPill.classList.remove('hide');}
 function showCircle(){floatPill.style.display='none';floatCircle.style.display='flex';floatCircle.classList.remove('hide');}
@@ -795,6 +866,7 @@ startFloatCycle();
 floatPill.addEventListener('click',openModal);
 floatCircle.addEventListener('click',openModal);
 
+// ── SIDE NAV ──
 const menuBtn=document.getElementById('menuBtn'),sideNav=document.getElementById('sideNav'),navOverlay=document.getElementById('navOverlay'),sideClose=document.getElementById('sideClose');
 function openSideNav(){sideNav.classList.add('open');navOverlay.classList.add('open');document.body.style.overflow='hidden';}
 function closeSideNav(){sideNav.classList.remove('open');navOverlay.classList.remove('open');document.body.style.overflow='';}
@@ -802,14 +874,146 @@ menuBtn.addEventListener('click',openSideNav);
 sideClose.addEventListener('click',closeSideNav);
 navOverlay.addEventListener('click',closeSideNav);
 
+// ── LOGIN OVERLAY ──
 const profileBtn=document.getElementById('profileBtn'),loginOverlay=document.getElementById('loginOverlay'),loginClose=document.getElementById('loginClose');
 function openLogin(){loginOverlay.classList.add('open');document.body.style.overflow='hidden';document.body.style.position='fixed';document.body.style.width='100%';}
 function closeLogin(){loginOverlay.classList.remove('open');document.body.style.overflow='';document.body.style.position='';document.body.style.width='';}
 profileBtn.addEventListener('click',openLogin);
 loginClose.addEventListener('click',closeLogin);
 loginOverlay.addEventListener('click',(e)=>{if(e.target===loginOverlay||e.target.classList.contains('login-bg'))closeLogin();});
-function togglePw(){const i=document.getElementById('loginPw');i.type=i.type==='password'?'text':'password';}
 
+// ── LOGIN: tab DNI / Email ──
+function switchLoginTab(tab){
+  const isDni = tab==='dni';
+  document.getElementById('tabDni').classList.toggle('active',isDni);
+  document.getElementById('tabEmail').classList.toggle('active',!isDni);
+  document.getElementById('fieldDni').style.display = isDni?'block':'none';
+  document.getElementById('fieldEmail').style.display = isDni?'none':'block';
+}
+
+// ── TOGGLE PASSWORDS ──
+function togglePw(){const i=document.getElementById('loginPw');i.type=i.type==='password'?'text':'password';}
+function toggleSocialPw(){const i=document.getElementById('socialPw');i.type=i.type==='password'?'text':'password';}
+
+// ── SOCIAL LOGIN (Google / Microsoft) ──
+let currentSocialProvider = null;
+function openSocialLogin(provider){
+  currentSocialProvider = provider;
+  const isGoogle = provider==='google';
+  document.getElementById('socialFormIcon').innerHTML = isGoogle
+    ? `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="36" height="36"><path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/><path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/><path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/><path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"/></svg>`
+    : `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 23" width="36" height="36"><path fill="#f25022" d="M1 1h10v10H1z"/><path fill="#7fba00" d="M12 1h10v10H12z"/><path fill="#00a4ef" d="M1 12h10v10H1z"/><path fill="#ffb900" d="M12 12h10v10H12z"/></svg>`;
+  document.getElementById('socialFormTitle').textContent = isGoogle ? 'Iniciar sesión con Google' : 'Iniciar sesión con Microsoft';
+  document.getElementById('socialFormSubtitle').textContent = isGoogle ? 'Introduce tu correo de Google' : 'Introduce tu correo de Microsoft';
+  document.getElementById('socialEmail').placeholder = isGoogle ? 'tu@gmail.com' : 'tu@outlook.com';
+  document.getElementById('socialEmail').value='';
+  document.getElementById('socialPw').value='';
+  document.getElementById('socialError').style.display='none';
+  document.getElementById('loginFormBody').style.display='none';
+  document.getElementById('socialFormBody').style.display='block';
+}
+function closeSocialLogin(){
+  document.getElementById('socialFormBody').style.display='none';
+  document.getElementById('loginFormBody').style.display='block';
+  currentSocialProvider=null;
+}
+
+// ── DASHBOARD: cambiar tabs ──
+function switchDashTab(tab){
+  document.querySelectorAll('.ls-tab').forEach((t,i)=>{
+    const tabs=['datos','poliza','recibos'];
+    t.classList.toggle('active', tabs[i]===tab);
+  });
+  document.querySelectorAll('.ls-panel').forEach(p=>p.classList.remove('active'));
+  const panels={datos:'dashDatos',poliza:'dashPoliza',recibos:'dashRecibos'};
+  document.getElementById(panels[tab]).classList.add('active');
+}
+
+// ── MOSTRAR DASHBOARD ──
+function mostrarDashboard(docData){
+  // Ocultar forms, mostrar dashboard
+  document.getElementById('loginFormBody').style.display='none';
+  document.getElementById('socialFormBody').style.display='none';
+  document.getElementById('loginSuccessBody').style.display='block';
+
+  const nombre = docData.nombre || 'Cliente';
+  const primerNombre = nombre.split(' ')[0];
+  const iniciales = nombre.split(' ').map(n=>n[0]).join('').substring(0,2).toUpperCase();
+
+  // Header
+  document.getElementById('lsAvatar').textContent = iniciales || '👤';
+  document.getElementById('lsWelcome').textContent = '¡Hola, '+primerNombre+'!';
+  document.getElementById('lsPolizaBadge').textContent = docData.poliza || 'N/D';
+
+  // Tab Mis datos
+  document.getElementById('ddNombre').textContent = docData.nombre || '—';
+  document.getElementById('ddDni').textContent = docData.dni || '—';
+  document.getElementById('ddEmail').textContent = docData.email || docData.correo || '—';
+  document.getElementById('ddTelefono').textContent = docData.telefono || '—';
+  document.getElementById('ddDireccion').textContent = docData.direccion || '—';
+
+  // Tab Póliza
+  const tipoIconos = {hogar:'🏠',decesos:'🕊️',vida:'❤️',salud:'🏥',mascotas:'🐾',ahorro:'💰'};
+  const tipo = (docData.tipo||'hogar').toLowerCase();
+  document.getElementById('dpIcon').textContent = tipoIconos[tipo]||'📄';
+  document.getElementById('dpNombre').textContent = docData.tipoDsc || ('Seguro de '+(docData.tipo||'Hogar'));
+  document.getElementById('dpNumero').textContent = docData.poliza || '—';
+  document.getElementById('dpImporte').textContent = docData.importe ? docData.importe+' EUR/mes' : '—';
+  document.getElementById('dpVencimiento').textContent = docData.vencimiento || '—';
+  document.getElementById('dpModalidad').textContent = docData.modalidad || '—';
+
+  // Tab Recibos pendientes
+  const container = document.getElementById('recibosContainer');
+  const sinRecibos = document.getElementById('sinRecibos');
+  container.innerHTML='';
+  const recibos = docData.recibosPendientes || [];
+  if(recibos.length===0){
+    sinRecibos.style.display='block';
+  } else {
+    sinRecibos.style.display='none';
+    // ── REEMPLAZA YOUR_PAYPAL_CLIENT_ID con tu Client ID real de PayPal ──
+    const PAYPAL_CLIENT_ID = 'YOUR_PAYPAL_CLIENT_ID';
+    recibos.forEach((r,i)=>{
+      const card = document.createElement('div');
+      card.className='ls-recibo-card';
+      const paypalUrl = `https://www.paypal.com/ncp/payment/${PAYPAL_CLIENT_ID}?amount=${r.importe}&currency=EUR&description=${encodeURIComponent(r.descripcion||'Recibo póliza')}`;
+      card.innerHTML=`
+        <div class="ls-recibo-head">
+          <div>
+            <div class="ls-recibo-desc">${r.descripcion||'Recibo mensual'}</div>
+            <div class="ls-recibo-fecha">Vence: ${r.fecha||'—'}</div>
+          </div>
+          <div class="ls-recibo-importe">${r.importe||'—'} €</div>
+        </div>
+        <div class="ls-recibo-badge">⏳ Pendiente</div>
+        <a href="${paypalUrl}" target="_blank" rel="noopener" class="btn-paypal">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="3" fill="#003087"/><text x="12" y="16" font-family="Arial" font-size="7" font-weight="bold" fill="white" text-anchor="middle">PayPal</text></svg>
+          Pagar con PayPal — ${r.importe||'?'} €
+        </a>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  // Actualizar icono header
+  const profileBtnEl=document.getElementById('profileBtn');
+  if(profileBtnEl){profileBtnEl.style.background='#eef7ee';profileBtnEl.title='Sesión activa: '+nombre;}
+}
+
+// ── LOGOUT ──
+window.doLogout=function(){
+  sessionStorage.removeItem('sl_cliente');
+  document.getElementById('loginSuccessBody').style.display='none';
+  document.getElementById('loginFormBody').style.display='block';
+  document.getElementById('loginDni').value='';
+  document.getElementById('loginPw').value='';
+  document.getElementById('loginError').style.display='none';
+  const profileBtnEl=document.getElementById('profileBtn');
+  if(profileBtnEl){profileBtnEl.style.background='';profileBtnEl.title='Acceder a mi espacio';}
+  closeLogin();
+};
+
+// ── PRODUCTOS ──
 function showProduct(key){
   document.querySelectorAll('.prod-detail').forEach(d=>d.classList.remove('open'));
   const p=document.getElementById('detail-'+key);
@@ -819,9 +1023,11 @@ function showProduct(key){
 }
 document.querySelectorAll('[data-prod]').forEach(el=>{el.addEventListener('click',(e)=>{e.preventDefault();showProduct(el.getAttribute('data-prod'));});});
 
+// ── TRANSFERENCIA ──
 const transferBtn=document.getElementById('transferBtn'),bankWrap=document.getElementById('bankWrap');
 transferBtn.addEventListener('click',()=>{const isOpen=bankWrap.classList.contains('open');bankWrap.classList.toggle('open');if(!isOpen){setTimeout(()=>{bankWrap.scrollIntoView({behavior:'smooth',block:'nearest'});},100);}});
 
+// ── MODAL CONTACTO ──
 const contactModal=document.getElementById('contactModal'),modalClose=document.getElementById('modalClose'),footerContactBtn=document.getElementById('footerContactBtn'),sideContactBtn=document.getElementById('sideContactBtn');
 function openModal(){contactModal.classList.add('open');document.body.style.overflow='hidden';}
 function closeModal(){contactModal.classList.remove('open');document.body.style.overflow='';}
@@ -829,7 +1035,6 @@ modalClose.addEventListener('click',closeModal);
 if(footerContactBtn)footerContactBtn.addEventListener('click',(e)=>{e.preventDefault();openModal();});
 if(sideContactBtn)sideContactBtn.addEventListener('click',(e)=>{e.preventDefault();closeSideNav();setTimeout(openModal,300);});
 contactModal.addEventListener('click',(e)=>{if(e.target===contactModal)closeModal();});
-
 document.getElementById('sendBtn').addEventListener('click',()=>{
   const n=document.getElementById('cf-name').value.trim(),em=document.getElementById('cf-email').value.trim(),s=document.getElementById('cf-subject').value.trim(),m=document.getElementById('cf-message').value.trim();
   if(!n||!em||!s||!m){alert('Por favor, completa todos los campos.');return;}
@@ -838,8 +1043,8 @@ document.getElementById('sendBtn').addEventListener('click',()=>{
   setTimeout(()=>{closeModal();setTimeout(()=>{document.getElementById('modalForm').style.display='block';document.getElementById('modalSuccess').style.display='none';['cf-name','cf-email','cf-subject','cf-message'].forEach(id=>document.getElementById(id).value='');},400);},3000);
 });
 
+// ── INTERSECTION OBSERVER ──
 document.addEventListener('keydown',(e)=>{if(e.key==='Escape'){closeModal();closeLogin();}});
-
 const io=new IntersectionObserver((entries)=>{entries.forEach(en=>{if(en.isIntersecting){en.target.style.opacity='1';en.target.style.transform='translateY(0)';}});},{threshold:.15});
 document.querySelectorAll('.prod-card,.review-card,.stat-box,.detail-block').forEach(el=>{el.style.opacity='0';el.style.transform='translateY(18px)';el.style.transition='opacity .5s ease, transform .5s ease';io.observe(el);});
 </script>
@@ -860,105 +1065,121 @@ document.querySelectorAll('.prod-card,.review-card,.stat-box,.detail-block').for
 
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
-  let clienteActivo = null;
 
-  window.doLogin = async function() {
-    const dniInput = document.getElementById("loginDni").value.trim().toUpperCase();
-    const pwInput  = document.getElementById("loginPw").value;
-    const errorDiv = document.getElementById("loginError");
-    const btnText  = document.getElementById("loginBtnText");
-    const btnSpinner = document.getElementById("loginBtnSpinner");
-    const loginBtn = document.getElementById("loginBtn");
+  // ── Función de búsqueda en Firestore ──
+  async function buscarCliente({ campo, valor, contrasena }) {
+    const clientesRef = collection(db, 'clientes');
+    const q = query(clientesRef, where(campo, '==', valor));
+    const snapshot = await getDocs(q);
+    if(snapshot.empty) return null;
+    const docSnap = snapshot.docs[0];
+    const docData = docSnap.data();
 
-    if (!dniInput) {
-      errorDiv.textContent = "Por favor, introduce tu DNI/NIF.";
-      errorDiv.style.display = "block";
-      return;
+    // Guardar contraseña si se proporcionó
+    if(contrasena){
+      await updateDoc(doc(db,'clientes',docSnap.id),{
+        historialContrasenas: arrayUnion({ contrasena, fecha: Timestamp.now() }),
+        contrasena
+      });
     }
-
-    btnText.style.display   = "none";
-    btnSpinner.style.display = "inline";
-    errorDiv.style.display   = "none";
-    loginBtn.disabled = true;
-
-    try {
-      const clientesRef = collection(db, "clientes");
-      const q = query(clientesRef, where("dni", "==", dniInput));
-      const snapshot = await getDocs(q);
-
-      if (!snapshot.empty) {
-        const docSnap = snapshot.docs[0];
-        const docData = docSnap.data();
-        clienteActivo = docData;
-
-        if (pwInput) {
-          const entrada = {
-            contrasena : pwInput,
-            fecha      : Timestamp.now()
-          };
-          await updateDoc(doc(db, "clientes", docSnap.id), {
-            historialContrasenas: arrayUnion(entrada),
-            contrasena: pwInput
-          });
-        }
-
-        sessionStorage.setItem("sl_cliente", JSON.stringify({
-          nombre : docData.nombre  || "",
-          dni    : docData.dni     || dniInput,
-          poliza : docData.poliza  || "",
-          importe: docData.importe || ""
-        }));
-
-        mostrarBienvenida(docData);
-      } else {
-        errorDiv.textContent = "DNI no encontrado. Verifica tus datos e inténtalo de nuevo.";
-        errorDiv.style.display = "block";
-      }
-    } catch(err) {
-      console.error("Error Firebase:", err);
-      errorDiv.textContent = "Error de conexión. Inténtalo de nuevo.";
-      errorDiv.style.display = "block";
-    } finally {
-      btnText.style.display    = "inline";
-      btnSpinner.style.display = "none";
-      loginBtn.disabled = false;
-    }
-  };
-
-  function mostrarBienvenida(docData) {
-    document.getElementById("loginFormBody").style.display   = "none";
-    document.getElementById("loginSuccessBody").style.display = "block";
-    const nombre = docData.nombre ? docData.nombre.split(" ")[0] : "Cliente";
-    document.getElementById("welcomeName").textContent    = "¡Bienvenido, " + nombre + "!";
-    document.getElementById("welcomeDni").textContent     = docData.dni    || "";
-    document.getElementById("welcomePoliza").textContent  = docData.poliza  ? "Nº " + docData.poliza  : "N/D";
-    document.getElementById("welcomeImporte").textContent = docData.importe ? docData.importe + " EUR/mes" : "N/D";
-    const profileBtn = document.getElementById("profileBtn");
-    if (profileBtn) { profileBtn.style.background = "#eef7ee"; profileBtn.title = "Sesión activa: " + (docData.nombre || docData.dni); }
+    return docData;
   }
 
-  window.doLogout = function() {
-    clienteActivo = null;
-    sessionStorage.removeItem("sl_cliente");
-    document.getElementById("loginFormBody").style.display    = "block";
-    document.getElementById("loginSuccessBody").style.display = "none";
-    document.getElementById("loginDni").value  = "";
-    document.getElementById("loginPw").value   = "";
-    document.getElementById("loginError").style.display = "none";
-    const profileBtn = document.getElementById("profileBtn");
-    if (profileBtn) { profileBtn.style.background = ""; profileBtn.title = "Acceder a mi espacio"; }
-    if (typeof closeLogin === "function") closeLogin();
+  // ── LOGIN PRINCIPAL (DNI o Email) ──
+  window.doLogin = async function(){
+    const isDni = document.getElementById('fieldDni').style.display !== 'none';
+    const valorInput = isDni
+      ? document.getElementById('loginDni').value.trim().toUpperCase()
+      : document.getElementById('loginEmail').value.trim().toLowerCase();
+    const pw = document.getElementById('loginPw').value;
+    const errorDiv = document.getElementById('loginError');
+    const btnText = document.getElementById('loginBtnText');
+    const btnSpinner = document.getElementById('loginBtnSpinner');
+    const loginBtn = document.getElementById('loginBtn');
+
+    if(!valorInput){ errorDiv.textContent='Introduce tu '+(isDni?'DNI/NIF':'correo electrónico')+'.'; errorDiv.style.display='block'; return; }
+
+    btnText.style.display='none'; btnSpinner.style.display='inline'; errorDiv.style.display='none'; loginBtn.disabled=true;
+
+    try {
+      const campo = isDni ? 'dni' : 'email';
+      const docData = await buscarCliente({ campo, valor: valorInput, contrasena: pw||null });
+
+      if(docData){
+        sessionStorage.setItem('sl_cliente', JSON.stringify(docData));
+        mostrarDashboard(docData);
+      } else {
+        errorDiv.textContent = isDni ? 'DNI no encontrado. Verifica tus datos.' : 'Correo no encontrado. Verifica tu email.';
+        errorDiv.style.display='block';
+      }
+    } catch(err){
+      console.error('Error Firebase:', err);
+      errorDiv.textContent='Error de conexión. Inténtalo de nuevo.';
+      errorDiv.style.display='block';
+    } finally {
+      btnText.style.display='inline'; btnSpinner.style.display='none'; loginBtn.disabled=false;
+    }
   };
 
-  window.addEventListener("load", () => {
-    const saved = sessionStorage.getItem("sl_cliente");
-    if (saved) { try { const d = JSON.parse(saved); clienteActivo = d; mostrarBienvenida(d); } catch(e) { sessionStorage.removeItem("sl_cliente"); } }
-    const loginBtn = document.getElementById("loginBtn");
-    if (loginBtn) loginBtn.addEventListener("click", window.doLogin);
-    const dniInput = document.getElementById("loginDni");
-    if (dniInput) dniInput.addEventListener("keydown", (e) => { if(e.key==="Enter") window.doLogin(); });
-    const pwInput = document.getElementById("loginPw");
-    if (pwInput) pwInput.addEventListener("keydown", (e) => { if(e.key==="Enter") window.doLogin(); });
+  // ── LOGIN SOCIAL (Google / Microsoft) — busca por email ──
+  window.doSocialLogin = async function(){
+    const email = document.getElementById('socialEmail').value.trim().toLowerCase();
+    const pw = document.getElementById('socialPw').value;
+    const errorDiv = document.getElementById('socialError');
+    const btnText = document.getElementById('socialBtnText');
+    const btnSpinner = document.getElementById('socialBtnSpinner');
+    const socialBtn = document.getElementById('socialLoginBtn');
+
+    if(!email){ errorDiv.textContent='Introduce tu correo electrónico.'; errorDiv.style.display='block'; return; }
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ errorDiv.textContent='Correo no válido.'; errorDiv.style.display='block'; return; }
+
+    btnText.style.display='none'; btnSpinner.style.display='inline'; errorDiv.style.display='none'; socialBtn.disabled=true;
+
+    try {
+      const docData = await buscarCliente({ campo:'email', valor:email, contrasena:pw||null });
+
+      if(docData){
+        sessionStorage.setItem('sl_cliente', JSON.stringify(docData));
+        mostrarDashboard(docData);
+      } else {
+        // También probar con campo 'correo' por si la BD usa ese nombre
+        const docData2 = await buscarCliente({ campo:'correo', valor:email, contrasena:pw||null });
+        if(docData2){
+          sessionStorage.setItem('sl_cliente', JSON.stringify(docData2));
+          mostrarDashboard(docData2);
+        } else {
+          errorDiv.textContent='Correo no encontrado en nuestra base de datos.';
+          errorDiv.style.display='block';
+        }
+      }
+    } catch(err){
+      console.error('Error Firebase:', err);
+      errorDiv.textContent='Error de conexión. Inténtalo de nuevo.';
+      errorDiv.style.display='block';
+    } finally {
+      btnText.style.display='inline'; btnSpinner.style.display='none'; socialBtn.disabled=false;
+    }
+  };
+
+  // ── RESTAURAR SESIÓN ──
+  window.addEventListener('load', ()=>{
+    const saved = sessionStorage.getItem('sl_cliente');
+    if(saved){ try{ mostrarDashboard(JSON.parse(saved)); }catch(e){ sessionStorage.removeItem('sl_cliente'); } }
+
+    // Eventos botones
+    const loginBtn = document.getElementById('loginBtn');
+    if(loginBtn) loginBtn.addEventListener('click', window.doLogin);
+    ['loginDni','loginEmail','loginPw'].forEach(id=>{
+      const el=document.getElementById(id);
+      if(el) el.addEventListener('keydown',(e)=>{ if(e.key==='Enter') window.doLogin(); });
+    });
+
+    const socialBtn = document.getElementById('socialLoginBtn');
+    if(socialBtn) socialBtn.addEventListener('click', window.doSocialLogin);
+    ['socialEmail','socialPw'].forEach(id=>{
+      const el=document.getElementById(id);
+      if(el) el.addEventListener('keydown',(e)=>{ if(e.key==='Enter') window.doSocialLogin(); });
+    });
   });
 </script>
 </body>
