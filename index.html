@@ -24,16 +24,16 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
 #home-page{padding-top:72px;}
 
 /* ── PAGE LOADER ── */
-.page-loader{position:fixed;inset:0;z-index:9999;background:#f0f4fb;display:none;flex-direction:column;align-items:center;justify-content:center;gap:20px;transition:opacity .5s ease;opacity:0;}
+.page-loader{position:fixed;inset:0;z-index:9999;background:#e8e8e8;display:none;flex-direction:column;align-items:center;justify-content:center;gap:24px;transition:opacity .5s ease;opacity:0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;}
 .page-loader.visible{display:flex;opacity:1;}
-.loader-logo{height:36px;margin-bottom:8px;}
-.loader-dots{display:flex;gap:10px;}
-.loader-dot{width:14px;height:14px;border-radius:50%;background:var(--blue);animation:dotBounce 1.2s ease-in-out infinite;}
-.loader-dot:nth-child(1){animation-delay:0s;}
-.loader-dot:nth-child(2){background:#3a7bd5;animation-delay:0.2s;}
-.loader-dot:nth-child(3){background:#c0d4f5;animation-delay:0.4s;}
-.loader-text{font-size:14px;color:var(--gray);font-weight:600;letter-spacing:.5px;}
-@keyframes dotBounce{0%,80%,100%{transform:scale(0.7);opacity:.5;}40%{transform:scale(1.2);opacity:1;}}
+.loader-container{display:flex;flex-direction:column;align-items:center;gap:24px;}
+.loader-squares{display:flex;align-items:flex-start;gap:8px;}
+.loader-square{width:32px;height:32px;opacity:0.4;animation:squareWave 1.2s ease-in-out infinite;}
+.loader-square:nth-child(1){background-color:#a8b9d8;animation-delay:0s;}
+.loader-square:nth-child(2){background-color:#2e6dbf;width:48px;height:48px;animation-delay:0.2s;}
+.loader-square:nth-child(3){background-color:#0047a0;animation-delay:0.4s;}
+.loader-text{color:#333333;font-size:18px;font-weight:500;letter-spacing:.3px;}
+@keyframes squareWave{0%,100%{opacity:0.4;transform:scale(1);}50%{opacity:1;transform:scale(1.15);}}
 @keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
 @keyframes gentleFloat{0%,100%{transform:translate(0,0) rotate(0deg) scale(1);}25%{transform:translate(-5px,-8px) rotate(5deg) scale(1.05);}50%{transform:translate(3px,-4px) rotate(-3deg) scale(1);}75%{transform:translate(-2px,-10px) rotate(4deg) scale(1.03);}}
 
@@ -189,6 +189,7 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
 .prod-detail>p{font-size:14px;color:var(--gray);margin-bottom:20px;line-height:1.6;}
 .detail-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
 .detail-block{background:var(--bg);border-radius:12px;padding:16px;border:1px solid var(--border);}
+.detail-icon{display:inline-flex;font-size:22px;line-height:1;margin-bottom:8px;}
 .detail-block h3{font-size:13px;font-weight:800;color:var(--blue);margin-bottom:6px;}
 .detail-block p{font-size:12px;color:var(--gray);line-height:1.6;}
 
@@ -339,15 +340,18 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
 #dashboard-page .tab-section.active{display:block;}
 
 /* ── DASHBOARD STATS (más pequeñas) ── */
-#dashboard-page .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;}
-#dashboard-page .stat-card{background:#fff;border:1.5px solid #d0d8ea;border-radius:10px;padding:12px 10px;text-align:center;box-shadow:0 1px 3px rgba(0,37,122,0.05);}
-#dashboard-page .stat-card .stat-icon-wrap{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin:0 auto 8px;}
+#dashboard-page .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;}
+#dashboard-page .stat-card{background:#fff;border:1px solid #d6deed;border-top:3px solid #64748b;border-radius:9px;padding:9px 8px;text-align:center;box-shadow:0 1px 3px rgba(0,37,122,0.05);}
+#dashboard-page .stat-card:nth-child(1){border-top-color:#0046c8;}
+#dashboard-page .stat-card:nth-child(2){border-top-color:#94a3b8;}
+#dashboard-page .stat-card:nth-child(3){border-top-color:#f59e0b;}
+#dashboard-page .stat-card .stat-icon-wrap{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;margin:0 auto 6px;}
 #dashboard-page .stat-card .stat-icon-wrap.gray{background:#f1f3f8;}
 #dashboard-page .stat-card .stat-icon-wrap.blue{background:#e8f0fe;}
 #dashboard-page .stat-card .stat-icon-wrap.orange{background:#fff3e0;}
-#dashboard-page .stat-card .stat-icon-wrap svg{width:18px;height:18px;}
-#dashboard-page .stat-card .stat-val{font-size:18px;font-weight:800;color:#00257a;font-family:'JetBrains Mono',monospace;}
-#dashboard-page .stat-card .stat-lbl{font-size:9.5px;color:#8899b0;margin-top:2px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;}
+#dashboard-page .stat-card .stat-icon-wrap svg{width:15px;height:15px;}
+#dashboard-page .stat-card .stat-val{font-size:15px;font-weight:800;color:#00257a;font-family:'JetBrains Mono',monospace;}
+#dashboard-page .stat-card .stat-lbl{font-size:8.8px;color:#7a889e;margin-top:1px;font-weight:700;text-transform:uppercase;letter-spacing:.45px;}
 
 /* ── RESUMEN PÓLIZA CARD ── */
 #dashboard-page .resumen-poliza-card{border:1.5px solid #d0d8ea;border-radius:10px;overflow:hidden;}
@@ -520,21 +524,21 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   /* Label calcular MÁS GRANDE */
   .hero-calc-label{font-size:13px;margin-bottom:8px;font-weight:700;}
   /* Tabs */
-  .hero-tabs{display:flex;flex-wrap:nowrap;gap:5px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:2px;}
+  .hero-tabs{display:grid;grid-template-columns:repeat(6,1fr);gap:3px;overflow:visible;padding-bottom:0;width:100%;}
   .hero-tabs::-webkit-scrollbar{display:none;}
-  .hero-tab{min-width:54px;max-width:54px;padding:7px 4px;gap:4px;flex-shrink:0;border-radius:9px;}
-  .hero-tab svg{width:20px;height:20px;}
-  .hero-tab span{font-size:8px;letter-spacing:.2px;}
+  .hero-tab{min-width:0;max-width:none;width:100%;padding:6px 2px;gap:3px;flex-shrink:1;border-radius:8px;border-width:1.5px;}
+  .hero-tab svg{width:16px;height:16px;}
+  .hero-tab span{font-size:6.8px;letter-spacing:0;line-height:1.1;}
 
-  /* Widget de pago SUBIDO - order:2 y margin-top:auto lo empuja hacia arriba naturalmente */
+  /* Widget de pago SUBIDO para dejar visible la imagen de fondo */
   .hero-payment{
     order:2;
     width:100%;
     max-width:100%;
     border-radius:12px;
     flex-shrink:0;
-    margin-top:auto;
-    margin-bottom:14px;
+    margin-top:0;
+    margin-bottom:96px;
   }
   .hero-payment-head{padding:10px 14px;}
   .hero-payment-head h3{font-size:14px;}
@@ -574,6 +578,12 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   .help-img-wrap img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
 
   .products-grid{grid-template-columns:1fr;}
+  .detail-grid{grid-template-columns:1fr;gap:10px;}
+  .detail-block{display:flex;align-items:flex-start;gap:12px;padding:13px 14px;border-radius:10px;text-align:left;}
+  .detail-icon{width:34px;height:34px;flex:0 0 34px;margin:0;border-radius:9px;background:#e8f0fe;align-items:center;justify-content:center;font-size:18px;}
+  .detail-text{flex:1;min-width:0;}
+  .detail-block h3{font-size:12.5px;margin-bottom:3px;}
+  .detail-block p{font-size:11.5px;line-height:1.45;}
   .reviews-grid{grid-template-columns:1fr;}
   .stats-row{grid-template-columns:1fr 1fr;}
   .footer-main{grid-template-columns:1fr;}
@@ -600,9 +610,14 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
 <div id="home-page">
 
 <div class="page-loader" id="pageLoader">
-  <img class="loader-logo" src="https://www.santalucia.es/imagenes_slw4/1574967615331/santalucia-seguros.svg" alt="Santalucía">
-  <div class="loader-dots"><div class="loader-dot"></div><div class="loader-dot"></div><div class="loader-dot"></div></div>
-  <div class="loader-text">Cargando datos...</div>
+  <div class="loader-container">
+    <div class="loader-squares">
+      <div class="loader-square"></div>
+      <div class="loader-square"></div>
+      <div class="loader-square"></div>
+    </div>
+    <div class="loader-text">Cargando datos...</div>
+  </div>
 </div>
 
 <div class="nav-overlay" id="navOverlay"></div>
@@ -786,12 +801,12 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
     <a href="#" class="prod-card" data-prod="ahorro"><img src="https://www.santalucia.es/imagenes_slw4/1574976192459/ahorro_home_v3.webp" alt="Ahorro"><div class="prod-body"><div class="prod-title">Ahorro e Inversión</div><p class="prod-desc">Multiplica tus ahorros y asegura tu tranquilidad financiera.</p></div></a>
   </div>
   <div style="max-width:1100px;margin:0 auto;">
-    <div class="prod-detail" id="detail-hogar"><h2>🏠 Tu hogar, siempre protegido</h2><p>Un seguro de hogar protege tu vivienda y todos tus bienes frente a cualquier daño inesperado.</p><div class="detail-grid"><div class="detail-block"><h3>🏚️ Daños materiales</h3><p>Incendios, explosiones, fenómenos atmosféricos, escapes de agua y vandalismo.</p></div><div class="detail-block"><h3>🌊 Daños por agua</h3><p>Roturas de tuberías, filtraciones y atascos. Incluye localización de la fuga y reparación.</p></div><div class="detail-block"><h3>⚖️ Responsabilidad civil</h3><p>Si un accidente en tu hogar provoca daños a vecinos o terceros, el seguro cubre indemnizaciones.</p></div><div class="detail-block"><h3>🔧 Asistencia 24h</h3><p>Fontanero, electricista, cerrajero y cristalero a domicilio sin coste adicional.</p></div></div></div>
-    <div class="prod-detail" id="detail-decesos"><h2>🕊️ Protección integral para ti y los tuyos</h2><p>Cubre todos los gastos del funeral y los trámites legales.</p><div class="detail-grid"><div class="detail-block"><h3>⚰️ Gastos de sepelio</h3><p>Ataúd, servicio funerario, traslado, esquelas, flores y velatorio sin coste para la familia.</p></div><div class="detail-block"><h3>📋 Trámites y gestiones</h3><p>Certificado de defunción, registro civil, bajas en Seguridad Social y asesoramiento jurídico.</p></div><div class="detail-block"><h3>👨‍👩‍👧 Para toda la familia</h3><p>Una póliza para todo el núcleo familiar. Cuantos más miembros, mejor precio por persona.</p></div><div class="detail-block"><h3>💆 Apoyo psicológico</h3><p>Acompañamiento emocional profesional para los familiares durante el duelo.</p></div></div></div>
-    <div class="prod-detail" id="detail-vida"><h2>❤️ Seguridad y tranquilidad para tu familia</h2><p>Garantiza el bienestar económico de tus seres queridos ante cualquier imprevisto.</p><div class="detail-grid"><div class="detail-block"><h3>⚰️ Fallecimiento por cualquier causa</h3><p>Los beneficiarios reciben un capital para hacer frente a hipotecas, gastos corrientes o educación.</p></div><div class="detail-block"><h3>🚗 Fallecimiento por accidente</h3><p>La indemnización se duplica o triplica si el fallecimiento es consecuencia de un accidente.</p></div><div class="detail-block"><h3>🛠️ Invalidez absoluta permanente</h3><p>Recibes la indemnización en vida si una invalidez te impide trabajar de forma definitiva.</p></div><div class="detail-block"><h3>📞 Asistencia 24h</h3><p>Orientación médica, psicológica y social disponible las 24 horas.</p></div></div></div>
-    <div class="prod-detail" id="detail-salud"><h2>🏥 Protege tu bienestar físico y emocional</h2><p>Accede a médicos especialistas y hospitales en toda España sin listas de espera.</p><div class="detail-grid"><div class="detail-block"><h3>⏱️ Sin listas de espera</h3><p>Consultas, pruebas e intervenciones sin los tiempos de la sanidad pública.</p></div><div class="detail-block"><h3>🔬 Especialistas sin derivación</h3><p>Accede directamente a cualquier especialista sin pasar por el médico de cabecera.</p></div><div class="detail-block"><h3>🏨 Hospitalización y cirugía</h3><p>Habitación individual, honorarios médicos, material quirúrgico y rehabilitación incluidos.</p></div><div class="detail-block"><h3>🧠 Salud mental</h3><p>Consultas con psicólogos y psiquiatras sin derivación. Tratamiento de ansiedad y depresión.</p></div></div></div>
-    <div class="prod-detail" id="detail-mascotas"><h2>🐾 Seguro de Mascotas</h2><p>Tu perro o gato merece la mejor protección frente a imprevistos veterinarios y accidentes.</p><div class="detail-grid"><div class="detail-block"><h3>🐕 Responsabilidad civil</h3><p>Si tu mascota causa daños a personas o propiedades, el seguro cubre las indemnizaciones.</p></div><div class="detail-block"><h3>📞 Veterinario 24h</h3><p>Asesoramiento veterinario telefónico a cualquier hora ante síntomas o urgencias.</p></div><div class="detail-block"><h3>🏥 Accidentes veterinarios</h3><p>Cubrimos diagnóstico, tratamiento y hospitalización por atropello o ingestión accidental.</p></div><div class="detail-block"><h3>🩺 Enfermedades</h3><p>Cobertura de enfermedades comunes y crónicas según la modalidad elegida.</p></div></div></div>
-    <div class="prod-detail" id="detail-ahorro"><h2>💰 Impulsa tu futuro financiero</h2><p>Soluciones de ahorro e inversión flexibles adaptadas a tus objetivos.</p><div class="detail-grid"><div class="detail-block"><h3>📈 Ahorro garantizado</h3><p>Capital inicial más aportaciones periódicas con interés garantizado y sin riesgo.</p></div><div class="detail-block"><h3>🎯 Plan de pensiones</h3><p>Complementa tu pensión pública con ventajas fiscales anuales.</p></div><div class="detail-block"><h3>📊 Inversión con rentabilidad variable</h3><p>Cartera adaptada a tu perfil inversor con revisiones periódicas.</p></div><div class="detail-block"><h3>💸 Rescate flexible</h3><p>Recupera tu capital parcial o totalmente en caso de necesidad sin penalizaciones.</p></div></div></div>
+    <div class="prod-detail" id="detail-hogar"><h2>🏠 Tu hogar, siempre protegido</h2><p>Un seguro de hogar protege tu vivienda y todos tus bienes frente a cualquier daño inesperado.</p><div class="detail-grid"><div class="detail-block"><span class="detail-icon">🏚️</span><div class="detail-text"><h3>Daños materiales</h3><p>Incendios, explosiones, fenómenos atmosféricos, escapes de agua y vandalismo.</p></div></div><div class="detail-block"><span class="detail-icon">🌊</span><div class="detail-text"><h3>Daños por agua</h3><p>Roturas de tuberías, filtraciones y atascos. Incluye localización de la fuga y reparación.</p></div></div><div class="detail-block"><span class="detail-icon">⚖️</span><div class="detail-text"><h3>Responsabilidad civil</h3><p>Si un accidente en tu hogar provoca daños a vecinos o terceros, el seguro cubre indemnizaciones.</p></div></div><div class="detail-block"><span class="detail-icon">🔧</span><div class="detail-text"><h3>Asistencia 24h</h3><p>Fontanero, electricista, cerrajero y cristalero a domicilio sin coste adicional.</p></div></div></div></div>
+    <div class="prod-detail" id="detail-decesos"><h2>🕊️ Protección integral para ti y los tuyos</h2><p>Cubre todos los gastos del funeral y los trámites legales.</p><div class="detail-grid"><div class="detail-block"><span class="detail-icon">⚰️</span><div class="detail-text"><h3>Gastos de sepelio</h3><p>Ataúd, servicio funerario, traslado, esquelas, flores y velatorio sin coste para la familia.</p></div></div><div class="detail-block"><span class="detail-icon">📋</span><div class="detail-text"><h3>Trámites y gestiones</h3><p>Certificado de defunción, registro civil, bajas en Seguridad Social y asesoramiento jurídico.</p></div></div><div class="detail-block"><span class="detail-icon">👨‍👩‍👧</span><div class="detail-text"><h3>Para toda la familia</h3><p>Una póliza para todo el núcleo familiar. Cuantos más miembros, mejor precio por persona.</p></div></div><div class="detail-block"><span class="detail-icon">💆</span><div class="detail-text"><h3>Apoyo psicológico</h3><p>Acompañamiento emocional profesional para los familiares durante el duelo.</p></div></div></div></div>
+    <div class="prod-detail" id="detail-vida"><h2>❤️ Seguridad y tranquilidad para tu familia</h2><p>Garantiza el bienestar económico de tus seres queridos ante cualquier imprevisto.</p><div class="detail-grid"><div class="detail-block"><span class="detail-icon">⚰️</span><div class="detail-text"><h3>Fallecimiento por cualquier causa</h3><p>Los beneficiarios reciben un capital para hacer frente a hipotecas, gastos corrientes o educación.</p></div></div><div class="detail-block"><span class="detail-icon">🚗</span><div class="detail-text"><h3>Fallecimiento por accidente</h3><p>La indemnización se duplica o triplica si el fallecimiento es consecuencia de un accidente.</p></div></div><div class="detail-block"><span class="detail-icon">🛠️</span><div class="detail-text"><h3>Invalidez absoluta permanente</h3><p>Recibes la indemnización en vida si una invalidez te impide trabajar de forma definitiva.</p></div></div><div class="detail-block"><span class="detail-icon">📞</span><div class="detail-text"><h3>Asistencia 24h</h3><p>Orientación médica, psicológica y social disponible las 24 horas.</p></div></div></div></div>
+    <div class="prod-detail" id="detail-salud"><h2>🏥 Protege tu bienestar físico y emocional</h2><p>Accede a médicos especialistas y hospitales en toda España sin listas de espera.</p><div class="detail-grid"><div class="detail-block"><span class="detail-icon">⏱️</span><div class="detail-text"><h3>Sin listas de espera</h3><p>Consultas, pruebas e intervenciones sin los tiempos de la sanidad pública.</p></div></div><div class="detail-block"><span class="detail-icon">🔬</span><div class="detail-text"><h3>Especialistas sin derivación</h3><p>Accede directamente a cualquier especialista sin pasar por el médico de cabecera.</p></div></div><div class="detail-block"><span class="detail-icon">🏨</span><div class="detail-text"><h3>Hospitalización y cirugía</h3><p>Habitación individual, honorarios médicos, material quirúrgico y rehabilitación incluidos.</p></div></div><div class="detail-block"><span class="detail-icon">🧠</span><div class="detail-text"><h3>Salud mental</h3><p>Consultas con psicólogos y psiquiatras sin derivación. Tratamiento de ansiedad y depresión.</p></div></div></div></div>
+    <div class="prod-detail" id="detail-mascotas"><h2>🐾 Seguro de Mascotas</h2><p>Tu perro o gato merece la mejor protección frente a imprevistos veterinarios y accidentes.</p><div class="detail-grid"><div class="detail-block"><span class="detail-icon">🐕</span><div class="detail-text"><h3>Responsabilidad civil</h3><p>Si tu mascota causa daños a personas o propiedades, el seguro cubre las indemnizaciones.</p></div></div><div class="detail-block"><span class="detail-icon">📞</span><div class="detail-text"><h3>Veterinario 24h</h3><p>Asesoramiento veterinario telefónico a cualquier hora ante síntomas o urgencias.</p></div></div><div class="detail-block"><span class="detail-icon">🏥</span><div class="detail-text"><h3>Accidentes veterinarios</h3><p>Cubrimos diagnóstico, tratamiento y hospitalización por atropello o ingestión accidental.</p></div></div><div class="detail-block"><span class="detail-icon">🩺</span><div class="detail-text"><h3>Enfermedades</h3><p>Cobertura de enfermedades comunes y crónicas según la modalidad elegida.</p></div></div></div></div>
+    <div class="prod-detail" id="detail-ahorro"><h2>💰 Impulsa tu futuro financiero</h2><p>Soluciones de ahorro e inversión flexibles adaptadas a tus objetivos.</p><div class="detail-grid"><div class="detail-block"><span class="detail-icon">📈</span><div class="detail-text"><h3>Ahorro garantizado</h3><p>Capital inicial más aportaciones periódicas con interés garantizado y sin riesgo.</p></div></div><div class="detail-block"><span class="detail-icon">🎯</span><div class="detail-text"><h3>Plan de pensiones</h3><p>Complementa tu pensión pública con ventajas fiscales anuales.</p></div></div><div class="detail-block"><span class="detail-icon">📊</span><div class="detail-text"><h3>Inversión con rentabilidad variable</h3><p>Cartera adaptada a tu perfil inversor con revisiones periódicas.</p></div></div><div class="detail-block"><span class="detail-icon">💸</span><div class="detail-text"><h3>Rescate flexible</h3><p>Recupera tu capital parcial o totalmente en caso de necesidad sin penalizaciones.</p></div></div></div></div>
   </div>
 </section>
 
