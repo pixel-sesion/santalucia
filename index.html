@@ -484,8 +484,8 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   .icon-btn{width:42px;height:42px;}
   .icon-btn svg{width:28px;height:28px;}
 
-  /* ── HERO MOBILE: payment card pegada justo debajo de los tabs ── */
-  .hero{min-height:0;display:block;}
+  /* ── HERO MOBILE: ocupa toda la pantalla, payment card pegada bajo los tabs ── */
+  .hero{min-height:calc(100dvh - 60px);display:flex;align-items:flex-start;}
   .hero-bg{background-size:cover;background-position:center center;}
   .hero-inner{
     flex-direction:column;
