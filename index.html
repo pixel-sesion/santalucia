@@ -69,6 +69,7 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
 .login-close svg{width:15px;height:15px;stroke:white;fill:none;stroke-width:2.5;stroke-linecap:round;}
 .login-main{position:relative;z-index:2;flex:1;display:flex;align-items:center;justify-content:center;padding:32px 5%;gap:50px;overflow:hidden;}
 .login-features{display:grid;grid-template-columns:repeat(3,190px);grid-template-rows:repeat(2,185px);gap:14px;flex-shrink:0;}
+/* ── FIX: sin transform en hover para las tarjetas de login ── */
 .lf-card{background:rgba(255,255,255,0.88);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:0;padding:24px 20px;display:flex;flex-direction:column;cursor:pointer;border:none;transition:background .2s,box-shadow .2s;}
 .lf-card:hover{background:rgba(255,255,255,0.97);box-shadow:0 8px 24px rgba(0,0,0,0.12);}
 .lf-icon{width:38px;height:38px;margin-bottom:14px;color:#1a4bbf;}
@@ -288,10 +289,12 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   background:#eef1f8;
   color:#0d1526;
   min-height:100vh;
+  /* zoom out para que todo quepa */
   font-size:13px;
 }
 #dashboard-page *{box-sizing:border-box;}
 
+/* ── DASHBOARD TOPBAR ── */
 #dashboard-page .topbar{background:#ffffff;padding:0 1.5rem;height:58px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;border-bottom:1px solid #e2e8f0;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
 #dashboard-page .topbar-logo{display:flex;align-items:center;gap:12px;}
 #dashboard-page .topbar-logo img{height:26px;}
@@ -305,9 +308,11 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
 #dashboard-page .btn-logout:hover{background:linear-gradient(135deg,#001a5c,#003399);}
 #dashboard-page .btn-logout svg{width:12px;height:12px;flex-shrink:0;}
 
+/* ── MAIN GRID ── */
 #dashboard-page .main-wrap{max-width:1100px;margin:0 auto;padding:20px 1.5rem 50px;}
 #dashboard-page .main-grid{display:grid;grid-template-columns:240px 1fr;gap:16px;align-items:start;}
 
+/* ── DASHBOARD SIDEBAR NAV ── */
 #dashboard-page .side-nav{background:#ffffff;border-radius:12px;border:1px solid #d0d8ea;box-shadow:0 2px 8px rgba(0,37,122,0.06);overflow:hidden;position:sticky;top:12px;}
 #dashboard-page .side-nav-profile{background:linear-gradient(135deg,#f8f9ff 0%,#eef1fb 100%);padding:16px 18px;border-bottom:1px solid #d0d8ea;text-align:center;}
 #dashboard-page .snp-avatar{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#1a3a8f,#0668f5);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:white;margin:0 auto 10px;box-shadow:0 3px 12px rgba(6,104,245,0.25);}
@@ -323,6 +328,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
 #dashboard-page .nav-btn .nav-badge{margin-left:auto;background:#e8364a;color:white;border-radius:20px;padding:2px 6px;font-size:9px;font-weight:700;}
 #dashboard-page .nav-divider{height:1px;background:#d0d8ea;margin:4px 6px;}
 
+/* ── CONTENT PANELS ── */
 #dashboard-page .content-area{display:flex;flex-direction:column;gap:14px;}
 #dashboard-page .panel{background:#ffffff;border-radius:12px;border:1px solid #d0d8ea;box-shadow:0 2px 8px rgba(0,37,122,0.06);overflow:hidden;animation:dashFadeUp .3s ease both;}
 @keyframes dashFadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
@@ -333,6 +339,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
 #dashboard-page .tab-section{display:none;}
 #dashboard-page .tab-section.active{display:block;}
 
+/* ── DASHBOARD STATS (más pequeñas) ── */
 #dashboard-page .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;}
 #dashboard-page .stat-card{background:#fff;border:1px solid #d6deed;border-top:3px solid #64748b;border-radius:9px;padding:9px 8px;text-align:center;box-shadow:0 1px 3px rgba(0,37,122,0.05);}
 #dashboard-page .stat-card:nth-child(1){border-top-color:#0046c8;}
@@ -346,6 +353,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
 #dashboard-page .stat-card .stat-val{font-size:15px;font-weight:800;color:#00257a;font-family:'JetBrains Mono',monospace;}
 #dashboard-page .stat-card .stat-lbl{font-size:8.8px;color:#7a889e;margin-top:1px;font-weight:700;text-transform:uppercase;letter-spacing:.45px;}
 
+/* ── RESUMEN PÓLIZA CARD ── */
 #dashboard-page .resumen-poliza-card{border:1.5px solid #d0d8ea;border-radius:10px;overflow:hidden;}
 #dashboard-page .resumen-poliza-head{background:linear-gradient(135deg,#00257a 0%,#0046c8 100%);padding:12px 16px;display:flex;align-items:center;gap:10px;}
 #dashboard-page .resumen-poliza-icon{font-size:20px;}
@@ -357,6 +365,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
 #dashboard-page .resumen-poliza-field label{font-size:9.5px;font-weight:700;color:#8899b0;text-transform:uppercase;letter-spacing:.4px;display:block;margin-bottom:2px;}
 #dashboard-page .resumen-poliza-field span{font-size:12px;font-weight:600;color:#0d1526;font-family:'JetBrains Mono',monospace;}
 
+/* ── AVISO RECIBOS ── */
 #dashboard-page .aviso-recibos{display:flex;background:#fff8e1;border:1.5px solid #ffcc02;border-radius:10px;padding:12px 14px;align-items:center;gap:10px;margin-top:12px;}
 #dashboard-page .aviso-recibos-icon{font-size:22px;flex-shrink:0;}
 #dashboard-page .aviso-recibos-text{flex:1;}
@@ -364,6 +373,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
 #dashboard-page .aviso-recibos-text span{font-size:11.5px;color:#9a6000;}
 #dashboard-page .aviso-recibos-btn{background:#ffcc02;border:none;border-radius:7px;padding:7px 12px;font-size:11.5px;font-weight:700;font-family:'Sora',sans-serif;cursor:pointer;color:#3a2000;white-space:nowrap;flex-shrink:0;}
 
+/* ── PÓLIZA ── */
 #dashboard-page .poliza-card{border:1.5px solid #d0d8ea;border-radius:10px;overflow:hidden;margin-bottom:12px;}
 #dashboard-page .poliza-head{background:linear-gradient(135deg,#00257a 0%,#0046c8 100%);padding:12px 16px;display:flex;align-items:center;gap:10px;}
 #dashboard-page .poliza-icon{width:38px;height:38px;background:rgba(255,255,255,0.15);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
@@ -378,6 +388,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
 #dashboard-page .poliza-field-label{font-size:9.5px;font-weight:700;color:#8899b0;text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px;}
 #dashboard-page .poliza-field-val{font-size:13px;font-weight:600;color:#0d1526;font-family:'JetBrains Mono',monospace;}
 
+/* ── DATOS PERSONALES ── */
 #dashboard-page .datos-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;}
 #dashboard-page .dato-row{display:flex;align-items:flex-start;gap:10px;padding:12px 0;border-bottom:1px solid #d0d8ea;}
 #dashboard-page .dato-row:nth-last-child(-n+2){border-bottom:none;}
@@ -387,6 +398,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
 #dashboard-page .dato-label{font-size:9.5px;font-weight:600;color:#8899b0;text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px;}
 #dashboard-page .dato-val{font-size:13px;font-weight:600;color:#0d1526;}
 
+/* ── RECIBOS ── */
 #dashboard-page .recibo-item{border:1.5px solid #d0d8ea;border-radius:10px;overflow:hidden;margin-bottom:10px;transition:box-shadow .2s;}
 #dashboard-page .recibo-item:last-child{margin-bottom:0;}
 #dashboard-page .recibo-item:hover{box-shadow:0 4px 16px rgba(0,37,122,0.1);}
@@ -409,6 +421,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
 #dashboard-page .no-recibos h3{font-size:15px;font-weight:700;color:#0d1526;margin-bottom:5px;}
 #dashboard-page .no-recibos p{font-size:12.5px;color:#8899b0;line-height:1.6;}
 
+/* ── CONTACTO ── */
 #dashboard-page .contact-intro{display:flex;flex-direction:column;align-items:center;padding:20px 18px 16px;gap:10px;text-align:center;}
 #dashboard-page .contact-intro-icon{width:56px;height:56px;background:#eef3ff;border-radius:14px;display:flex;align-items:center;justify-content:center;}
 #dashboard-page .contact-intro-icon svg{width:28px;height:28px;stroke:#0046c8;}
@@ -418,6 +431,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
 #dashboard-page .btn-abrir-contacto:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(0,37,122,0.35);}
 #dashboard-page .btn-abrir-contacto svg{width:15px;height:15px;}
 
+/* ── INLINE CONTACT FORM (más pequeño) ── */
 #dashboard-page .inline-contact-form{display:none;margin-top:0;background:#f8f9ff;border-top:1.5px solid #dde3ee;padding:16px 18px;animation:dashFadeUp .25s ease both;}
 #dashboard-page .inline-contact-form.open{display:block;}
 #dashboard-page .icf-title{font-size:13px;font-weight:700;color:#0d1526;margin-bottom:12px;display:flex;align-items:center;gap:7px;}
@@ -437,6 +451,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
 #dashboard-page .icf-success h3{font-size:15px;font-weight:700;color:#0d1526;margin-bottom:5px;}
 #dashboard-page .icf-success p{font-size:12px;color:#8899b0;line-height:1.6;}
 
+/* ── TRANSFER WRAP ── */
 #dashboard-page .transfer-wrap{display:none;margin-top:10px;background:#f8f9ff;border:1.5px solid #d0d8ea;border-radius:9px;padding:14px;}
 #dashboard-page .transfer-wrap.open{display:block;animation:dashFadeUp .2s ease;}
 #dashboard-page .transfer-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #d0d8ea;}
@@ -484,7 +499,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   .icon-btn{width:42px;height:42px;}
   .icon-btn svg{width:28px;height:28px;}
 
-  /* ── HERO MOBILE: tarjeta de pago JUSTO debajo de los tabs ── */
+  /* ── HERO MOBILE: todo en una pantalla sin huecos ── */
   .hero{min-height:0;display:block;}
   .hero-inner{
     flex-direction:column;
@@ -497,30 +512,33 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   .hero-content{
     order:1;
     flex-shrink:0;
-    padding-top:18px;
+    padding-top:22px;
     padding-bottom:0;
     margin-bottom:0;
-    display:flex;
-    flex-direction:column;
   }
-  .hero-eyebrow{font-size:11px;margin-bottom:6px;letter-spacing:2px;order:1;}
-  .hero h1{font-size:30px;margin-bottom:8px;line-height:1.15;order:2;}
-  .hero-sub{font-size:14px;margin-bottom:10px;line-height:1.55;max-width:100%;order:3;}
-  .hero-calc-label{font-size:13px;margin-bottom:6px;font-weight:700;order:4;}
-  .hero-tabs{display:grid;grid-template-columns:repeat(6,1fr);gap:3px;overflow:visible;padding-bottom:0;width:100%;order:5;margin-bottom:0;}
+  /* Eyebrow */
+  .hero-eyebrow{font-size:11px;margin-bottom:6px;letter-spacing:2px;}
+  /* Título principal MÁS GRANDE */
+  .hero h1{font-size:30px;margin-bottom:10px;line-height:1.15;}
+  /* Subtítulo MÁS GRANDE */
+  .hero-sub{font-size:15px;margin-bottom:14px;line-height:1.6;max-width:100%;}
+  /* Label calcular MÁS GRANDE */
+  .hero-calc-label{font-size:13px;margin-bottom:8px;font-weight:700;}
+  /* Tabs */
+  .hero-tabs{display:grid;grid-template-columns:repeat(6,1fr);gap:3px;overflow:visible;padding-bottom:0;width:100%;}
   .hero-tabs::-webkit-scrollbar{display:none;}
   .hero-tab{min-width:0;max-width:none;width:100%;padding:6px 2px;gap:3px;flex-shrink:1;border-radius:8px;border-width:1.5px;}
   .hero-tab svg{width:16px;height:16px;}
   .hero-tab span{font-size:6.8px;letter-spacing:0;line-height:1.1;}
 
-  /* TARJETA DE PAGO pegada directamente debajo de los tabs */
+  /* Widget de pago SUBIDO para dejar visible la imagen de fondo */
   .hero-payment{
     order:2;
     width:100%;
     max-width:100%;
     border-radius:12px;
     flex-shrink:0;
-    margin-top:8px;
+    margin-top:6px;
     margin-bottom:0;
   }
   .hero-payment-head{padding:10px 14px;}
@@ -531,6 +549,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   .pay-btn{flex:1;flex-direction:column;padding:9px 4px;font-size:10.5px;gap:4px;}
   .pay-btn svg{width:17px;height:17px;}
 
+  /* PROMO */
   .promo-section{padding:18px 0.9rem;}
   .promo-inner{flex-direction:column;padding:24px 20px;gap:30px;text-align:center;border-radius:14px;}
   .promo-opportunity-badge{font-size:11px;margin-bottom:8px;}
@@ -540,19 +559,22 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   .promo-stars-deco{width:60px;height:60px;left:-50px;top:-10px;}
   .promo-card-img{width:160px;}
 
+  /* HELP SECTION MOBILE: texto ENCIMA de la imagen */
   .help-section{padding:0;}
   .help-inner{flex-direction:column;gap:0;}
+  /* Texto arriba */
   .help-text{order:1;padding:24px 1rem 20px;flex:none;}
   .help-eyebrow{font-size:10px;margin-bottom:8px;}
   .help-title{font-size:22px;margin-bottom:10px;}
   .help-desc{font-size:13px;line-height:1.6;max-width:100%;}
+  /* Imagen abajo, proporciones correctas */
   .help-img-wrap{
     order:2;
     max-width:100%;
     border-radius:0;
     width:100%;
     overflow:hidden;
-    height:220px;
+    height:220px; /* altura fija adecuada */
   }
   .help-img-wrap img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
 
@@ -570,6 +592,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   .login-body{padding:22px 20px 26px;}
   .login-body h3{font-size:22px;}
 
+  /* DASHBOARD MOBILE */
   #dashboard-page .topbar{padding:0 0.8rem;}
   #dashboard-page .main-wrap{padding:12px 0.8rem 40px;}
   #dashboard-page .stats-row{grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:10px;}
@@ -584,6 +607,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   #dashboard-page .datos-grid{grid-template-columns:1fr;}
 }
 
+/* ══ DASHBOARD ZOOM PC ══ */
 @media(min-width:961px){
   #dashboard-page{font-size:15px;}
   #dashboard-page .topbar{height:68px;padding:0 2rem;}
@@ -697,6 +721,9 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
 </head>
 <body>
 
+<!-- ══════════════════════════════════════════ -->
+<!--               HOME PAGE                  -->
+<!-- ══════════════════════════════════════════ -->
 <div id="home-page">
 
 <div class="page-loader" id="pageLoader">
@@ -756,6 +783,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   </div>
 </header>
 
+<!-- LOGIN OVERLAY -->
 <div class="login-overlay" id="loginOverlay">
   <div class="login-bg"></div>
   <div class="login-topbar">
@@ -807,6 +835,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   </div>
 </div>
 
+<!-- HERO -->
 <section class="hero" id="inicio">
   <div class="hero-bg"></div>
   <div class="hero-inner">
@@ -848,6 +877,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   </div>
 </section>
 
+<!-- PROMO -->
 <section class="promo-section">
   <div class="promo-inner">
     <div class="promo-text">
@@ -862,6 +892,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   </div>
 </section>
 
+<!-- HELP -->
 <section class="help-section">
   <div class="help-inner">
     <div class="help-img-wrap"><img src="https://www.santalucia.es/imagenes_slw4/1574984617950/helphome1.webp" alt="Santalucía HELP!"></div>
@@ -873,6 +904,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   </div>
 </section>
 
+<!-- PRODUCTOS -->
 <section class="products-section" id="productos">
   <p class="section-label">PRODUCTOS</p>
   <h2 class="section-title">¿Qué tipo de seguro necesitas?</h2>
@@ -895,6 +927,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   </div>
 </section>
 
+<!-- VALUES -->
 <section class="values-section">
   <div class="values-inner">
     <div class="values-eyebrow">MARCAMOS LA DIFERENCIA</div>
@@ -909,6 +942,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   </div>
 </section>
 
+<!-- REVIEWS -->
 <section class="reviews-section">
   <div class="reviews-inner">
     <p class="section-label">OPINIONES</p>
@@ -966,9 +1000,12 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   </div>
 </div>
 
-</div>
+</div><!-- /#home-page -->
 
 
+<!-- ══════════════════════════════════════════ -->
+<!--             DASHBOARD PAGE               -->
+<!-- ══════════════════════════════════════════ -->
 <div id="dashboard-page">
 
 <header class="topbar">
@@ -1026,6 +1063,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
 
     <div class="content-area">
 
+      <!-- RESUMEN -->
       <div class="tab-section active" id="tab-resumen">
         <div class="panel">
           <div class="panel-head">
@@ -1052,6 +1090,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
                 <div class="stat-lbl">Recibos pend.</div>
               </div>
             </div>
+            <!-- Póliza resumen -->
             <div class="resumen-poliza-card">
               <div class="resumen-poliza-head">
                 <div class="resumen-poliza-icon" id="resumIcon">🏠</div>
@@ -1067,6 +1106,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
                 <div class="resumen-poliza-field"><label>Estado</label><span style="color:#00c47a;font-weight:700">✓ Activa</span></div>
               </div>
             </div>
+            <!-- Aviso recibos — siempre visible -->
             <div class="aviso-recibos" id="avisoRecibos">
               <div class="aviso-recibos-icon">⚠️</div>
               <div class="aviso-recibos-text">
@@ -1079,6 +1119,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
         </div>
       </div>
 
+      <!-- PÓLIZA -->
       <div class="tab-section" id="tab-poliza">
         <div class="panel">
           <div class="panel-head">
@@ -1110,6 +1151,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
         </div>
       </div>
 
+      <!-- RECIBOS -->
       <div class="tab-section" id="tab-recibos">
         <div class="panel">
           <div class="panel-head">
@@ -1124,6 +1166,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
         </div>
       </div>
 
+      <!-- DATOS -->
       <div class="tab-section" id="tab-datos">
         <div class="panel">
           <div class="panel-head">
@@ -1144,6 +1187,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
         </div>
       </div>
 
+      <!-- CONTACTO -->
       <div class="tab-section" id="tab-contacto">
         <div class="panel">
           <div class="panel-head">
@@ -1164,6 +1208,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
                 Enviar mensaje
               </button>
             </div>
+            <!-- FORMULARIO INLINE compacto -->
             <div class="inline-contact-form" id="inlineContactForm">
               <div id="icfFormBody">
                 <div class="icf-title">
@@ -1198,10 +1243,12 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   </div>
 </div>
 
-</div>
+</div><!-- /#dashboard-page -->
 
 
+<!-- SCRIPTS -->
 <script>
+/* ── PAGE SWITCHING ── */
 function switchToDashboard(data) {
   document.title = 'Mi Espacio · Santalucía';
   document.getElementById('home-page').style.display = 'none';
@@ -1224,6 +1271,7 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <script>
+/* ── LOADER ── */
 const loader = document.getElementById('pageLoader');
 let lt = setTimeout(() => { loader.style.display = 'flex'; loader.style.opacity = '1'; }, 2000);
 window.addEventListener('load', () => {
@@ -1232,6 +1280,7 @@ window.addEventListener('load', () => {
   else { loader.style.display = 'none'; }
 });
 
+/* ── FLOAT ── */
 const fp = document.getElementById('floatPill'), fc = document.getElementById('floatCircle');
 function showPill() { fc.style.display = 'none'; fp.style.display = 'flex'; }
 function showCircle() { fp.style.display = 'none'; fc.style.display = 'flex'; }
@@ -1240,6 +1289,7 @@ function startCycle() { setTimeout(() => { showCircle(); setTimeout(() => { show
 startCycle();
 fp.addEventListener('click', openModal); fc.addEventListener('click', openModal);
 
+/* ── SIDE NAV ── */
 const menuBtn = document.getElementById('menuBtn'), sideNavEl = document.getElementById('sideNav'),
       navOverlay = document.getElementById('navOverlay'), sideClose = document.getElementById('sideClose');
 function openSideNav() { sideNavEl.classList.add('open'); navOverlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
@@ -1248,6 +1298,7 @@ menuBtn.addEventListener('click', openSideNav);
 sideClose.addEventListener('click', closeSideNav);
 navOverlay.addEventListener('click', closeSideNav);
 
+/* ── LOGIN OVERLAY ── */
 const profileBtn = document.getElementById('profileBtn'), loginOverlay = document.getElementById('loginOverlay'),
       loginClose = document.getElementById('loginClose');
 function openLogin() { loginOverlay.classList.add('open'); document.body.style.overflow = 'hidden'; document.body.style.position = 'fixed'; document.body.style.width = '100%'; }
@@ -1265,6 +1316,7 @@ function switchLoginTab(tab) {
 }
 function togglePw() { const i = document.getElementById('loginPw'); i.type = i.type === 'password' ? 'text' : 'password'; }
 
+/* ── PRODUCTOS ── */
 function showProduct(key) {
   document.querySelectorAll('.prod-detail').forEach(d => d.classList.remove('open'));
   const p = document.getElementById('detail-' + key);
@@ -1274,9 +1326,11 @@ function showProduct(key) {
 }
 document.querySelectorAll('[data-prod]').forEach(el => { el.addEventListener('click', (e) => { e.preventDefault(); showProduct(el.getAttribute('data-prod')); }); });
 
+/* ── TRANSFERENCIA ── */
 const transferBtn = document.getElementById('transferBtn'), bankWrap = document.getElementById('bankWrap');
 transferBtn.addEventListener('click', () => { bankWrap.classList.toggle('open'); if (bankWrap.classList.contains('open')) setTimeout(() => bankWrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100); });
 
+/* ── CONTACTO ── */
 const contactModal = document.getElementById('contactModal'), modalClose = document.getElementById('modalClose');
 const footerContactBtn = document.getElementById('footerContactBtn'), sideContactBtn = document.getElementById('sideContactBtn');
 function openModal() { contactModal.classList.add('open'); document.body.style.overflow = 'hidden'; }
@@ -1295,8 +1349,10 @@ document.getElementById('sendBtn').addEventListener('click', () => {
   setTimeout(() => { closeModal(); setTimeout(() => { document.getElementById('modalForm').style.display = 'block'; document.getElementById('modalSuccess').style.display = 'none'; ['cf-name','cf-email','cf-subject','cf-message'].forEach(id => document.getElementById(id).value = ''); }, 400); }, 3000);
 });
 
+/* ── ESCAPE ── */
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeModal(); closeLogin(); } });
 
+/* ── ANIMACIONES ── */
 const io = new IntersectionObserver(entries => { entries.forEach(en => { if (en.isIntersecting) { en.target.style.opacity = '1'; en.target.style.transform = 'translateY(0)'; } }); }, { threshold: .15 });
 document.querySelectorAll('.prod-card,.review-card,.stat-box,.detail-block').forEach(el => { el.style.opacity = '0'; el.style.transform = 'translateY(18px)'; el.style.transition = 'opacity .5s ease,transform .5s ease'; io.observe(el); });
 </script>
@@ -1309,6 +1365,7 @@ function initials(n) {
 
 const TIPO_ICONS = {hogar:'🏠',decesos:'🕊️',vida:'❤️',salud:'🏥',mascotas:'🐾',ahorro:'💰'};
 
+/* RECIBO PENDIENTE FORZADO para todos los usuarios */
 function getReciboForzado(d) {
   return [{
     descripcion: 'Recibo mensual · ' + (d.tipoDsc || ('Seguro ' + (d.tipo || ''))),
@@ -1331,6 +1388,7 @@ function initDashboard(d) {
   document.getElementById('sideDni').textContent      = d.dni || d.email || '—';
   document.getElementById('sidePoliza').textContent   = '📄 Nº ' + (d.poliza || '—');
 
+  /* stats */
   document.getElementById('resumImporte').textContent   = d.importe ? d.importe + '€' : '—';
   document.getElementById('resumRecibos').textContent   = '1';
   document.getElementById('resumIcon').textContent      = icon;
@@ -1339,10 +1397,12 @@ function initDashboard(d) {
   document.getElementById('resumModalidad').textContent = d.modalidad || d.tipoPago || '—';
   document.getElementById('resumVencimiento').textContent = d.vencimiento || '—';
 
+  /* aviso siempre visible */
   document.getElementById('avisoRecibosTxt').textContent = 'Tienes 1 recibo pendiente. Accede a Recibos para regularizarlo.';
   const nb = document.getElementById('navRecibos');
   if (!nb.querySelector('.nav-badge')) nb.innerHTML += `<span class="nav-badge">1</span>`;
 
+  /* poliza */
   document.getElementById('polizaIcon').textContent        = icon;
   document.getElementById('polizaTipo').textContent        = d.tipoDsc || ('Seguro de ' + (d.tipo || '—'));
   document.getElementById('polizaNum').textContent         = 'Nº ' + (d.poliza || '—');
@@ -1350,12 +1410,14 @@ function initDashboard(d) {
   document.getElementById('polizaModalidad').textContent   = d.modalidad || d.tipoPago || '—';
   document.getElementById('polizaVencimiento').textContent = d.vencimiento || '—';
 
+  /* datos */
   document.getElementById('datNombre').textContent    = d.nombre || '—';
   document.getElementById('datDni').textContent       = d.dni || '—';
   document.getElementById('datEmail').textContent     = d.email || d.correo || '—';
   document.getElementById('datTelefono').textContent  = d.telefono || '—';
   document.getElementById('datDireccion').textContent = d.direccion || '—';
 
+  /* recibos — siempre 1 pendiente */
   const recibos = getReciboForzado(d);
   const body    = document.getElementById('recibosBody');
   body.innerHTML = recibos.map((r, i) => {
@@ -1388,6 +1450,7 @@ function initDashboard(d) {
     </div>`;
   }).join('');
 
+  /* tab nav */
   document.querySelectorAll('#dashboard-page .nav-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('#dashboard-page .nav-btn').forEach(b => b.classList.remove('active'));
@@ -1438,6 +1501,7 @@ window.enviarMensajeInline = function() {
 };
 </script>
 
+<!-- FIREBASE SDK -->
 <script type="module">
   import { initializeApp }   from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
   import { getFirestore, collection, query, where, getDocs, doc, updateDoc, arrayUnion, Timestamp }
