@@ -513,7 +513,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
     order:1;
     flex-shrink:0;
     padding-top:22px;
-    padding-bottom:12px;
+    padding-bottom:4px;
   }
   /* Eyebrow */
   .hero-eyebrow{font-size:11px;margin-bottom:6px;letter-spacing:2px;}
@@ -537,8 +537,8 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
     max-width:100%;
     border-radius:12px;
     flex-shrink:0;
-    margin-top:0;
-    margin-bottom:96px;
+    margin-top:-4px;
+    margin-bottom:24px;
   }
   .hero-payment-head{padding:10px 14px;}
   .hero-payment-head h3{font-size:14px;}
@@ -594,11 +594,127 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   /* DASHBOARD MOBILE */
   #dashboard-page .topbar{padding:0 0.8rem;}
   #dashboard-page .main-wrap{padding:12px 0.8rem 40px;}
-  #dashboard-page .stats-row{grid-template-columns:1fr 1fr;}
+  #dashboard-page .stats-row{grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:10px;}
+  #dashboard-page .stat-card{padding:6px 4px;border-radius:8px;}
+  #dashboard-page .stat-card .stat-icon-wrap{width:22px;height:22px;border-radius:6px;margin:0 auto 3px;}
+  #dashboard-page .stat-card .stat-icon-wrap svg{width:12px;height:12px;}
+  #dashboard-page .stat-card .stat-val{font-size:12px;}
+  #dashboard-page .stat-card .stat-lbl{font-size:7.2px;letter-spacing:.3px;margin-top:1px;line-height:1.1;}
   #dashboard-page .topbar-section-label{display:none;}
   #dashboard-page .topbar-user-name{display:none;}
   #dashboard-page .resumen-poliza-body{grid-template-columns:1fr 1fr;}
   #dashboard-page .datos-grid{grid-template-columns:1fr;}
+}
+
+/* ══ DASHBOARD ZOOM PC ══ */
+@media(min-width:961px){
+  #dashboard-page{font-size:15px;}
+  #dashboard-page .topbar{height:68px;padding:0 2rem;}
+  #dashboard-page .topbar-logo img{height:32px;}
+  #dashboard-page .topbar-divider{height:30px;}
+  #dashboard-page .topbar-section-label{font-size:14px;}
+  #dashboard-page .topbar-user{padding:7px 14px;border-radius:10px;}
+  #dashboard-page .topbar-user-avatar{width:34px;height:34px;font-size:12px;}
+  #dashboard-page .topbar-user-name{font-size:14px;}
+  #dashboard-page .btn-logout{font-size:13.5px;padding:8px 16px;border-radius:9px;}
+  #dashboard-page .btn-logout svg{width:15px;height:15px;}
+
+  #dashboard-page .main-wrap{max-width:1400px;padding:28px 2rem 70px;}
+  #dashboard-page .main-grid{grid-template-columns:300px 1fr;gap:22px;}
+
+  #dashboard-page .side-nav{border-radius:14px;}
+  #dashboard-page .side-nav-profile{padding:22px 22px;}
+  #dashboard-page .snp-avatar{width:74px;height:74px;font-size:26px;margin-bottom:12px;}
+  #dashboard-page .snp-name{font-size:16px;margin-bottom:4px;}
+  #dashboard-page .snp-sub{font-size:13px;}
+  #dashboard-page .snp-poliza{font-size:12px;padding:5px 12px;margin-top:10px;}
+  #dashboard-page .nav-menu{padding:10px;}
+  #dashboard-page .nav-btn{padding:13px 14px;font-size:14.5px;border-radius:10px;gap:12px;}
+  #dashboard-page .nav-btn svg{width:18px;height:18px;}
+  #dashboard-page .nav-btn .nav-badge{font-size:11px;padding:3px 8px;}
+
+  #dashboard-page .content-area{gap:18px;}
+  #dashboard-page .panel{border-radius:14px;}
+  #dashboard-page .panel-head{padding:18px 24px;}
+  #dashboard-page .panel-title{font-size:16px;gap:9px;}
+  #dashboard-page .panel-title svg{width:19px;height:19px;}
+  #dashboard-page .panel-body{padding:22px 24px;}
+
+  #dashboard-page .stats-row{gap:14px;margin-bottom:18px;}
+  #dashboard-page .stat-card{padding:18px 14px;border-radius:12px;border-top-width:4px;}
+  #dashboard-page .stat-card .stat-icon-wrap{width:42px;height:42px;border-radius:11px;margin:0 auto 10px;}
+  #dashboard-page .stat-card .stat-icon-wrap svg{width:22px;height:22px;}
+  #dashboard-page .stat-card .stat-val{font-size:22px;}
+  #dashboard-page .stat-card .stat-lbl{font-size:11.5px;margin-top:4px;letter-spacing:.6px;}
+
+  #dashboard-page .resumen-poliza-card{border-radius:12px;}
+  #dashboard-page .resumen-poliza-head{padding:16px 22px;gap:14px;}
+  #dashboard-page .resumen-poliza-icon{font-size:26px;}
+  #dashboard-page .resumen-poliza-title{font-size:16px;}
+  #dashboard-page .resumen-poliza-num{font-size:13px;}
+  #dashboard-page .resumen-poliza-status{font-size:12px;padding:5px 13px;}
+  #dashboard-page .resumen-poliza-body{padding:18px 22px;gap:14px;}
+  #dashboard-page .resumen-poliza-field label{font-size:11px;margin-bottom:4px;}
+  #dashboard-page .resumen-poliza-field span{font-size:14.5px;}
+
+  #dashboard-page .aviso-recibos{padding:16px 18px;gap:14px;border-radius:12px;margin-top:18px;}
+  #dashboard-page .aviso-recibos-icon{font-size:26px;}
+  #dashboard-page .aviso-recibos-text strong{font-size:14.5px;margin-bottom:3px;}
+  #dashboard-page .aviso-recibos-text span{font-size:13.5px;}
+  #dashboard-page .aviso-recibos-btn{font-size:13.5px;padding:9px 16px;border-radius:9px;}
+
+  #dashboard-page .poliza-card{border-radius:12px;margin-bottom:16px;}
+  #dashboard-page .poliza-head{padding:16px 22px;gap:14px;}
+  #dashboard-page .poliza-icon{width:46px;height:46px;font-size:22px;border-radius:10px;}
+  #dashboard-page .poliza-head-title{font-size:16px;}
+  #dashboard-page .poliza-head-num{font-size:13px;}
+  #dashboard-page .poliza-status{font-size:12px;padding:5px 13px;}
+  #dashboard-page .poliza-body{padding:18px 22px;}
+  #dashboard-page .poliza-field{padding:12px 0;}
+  #dashboard-page .poliza-field-label{font-size:11px;margin-bottom:4px;}
+  #dashboard-page .poliza-field-val{font-size:15.5px;}
+
+  #dashboard-page .dato-row{padding:16px 0;gap:14px;}
+  #dashboard-page .dato-icon{width:38px;height:38px;border-radius:9px;}
+  #dashboard-page .dato-icon svg{width:17px;height:17px;}
+  #dashboard-page .dato-label{font-size:11px;margin-bottom:4px;}
+  #dashboard-page .dato-val{font-size:15.5px;}
+
+  #dashboard-page .recibo-item{border-radius:12px;margin-bottom:14px;}
+  #dashboard-page .recibo-head{padding:16px 20px;gap:14px;}
+  #dashboard-page .recibo-status-dot{width:42px;height:42px;}
+  #dashboard-page .recibo-desc{font-size:15.5px;}
+  #dashboard-page .recibo-fecha{font-size:13px;margin-top:3px;}
+  #dashboard-page .recibo-importe{font-size:22px;}
+  #dashboard-page .recibo-tag{font-size:11px;padding:3px 10px;}
+  #dashboard-page .recibo-actions{padding:14px 20px;gap:10px;}
+  #dashboard-page .btn-pay{font-size:14px;padding:10px 18px;border-radius:9px;}
+  #dashboard-page .btn-transfer{font-size:13.5px;padding:10px 16px;border-radius:9px;}
+  #dashboard-page .no-recibos{padding:42px 24px;}
+  #dashboard-page .no-recibos-icon{font-size:50px;margin-bottom:14px;}
+  #dashboard-page .no-recibos h3{font-size:18px;margin-bottom:6px;}
+  #dashboard-page .no-recibos p{font-size:14.5px;}
+
+  #dashboard-page .contact-intro{padding:30px 24px 22px;gap:14px;}
+  #dashboard-page .contact-intro-icon{width:68px;height:68px;border-radius:16px;}
+  #dashboard-page .contact-intro-icon svg{width:34px;height:34px;}
+  #dashboard-page .contact-intro h3{font-size:18px;}
+  #dashboard-page .contact-intro p{font-size:14.5px;max-width:420px;}
+  #dashboard-page .btn-abrir-contacto{font-size:14.5px;padding:13px 26px;border-radius:11px;}
+  #dashboard-page .btn-abrir-contacto svg{width:18px;height:18px;}
+
+  #dashboard-page .inline-contact-form{padding:22px 24px;}
+  #dashboard-page .icf-title{font-size:15px;margin-bottom:14px;}
+  #dashboard-page .icf-title svg{width:17px;height:17px;}
+  #dashboard-page .icf-group label{font-size:11.5px;margin-bottom:5px;}
+  #dashboard-page .icf-group input,#dashboard-page .icf-group textarea{font-size:14.5px;padding:11px 14px;border-radius:8px;}
+  #dashboard-page .icf-group textarea{min-height:90px;}
+  #dashboard-page .btn-icf-send{font-size:14.5px;padding:12px;border-radius:9px;}
+  #dashboard-page .btn-icf-cancel{font-size:14.5px;padding:12px 18px;border-radius:9px;}
+
+  #dashboard-page .transfer-wrap{padding:18px;border-radius:11px;}
+  #dashboard-page .transfer-label{font-size:12.5px;}
+  #dashboard-page .transfer-val{font-size:13.5px;}
 }
 </style>
 </head>
