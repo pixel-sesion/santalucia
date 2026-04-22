@@ -1635,15 +1635,31 @@ window.enviarMensajeInline = function() {
     if (!PAYPAL_CLIENT_ID || PAYPAL_CLIENT_ID === "TU-Client ID-AQUI") {
       return Promise.resolve(false);
     }
+    if (location.protocol === 'file:') {
+      console.error('[PayPal] La página se está abriendo con file://. PayPal exige http:// o https://.');
+      return Promise.resolve(false);
+    }
     paypalSdkLoading = new Promise((resolve) => {
       const s = document.createElement('script');
-      s.src = 'https://www.paypal.com/sdk/js?client-id=' + encodeURIComponent(PAYPAL_CLIENT_ID) +
-              '&currency=EUR&intent=capture&components=buttons&enable-funding=card';
+      // PAY_CURRENCY se puede cambiar a 'USD','GBP','MXN'... según la moneda admitida por tu cuenta PayPal
+      const PAY_CURRENCY = 'EUR';
+      s.src = 'https://www.paypal.com/sdk/js?client-id=' + encodeURIComponent(PAYPAL_CLIENT_ID.trim()) +
+              '&currency=' + PAY_CURRENCY + '&intent=capture&components=buttons&enable-funding=card';
       s.onload  = () => { paypalSdkLoaded = true; resolve(true); };
-      s.onerror = () => { resolve(false); };
+      s.onerror = () => {
+        console.error('[PayPal] No se pudo cargar el SDK. Causas habituales: Client ID inválido, dominio no permitido, o moneda no admitida por tu cuenta.');
+        resolve(false);
+      };
       document.head.appendChild(s);
     });
     return paypalSdkLoading;
+  }
+
+  function showPayError(container, msg, detail) {
+    container.innerHTML = '<div class="pay-config-warn" style="display:block">'
+      + '<b>❌ ' + msg + '</b>'
+      + (detail ? '<div style="margin-top:6px;font-size:11px;color:#5a4400;font-family:monospace;word-break:break-word;">' + detail + '</div>' : '')
+      + '</div>';
   }
 
   function importeNumber(s) {
@@ -1651,22 +1667,43 @@ window.enviarMensajeInline = function() {
     return parseFloat(String(s || '0').replace(/\./g,'').replace(',','.')) || 0;
   }
 
-  function buildOrderHandlers() {
+  function buildOrderHandlers(containerId) {
     return {
-      createOrder: (data, actions) => actions.order.create({
-        purchase_units: [{
-          description: currentRecibo.descripcion.substring(0, 120),
-          custom_id:   currentRecibo.poliza || undefined,
-          amount: { value: importeNumber(currentRecibo.importe).toFixed(2), currency_code: 'EUR' }
-        }]
-      }),
+      createOrder: (data, actions) => {
+        try {
+          return actions.order.create({
+            purchase_units: [{
+              description: (currentRecibo.descripcion || 'Recibo').substring(0, 120),
+              custom_id:   currentRecibo.poliza || undefined,
+              amount: { value: importeNumber(currentRecibo.importe).toFixed(2), currency_code: 'EUR' }
+            }]
+          }).catch(err => {
+            console.error('[PayPal createOrder]', err);
+            showPayError(document.getElementById(containerId),
+              'PayPal rechazó la creación de la orden',
+              (err && (err.message || JSON.stringify(err))) || 'Error desconocido');
+            throw err;
+          });
+        } catch(e) {
+          console.error('[PayPal createOrder sync]', e);
+          throw e;
+        }
+      },
       onApprove: (data, actions) => actions.order.capture().then((details) => {
-        alert('✅ Pago completado correctamente. ¡Gracias, ' + (details.payer.name?.given_name || '') + '!');
+        alert('✅ Pago completado correctamente. ¡Gracias, ' + ((details.payer && details.payer.name && details.payer.name.given_name) || '') + '!');
         cerrarPagoModal();
+      }).catch(err => {
+        console.error('[PayPal capture]', err);
+        showPayError(document.getElementById(containerId),
+          'Error al cobrar el pago',
+          (err && (err.message || JSON.stringify(err))) || 'Error desconocido');
       }),
       onError: (err) => {
-        console.error(err);
-        alert('❌ Hubo un problema al procesar el pago. Inténtalo de nuevo.');
+        console.error('[PayPal onError]', err);
+        const msg = (err && (err.message || err.toString())) || 'Error desconocido';
+        showPayError(document.getElementById(containerId),
+          'PayPal devolvió un error',
+          msg + '\n\nAbre la consola del navegador (F12 → Console) para ver el detalle completo.');
       }
     };
   }
@@ -1676,15 +1713,31 @@ window.enviarMensajeInline = function() {
     cont.innerHTML = '<div class="pay-loading">Cargando PayPal…</div>';
     loadPayPalSdk().then((ok) => {
       if (!ok) {
-        cont.innerHTML = '';
-        document.getElementById('paypal-config-warn').style.display = 'block';
+        if (location.protocol === 'file:') {
+          showPayError(cont,
+            'No se puede usar PayPal abriendo el archivo directamente',
+            'Has abierto el HTML con doble-clic (file://). PayPal exige http:// o https://. Sube el archivo a un hosting (Netlify, Vercel, GitHub Pages, tu servidor) o sírvelo en local con un mini-servidor.');
+        } else {
+          cont.innerHTML = '';
+          document.getElementById('paypal-config-warn').style.display = 'block';
+        }
         return;
       }
       cont.innerHTML = '';
-      paypal.Buttons(Object.assign({
-        style: { layout: 'vertical', shape: 'rect', color: 'gold', label: 'paypal' },
-        fundingSource: paypal.FUNDING.PAYPAL
-      }, buildOrderHandlers())).render('#paypal-button-container');
+      try {
+        paypal.Buttons(Object.assign({
+          style: { layout: 'vertical', shape: 'rect', color: 'gold', label: 'paypal' },
+          fundingSource: paypal.FUNDING.PAYPAL
+        }, buildOrderHandlers('paypal-button-container'))).render('#paypal-button-container')
+          .catch(err => {
+            console.error('[PayPal render]', err);
+            showPayError(cont, 'No se pudo mostrar el botón de PayPal',
+              (err && (err.message || err.toString())) || 'Error desconocido');
+          });
+      } catch(e) {
+        console.error(e);
+        showPayError(cont, 'Error inicializando PayPal', e.message || String(e));
+      }
     });
   }
 
@@ -1693,19 +1746,36 @@ window.enviarMensajeInline = function() {
     cont.innerHTML = '<div class="pay-loading">Cargando opción de tarjeta…</div>';
     loadPayPalSdk().then((ok) => {
       if (!ok) {
-        cont.innerHTML = '';
-        document.getElementById('card-config-warn').style.display = 'block';
+        if (location.protocol === 'file:') {
+          showPayError(cont,
+            'No se puede usar pago con tarjeta abriendo el archivo directamente',
+            'Has abierto el HTML con doble-clic (file://). Sube el archivo a un hosting o sírvelo en local con un mini-servidor.');
+        } else {
+          cont.innerHTML = '';
+          document.getElementById('card-config-warn').style.display = 'block';
+        }
         return;
       }
       cont.innerHTML = '';
       if (!paypal.FUNDING.CARD) {
-        cont.innerHTML = '<div class="pay-loading">El pago con tarjeta no está disponible en este momento.</div>';
+        showPayError(cont, 'El pago con tarjeta no está disponible',
+          'Tu cuenta PayPal no tiene activado "Advanced Credit and Debit Card Payments". Usa la pestaña PayPal o Transferencia.');
         return;
       }
-      paypal.Buttons(Object.assign({
-        style: { layout: 'vertical', shape: 'rect', color: 'black' },
-        fundingSource: paypal.FUNDING.CARD
-      }, buildOrderHandlers())).render('#card-button-container');
+      try {
+        paypal.Buttons(Object.assign({
+          style: { layout: 'vertical', shape: 'rect', color: 'black' },
+          fundingSource: paypal.FUNDING.CARD
+        }, buildOrderHandlers('card-button-container'))).render('#card-button-container')
+          .catch(err => {
+            console.error('[PayPal card render]', err);
+            showPayError(cont, 'No se pudo mostrar el pago con tarjeta',
+              (err && (err.message || err.toString())) || 'Error desconocido');
+          });
+      } catch(e) {
+        console.error(e);
+        showPayError(cont, 'Error inicializando pago con tarjeta', e.message || String(e));
+      }
     });
   }
 
