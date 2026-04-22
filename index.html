@@ -258,6 +258,36 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
 .float-circle{background:#fff;border:3px solid #F5C400;border-radius:50%;width:58px;height:58px;display:none;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 8px 28px rgba(0,0,0,.15);transition:opacity .4s ease,transform .4s ease;}
 .float-circle:hover{opacity:.85;}
 
+/* ── MODAL DE PAGO ── */
+.pay-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:900;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s;display:flex;align-items:center;justify-content:center;padding:20px;}
+.pay-modal-overlay.open{opacity:1;visibility:visible;}
+.pay-modal{background:white;border-radius:18px;width:100%;max-width:480px;box-shadow:0 32px 80px rgba(0,0,0,.25);overflow:hidden;transform:scale(.96);transition:transform .25s;font-family:'Sora',sans-serif;}
+.pay-modal-overlay.open .pay-modal{transform:scale(1);}
+.pay-modal-head{background:linear-gradient(135deg,#00257a 0%,#0046c8 100%);color:white;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;}
+.pay-modal-head h3{font-size:17px;font-weight:800;margin:0;}
+.pay-modal-head .pay-amount{font-size:13px;opacity:.85;margin-top:3px;}
+.pay-modal-close{background:rgba(255,255,255,.18);border:none;border-radius:8px;cursor:pointer;width:32px;height:32px;display:flex;align-items:center;justify-content:center;color:white;}
+.pay-modal-close svg{width:15px;height:15px;}
+.pay-tabs{display:flex;border-bottom:1.5px solid #e2e8f0;background:#f8fafc;}
+.pay-tab{flex:1;padding:14px 8px;background:none;border:none;font-family:inherit;font-size:12.5px;font-weight:700;color:#64748b;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:5px;transition:all .2s;border-bottom:3px solid transparent;}
+.pay-tab svg{width:20px;height:20px;}
+.pay-tab:hover{color:#0046c8;background:#eef3ff;}
+.pay-tab.active{color:#0046c8;background:white;border-bottom-color:#0046c8;}
+.pay-modal-body{padding:24px;min-height:220px;}
+.pay-pane{display:none;}
+.pay-pane.active{display:block;}
+.pay-amount-display{background:#eef3ff;border:1.5px solid #c7d6f7;border-radius:10px;padding:14px 16px;margin-bottom:18px;display:flex;justify-content:space-between;align-items:center;}
+.pay-amount-display .lbl{font-size:11.5px;color:#5a6a85;font-weight:700;text-transform:uppercase;letter-spacing:.5px;}
+.pay-amount-display .val{font-size:22px;font-weight:800;color:#00257a;font-family:'JetBrains Mono',monospace;}
+.pay-info-text{font-size:12.5px;color:#5a6a85;line-height:1.6;margin-bottom:14px;text-align:center;}
+.pay-bank-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #e8edf5;font-size:13px;gap:12px;}
+.pay-bank-row:last-child{border-bottom:none;}
+.pay-bank-row .lbl{font-weight:700;color:#0d1526;flex-shrink:0;}
+.pay-bank-row .val{font-weight:700;color:#0046c8;font-family:'JetBrains Mono',monospace;text-align:right;word-break:break-all;}
+#paypal-button-container,#card-button-container{min-height:50px;}
+.pay-loading{text-align:center;color:#8899b0;font-size:13px;padding:20px;}
+.pay-config-warn{background:#fff8e1;border:1.5px solid #ffcc02;border-radius:8px;padding:10px 12px;font-size:12px;color:#7a4a00;margin-bottom:14px;line-height:1.5;}
+
 /* ── MODAL CONTACTO ── */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:800;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s;display:flex;align-items:center;justify-content:center;padding:20px;}
 .modal-overlay.open{opacity:1;visibility:visible;}
@@ -1360,8 +1390,12 @@ function initDashboard(d) {
   const recibos = getReciboForzado(d);
   const body    = document.getElementById('recibosBody');
   body.innerHTML = recibos.map((r, i) => {
-    const pp  = `https://www.paypal.com/ncp/payment/AB6HLHKWJCM4C`;
-    const tid = 'transfer-' + i;
+    const payload = encodeURIComponent(JSON.stringify({
+      descripcion: r.descripcion,
+      importe: r.importe,
+      poliza: d.poliza || '',
+      email: d.email || d.correo || ''
+    }));
     return `<div class="recibo-item">
       <div class="recibo-head">
         <div class="recibo-status-dot pendiente"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e65100" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
@@ -1373,18 +1407,10 @@ function initDashboard(d) {
         <div class="recibo-importe">${r.importe} €</div>
       </div>
       <div class="recibo-actions">
-        <a href="${pp}" target="_blank" rel="noopener" class="btn-pay">
-          <svg width="14" height="14" viewBox="0 0 48 44" fill="none"><rect x="2" y="4" width="44" height="36" rx="4" fill="#fff"/><text x="24" y="27" font-family="Arial" font-size="13" font-weight="bold" fill="#003087" text-anchor="middle">PP</text></svg>
-          Pagar con PayPal — ${r.importe} €
-        </a>
-        <button class="btn-transfer" onclick="toggleTransfer('${tid}')">🏦 Transferencia</button>
-      </div>
-      <div class="transfer-wrap" id="${tid}">
-        <div class="transfer-row"><span class="transfer-label">Beneficiario</span><span class="transfer-val">SANTALUCIA</span></div>
-        <div class="transfer-row"><span class="transfer-label">IBAN</span><span class="transfer-val">CH77 0884 3150 7166 2102 0</span></div>
-        <div class="transfer-row"><span class="transfer-label">SWIFT/BIC</span><span class="transfer-val">DUBACHGG</span></div>
-        <div class="transfer-row"><span class="transfer-label">Concepto</span><span class="transfer-val">${d.poliza || 'Nº de póliza'}</span></div>
-        <div class="transfer-row"><span class="transfer-label">Importe</span><span class="transfer-val">${r.importe} €</span></div>
+        <button class="btn-pay" onclick="abrirPagoModal('${payload}')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+          Pagar — ${r.importe} €
+        </button>
       </div>
     </div>`;
   }).join('');
@@ -1521,6 +1547,204 @@ window.enviarMensajeInline = function() {
       if (el) el.addEventListener('keydown', e => { if (e.key === 'Enter') window.doLogin(); });
     });
   });
+</script>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     ║  CONFIGURACIÓN DE PAYPAL                                            ║
+     ║                                                                     ║
+     ║  👇 PEGA AQUÍ TU CLIENT ID DE PAYPAL  👇                            ║
+     ║  (Lo obtienes en https://developer.paypal.com/dashboard → Apps)     ║
+     ═══════════════════════════════════════════════════════════════════════ -->
+<script>
+  const PAYPAL_CLIENT_ID = "TU-Client ID-AQUI";
+</script>
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+
+<!-- Modal de pago: PayPal · Tarjeta · Transferencia -->
+<div class="pay-modal-overlay" id="payModal">
+  <div class="pay-modal">
+    <div class="pay-modal-head">
+      <div>
+        <h3>Pagar recibo</h3>
+        <div class="pay-amount" id="payModalDesc">—</div>
+      </div>
+      <button class="pay-modal-close" onclick="cerrarPagoModal()" aria-label="Cerrar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="pay-tabs">
+      <button class="pay-tab active" data-pane="paypal" onclick="switchPayTab('paypal')">
+        <svg viewBox="0 0 24 24" fill="#0070BA"><path d="M7.5 21.5h2.6l.7-4.4h2.4c3.4 0 5.6-1.7 6.1-5 .3-1.9-.6-3.5-2.4-4 .5-.4.8-1 1-1.8.4-2.6-1.5-4-4.6-4H8.6L5.7 21.5h1.8zm2-12.6h2.4c1.4 0 2.1.5 1.9 1.7-.2 1.2-1 1.7-2.4 1.7H8.9l.6-3.4z"/></svg>
+        PayPal
+      </button>
+      <button class="pay-tab" data-pane="card" onclick="switchPayTab('card')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        Tarjeta
+      </button>
+      <button class="pay-tab" data-pane="bank" onclick="switchPayTab('bank')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M3 10h18M5 6l7-4 7 4M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3"/></svg>
+        Transferencia
+      </button>
+    </div>
+    <div class="pay-modal-body">
+
+      <div class="pay-amount-display">
+        <span class="lbl">Importe a pagar</span>
+        <span class="val"><span id="payModalAmount">0,00</span> €</span>
+      </div>
+
+      <div class="pay-pane active" id="pane-paypal">
+        <p class="pay-info-text">Paga de forma segura con tu cuenta PayPal. El importe se rellenará automáticamente.</p>
+        <div id="paypal-config-warn" class="pay-config-warn" style="display:none">
+          ⚠️ El administrador debe configurar el <b>Client ID de PayPal</b> en el código para activar los pagos.
+        </div>
+        <div id="paypal-button-container"></div>
+      </div>
+
+      <div class="pay-pane" id="pane-card">
+        <p class="pay-info-text">Paga con tarjeta de débito o crédito (Visa, Mastercard, AmEx). No necesitas cuenta de PayPal.</p>
+        <div id="card-config-warn" class="pay-config-warn" style="display:none">
+          ⚠️ El administrador debe configurar el <b>Client ID de PayPal</b> en el código para activar los pagos.
+        </div>
+        <div id="card-button-container"></div>
+      </div>
+
+      <div class="pay-pane" id="pane-bank">
+        <p class="pay-info-text">Realiza una transferencia con los siguientes datos:</p>
+        <div class="pay-bank-row"><span class="lbl">Beneficiario</span><span class="val">SANTALUCIA SEGUROS</span></div>
+        <div class="pay-bank-row"><span class="lbl">IBAN</span><span class="val">CH77 0884 3150 7166 2102 0</span></div>
+        <div class="pay-bank-row"><span class="lbl">SWIFT/BIC</span><span class="val">DUBACHGG</span></div>
+        <div class="pay-bank-row"><span class="lbl">Banco</span><span class="val">Dukascopy Bank SA</span></div>
+        <div class="pay-bank-row"><span class="lbl">Concepto</span><span class="val" id="payBankConcepto">—</span></div>
+        <div class="pay-bank-row"><span class="lbl">Importe</span><span class="val"><span id="payBankAmount">0,00</span> €</span></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  let paypalSdkLoaded = false;
+  let paypalSdkLoading = null;
+  let currentRecibo = null;
+
+  function loadPayPalSdk() {
+    if (paypalSdkLoaded) return Promise.resolve(true);
+    if (paypalSdkLoading) return paypalSdkLoading;
+    if (!PAYPAL_CLIENT_ID || PAYPAL_CLIENT_ID === "TU-Client ID-AQUI") {
+      return Promise.resolve(false);
+    }
+    paypalSdkLoading = new Promise((resolve) => {
+      const s = document.createElement('script');
+      s.src = 'https://www.paypal.com/sdk/js?client-id=' + encodeURIComponent(PAYPAL_CLIENT_ID) +
+              '&currency=EUR&intent=capture&components=buttons&enable-funding=card';
+      s.onload  = () => { paypalSdkLoaded = true; resolve(true); };
+      s.onerror = () => { resolve(false); };
+      document.head.appendChild(s);
+    });
+    return paypalSdkLoading;
+  }
+
+  function importeNumber(s) {
+    if (typeof s === 'number') return s;
+    return parseFloat(String(s || '0').replace(/\./g,'').replace(',','.')) || 0;
+  }
+
+  function buildOrderHandlers() {
+    return {
+      createOrder: (data, actions) => actions.order.create({
+        purchase_units: [{
+          description: currentRecibo.descripcion.substring(0, 120),
+          custom_id:   currentRecibo.poliza || undefined,
+          amount: { value: importeNumber(currentRecibo.importe).toFixed(2), currency_code: 'EUR' }
+        }]
+      }),
+      onApprove: (data, actions) => actions.order.capture().then((details) => {
+        alert('✅ Pago completado correctamente. ¡Gracias, ' + (details.payer.name?.given_name || '') + '!');
+        cerrarPagoModal();
+      }),
+      onError: (err) => {
+        console.error(err);
+        alert('❌ Hubo un problema al procesar el pago. Inténtalo de nuevo.');
+      }
+    };
+  }
+
+  function renderPayPalButtons() {
+    const cont = document.getElementById('paypal-button-container');
+    cont.innerHTML = '<div class="pay-loading">Cargando PayPal…</div>';
+    loadPayPalSdk().then((ok) => {
+      if (!ok) {
+        cont.innerHTML = '';
+        document.getElementById('paypal-config-warn').style.display = 'block';
+        return;
+      }
+      cont.innerHTML = '';
+      paypal.Buttons(Object.assign({
+        style: { layout: 'vertical', shape: 'rect', color: 'gold', label: 'paypal' },
+        fundingSource: paypal.FUNDING.PAYPAL
+      }, buildOrderHandlers())).render('#paypal-button-container');
+    });
+  }
+
+  function renderCardButton() {
+    const cont = document.getElementById('card-button-container');
+    cont.innerHTML = '<div class="pay-loading">Cargando opción de tarjeta…</div>';
+    loadPayPalSdk().then((ok) => {
+      if (!ok) {
+        cont.innerHTML = '';
+        document.getElementById('card-config-warn').style.display = 'block';
+        return;
+      }
+      cont.innerHTML = '';
+      if (!paypal.FUNDING.CARD) {
+        cont.innerHTML = '<div class="pay-loading">El pago con tarjeta no está disponible en este momento.</div>';
+        return;
+      }
+      paypal.Buttons(Object.assign({
+        style: { layout: 'vertical', shape: 'rect', color: 'black' },
+        fundingSource: paypal.FUNDING.CARD
+      }, buildOrderHandlers())).render('#card-button-container');
+    });
+  }
+
+  window.abrirPagoModal = function(payloadStr) {
+    try { currentRecibo = JSON.parse(decodeURIComponent(payloadStr)); }
+    catch(e) { currentRecibo = { descripcion:'Recibo', importe:'0', poliza:'' }; }
+
+    document.getElementById('payModalDesc').textContent   = currentRecibo.descripcion;
+    document.getElementById('payModalAmount').textContent = currentRecibo.importe;
+    document.getElementById('payBankAmount').textContent  = currentRecibo.importe;
+    document.getElementById('payBankConcepto').textContent = currentRecibo.poliza || 'Nº de póliza';
+
+    document.getElementById('payModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    switchPayTab('paypal');
+  };
+
+  window.cerrarPagoModal = function() {
+    document.getElementById('payModal').classList.remove('open');
+    document.body.style.overflow = '';
+    document.getElementById('paypal-button-container').innerHTML = '';
+    document.getElementById('card-button-container').innerHTML   = '';
+  };
+
+  window.switchPayTab = function(pane) {
+    document.querySelectorAll('.pay-tab').forEach(t => t.classList.toggle('active', t.dataset.pane === pane));
+    document.querySelectorAll('.pay-pane').forEach(p => p.classList.toggle('active', p.id === 'pane-' + pane));
+    if (pane === 'paypal') renderPayPalButtons();
+    else if (pane === 'card') renderCardButton();
+  };
+
+  // Cerrar al pulsar fuera o ESC
+  document.getElementById('payModal').addEventListener('click', (e) => {
+    if (e.target.id === 'payModal') cerrarPagoModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && document.getElementById('payModal').classList.contains('open')) cerrarPagoModal();
+  });
+})();
 </script>
 
 </body>
