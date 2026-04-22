@@ -1558,7 +1558,7 @@ window.enviarMensajeInline = function() {
 <script>
   // "sb" es el Client ID universal de PayPal Sandbox (modo demo).
   // Para producción reemplázalo por tu Client ID Live de https://developer.paypal.com/dashboard
-  const PAYPAL_CLIENT_ID = "AWgG8WaCf9zRsxbC4VyqjwdzhbMAgf9Y-r91Jp-6pxUCrHildMDpImRslonMhcmzsbnIGPAa1x1NWts7";
+  const PAYPAL_CLIENT_ID = "sb";
   // URL de PayPal NCP (No-Code Payments) - checkout hospedado que funciona sin configuración
   const PAYPAL_NCP_URL   = "https://www.paypal.com/ncp/payment/AB6HLHKWJCM4C";
 </script>
@@ -1606,34 +1606,11 @@ window.enviarMensajeInline = function() {
       </div>
 
       <div class="pay-pane" id="pane-card">
-        <p class="pay-info-text">Paga con tarjeta de débito o crédito (Visa, Mastercard, AmEx).</p>
+        <p class="pay-info-text">Paga con tarjeta de débito o crédito (Visa, Mastercard, AmEx). No necesitas cuenta de PayPal.</p>
+        <div id="card-config-warn" class="pay-config-warn" style="display:none">
+          ⚠️ El administrador debe configurar el <b>Client ID de PayPal</b> en el código para activar los pagos.
+        </div>
         <div id="card-button-container"></div>
-        <div class="pay-card-divider" style="text-align:center;font-size:11px;color:#94a3b8;margin:14px 0 10px;letter-spacing:1px;font-weight:700;">— O INTRODUCE TU TARJETA —</div>
-        <form id="payCardForm" autocomplete="on" novalidate style="display:grid;gap:10px;">
-          <div>
-            <label style="display:block;font-size:11px;font-weight:700;color:#5a6a85;text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;">Titular</label>
-            <input id="pcfName" type="text" placeholder="Nombre y apellidos" autocomplete="cc-name" style="width:100%;padding:10px 12px;border:1.5px solid #d0d8ea;border-radius:8px;font-size:14px;font-family:inherit;outline:none;">
-          </div>
-          <div>
-            <label style="display:block;font-size:11px;font-weight:700;color:#5a6a85;text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;">Número de tarjeta</label>
-            <input id="pcfNumber" type="text" inputmode="numeric" placeholder="1234 5678 9012 3456" autocomplete="cc-number" maxlength="23" style="width:100%;padding:10px 12px;border:1.5px solid #d0d8ea;border-radius:8px;font-size:14px;font-family:'JetBrains Mono',monospace;outline:none;">
-            <div id="pcfBrandHint" style="font-size:11px;color:#94a3b8;margin-top:3px;">Visa / Mastercard / AmEx</div>
-          </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-            <div>
-              <label style="display:block;font-size:11px;font-weight:700;color:#5a6a85;text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;">Caducidad</label>
-              <input id="pcfExpiry" type="text" inputmode="numeric" placeholder="MM/AA" autocomplete="cc-exp" maxlength="5" style="width:100%;padding:10px 12px;border:1.5px solid #d0d8ea;border-radius:8px;font-size:14px;font-family:'JetBrains Mono',monospace;outline:none;">
-            </div>
-            <div>
-              <label style="display:block;font-size:11px;font-weight:700;color:#5a6a85;text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;">CVC</label>
-              <input id="pcfCvc" type="text" inputmode="numeric" placeholder="123" autocomplete="cc-csc" maxlength="4" style="width:100%;padding:10px 12px;border:1.5px solid #d0d8ea;border-radius:8px;font-size:14px;font-family:'JetBrains Mono',monospace;outline:none;">
-            </div>
-          </div>
-          <div id="pcfError" style="display:none;background:#fee;border:1px solid #fcc;color:#a33;padding:8px 12px;border-radius:7px;font-size:12px;font-weight:600;"></div>
-          <button type="submit" id="pcfSubmit" style="width:100%;background:linear-gradient(135deg,#00257a,#0046c8);color:white;border:none;border-radius:8px;padding:12px;font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;margin-top:4px;">
-            Pagar <span id="pcfSubmitAmount">0,00 €</span>
-          </button>
-        </form>
       </div>
 
       <div class="pay-pane" id="pane-bank">
@@ -1650,10 +1627,24 @@ window.enviarMensajeInline = function() {
       </div>
 
       <style>
-        .bnk-copy{background:#eef3ff;color:#0046c8;border:none;border-radius:6px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;margin-left:6px;}
+        .bnk-copy{background:#eef3ff;color:#0046c8;border:none;border-radius:6px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;margin-left:6px;flex-shrink:0;}
         .bnk-copy:hover{background:#dbe6ff;}
         .pay-success-banner{background:#e9f9ee;border:1.5px solid #16a34a;color:#15803d;padding:12px 14px;border-radius:8px;font-size:13px;font-weight:700;margin-bottom:14px;display:none;}
         .pay-success-banner.show{display:block;}
+        #pane-bank .pay-bank-row{flex-wrap:nowrap;white-space:nowrap;gap:8px;}
+        #pane-bank .pay-bank-row .val{word-break:keep-all;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:1;}
+        @media(max-width:640px){
+          .pay-modal-body{padding:16px 12px;}
+          #pane-bank .pay-bank-row{padding:8px 0;font-size:11px;gap:6px;}
+          #pane-bank .pay-bank-row .lbl{font-size:10.5px;}
+          #pane-bank .pay-bank-row .val{font-size:10.5px;letter-spacing:-.2px;}
+          #pane-bank .bnk-copy{padding:3px 7px;font-size:10px;margin-left:2px;}
+        }
+        @media(max-width:380px){
+          #pane-bank .pay-bank-row .lbl,
+          #pane-bank .pay-bank-row .val{font-size:9.8px;}
+          #pane-bank .bnk-copy{padding:3px 6px;font-size:9.5px;}
+        }
       </style>
       <div id="paySuccessBanner" class="pay-success-banner"></div>
 
@@ -1781,11 +1772,23 @@ window.enviarMensajeInline = function() {
 
   function renderCardButton() {
     const cont = document.getElementById('card-button-container');
-    cont.innerHTML = '';
+    cont.innerHTML = '<div class="pay-loading">Cargando opción de tarjeta…</div>';
     loadPayPalSdk().then((ok) => {
-      if (!ok || !window.paypal || !paypal.FUNDING || !paypal.FUNDING.CARD) {
-        // Sin botón PayPal-card; el usuario usa el formulario manual de abajo.
+      if (!ok) {
         cont.innerHTML = '';
+        if (location.protocol === 'file:') {
+          showPayError(cont,
+            'No se puede usar pago con tarjeta abriendo el archivo directamente',
+            'Has abierto el HTML con doble-clic (file://). Sube el archivo a un hosting o sírvelo en local con un mini-servidor.');
+        } else {
+          document.getElementById('card-config-warn').style.display = 'block';
+        }
+        return;
+      }
+      cont.innerHTML = '';
+      if (!paypal.FUNDING.CARD) {
+        showPayError(cont, 'El pago con tarjeta no está disponible',
+          'Tu cuenta PayPal no tiene activado "Advanced Credit and Debit Card Payments". Usa la pestaña PayPal o Transferencia.');
         return;
       }
       try {
@@ -1793,8 +1796,15 @@ window.enviarMensajeInline = function() {
           style: { layout: 'vertical', shape: 'rect', color: 'black' },
           fundingSource: paypal.FUNDING.CARD
         }, buildOrderHandlers('card-button-container'))).render('#card-button-container')
-          .catch(() => { cont.innerHTML = ''; });
-      } catch(e) { cont.innerHTML = ''; }
+          .catch(err => {
+            console.error('[PayPal card render]', err);
+            showPayError(cont, 'No se pudo mostrar el pago con tarjeta',
+              (err && (err.message || err.toString())) || 'Error desconocido');
+          });
+      } catch(e) {
+        console.error(e);
+        showPayError(cont, 'Error inicializando pago con tarjeta', e.message || String(e));
+      }
     });
   }
 
