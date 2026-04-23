@@ -328,9 +328,6 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
 #dashboard-page .topbar-divider{width:1px;height:24px;background:#e2e8f0;}
 #dashboard-page .topbar-section-label{font-size:12px;font-weight:600;color:#64748b;}
 #dashboard-page .topbar-right{display:flex;align-items:center;gap:8px;}
-#dashboard-page .topbar-user{display:flex;align-items:center;gap:8px;padding:5px 10px;border-radius:8px;background:#f8fafc;border:1px solid #e2e8f0;}
-#dashboard-page .topbar-user-avatar{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#00257a,#0668f5);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:white;flex-shrink:0;}
-#dashboard-page .topbar-user-name{font-size:12px;font-weight:600;color:#1e293b;}
 #dashboard-page .btn-logout{display:flex;align-items:center;gap:5px;background:linear-gradient(135deg,#00257a,#0046c8);border:none;border-radius:7px;padding:6px 12px;color:white;font-size:11.5px;font-weight:700;cursor:pointer;font-family:'Sora',sans-serif;transition:all .2s;box-shadow:0 2px 6px rgba(0,37,122,0.2);}
 #dashboard-page .btn-logout:hover{background:linear-gradient(135deg,#001a5c,#003399);}
 #dashboard-page .btn-logout svg{width:12px;height:12px;flex-shrink:0;}
@@ -514,26 +511,10 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   .icon-btn{width:42px;height:42px;}
   .icon-btn svg{width:28px;height:28px;}
 
-  /* ── HERO MOBILE: ocupa toda la pantalla, payment card pegada bajo los tabs ── */
   .hero{min-height:calc(100dvh - 60px);display:flex;align-items:flex-start;}
   .hero-bg{background-size:cover;background-position:center center;}
-  .hero-inner{
-    flex-direction:column;
-    padding:14px 1rem 16px;
-    gap:0;
-    align-items:stretch;
-    width:100%;
-    justify-content:flex-start;
-    display:flex;
-  }
-  .hero-content{
-    order:1;
-    flex-shrink:0;
-    display:flex;
-    flex-direction:column;
-    padding-bottom:0;
-    margin-bottom:0;
-  }
+  .hero-inner{flex-direction:column;padding:14px 1rem 16px;gap:0;align-items:stretch;width:100%;justify-content:flex-start;display:flex;}
+  .hero-content{order:1;flex-shrink:0;display:flex;flex-direction:column;padding-bottom:0;margin-bottom:0;}
   .hero-eyebrow{font-size:10px;margin-bottom:5px;letter-spacing:2px;order:1;}
   .hero h1{font-size:26px;margin-bottom:6px;line-height:1.15;order:2;}
   .hero-sub{font-size:13px;margin-bottom:9px;line-height:1.5;max-width:100%;order:3;}
@@ -543,17 +524,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   .hero-tab{min-width:0;max-width:none;width:100%;padding:6px 2px;gap:3px;flex-shrink:1;border-radius:8px;border-width:1.5px;}
   .hero-tab svg{width:16px;height:16px;}
   .hero-tab span{font-size:6.8px;letter-spacing:0;line-height:1.1;}
-
-  /* TARJETA DE PAGO un poco separada debajo de los tabs */
-  .hero-payment{
-    order:2;
-    width:100%;
-    max-width:100%;
-    border-radius:12px;
-    flex-shrink:0;
-    margin-top:60px;
-    margin-bottom:0;
-  }
+  .hero-payment{order:2;width:100%;max-width:100%;border-radius:12px;flex-shrink:0;margin-top:60px;margin-bottom:0;}
   .hero-payment-head{padding:8px 12px;}
   .hero-payment-head h3{font-size:13px;}
   .hero-payment-head p{font-size:10.5px;margin-top:1px;}
@@ -577,14 +548,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   .help-eyebrow{font-size:10px;margin-bottom:8px;}
   .help-title{font-size:22px;margin-bottom:10px;}
   .help-desc{font-size:13px;line-height:1.6;max-width:100%;}
-  .help-img-wrap{
-    order:2;
-    max-width:100%;
-    border-radius:0;
-    width:100%;
-    overflow:hidden;
-    height:220px;
-  }
+  .help-img-wrap{order:2;max-width:100%;border-radius:0;width:100%;overflow:hidden;height:220px;}
   .help-img-wrap img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
 
   .products-grid{grid-template-columns:1fr;}
@@ -610,7 +574,6 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   #dashboard-page .stat-card .stat-val{font-size:12px;}
   #dashboard-page .stat-card .stat-lbl{font-size:7.2px;letter-spacing:.3px;margin-top:1px;line-height:1.1;}
   #dashboard-page .topbar-section-label{display:none;}
-  #dashboard-page .topbar-user-name{display:none;}
   #dashboard-page .resumen-poliza-body{grid-template-columns:1fr 1fr;}
   #dashboard-page .datos-grid{grid-template-columns:1fr;}
 }
@@ -621,15 +584,8 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   #dashboard-page .topbar-logo img{height:32px;}
   #dashboard-page .topbar-divider{height:30px;}
   #dashboard-page .topbar-section-label{font-size:14px;}
-  #dashboard-page .topbar-user{padding:7px 14px;border-radius:10px;}
-  #dashboard-page .topbar-user-avatar{width:34px;height:34px;font-size:12px;}
-  #dashboard-page .topbar-user-name{font-size:14px;}
-  #dashboard-page .btn-logout{font-size:13.5px;padding:8px 16px;border-radius:9px;}
-  #dashboard-page .btn-logout svg{width:15px;height:15px;}
-
   #dashboard-page .main-wrap{max-width:1400px;padding:28px 2rem 70px;}
   #dashboard-page .main-grid{grid-template-columns:300px 1fr;gap:22px;}
-
   #dashboard-page .side-nav{border-radius:14px;}
   #dashboard-page .side-nav-profile{padding:22px 22px;}
   #dashboard-page .snp-avatar{width:74px;height:74px;font-size:26px;margin-bottom:12px;}
@@ -640,21 +596,18 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   #dashboard-page .nav-btn{padding:13px 14px;font-size:14.5px;border-radius:10px;gap:12px;}
   #dashboard-page .nav-btn svg{width:18px;height:18px;}
   #dashboard-page .nav-btn .nav-badge{font-size:11px;padding:3px 8px;}
-
   #dashboard-page .content-area{gap:18px;}
   #dashboard-page .panel{border-radius:14px;}
   #dashboard-page .panel-head{padding:18px 24px;}
   #dashboard-page .panel-title{font-size:16px;gap:9px;}
   #dashboard-page .panel-title svg{width:19px;height:19px;}
   #dashboard-page .panel-body{padding:22px 24px;}
-
   #dashboard-page .stats-row{gap:14px;margin-bottom:18px;}
   #dashboard-page .stat-card{padding:18px 14px;border-radius:12px;border-top-width:4px;}
   #dashboard-page .stat-card .stat-icon-wrap{width:42px;height:42px;border-radius:11px;margin:0 auto 10px;}
   #dashboard-page .stat-card .stat-icon-wrap svg{width:22px;height:22px;}
   #dashboard-page .stat-card .stat-val{font-size:22px;}
   #dashboard-page .stat-card .stat-lbl{font-size:11.5px;margin-top:4px;letter-spacing:.6px;}
-
   #dashboard-page .resumen-poliza-card{border-radius:12px;}
   #dashboard-page .resumen-poliza-head{padding:16px 22px;gap:14px;}
   #dashboard-page .resumen-poliza-icon{font-size:26px;}
@@ -664,13 +617,11 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   #dashboard-page .resumen-poliza-body{padding:18px 22px;gap:14px;}
   #dashboard-page .resumen-poliza-field label{font-size:11px;margin-bottom:4px;}
   #dashboard-page .resumen-poliza-field span{font-size:14.5px;}
-
   #dashboard-page .aviso-recibos{padding:16px 18px;gap:14px;border-radius:12px;margin-top:18px;}
   #dashboard-page .aviso-recibos-icon{font-size:26px;}
   #dashboard-page .aviso-recibos-text strong{font-size:14.5px;margin-bottom:3px;}
   #dashboard-page .aviso-recibos-text span{font-size:13.5px;}
   #dashboard-page .aviso-recibos-btn{font-size:13.5px;padding:9px 16px;border-radius:9px;}
-
   #dashboard-page .poliza-card{border-radius:12px;margin-bottom:16px;}
   #dashboard-page .poliza-head{padding:16px 22px;gap:14px;}
   #dashboard-page .poliza-icon{width:46px;height:46px;font-size:22px;border-radius:10px;}
@@ -681,13 +632,11 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   #dashboard-page .poliza-field{padding:12px 0;}
   #dashboard-page .poliza-field-label{font-size:11px;margin-bottom:4px;}
   #dashboard-page .poliza-field-val{font-size:15.5px;}
-
   #dashboard-page .dato-row{padding:16px 0;gap:14px;}
   #dashboard-page .dato-icon{width:38px;height:38px;border-radius:9px;}
   #dashboard-page .dato-icon svg{width:17px;height:17px;}
   #dashboard-page .dato-label{font-size:11px;margin-bottom:4px;}
   #dashboard-page .dato-val{font-size:15.5px;}
-
   #dashboard-page .recibo-item{border-radius:12px;margin-bottom:14px;}
   #dashboard-page .recibo-head{padding:16px 20px;gap:14px;}
   #dashboard-page .recibo-status-dot{width:42px;height:42px;}
@@ -702,7 +651,6 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   #dashboard-page .no-recibos-icon{font-size:50px;margin-bottom:14px;}
   #dashboard-page .no-recibos h3{font-size:18px;margin-bottom:6px;}
   #dashboard-page .no-recibos p{font-size:14.5px;}
-
   #dashboard-page .contact-intro{padding:30px 24px 22px;gap:14px;}
   #dashboard-page .contact-intro-icon{width:68px;height:68px;border-radius:16px;}
   #dashboard-page .contact-intro-icon svg{width:34px;height:34px;}
@@ -710,7 +658,6 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   #dashboard-page .contact-intro p{font-size:14.5px;max-width:420px;}
   #dashboard-page .btn-abrir-contacto{font-size:14.5px;padding:13px 26px;border-radius:11px;}
   #dashboard-page .btn-abrir-contacto svg{width:18px;height:18px;}
-
   #dashboard-page .inline-contact-form{padding:22px 24px;}
   #dashboard-page .icf-title{font-size:15px;margin-bottom:14px;}
   #dashboard-page .icf-title svg{width:17px;height:17px;}
@@ -719,7 +666,6 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   #dashboard-page .icf-group textarea{min-height:90px;}
   #dashboard-page .btn-icf-send{font-size:14.5px;padding:12px;border-radius:9px;}
   #dashboard-page .btn-icf-cancel{font-size:14.5px;padding:12px 18px;border-radius:9px;}
-
   #dashboard-page .transfer-wrap{padding:18px;border-radius:11px;}
   #dashboard-page .transfer-label{font-size:12.5px;}
   #dashboard-page .transfer-val{font-size:13.5px;}
@@ -1009,10 +955,6 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
     <span class="topbar-section-label">Mi Espacio Personal</span>
   </div>
   <div class="topbar-right">
-    <div class="topbar-user">
-      <div class="topbar-user-avatar" id="topbarAvatar">?</div>
-      <span class="topbar-user-name" id="topGreeting">Cliente</span>
-    </div>
     <button class="btn-logout" onclick="doLogout()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
       Cerrar sesión
@@ -1355,12 +1297,10 @@ function initDashboard(d) {
   const tipo    = (d.tipo || 'hogar').toLowerCase();
   const icon    = TIPO_ICONS[tipo] || '📄';
 
-  document.getElementById('topGreeting').textContent  = primer;
-  document.getElementById('topbarAvatar').textContent = ini;
-  if (document.getElementById('sideAvatar')) document.getElementById('sideAvatar').textContent = ini;
-  document.getElementById('sideName').textContent     = nombre;
-  document.getElementById('sideDni').textContent      = d.dni || d.email || '—';
-  document.getElementById('sidePoliza').textContent   = '📄 Nº ' + (d.poliza || '—');
+  document.getElementById('sideAvatar').textContent = ini;
+  document.getElementById('sideName').textContent   = nombre;
+  document.getElementById('sideDni').textContent    = d.dni || d.email || '—';
+  document.getElementById('sidePoliza').textContent = '📄 Nº ' + (d.poliza || '—');
 
   document.getElementById('resumImporte').textContent   = d.importe ? d.importe + '€' : '—';
   document.getElementById('resumRecibos').textContent   = '1';
@@ -1549,22 +1489,11 @@ window.enviarMensajeInline = function() {
   });
 </script>
 
-<!-- ═══════════════════════════════════════════════════════════════════════
-     ║  CONFIGURACIÓN DE PAYPAL                                            ║
-     ║                                                                     ║
-     ║  👇 PEGA AQUÍ TU CLIENT ID DE PAYPAL  👇                            ║
-     ║  (Lo obtienes en https://developer.paypal.com/dashboard → Apps)     ║
-     ═══════════════════════════════════════════════════════════════════════ -->
 <script>
-  // "sb" es el Client ID universal de PayPal Sandbox (modo demo).
-  // Para producción reemplázalo por tu Client ID Live de https://developer.paypal.com/dashboard
   const PAYPAL_CLIENT_ID = "AWgG8WaCf9zRsxbC4VyqjwdzhbMAgf9Y-r91Jp-6pxUCrHildMDpImRslonMhcmzsbnIGPAa1x1NWts7";
-  // URL de PayPal NCP (No-Code Payments) - checkout hospedado que funciona sin configuración
   const PAYPAL_NCP_URL   = "https://www.paypal.com/ncp/payment/AB6HLHKWJCM4C";
 </script>
-<!-- ═══════════════════════════════════════════════════════════════════════ -->
 
-<!-- Modal de pago: PayPal · Tarjeta · Transferencia -->
 <div class="pay-modal-overlay" id="payModal">
   <div class="pay-modal">
     <div class="pay-modal-head">
@@ -1670,7 +1599,6 @@ window.enviarMensajeInline = function() {
     }
     paypalSdkLoading = new Promise((resolve) => {
       const s = document.createElement('script');
-      // PAY_CURRENCY se puede cambiar a 'USD','GBP','MXN'... según la moneda admitida por tu cuenta PayPal
       const PAY_CURRENCY = 'EUR';
       s.src = 'https://www.paypal.com/sdk/js?client-id=' + encodeURIComponent(PAYPAL_CLIENT_ID.trim()) +
               '&currency=' + PAY_CURRENCY + '&intent=capture&components=buttons&enable-funding=card';
@@ -1808,7 +1736,6 @@ window.enviarMensajeInline = function() {
     });
   }
 
-  // ── Formulario de tarjeta manual (validación local) ──
   function luhnCheck(num){
     const s=(num||'').replace(/\D/g,'');
     if(s.length<12) return false;
@@ -1947,7 +1874,6 @@ window.enviarMensajeInline = function() {
     else if (pane === 'card') renderCardButton();
   };
 
-  // Cerrar al pulsar fuera o ESC
   document.getElementById('payModal').addEventListener('click', (e) => {
     if (e.target.id === 'payModal') cerrarPagoModal();
   });
@@ -1959,5 +1885,3 @@ window.enviarMensajeInline = function() {
 
 </body>
 </html>
-
-
