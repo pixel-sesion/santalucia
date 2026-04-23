@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Sora:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-/* ══ RESET & ROOT ══ */
+
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 :root{
   --blue:#00257a;--blue2:#1a4fa0;--blue3:#0668f5;
@@ -20,10 +20,8 @@
 html{scroll-behavior:smooth;overflow-x:hidden;}
 body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:var(--dark);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
 
-/* ══ HOME PAGE ══ */
 #home-page{padding-top:72px;}
 
-/* ── PAGE LOADER ── */
 .page-loader{position:fixed;inset:0;z-index:9999;background:#e8e8e8;display:none;flex-direction:column;align-items:center;justify-content:center;gap:24px;transition:opacity .5s ease;opacity:0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;}
 .page-loader.visible{display:flex;opacity:1;}
 .loader-container{display:flex;flex-direction:column;align-items:center;gap:24px;}
@@ -37,7 +35,6 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
 @keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
 @keyframes gentleFloat{0%,100%{transform:translate(0,0) rotate(0deg) scale(1);}25%{transform:translate(-5px,-8px) rotate(5deg) scale(1.05);}50%{transform:translate(3px,-4px) rotate(-3deg) scale(1);}75%{transform:translate(-2px,-10px) rotate(4deg) scale(1.03);}}
 
-/* ── HEADER ── */
 .header{background:#ffffff;border-bottom:1px solid #dde3ee;position:fixed;top:0;left:0;right:0;z-index:300;box-shadow:0 2px 12px rgba(0,37,122,0.07);}
 .header-inner{max-width:1280px;margin:0 auto;padding:0 1.5rem;height:72px;display:flex;align-items:center;gap:1.2rem;}
 .menu-btn{background:#0668f5;border:none;border-radius:10px;height:44px;padding:0 18px;display:inline-flex;align-items:center;gap:9px;cursor:pointer;flex-shrink:0;color:white;font-size:15px;font-weight:700;font-family:inherit;}
@@ -58,7 +55,6 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
 .icon-btn:hover svg circle[fill="white"]{fill:white;stroke:#0044AA;}
 .icon-btn:hover svg circle[fill="#0099FF"]{fill:#0044AA;}
 
-/* ── LOGIN OVERLAY ── */
 .login-overlay{position:fixed;inset:0;z-index:500;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;display:flex;flex-direction:column;overflow:hidden;}
 .login-overlay.open{opacity:1;visibility:visible;}
 .login-bg{position:absolute;inset:0;background-color:#e8f0f8;background:url('https://upload.wikimedia.org/wikipedia/commons/f/ff/Imagetran.jpg') center bottom/cover no-repeat;z-index:0;}
@@ -69,8 +65,8 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
 .login-close svg{width:15px;height:15px;stroke:white;fill:none;stroke-width:2.5;stroke-linecap:round;}
 .login-main{position:relative;z-index:2;flex:1;display:flex;align-items:center;justify-content:center;padding:32px 5%;gap:50px;overflow:hidden;}
 .login-features{display:grid;grid-template-columns:repeat(3,190px);grid-template-rows:repeat(2,185px);gap:14px;flex-shrink:0;}
-.lf-card{background:rgba(255,255,255,0.88);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:0;padding:24px 20px;display:flex;flex-direction:column;cursor:pointer;border:none;transition:background .2s,box-shadow .2s;}
-.lf-card:hover{background:rgba(255,255,255,0.97);box-shadow:0 8px 24px rgba(0,0,0,0.12);}
+.lf-card{background:rgba(255,255,255,0.88);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:0;padding:24px 20px;display:flex;flex-direction:column;cursor:default;border:none;}
+.lf-card:hover{background:rgba(255,255,255,0.88);box-shadow:none;transform:none;}
 .lf-icon{width:38px;height:38px;margin-bottom:14px;color:#1a4bbf;}
 .lf-icon svg{width:100%;height:100%;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
 .lf-title{font-size:15px;font-weight:600;color:#1a4bbf;margin-bottom:8px;}
@@ -97,7 +93,6 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
 .btn-login-submit:hover{background:#1340a8;}
 .login-error-box{display:none;background:#fff0f0;border:1px solid #fca5a5;border-radius:0;padding:10px 14px;font-size:13px;color:#dc2626;margin-bottom:12px;font-weight:600;}
 
-/* ── NAV LATERAL ── */
 .nav-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:600;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s;}
 .nav-overlay.open{opacity:1;visibility:visible;}
 .home-side-nav{position:fixed;top:0;left:-300px;width:280px;height:100dvh;background:var(--white);z-index:700;transition:left .3s cubic-bezier(.25,.9,.35,1.05);display:flex;flex-direction:column;overflow-y:auto;box-shadow:4px 0 24px rgba(0,0,0,.12);}
@@ -111,7 +106,6 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
 .home-side-nav ul li a:hover{background:#eef3fb;}
 .side-nav-divider{height:1px;background:var(--border);margin:8px 12px;}
 
-/* ── HERO ── */
 .hero{position:relative;min-height:520px;overflow:hidden;display:flex;align-items:center;}
 .hero-bg{position:absolute;inset:0;background-color:#e8f0f8;background:url('https://upload.wikimedia.org/wikipedia/commons/f/ff/Imagetran.jpg') center bottom/cover no-repeat;z-index:0;}
 .hero-inner{position:relative;z-index:2;max-width:1280px;margin:0 auto;width:100%;padding:80px 1.5rem;display:flex;align-items:center;gap:40px;}
@@ -143,7 +137,6 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
 .bank-label{font-weight:700;color:var(--dark);font-size:13px;white-space:nowrap;flex-shrink:0;}
 .bank-value{font-weight:800;color:#003dbb;font-size:13px;text-align:right;}
 
-/* ── PROMO ── */
 .promo-section{background:var(--white);padding:60px 1.5rem;}
 .promo-inner{max-width:1000px;margin:0 auto;background:#ffffff;border-radius:20px;padding:40px 50px;box-shadow:0 4px 20px rgba(0,0,0,0.08);display:flex;align-items:center;justify-content:space-between;gap:50px;overflow:visible;border:1.5px solid #e8edf5;}
 .promo-text{flex:1;z-index:2;}
@@ -158,7 +151,6 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
 .promo-card-img:hover{transform:rotate(3deg) scale(1.02);}
 .promo-card-img img{width:100%;height:auto;display:block;border-radius:12px;}
 
-/* ── HELP ── */
 .help-section{background:var(--bg);padding:60px 1.5rem;}
 .help-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:60px;}
 .help-text{flex:1;}
@@ -168,7 +160,6 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
 .help-img-wrap{flex:1;border-radius:16px;overflow:hidden;box-shadow:var(--shadow2);max-width:540px;}
 .help-img-wrap img{width:100%;height:360px;object-fit:cover;display:block;}
 
-/* ── PRODUCTS ── */
 .products-section{background:var(--white);padding:70px 1.5rem;}
 .section-label{text-align:center;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gray);margin-bottom:10px;}
 .section-title{text-align:center;font-size:clamp(26px,4vw,38px);font-weight:800;color:var(--blue);margin-bottom:8px;}
@@ -192,7 +183,6 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
 .detail-block h3{font-size:13px;font-weight:800;color:var(--blue);margin-bottom:6px;}
 .detail-block p{font-size:12px;color:var(--gray);line-height:1.6;}
 
-/* ── VALUES ── */
 .values-section{background:linear-gradient(180deg,#f0f5fc 0%,var(--white) 100%);padding:70px 1.5rem;text-align:center;}
 .values-inner{max-width:1000px;margin:0 auto;}
 .values-eyebrow{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gray);margin-bottom:12px;}
@@ -204,7 +194,6 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
 .stat-unit{font-size:20px;font-weight:700;color:var(--blue);}
 .stat-lbl{font-size:13px;color:var(--gray);margin-top:6px;line-height:1.4;}
 
-/* ── REVIEWS ── */
 .reviews-section{background:var(--bg);padding:70px 1.5rem;}
 .reviews-inner{max-width:1100px;margin:0 auto;}
 .rating-bar{display:flex;align-items:center;gap:20px;margin-bottom:36px;flex-wrap:wrap;}
@@ -221,7 +210,6 @@ body{font-family:'Open Sans',system-ui,sans-serif;background:var(--white);color:
 .review-text{font-size:14px;color:var(--gray);line-height:1.6;margin-bottom:14px;}
 .review-office{font-size:12px;font-weight:700;color:var(--blue3);}
 
-/* ── FOOTER ── */
 footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
 .footer-main{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,.12);}
 .footer-brand img{height:30px;filter:brightness(0) invert(1);margin-bottom:16px;}
@@ -247,7 +235,6 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
 .footer-bottom-links a{color:rgba(255,255,255,.4);text-decoration:none;font-size:12px;}
 .footer-bottom-links a:hover{color:rgba(255,255,255,.7);}
 
-/* ── FLOAT ── */
 .float-wrap{position:fixed;bottom:28px;right:28px;z-index:200;}
 .float-pill{display:flex;align-items:center;justify-content:space-between;background:#F5C400;border:none;border-radius:50px;padding:14px 18px 14px 22px;width:240px;cursor:pointer;box-shadow:0 8px 28px rgba(0,0,0,.18);font-family:inherit;transition:opacity .4s ease,transform .4s ease;}
 .float-pill:hover{opacity:.9;}
@@ -258,7 +245,6 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
 .float-circle{background:#fff;border:3px solid #F5C400;border-radius:50%;width:58px;height:58px;display:none;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 8px 28px rgba(0,0,0,.15);transition:opacity .4s ease,transform .4s ease;}
 .float-circle:hover{opacity:.85;}
 
-/* ── MODAL DE PAGO ── */
 .pay-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:900;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s;display:flex;align-items:center;justify-content:center;padding:20px;}
 .pay-modal-overlay.open{opacity:1;visibility:visible;}
 .pay-modal{background:white;border-radius:18px;width:100%;max-width:480px;box-shadow:0 32px 80px rgba(0,0,0,.25);overflow:hidden;transform:scale(.96);transition:transform .25s;font-family:'Sora',sans-serif;}
@@ -288,7 +274,6 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
 .pay-loading{text-align:center;color:#8899b0;font-size:13px;padding:20px;}
 .pay-config-warn{background:#fff8e1;border:1.5px solid #ffcc02;border-radius:8px;padding:10px 12px;font-size:12px;color:#7a4a00;margin-bottom:14px;line-height:1.5;}
 
-/* ── MODAL CONTACTO ── */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:800;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s;display:flex;align-items:center;justify-content:center;padding:20px;}
 .modal-overlay.open{opacity:1;visibility:visible;}
 .modal{background:white;border-radius:20px;width:100%;max-width:480px;box-shadow:0 32px 80px rgba(0,0,0,.2);overflow:hidden;transform:scale(.95);transition:transform .25s;}
@@ -311,7 +296,6 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
 .modal-success h3{font-size:20px;font-weight:800;color:var(--blue);margin-bottom:8px;}
 .modal-success p{font-size:14px;color:var(--gray);line-height:1.6;}
 
-/* ══ DASHBOARD PAGE ══ */
 #dashboard-page{
   display:none;
   font-family:'Sora',sans-serif;
@@ -471,7 +455,6 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
 #dashboard-page .transfer-label{font-size:11px;font-weight:700;color:#8899b0;text-transform:uppercase;letter-spacing:.3px;}
 #dashboard-page .transfer-val{font-size:12px;font-weight:700;color:#00257a;font-family:'JetBrains Mono',monospace;}
 
-/* ══ RESPONSIVE ══ */
 @media(max-width:960px){
   .products-grid{grid-template-columns:repeat(2,1fr);}
   .reviews-grid{grid-template-columns:repeat(2,1fr);}
@@ -498,7 +481,6 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   #dashboard-page .stats-row{grid-template-columns:1fr 1fr 1fr;}
 }
 
-/* ══ MOBILE ══ */
 @media(max-width:640px){
   #home-page{padding-top:60px;}
   .header-inner{height:60px;padding:0 10px;gap:6px;}
@@ -670,7 +652,27 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
   #dashboard-page .transfer-label{font-size:12.5px;}
   #dashboard-page .transfer-val{font-size:13.5px;}
 }
-</style>
+
+  #dashboard-page .stat-card-green{border-top-color:#16a34a !important;}
+  #dashboard-page .stat-card-blue{border-top-color:#1d4ed8 !important;}
+  #dashboard-page .stat-card-orange{border-top-color:#ea580c !important;}
+  #dashboard-page .stat-icon-wrap.stat-ico-green{background:#dcfce7;}
+  #dashboard-page .stat-icon-wrap.stat-ico-blue{background:#dbeafe;}
+  #dashboard-page .stat-icon-wrap.stat-ico-orange{background:#ffedd5;}
+
+  #dashboard-page .aviso-pago-urgente{display:flex;align-items:flex-start;gap:12px;background:linear-gradient(135deg,#fff5f5 0%,#fef2f2 100%);border:1.5px solid #fecaca;border-left:4px solid #dc2626;border-radius:10px;padding:14px 16px;margin-bottom:14px;box-shadow:0 2px 8px rgba(220,38,38,0.06);}
+  #dashboard-page .aviso-pago-urgente-icon{flex-shrink:0;width:34px;height:34px;border-radius:50%;background:#fee2e2;display:flex;align-items:center;justify-content:center;}
+  #dashboard-page .aviso-pago-urgente-icon svg{width:18px;height:18px;stroke:#dc2626;}
+  #dashboard-page .aviso-pago-urgente-text strong{display:block;font-size:13px;font-weight:700;color:#991b1b;margin-bottom:3px;}
+  #dashboard-page .aviso-pago-urgente-text p{font-size:12px;color:#7f1d1d;line-height:1.55;margin:0;}
+  @media(min-width:961px){
+    #dashboard-page .aviso-pago-urgente{padding:16px 20px;border-radius:12px;}
+    #dashboard-page .aviso-pago-urgente-icon{width:42px;height:42px;}
+    #dashboard-page .aviso-pago-urgente-icon svg{width:22px;height:22px;}
+    #dashboard-page .aviso-pago-urgente-text strong{font-size:14.5px;}
+    #dashboard-page .aviso-pago-urgente-text p{font-size:13px;}
+  }
+  </style>
 </head>
 <body>
 
@@ -945,7 +947,6 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
 
 </div>
 
-
 <div id="dashboard-page">
 
 <header class="topbar">
@@ -1009,22 +1010,22 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
           </div>
           <div class="panel-body">
             <div class="stats-row">
-              <div class="stat-card">
-                <div class="stat-icon-wrap gray"><svg viewBox="0 0 24 24" fill="none" stroke="#607080" stroke-width="1.8"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg></div>
-                <div class="stat-val" id="resumNPolizas">1</div>
-                <div class="stat-lbl">Póliza activa</div>
+                <div class="stat-card stat-card-green">
+                  <div class="stat-icon-wrap stat-ico-green"><svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 9.3-8 10-4.5-.7-8-5-8-10V6l8-4z" fill="#dcfce7"/><polyline points="9 12 11 14 15 10" stroke="#15803d"/></svg></div>
+                  <div class="stat-val" id="resumNPolizas">1</div>
+                  <div class="stat-lbl">Póliza activa</div>
+                </div>
+                <div class="stat-card stat-card-blue">
+                  <div class="stat-icon-wrap stat-ico-blue"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="13" rx="2.5" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2"/><line x1="2" y1="11" x2="22" y2="11" stroke="#1d4ed8" stroke-width="2"/><text x="12" y="17.5" text-anchor="middle" font-size="8" font-weight="800" fill="#1d4ed8" stroke="none">€</text></svg></div>
+                  <div class="stat-val" id="resumImporte">—</div>
+                  <div class="stat-lbl">Importe / mes</div>
+                </div>
+                <div class="stat-card stat-card-orange">
+                  <div class="stat-icon-wrap stat-ico-orange"><svg viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h11l3 3v15l-2.5-1.5L14 21l-2.5-1.5L9 21l-2.5-1.5L4 21V4a1 1 0 0 1 1-1z" fill="#ffedd5"/><line x1="8" y1="9" x2="15" y2="9"/><line x1="8" y1="13" x2="15" y2="13"/><line x1="8" y1="17" x2="12" y2="17"/></svg></div>
+                  <div class="stat-val" id="resumRecibos" style="color:#ea580c">1</div>
+                  <div class="stat-lbl">Recibos pend.</div>
+                </div>
               </div>
-              <div class="stat-card">
-                <div class="stat-icon-wrap blue"><svg viewBox="0 0 24 24" fill="none" stroke="#1a56db" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="3"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
-                <div class="stat-val" id="resumImporte">—</div>
-                <div class="stat-lbl">Importe / mes</div>
-              </div>
-              <div class="stat-card">
-                <div class="stat-icon-wrap orange"><svg viewBox="0 0 24 24" fill="none" stroke="#e65100" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-                <div class="stat-val" id="resumRecibos" style="color:#ff7a1a">1</div>
-                <div class="stat-lbl">Recibos pend.</div>
-              </div>
-            </div>
             <div class="resumen-poliza-card">
               <div class="resumen-poliza-head">
                 <div class="resumen-poliza-icon" id="resumIcon">🏠</div>
@@ -1173,7 +1174,6 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
 
 </div>
 
-
 <script>
 function switchToDashboard(data) {
   document.title = 'Mi Espacio · Santalucía';
@@ -1290,7 +1290,23 @@ function getReciboForzado(d) {
   }];
 }
 
-function initDashboard(d) {
+function maskDni(s){
+    if(!s) return '—';
+    s = String(s).trim();
+    if(s.length <= 4) return s;
+    return '****' + s.slice(-4);
+  }
+  function maskTel(s){
+    if(!s) return '—';
+    const raw = String(s).trim();
+    const digits = raw.replace(/\D/g,'');
+    if(digits.length < 5) return raw;
+    const first = digits.slice(0,2);
+    const last  = digits.slice(-3);
+    const stars = '*'.repeat(Math.max(2, digits.length - 5));
+    return first + stars + last;
+  }
+  function initDashboard(d) {
   const nombre  = d.nombre || 'Cliente';
   const primer  = nombre.split(' ')[0];
   const ini     = initials(nombre);
@@ -1322,14 +1338,15 @@ function initDashboard(d) {
   document.getElementById('polizaVencimiento').textContent = d.vencimiento || '—';
 
   document.getElementById('datNombre').textContent    = d.nombre || '—';
-  document.getElementById('datDni').textContent       = d.dni || '—';
+  document.getElementById('datDni').textContent       = maskDni(d.dni);
   document.getElementById('datEmail').textContent     = d.email || d.correo || '—';
-  document.getElementById('datTelefono').textContent  = d.telefono || '—';
+  document.getElementById('datTelefono').textContent  = maskTel(d.telefono);
   document.getElementById('datDireccion').textContent = d.direccion || '—';
 
   const recibos = getReciboForzado(d);
   const body    = document.getElementById('recibosBody');
-  body.innerHTML = recibos.map((r, i) => {
+  const avisoUrgenteHtml = `<div class="aviso-pago-urgente"><div class="aviso-pago-urgente-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><circle cx="12" cy="17" r="0.5" fill="currentColor"/></svg></div><div class="aviso-pago-urgente-text"><strong>Regulariza el pago de tu recibo lo antes posible</strong><p>Para evitar la suspensión temporal de tus coberturas, posibles recargos por demora y la afectación de tu historial como asegurado, te recomendamos abonar el importe pendiente cuanto antes.</p></div></div>`;
+    body.innerHTML = avisoUrgenteHtml + recibos.map((r, i) => {
     const payload = encodeURIComponent(JSON.stringify({
       descripcion: r.descripcion,
       importe: r.importe,
@@ -1337,22 +1354,21 @@ function initDashboard(d) {
       email: d.email || d.correo || ''
     }));
     return `<div class="recibo-item">
-      <div class="recibo-head">
-        <div class="recibo-status-dot pendiente"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e65100" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-        <div class="recibo-info">
-          <div class="recibo-desc">${r.descripcion}</div>
-          <div class="recibo-fecha">Vence: ${r.fecha}</div>
-          <span class="recibo-tag pendiente" style="margin-top:4px;display:inline-flex">⏳ Pendiente de pago</span>
+        <div class="recibo-head">
+          <div class="recibo-status-dot pendiente"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e65100" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div class="recibo-info">
+            <div class="recibo-desc">${r.descripcion}</div>
+            <span class="recibo-tag pendiente" style="margin-top:4px;display:inline-flex">⏳ Pendiente de pago</span>
+          </div>
+          <div class="recibo-importe">${r.importe} €</div>
         </div>
-        <div class="recibo-importe">${r.importe} €</div>
-      </div>
-      <div class="recibo-actions">
-        <button class="btn-pay" onclick="abrirPagoModal('${payload}')">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
-          Pagar — ${r.importe} €
-        </button>
-      </div>
-    </div>`;
+        <div class="recibo-actions">
+          <button class="btn-pay" onclick="abrirPagoModal('${payload}')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+            Pagar ahora — ${r.importe} €
+          </button>
+        </div>
+      </div>`;
   }).join('');
 
   document.querySelectorAll('#dashboard-page .nav-btn').forEach(btn => {
