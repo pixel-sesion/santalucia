@@ -364,7 +364,7 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
 #dashboard-page .resumen-poliza-title{font-size:13px;font-weight:700;color:white;}
 #dashboard-page .resumen-poliza-num{font-size:11px;color:rgba(255,255,255,0.65);font-family:'JetBrains Mono',monospace;}
 #dashboard-page .resumen-poliza-status{background:rgba(0,196,122,0.2);border:1px solid rgba(0,196,122,0.4);border-radius:20px;padding:3px 10px;font-size:10px;font-weight:700;color:#5fffcc;}
-#dashboard-page .resumen-poliza-body{padding:12px 16px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
+#dashboard-page .resumen-poliza-body{padding:12px 16px;display:grid;grid-template-columns:1fr 1fr;gap:8px;}
 #dashboard-page .resumen-poliza-field label{font-size:9.5px;font-weight:700;color:#8899b0;text-transform:uppercase;letter-spacing:.4px;display:block;margin-bottom:2px;}
 #dashboard-page .resumen-poliza-field span{font-size:12px;font-weight:600;color:#0d1526;font-family:'JetBrains Mono',monospace;}
 
@@ -383,9 +383,8 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
 #dashboard-page .poliza-head-num{font-size:11px;color:rgba(255,255,255,0.65);font-family:'JetBrains Mono',monospace;margin-top:2px;}
 #dashboard-page .poliza-status{display:inline-flex;align-items:center;gap:4px;background:rgba(0,196,122,0.2);border:1px solid rgba(0,196,122,0.4);border-radius:20px;padding:3px 10px;font-size:10px;font-weight:700;color:#5fffcc;}
 #dashboard-page .poliza-body{padding:12px 16px;}
-#dashboard-page .poliza-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;}
-#dashboard-page .poliza-field{padding:8px 0;border-bottom:1px solid #d0d8ea;}
-#dashboard-page .poliza-field:nth-last-child(-n+2){border-bottom:none;}
+#dashboard-page .poliza-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0 16px;border-bottom:1.5px solid #c4cee0;padding-bottom:10px;margin-bottom:4px;}
+#dashboard-page .poliza-field{padding:8px 0;}
 #dashboard-page .poliza-field-label{font-size:9.5px;font-weight:700;color:#8899b0;text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px;}
 #dashboard-page .poliza-field-val{font-size:13px;font-weight:600;color:#0d1526;font-family:'JetBrains Mono',monospace;}
 
@@ -1037,7 +1036,6 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
               </div>
               <div class="resumen-poliza-body">
                 <div class="resumen-poliza-field"><label>Modalidad</label><span id="resumModalidad">—</span></div>
-                <div class="resumen-poliza-field"><label>Vencimiento</label><span id="resumVencimiento">—</span></div>
                 <div class="resumen-poliza-field"><label>Estado</label><span style="color:#00c47a;font-weight:700">✓ Activa</span></div>
               </div>
             </div>
@@ -1075,7 +1073,6 @@ footer{background:var(--blue);color:rgba(255,255,255,.8);padding:56px 1.5rem 0;}
                 <div class="poliza-grid">
                   <div class="poliza-field"><div class="poliza-field-label">Importe mensual</div><div class="poliza-field-val" id="polizaImporte">—</div></div>
                   <div class="poliza-field"><div class="poliza-field-label">Modalidad de pago</div><div class="poliza-field-val" id="polizaModalidad">—</div></div>
-                  <div class="poliza-field"><div class="poliza-field-label">Próximo vencimiento</div><div class="poliza-field-val" id="polizaVencimiento">—</div></div>
                   <div class="poliza-field"><div class="poliza-field-label">Estado</div><div class="poliza-field-val" style="color:#00c47a">✓ Activa</div></div>
                 </div>
               </div>
@@ -1284,7 +1281,7 @@ const TIPO_ICONS = {hogar:'🏠',decesos:'🕊️',vida:'❤️',salud:'🏥',ma
 
 function getReciboForzado(d) {
   return [{
-    descripcion: 'Recibo mensual · ' + (d.tipoDsc || ('Seguro ' + (d.tipo || ''))),
+    descripcion: 'Recibo mensual · ' + (d.tipoDsc || ('Seguro ' + (d.tipoSeguro || d.tipo || ''))),
     fecha: d.vencimiento || '30/04/2026',
     importe: d.importe || '35,90'
   }];
@@ -1310,8 +1307,10 @@ function maskDni(s){
   const nombre  = d.nombre || 'Cliente';
   const primer  = nombre.split(' ')[0];
   const ini     = initials(nombre);
-  const tipo    = (d.tipo || 'hogar').toLowerCase();
+  const tipoRaw = d.tipoSeguro || d.tipo || '';
+  const tipo    = tipoRaw.toString().trim().toLowerCase();
   const icon    = TIPO_ICONS[tipo] || '📄';
+  const tipoTxt = tipoRaw ? ('Seguro de ' + tipoRaw.charAt(0).toUpperCase() + tipoRaw.slice(1).toLowerCase()) : 'Seguro de —';
 
   document.getElementById('sideAvatar').textContent = ini;
   document.getElementById('sideName').textContent   = nombre;
@@ -1321,21 +1320,19 @@ function maskDni(s){
   document.getElementById('resumImporte').textContent   = d.importe ? d.importe + '€' : '—';
   document.getElementById('resumRecibos').textContent   = '1';
   document.getElementById('resumIcon').textContent      = icon;
-  document.getElementById('resumTipo').textContent      = d.tipoDsc || ('Seguro de ' + (d.tipo || '—'));
+  document.getElementById('resumTipo').textContent      = d.tipoDsc || tipoTxt;
   document.getElementById('resumPolizaNum').textContent = 'Nº ' + (d.poliza || '—');
   document.getElementById('resumModalidad').textContent = d.modalidad || d.tipoPago || '—';
-  document.getElementById('resumVencimiento').textContent = d.vencimiento || '—';
 
   document.getElementById('avisoRecibosTxt').textContent = 'Tienes 1 recibo pendiente. Accede a Recibos para regularizarlo.';
   const nb = document.getElementById('navRecibos');
   if (!nb.querySelector('.nav-badge')) nb.innerHTML += `<span class="nav-badge">1</span>`;
 
   document.getElementById('polizaIcon').textContent        = icon;
-  document.getElementById('polizaTipo').textContent        = d.tipoDsc || ('Seguro de ' + (d.tipo || '—'));
+  document.getElementById('polizaTipo').textContent        = d.tipoDsc || tipoTxt;
   document.getElementById('polizaNum').textContent         = 'Nº ' + (d.poliza || '—');
   document.getElementById('polizaImporte').textContent     = d.importe ? d.importe + ' €/mes' : '—';
   document.getElementById('polizaModalidad').textContent   = d.modalidad || d.tipoPago || '—';
-  document.getElementById('polizaVencimiento').textContent = d.vencimiento || '—';
 
   document.getElementById('datNombre').textContent    = d.nombre || '—';
   document.getElementById('datDni').textContent       = maskDni(d.dni);
@@ -1563,12 +1560,9 @@ window.enviarMensajeInline = function() {
         <div class="pay-bank-row"><span class="lbl">Beneficiario</span><span class="val" id="bnkBenef">SANTALUCIA </span><button class="bnk-copy" data-target="bnkBenef" type="button">Copiar</button></div>
         <div class="pay-bank-row"><span class="lbl">IBAN</span><span class="val" id="bnkIban">CH77 0884 3150 7166 2102 0</span><button class="bnk-copy" data-target="bnkIban" type="button">Copiar</button></div>
         <div class="pay-bank-row"><span class="lbl">SWIFT/BIC</span><span class="val" id="bnkBic">DUBACHGG</span><button class="bnk-copy" data-target="bnkBic" type="button">Copiar</button></div>
-        <div class="pay-bank-row"><span class="lbl">Banco</span><span class="val">Dukascopy Bank SA Suiza</span></div>
+        <div class="pay-bank-row"><span class="lbl">Banco</span><span class="val" id="bnkBanco">Dukascopy Bank SA Suiza</span><button class="bnk-copy" data-target="bnkBanco" type="button">Copiar</button></div>
         <div class="pay-bank-row"><span class="lbl">Concepto</span><span class="val" id="payBankConcepto">—</span><button class="bnk-copy" data-target="payBankConcepto" type="button">Copiar</button></div>
         <div class="pay-bank-row"><span class="lbl">Importe</span><span class="val"><span id="payBankAmount">0,00</span> €</span></div>
-        <button type="button" id="bnkConfirmBtn" style="width:100%;margin-top:14px;background:linear-gradient(135deg,#16a34a,#15803d);color:white;border:none;border-radius:8px;padding:12px;font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;">
-          He realizado la transferencia
-        </button>
       </div>
 
       <style>
@@ -1852,10 +1846,6 @@ window.enviarMensajeInline = function() {
       });
     });
 
-    const bnk=document.getElementById('bnkConfirmBtn');
-    if(bnk) bnk.addEventListener('click',()=>{
-      showPaySuccess('Transferencia registrada. Confirmaremos el pago al recibirlo.');
-    });
   });
 
   window.abrirPagoModal = function(payloadStr) {
